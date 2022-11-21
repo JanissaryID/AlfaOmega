@@ -3,6 +3,7 @@ package com.example.alfaomega.component
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -29,78 +30,81 @@ fun ComponentTransaction(
 
 ) {
     Card(
-
+        elevation = CardDefaults.cardElevation(6.dp),
+        modifier = Modifier.padding(8.dp),
     ) {
-        Column {
-            Column(
-                modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)
-            ){
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = TransactionId,
+        Surface(shape = RoundedCornerShape(7),modifier = Modifier.clickable {  }) {
+            Column() {
+                Column(
+                    modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)
+                ){
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = TransactionId,
 //                fontWeight = FontWeight.Light,
-                        fontSize = MaterialTheme.typography.labelSmall.fontSize,
-                    )
-                    Text(
-                        text = TransactionDate,
+                            fontSize = MaterialTheme.typography.labelSmall.fontSize,
+                        )
+                        Text(
+                            text = TransactionDate,
 //                fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.labelSmall.fontSize,
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = TransactionMenu,
+                        fontWeight = FontWeight.ExtraBold,
+                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = TransactionType,
+                        fontWeight = FontWeight.Light,
                         fontSize = MaterialTheme.typography.labelSmall.fontSize,
                     )
                 }
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = TransactionMenu,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = TransactionType,
-                    fontWeight = FontWeight.Light,
-                    fontSize = MaterialTheme.typography.labelSmall.fontSize,
-                )
-            }
-            Divider(color = MaterialTheme.colorScheme.primary, thickness = 1.dp)
-            Column(
-                modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 16.dp)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .padding(0.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                Divider(color = MaterialTheme.colorScheme.primary, thickness = 1.dp)
+                Column(
+                    modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 16.dp)
                 ) {
                     Row(
-                        verticalAlignment = Alignment.CenterVertically,
-//                        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp, start = 8.dp, end = 8.dp)
+                        modifier = Modifier
+                            .padding(0.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_baseline_timelapse_24),
-                            contentDescription = "Icon TImer",
-                            modifier = Modifier.size(32.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Surface(
-                            modifier = Modifier.background(color = Color.Transparent),
-                            shape = RoundedCornerShape(50)
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+//                        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp, start = 8.dp, end = 8.dp)
                         ) {
-                            Text(
-                                text = TransactionProcess,
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_baseline_timelapse_24),
+                                contentDescription = "Icon TImer",
+                                modifier = Modifier.size(32.dp)
                             )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Surface(
+//                            modifier = Modifier.background(color = Color.Transparent),
+                                shape = RoundedCornerShape(50)
+                            ) {
+                                Text(
+                                    text = TransactionProcess,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                )
+                            }
                         }
+                        Text(
+                            text = TransactionAdmin,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        )
                     }
-                    Text(
-                        text = TransactionAdmin,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                    )
                 }
             }
         }
