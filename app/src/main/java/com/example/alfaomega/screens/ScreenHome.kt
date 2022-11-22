@@ -11,57 +11,26 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alfaomega.R
 import com.example.alfaomega.component.ComponentTransaction
 import com.example.alfaomega.component.TopBar
+import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ScreenHome() {
-    Scaffold(topBar = {
-        TopBar(
-            typeScreen = true,
-            tittleScreen = "Transaction Active"
-        ) },
-        content = {
-            WallHome(paddingValues = it)
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { /*TODO*/ }
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.fluent_add_12_filled),
-                    contentDescription = "Icon Add",
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-        }
+    TopBar(
+        typeScreen = true,
+        tittleScreen = "Transaction Active",
+        wallScreen = 0
     )
 }
 
+@Preview(showBackground = true)
 @Composable
-fun WallHome(paddingValues: PaddingValues) {
-    val numbers = remember {
-        mutableStateListOf(1,2,3,4,5,6,7,8,9,10)
-    }
-    Surface(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
-        LazyColumn(
-            modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ){
-            items(items = numbers, key = {it.hashCode()}) {
-                ComponentTransaction(
-                    TransactionId = "16283628937356732628",
-                    TransactionDate = "08-08-2022",
-                    TransactionMenu = "Cuci-Kering",
-                    TransactionType = "Giant 8 Kg",
-                    TransactionAdmin = "Putri Sabila",
-                    TransactionProcess = "Sedang Mencuci"
-                )
-            }
-        }
+fun ViewHome() {
+    AlfaOmegaTheme {
+        ScreenHome()
     }
 }

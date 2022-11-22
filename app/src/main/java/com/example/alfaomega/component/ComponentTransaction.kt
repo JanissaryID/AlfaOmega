@@ -32,8 +32,9 @@ fun ComponentTransaction(
     Card(
         elevation = CardDefaults.cardElevation(6.dp),
         modifier = Modifier.padding(8.dp),
+        shape = RoundedCornerShape(25)
     ) {
-        Surface(shape = RoundedCornerShape(7),modifier = Modifier.clickable {  }) {
+        Surface(shape = RoundedCornerShape(25),modifier = Modifier.clickable {  }) {
             Column() {
                 Column(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)

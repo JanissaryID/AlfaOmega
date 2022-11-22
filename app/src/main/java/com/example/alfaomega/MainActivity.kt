@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.alfaomega.component.ComponentTransaction
 import com.example.alfaomega.screens.ScreenHome
+import com.example.alfaomega.screens.ScreenMenu
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +26,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 //                    Greeting("Android")
-                    ScreenHome()
+//                    ScreenHome()
+                    ScreenMenu()
                 }
             }
         }
