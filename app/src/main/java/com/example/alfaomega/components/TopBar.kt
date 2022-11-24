@@ -1,4 +1,4 @@
-package com.example.alfaomega.component
+package com.example.alfaomega.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
@@ -10,22 +10,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.alfaomega.R
-import com.example.alfaomega.wallscreen.WallHome
-import com.example.alfaomega.wallscreen.WallPicker
+import com.example.alfaomega.navigations.Screens
+import com.example.alfaomega.wallscreens.WallPicker
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
     typeScreen: Boolean,
     tittleScreen: String,
-    wallScreen: Int
+    wallScreen: Int,
+    navController: NavController,
+    screenBack: String
 ) {
     if (typeScreen){
         Scaffold(topBar = {
             SmallTopBar(
                 typeScreen = typeScreen,
-                tittleScreen = tittleScreen)
+                tittleScreen = tittleScreen,
+                navController = navController,
+                screenBack = screenBack
+            )
         },
             content = {
 //            WallHome(paddingValues = it)
@@ -36,7 +42,7 @@ fun TopBar(
             },
             floatingActionButton = {
                 FloatingActionButton(
-                    onClick = { /*TODO*/ }
+                    onClick = { navController.navigate(route = Screens.Menu.route) }
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.fluent_add_12_filled),
@@ -51,7 +57,10 @@ fun TopBar(
         Scaffold(topBar = {
             SmallTopBar(
                 typeScreen = typeScreen,
-                tittleScreen = tittleScreen)
+                tittleScreen = tittleScreen,
+                navController = navController,
+                screenBack = screenBack
+            )
         },
             content = {
 //            WallHome(paddingValues = it)
@@ -68,7 +77,9 @@ fun TopBar(
 @Composable
 fun SmallTopBar(
     typeScreen: Boolean,
-    tittleScreen: String
+    tittleScreen: String,
+    navController: NavController,
+    screenBack: String
 ) {
     if(typeScreen){
         SmallTopAppBar(
@@ -100,7 +111,13 @@ fun SmallTopBar(
                     Icon(
                         painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24),
                         contentDescription = "Icon TImer",
-                        modifier = Modifier.clickable {  }
+                        modifier = Modifier.clickable {
+                            navController.navigate(route = screenBack) {
+                                popUpTo(screenBack) {
+                                    inclusive = true
+                                }
+                            }
+                        }
                     )
                 }
             }

@@ -1,4 +1,4 @@
-package com.example.alfaomega.wallscreen
+package com.example.alfaomega.wallscreens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,7 +11,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.alfaomega.component.ComponentTransaction
+import com.example.alfaomega.components.ComponentTransaction
 
 @Composable
 fun WallHome(paddingValues: PaddingValues) {

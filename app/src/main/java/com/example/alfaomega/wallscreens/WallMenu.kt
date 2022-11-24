@@ -1,4 +1,4 @@
-package com.example.alfaomega.wallscreen
+package com.example.alfaomega.wallscreens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,8 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.alfaomega.component.ComponentMenu
-import com.example.alfaomega.component.ComponentTransaction
+import com.example.alfaomega.components.ComponentMenu
 
 @Composable
 fun WallMenu(paddingValues: PaddingValues) {

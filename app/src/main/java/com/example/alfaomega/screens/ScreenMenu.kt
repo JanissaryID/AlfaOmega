@@ -2,15 +2,20 @@ package com.example.alfaomega.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.alfaomega.component.TopBar
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.alfaomega.components.TopBar
+import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
 @Composable
-fun ScreenMenu() {
+fun ScreenMenu(navController: NavController) {
     TopBar(
         typeScreen = false,
         tittleScreen = "New Transaction",
-        wallScreen = 1
+        wallScreen = 1,
+        navController = navController,
+        Screens.Home.route
     )
 }
 
@@ -18,6 +23,6 @@ fun ScreenMenu() {
 @Composable
 fun ViewMenu() {
     AlfaOmegaTheme {
-        ScreenMenu()
+        ScreenMenu(navController = rememberNavController())
     }
 }
