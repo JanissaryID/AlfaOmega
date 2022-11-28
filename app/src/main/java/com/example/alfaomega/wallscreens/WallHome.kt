@@ -11,10 +11,14 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.alfaomega.components.ComponentTransaction
 
 @Composable
-fun WallHome(paddingValues: PaddingValues) {
+fun WallHome(
+    paddingValues: PaddingValues,
+    navController: NavController
+) {
     val numbers = remember {
         mutableStateListOf(1,2,3,4,5,6,7,8,9,10)
     }
@@ -30,7 +34,8 @@ fun WallHome(paddingValues: PaddingValues) {
                     TransactionMenu = "Cuci-Kering",
                     TransactionType = "Giant 8 Kg",
                     TransactionAdmin = "Putri Sabila",
-                    TransactionProcess = "Sedang Mencuci"
+                    TransactionProcess = "Sedang Mencuci",
+                    navController = navController
                 )
             }
         }

@@ -11,7 +11,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.R
+import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
 @Composable
@@ -21,7 +24,8 @@ fun ComponentTransaction(
     TransactionMenu: String,
     TransactionType: String,
     TransactionAdmin: String,
-    TransactionProcess: String
+    TransactionProcess: String,
+    navController: NavController
 
 ) {
     Card(
@@ -117,7 +121,8 @@ fun DefaultPreview() {
             TransactionMenu = "Cuci-Kering",
             TransactionType = "Giant 8 Kg",
             TransactionAdmin = "Putri Sabila",
-            TransactionProcess = "Sedang Mencuci"
+            TransactionProcess = "Sedang Mencuci",
+            navController = rememberNavController()
         )
     }
 }

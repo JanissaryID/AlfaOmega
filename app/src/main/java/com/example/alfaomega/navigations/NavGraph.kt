@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.alfaomega.screens.ScreenDetailTransaction
 import com.example.alfaomega.screens.ScreenHome
 import com.example.alfaomega.screens.ScreenMenu
 
@@ -32,6 +33,16 @@ fun NavGraphSetup(
 //                paymentViewModel.getQR()
 //            }
             ScreenMenu(navController = navController)
+        }
+
+        composable(
+            route = Screens.DetailTransaction.route,
+        ){
+//            LaunchedEffect(key1 = STORE_ID){
+//                Log.d("debug", "Qris NavGraph")
+//                paymentViewModel.getQR()
+//            }
+            ScreenDetailTransaction(navController = navController)
         }
     }
 }

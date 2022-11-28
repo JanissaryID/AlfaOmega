@@ -15,7 +15,7 @@ fun ScreenMenu(navController: NavController) {
         tittleScreen = "New Transaction",
         wallScreen = 1,
         navController = navController,
-        Screens.Home.route
+        screenBack = Screens.Home.route
     )
 }
 

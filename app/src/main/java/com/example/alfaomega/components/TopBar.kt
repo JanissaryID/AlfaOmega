@@ -37,7 +37,8 @@ fun TopBar(
 //            WallHome(paddingValues = it)
                 WallPicker(
                     wallScreen = wallScreen,
-                    paddingValues = it
+                    paddingValues = it,
+                    navController = navController
                 )
             },
             floatingActionButton = {
@@ -66,7 +67,8 @@ fun TopBar(
 //            WallHome(paddingValues = it)
                 WallPicker(
                     wallScreen = wallScreen,
-                    paddingValues = it
+                    paddingValues = it,
+                    navController = navController
                 )
             }
         )

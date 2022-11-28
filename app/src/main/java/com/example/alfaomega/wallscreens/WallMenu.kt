@@ -14,10 +14,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.alfaomega.components.ComponentMenu
 
 @Composable
-fun WallMenu(paddingValues: PaddingValues) {
+fun WallMenu(
+    paddingValues: PaddingValues,
+    navController: NavController
+) {
     val numbers = remember {
         mutableStateListOf(1,2,3,4,5,6,7,8,9,10)
     }
@@ -76,7 +80,8 @@ fun WallMenu(paddingValues: PaddingValues) {
                         menuTitle = "Cuci-Kering",
                         menuType = "Giant 8 Kg",
                         menuPrice = "16000",
-                        menuTime = "45 Menit"
+                        menuTime = "45 Menit",
+                        navController = navController
                     )
                 }
             }
