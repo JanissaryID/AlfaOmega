@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.screens.ScreenDetailTransaction
 import com.example.alfaomega.screens.ScreenHome
 import com.example.alfaomega.screens.ScreenMenu
+import com.example.alfaomega.screens.ScreenStore
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -43,6 +44,16 @@ fun NavGraphSetup(
 //                paymentViewModel.getQR()
 //            }
             ScreenDetailTransaction(navController = navController)
+        }
+
+        composable(
+            route = Screens.StoreProfile.route,
+        ){
+//            LaunchedEffect(key1 = STORE_ID){
+//                Log.d("debug", "Qris NavGraph")
+//                paymentViewModel.getQR()
+//            }
+            ScreenStore(navController = navController)
         }
     }
 }

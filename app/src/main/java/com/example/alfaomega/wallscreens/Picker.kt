@@ -14,6 +14,7 @@ fun WallPicker(
         0 -> WallHome(paddingValues = paddingValues, navController = navController)
         1 -> WallMenu(paddingValues = paddingValues, navController = navController)
         2 -> WallDetailTransaction(paddingValues = paddingValues)
+        3 -> WallStore(navController = navController, paddingValues = paddingValues)
         else -> print("Opps tidak ada")
     }
 }

@@ -93,9 +93,9 @@ fun SmallTopBar(
             actions = {
                 Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_account_circle_24),
-                        contentDescription = "Icon TImer",
-                        modifier = Modifier.clickable {  }
+                        painter = painterResource(id = R.drawable.ic_baseline_storefront_24),
+                        contentDescription = "Icon Store",
+                        modifier = Modifier.clickable { navController.navigate(route = Screens.StoreProfile.route) }
                     )
                 }
             }
