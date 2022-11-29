@@ -52,7 +52,7 @@ fun DetailTransaction(
             modifier = Modifier
                 .padding(8.dp)
                 .fillMaxWidth()
-                .constrainAs(CardMenu){
+                .constrainAs(CardMenu) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -116,27 +116,33 @@ fun DetailTransaction(
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .selectable(
-                                selected = isSelectedItemType(TYPE_NEW_TRANSACATION),
-                                onClick = { onChangeStateType(TYPE_NEW_TRANSACATION) },
-                                role = Role.RadioButton
-                            )
-                            .padding(8.dp)
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        modifier = Modifier.wrapContentSize(),
+                        color = Color.Transparent
                     ) {
-                        RadioButton(
-                            selected = true,
-                            onClick = null,
-                            enabled = false
-                        )
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Text(
-                            text = TYPE_NEW_TRANSACATION,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .selectable(
+                                    selected = isSelectedItemType(TYPE_NEW_TRANSACATION),
+                                    onClick = { onChangeStateType(TYPE_NEW_TRANSACATION) },
+                                    role = Role.RadioButton
+                                )
+                                .padding(8.dp)
+                        ) {
+                            RadioButton(
+                                selected = true,
+                                onClick = null,
+                                enabled = false
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Text(
+                                text = TYPE_NEW_TRANSACATION,
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            )
+                        }
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
@@ -144,27 +150,33 @@ fun DetailTransaction(
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .selectable(
-                                selected = isSelectedItemPrice(PRICE_NEW_TRANSACATION),
-                                onClick = { onChangeStatePrice(PRICE_NEW_TRANSACATION) },
-                                role = Role.RadioButton
-                            )
-                            .padding(8.dp)
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        modifier = Modifier.wrapContentSize(),
+                        color = Color.Transparent
                     ) {
-                        RadioButton(
-                            selected = true,
-                            onClick = null,
-                            enabled = false
-                        )
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Text(
-                            text = PRICE_NEW_TRANSACATION,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .selectable(
+                                    selected = isSelectedItemPrice(PRICE_NEW_TRANSACATION),
+                                    onClick = { onChangeStatePrice(PRICE_NEW_TRANSACATION) },
+                                    role = Role.RadioButton
+                                )
+                                .padding(8.dp)
+                        ) {
+                            RadioButton(
+                                selected = true,
+                                onClick = null,
+                                enabled = false
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Text(
+                                text = PRICE_NEW_TRANSACATION,
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            )
+                        }
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
@@ -173,26 +185,32 @@ fun DetailTransaction(
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
                     paymentMethode.forEach { item ->
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier
-                                .selectable(
-                                    selected = isSelectedItemPayment(item),
-                                    onClick = { onChangeStatePayment(item) },
-                                    role = Role.RadioButton
-                                )
-                                .padding(8.dp)
+                        Surface(
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier.wrapContentSize(),
+                            color = Color.Transparent
                         ) {
-                            RadioButton(
-                                selected = isSelectedItemPayment(item),
-                                onClick = null
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Text(
-                                text = item,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                            )
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .selectable(
+                                        selected = isSelectedItemPayment(item),
+                                        onClick = { onChangeStatePayment(item) },
+                                        role = Role.RadioButton
+                                    )
+                                    .padding(8.dp)
+                            ) {
+                                RadioButton(
+                                    selected = isSelectedItemPayment(item),
+                                    onClick = null
+                                )
+                                Spacer(modifier = Modifier.width(16.dp))
+                                Text(
+                                    text = item,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                )
+                            }
                         }
                     }
                 }
@@ -208,12 +226,6 @@ fun DetailTransaction(
                 end.linkTo(parent.end)
             }
         ) {
-
         }
-
     }
-
-
-
-
 }

@@ -9,13 +9,15 @@ import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
 @Composable
-fun ScreenDetailTransaction(navController: NavController) {
+fun ScreenDetailTransaction(
+    navController: NavController
+) {
     TopBar(
         typeScreen = false,
         tittleScreen = "Detail Transaction",
         wallScreen = 2,
         navController = navController,
-        screenBack = Screens.Menu.route
+        screenBack = Screens.Menu.route,
     )
 }
 

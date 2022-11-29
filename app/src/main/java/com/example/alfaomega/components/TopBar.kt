@@ -10,8 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.alfaomega.R
+import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.wallscreens.WallPicker
 
@@ -22,7 +24,7 @@ fun TopBar(
     tittleScreen: String,
     wallScreen: Int,
     navController: NavController,
-    screenBack: String
+    screenBack: String,
 ) {
     if (typeScreen){
         Scaffold(topBar = {
@@ -38,7 +40,7 @@ fun TopBar(
                 WallPicker(
                     wallScreen = wallScreen,
                     paddingValues = it,
-                    navController = navController
+                    navController = navController,
                 )
             },
             floatingActionButton = {
@@ -68,7 +70,7 @@ fun TopBar(
                 WallPicker(
                     wallScreen = wallScreen,
                     paddingValues = it,
-                    navController = navController
+                    navController = navController,
                 )
             }
         )
