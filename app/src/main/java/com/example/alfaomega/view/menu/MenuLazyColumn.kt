@@ -16,7 +16,7 @@ import com.example.alfaomega.components.ComponentMenu as ComponentMenu
 fun MenuLazyColumn(
     menuModel: List<MenuModel>,
     navController: NavController,
-//    selectedIndex: Int
+    selectedIndex: Int
 ) {
     LazyColumn(
         modifier = Modifier.padding(top = 8.dp),
@@ -25,9 +25,9 @@ fun MenuLazyColumn(
         itemsIndexed(items = menuModel) { index, menu ->
             ComponentMenu(
                 menuTitle = menu.menuTitle.toString(),
-                menuType = "Giant 8 Kg",
+                menuType = if(selectedIndex == 0) "Giant 8 Kg" else "Titan 12 Kg",
                 menuPrice = menu.menuPrice.toString(),
-                menuTime = "${menu.menuTime} Menit",
+                menuTime = menu.menuTime!!,
                 navController = navController
             )
         }

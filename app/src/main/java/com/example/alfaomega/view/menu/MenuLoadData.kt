@@ -22,10 +22,10 @@ import com.example.alfaomega.api.menu.MenuModel
 @Composable
 fun MachineLoadData(
     menuState: Int,
-//    selectedIndex: Int,
+    selectedIndex: Int,
     menu: List<MenuModel>,
     navController: NavController,
-    onItemClick: (Int) -> Unit
+//    onItemClick: (Int) -> Unit
 ) {
     val context = LocalContext.current
 
@@ -45,12 +45,12 @@ fun MachineLoadData(
             if (!menu.isNullOrEmpty()){
                 Box(
                     modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.TopCenter
                 ) {
                     MenuLazyColumn(
                         navController = navController,
                         menuModel = menu,
-//                        selectedIndex = selectedIndex
+                        selectedIndex = selectedIndex
                     )
                 }
 

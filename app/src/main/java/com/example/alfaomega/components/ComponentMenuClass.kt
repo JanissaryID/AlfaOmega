@@ -1,5 +1,6 @@
 package com.example.alfaomega.components
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -26,6 +28,7 @@ fun ComponentMenuClass(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.clickable {
             onClick.invoke(index)
+//            Log.i("info_response", "Index : $index")
         }
     ) {
         Text(
@@ -33,12 +36,23 @@ fun ComponentMenuClass(
             fontWeight = FontWeight.ExtraBold,
             fontSize = MaterialTheme.typography.titleMedium.fontSize,
         )
-        Surface(
-            modifier = Modifier.size(width = 70.dp, height = 4.dp),
-            color = MaterialTheme.colorScheme.primary,
-            shape = RoundedCornerShape(100)
-        ) {
+        if(!selected){
+            Surface(
+                modifier = Modifier.size(width = 70.dp, height = 4.dp),
+                color = MaterialTheme.colorScheme.primary,
+                shape = RoundedCornerShape(100)
+            ) {
 
+            }
+        }
+        else{
+            Surface(
+                modifier = Modifier.size(width = 70.dp, height = 4.dp),
+                color = Color.Transparent,
+                shape = RoundedCornerShape(100)
+            ) {
+
+            }
         }
     }
 }

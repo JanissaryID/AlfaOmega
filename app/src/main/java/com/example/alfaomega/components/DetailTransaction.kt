@@ -13,10 +13,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.alfaomega.NAME_CUSTOMER_NEW_TRANSACATION
-import com.example.alfaomega.PRICE_NEW_TRANSACATION
-import com.example.alfaomega.TITLE_NEW_TRANSACATION
-import com.example.alfaomega.TYPE_NEW_TRANSACATION
+import com.example.alfaomega.NEW_TRANSACATION_CUSTOMER
+import com.example.alfaomega.NEW_TRANSACATION_MENU
+import com.example.alfaomega.NEW_TRANSACATION_PRICE
+import com.example.alfaomega.NEW_TRANSACATION_TYPE
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,8 +27,12 @@ fun DetailTransaction(
     transactionProcess: String,
     transactionAdmin: String
 ) {
-    var text_name by remember { mutableStateOf(TextFieldValue(NAME_CUSTOMER_NEW_TRANSACATION.toString())) }
-    var text_menu by remember { mutableStateOf(TextFieldValue(TITLE_NEW_TRANSACATION.toString())) }
+    var buttonEnable: Boolean = false
+    var text_name by remember { mutableStateOf(TextFieldValue(NEW_TRANSACATION_CUSTOMER)) }
+
+    val selectedValueMenu = remember { mutableStateOf("") }
+    val isSelectedItemMenu: (String) -> Boolean = { selectedValueMenu.value == it }
+    val onChangeStateMenu: (String) -> Unit = { selectedValueMenu.value = it }
 
     val selectedValueType = remember { mutableStateOf("") }
     val isSelectedItemType: (String) -> Boolean = { selectedValueType.value == it }
@@ -94,22 +99,34 @@ fun DetailTransaction(
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
                     Spacer(modifier = Modifier.height(4.dp))
-                    TextField(
-                        value = text_menu,
-                        onValueChange ={
-                            text_menu = it
-                        },
-                        singleLine = true,
-                        colors = TextFieldDefaults.textFieldColors(
-//                            backgroundColor = Color.White,
-                            focusedIndicatorColor = Color.Transparent,
-                            unfocusedIndicatorColor = Color.Transparent,
-                            disabledIndicatorColor = Color.Transparent,
-                            containerColor = MaterialTheme.colorScheme.primaryContainer
-                        ),
+                    Surface(
                         shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                        modifier = Modifier.wrapContentSize(),
+                        color = Color.Transparent
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .selectable(
+                                    selected = isSelectedItemMenu(NEW_TRANSACATION_MENU),
+                                    onClick = { onChangeStateMenu(NEW_TRANSACATION_MENU) },
+                                    role = Role.RadioButton
+                                )
+                                .padding(8.dp)
+                        ) {
+                            RadioButton(
+                                selected = true,
+                                onClick = null,
+                                enabled = false
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Text(
+                                text = NEW_TRANSACATION_MENU,
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            )
+                        }
+                    }
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = "Type Menu",
@@ -125,8 +142,8 @@ fun DetailTransaction(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .selectable(
-                                    selected = isSelectedItemType(TYPE_NEW_TRANSACATION),
-                                    onClick = { onChangeStateType(TYPE_NEW_TRANSACATION) },
+                                    selected = isSelectedItemType(NEW_TRANSACATION_TYPE),
+                                    onClick = { onChangeStateType(NEW_TRANSACATION_TYPE) },
                                     role = Role.RadioButton
                                 )
                                 .padding(8.dp)
@@ -138,7 +155,7 @@ fun DetailTransaction(
                             )
                             Spacer(modifier = Modifier.width(16.dp))
                             Text(
-                                text = TYPE_NEW_TRANSACATION,
+                                text = NEW_TRANSACATION_TYPE,
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
                             )
@@ -159,8 +176,8 @@ fun DetailTransaction(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .selectable(
-                                    selected = isSelectedItemPrice(PRICE_NEW_TRANSACATION),
-                                    onClick = { onChangeStatePrice(PRICE_NEW_TRANSACATION) },
+                                    selected = isSelectedItemPrice(NEW_TRANSACATION_PRICE),
+                                    onClick = { onChangeStatePrice(NEW_TRANSACATION_PRICE) },
                                     role = Role.RadioButton
                                 )
                                 .padding(8.dp)
@@ -172,7 +189,7 @@ fun DetailTransaction(
                             )
                             Spacer(modifier = Modifier.width(16.dp))
                             Text(
-                                text = PRICE_NEW_TRANSACATION,
+                                text = "Rp $NEW_TRANSACATION_PRICE",
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
                             )
@@ -217,9 +234,16 @@ fun DetailTransaction(
             }
         }
 
+        if(!text_name.text.isNullOrEmpty() && !selectedValuePayment.value.isNullOrEmpty()){
+            buttonEnable = true
+        }
+        else{
+            buttonEnable = false
+        }
+
         ButtonView(
             title = "Print Bill",
-            enable = true,
+            enable = buttonEnable,
             modifier = Modifier.constrainAs(Button){
                 bottom.linkTo(parent.bottom, 16.dp)
                 start.linkTo(parent.start)
