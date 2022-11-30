@@ -28,6 +28,9 @@ fun MenuLazyColumn(
                 menuType = if(selectedIndex == 0) "Giant 8 Kg" else "Titan 12 Kg",
                 menuPrice = menu.menuPrice.toString(),
                 menuTime = menu.menuTime!!,
+                isWasher = menu.isWasher!!,
+                isDryer = menu.isDryer!!,
+                menuClass = menu.menuClass!!,
                 navController = navController
             )
         }

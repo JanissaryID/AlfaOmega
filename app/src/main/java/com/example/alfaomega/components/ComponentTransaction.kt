@@ -22,11 +22,10 @@ fun ComponentTransaction(
     TransactionId: String,
     TransactionDate: String,
     TransactionMenu: String,
-    TransactionType: String,
-    TransactionAdmin: String,
-    TransactionProcess: String,
+    TransactionClass: String,
+    TransactionCustomer: String,
+    TransactionProcess: Int,
     navController: NavController
-
 ) {
     Card(
         elevation = CardDefaults.cardElevation(6.dp),
@@ -61,7 +60,7 @@ fun ComponentTransaction(
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = TransactionType,
+                        text = TransactionClass,
                         fontWeight = FontWeight.Light,
                         fontSize = MaterialTheme.typography.labelSmall.fontSize,
                     )
@@ -91,16 +90,60 @@ fun ComponentTransaction(
 //                            modifier = Modifier.background(color = Color.Transparent),
                                 shape = RoundedCornerShape(50)
                             ) {
-                                Text(
-                                    text = TransactionProcess,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                    modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
-                                )
+                                when (TransactionProcess){
+                                    0 -> {
+                                        Text(
+                                            text = "Waiting Wash",
+                                            fontWeight = FontWeight.SemiBold,
+                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                        )
+                                    }
+                                    1 -> {
+                                        Text(
+                                            text = "Washing",
+                                            fontWeight = FontWeight.SemiBold,
+                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                        )
+                                    }
+                                    2 -> {
+                                        Text(
+                                            text = "Finish Wash",
+                                            fontWeight = FontWeight.SemiBold,
+                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                        )
+                                    }
+                                    3 -> {
+                                        Text(
+                                            text = "Waiting Dry",
+                                            fontWeight = FontWeight.SemiBold,
+                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                        )
+                                    }
+                                    4 -> {
+                                        Text(
+                                            text = "Drying",
+                                            fontWeight = FontWeight.SemiBold,
+                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                        )
+                                    }
+                                    5 -> {
+                                        Text(
+                                            text = "Finish Dry",
+                                            fontWeight = FontWeight.SemiBold,
+                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                        )
+                                    }
+                                }
                             }
                         }
                         Text(
-                            text = TransactionAdmin,
+                            text = TransactionCustomer,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
                         )
@@ -119,9 +162,9 @@ fun DefaultPreview() {
             TransactionId = "16283628937356732628",
             TransactionDate = "08-08-2022",
             TransactionMenu = "Cuci-Kering",
-            TransactionType = "Giant 8 Kg",
-            TransactionAdmin = "Putri Sabila",
-            TransactionProcess = "Sedang Mencuci",
+            TransactionClass = "Giant 8 Kg",
+            TransactionCustomer = "Putri Sabila",
+            TransactionProcess = 1,
             navController = rememberNavController()
         )
     }

@@ -10,8 +10,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.alfaomega.MENU_LIST_TITAN_RESPONSE
 import com.example.alfaomega.STORE_ID
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.screens.ScreenDetailTransaction
 import com.example.alfaomega.screens.ScreenHome
 import com.example.alfaomega.screens.ScreenMenu
@@ -21,13 +23,17 @@ import com.example.alfaomega.screens.ScreenStore
 @Composable
 fun NavGraphSetup(
     navController: NavHostController,
-    menuViewModel: MenuViewModel
+    menuViewModel: MenuViewModel,
+    transactionViewModel: TransactionViewModel
     ) {
     val context = LocalContext.current
     NavHost(navController = navController, startDestination = Screens.Home.route) {
         composable(
             route = Screens.Home.route,
         ) {
+            LaunchedEffect(key1 = STORE_ID){
+                transactionViewModel.getTransactionActive()
+            }
             ScreenHome(navController = navController)
         }
 

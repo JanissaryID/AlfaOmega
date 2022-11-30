@@ -12,32 +12,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.alfaomega.TRANSACTION_ACTIVE_RESPONSE
+import com.example.alfaomega.TRANSACTION_ACTIVE_STATE
+import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.components.ComponentTransaction
+import com.example.alfaomega.view.transaction_active.TransactionActiveLoadData
 
 @Composable
 fun WallHome(
     paddingValues: PaddingValues,
-    navController: NavController
+    navController: NavController,
+    transactionViewModel: TransactionViewModel
 ) {
-    val numbers = remember {
-        mutableStateListOf(1,2,3,4,5,6,7,8,9,10)
-    }
-    Surface(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
-        LazyColumn(
-            modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ){
-            items(items = numbers, key = {it.hashCode()}) {
-                ComponentTransaction(
-                    TransactionId = "16283628937356732628",
-                    TransactionDate = "08-08-2022",
-                    TransactionMenu = "Cuci-Kering",
-                    TransactionType = "Giant 8 Kg",
-                    TransactionAdmin = "Putri Sabila",
-                    TransactionProcess = "Sedang Mencuci",
-                    navController = navController
-                )
-            }
-        }
+
+    Surface(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = paddingValues.calculateTopPadding())) {
+        TransactionActiveLoadData(
+            transactionState = TRANSACTION_ACTIVE_STATE,
+            transactionActive = TRANSACTION_ACTIVE_RESPONSE,
+            navController = navController
+        )
     }
 }

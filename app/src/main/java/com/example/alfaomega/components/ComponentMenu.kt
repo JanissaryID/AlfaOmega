@@ -10,10 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.alfaomega.NEW_TRANSACATION_MENU
-import com.example.alfaomega.NEW_TRANSACATION_PRICE
-import com.example.alfaomega.NEW_TRANSACATION_TIME
-import com.example.alfaomega.NEW_TRANSACATION_TYPE
+import com.example.alfaomega.*
 import com.example.alfaomega.navigations.Screens
 
 @Composable
@@ -22,6 +19,9 @@ fun ComponentMenu(
     menuType: String,
     menuPrice: String,
     menuTime: Int,
+    isWasher: Boolean,
+    isDryer: Boolean,
+    menuClass: Boolean,
     navController: NavController
 ) {
     Card(
@@ -36,6 +36,9 @@ fun ComponentMenu(
                 NEW_TRANSACATION_PRICE = menuPrice
                 NEW_TRANSACATION_TIME = menuTime
                 NEW_TRANSACATION_TYPE = menuType
+                NEW_TRANSACATION_IS_WASHER = isWasher
+                NEW_TRANSACATION_IS_DRYER = isDryer
+                NEW_TRANSACATION_CLASS = menuClass
                 navController.navigate(route = Screens.DetailTransaction.route)
 //                Log.i("info_response", "$menuTitle  $menuType  $menuPrice  $menuTime")
             }) {

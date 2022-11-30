@@ -1,5 +1,8 @@
 package com.example.alfaomega.components
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,22 +16,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.alfaomega.NEW_TRANSACATION_CUSTOMER
-import com.example.alfaomega.NEW_TRANSACATION_MENU
-import com.example.alfaomega.NEW_TRANSACATION_PRICE
-import com.example.alfaomega.NEW_TRANSACATION_TYPE
+import androidx.navigation.NavController
+import com.example.alfaomega.*
+import com.example.alfaomega.api.transaction.TransactionViewModel
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailTransaction(
-    transcationTitle: String,
-    transcationType: String,
-    transactionProcess: String,
-    transactionAdmin: String
+    transactionViewModel: TransactionViewModel,
+    navController: NavController
 ) {
-    var buttonEnable: Boolean = false
+    var button_clicked by remember { mutableStateOf(false) }
     var text_name by remember { mutableStateOf(TextFieldValue(NEW_TRANSACATION_CUSTOMER)) }
+    var payment_value_index by remember {
+        mutableStateOf(0)
+    }
 
     val selectedValueMenu = remember { mutableStateOf("") }
     val isSelectedItemMenu: (String) -> Boolean = { selectedValueMenu.value == it }
@@ -201,7 +205,7 @@ fun DetailTransaction(
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
-                    paymentMethode.forEach { item ->
+                    paymentMethode.forEachIndexed { indexItem ,item ->
                         Surface(
                             shape = RoundedCornerShape(12.dp),
                             modifier = Modifier.wrapContentSize(),
@@ -212,7 +216,10 @@ fun DetailTransaction(
                                 modifier = Modifier
                                     .selectable(
                                         selected = isSelectedItemPayment(item),
-                                        onClick = { onChangeStatePayment(item) },
+                                        onClick = {
+                                            onChangeStatePayment(item)
+                                            payment_value_index = indexItem
+                                                  },
                                         role = Role.RadioButton
                                     )
                                     .padding(8.dp)
@@ -234,22 +241,38 @@ fun DetailTransaction(
             }
         }
 
-        if(!text_name.text.isNullOrEmpty() && !selectedValuePayment.value.isNullOrEmpty()){
-            buttonEnable = true
+        if(!text_name.text.isNullOrEmpty() && !selectedValuePayment.value.isNullOrEmpty() && !button_clicked){
+            NEW_TRANSACATION_BUTTON = true
         }
         else{
-            buttonEnable = false
+            NEW_TRANSACATION_BUTTON = false
         }
 
         ButtonView(
-            title = "Print Bill",
-            enable = buttonEnable,
+            title = "Create Transaction",
+            enable = NEW_TRANSACATION_BUTTON,
             modifier = Modifier.constrainAs(Button){
                 bottom.linkTo(parent.bottom, 16.dp)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
             }
         ) {
+            button_clicked = true
+//            Log.i("info_response", "Payment : ${payment_value_index}")
+            transactionViewModel.insertTransaction(
+                transactionCustomer = text_name.text,
+                transactionMenu = NEW_TRANSACATION_MENU,
+                transactionPrice = NEW_TRANSACATION_PRICE,
+                transactionClass = NEW_TRANSACATION_CLASS,
+                transactionPayment = if(payment_value_index == 0) false else true,
+                transactionStateMachine = if(NEW_TRANSACATION_IS_WASHER) 0
+                                            else if(NEW_TRANSACATION_IS_DRYER) 3
+                                            else if (!NEW_TRANSACATION_IS_WASHER && !NEW_TRANSACATION_IS_DRYER) 6
+                                            else 0,
+                isWasher = NEW_TRANSACATION_IS_WASHER,
+                isDryer = NEW_TRANSACATION_IS_DRYER,
+                navController = navController
+            )
         }
     }
 }

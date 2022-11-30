@@ -1,4 +1,4 @@
-package com.example.alfaomega.view.menu
+package com.example.alfaomega.view.transaction_active
 
 import android.util.Log
 import android.widget.Toast
@@ -17,21 +17,22 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.R
-import com.example.alfaomega.api.menu.MenuModel
+import com.example.alfaomega.api.transaction.TransactionModel
+import com.example.alfaomega.view.menu.MenuLazyColumn
 
 @Composable
-fun MachineLoadData(
-    menuState: Int,
-    selectedIndex: Int,
-    menu: List<MenuModel>,
+fun TransactionActiveLoadData(
+    transactionState: Int,
+//    selectedIndex: Int,
+    transactionActive: List<TransactionModel>,
     navController: NavController,
 //    onItemClick: (Int) -> Unit
 ) {
     val context = LocalContext.current
 
-//    Log.i("Check State", "This Is $menuState")
+//    Log.i("Check State", "This Is $transactionState")
 
-    when (menuState) {
+    when (transactionState) {
         0 -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -42,15 +43,14 @@ fun MachineLoadData(
         }
         1 -> {
 //            Log.d("debug", "Success")
-            if (!menu.isNullOrEmpty()){
+            if (!transactionActive.isNullOrEmpty()){
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.TopCenter
                 ) {
-                    MenuLazyColumn(
+                    TransactionActiveLazyColumn(
                         navController = navController,
-                        menuModel = menu,
-                        selectedIndex = selectedIndex
+                        transactionActiveModel = transactionActive,
                     )
                 }
 
