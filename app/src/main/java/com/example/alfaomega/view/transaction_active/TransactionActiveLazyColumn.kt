@@ -26,18 +26,15 @@ fun TransactionActiveLazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ){
         itemsIndexed(items = transactionActiveModel) { index, transactionActive ->
-            if(transactionActive.transactionStateMachine != 6)
-            {
-                ComponentTransaction(
-                    TransactionId = transactionActive.id.toString(),
-                    TransactionDate = transactionActive.transactionDate.toString(),
-                    TransactionMenu = transactionActive.transactionMenu.toString(),
-                    TransactionClass = if(!transactionActive.transactionClass!!) selectionMenuClass[0] else selectionMenuClass[1],
-                    TransactionCustomer = transactionActive.transactionCustomer.toString(),
-                    TransactionProcess = transactionActive.transactionStateMachine!!,
-                    navController =navController
-                )
-            }
+            ComponentTransaction(
+                TransactionId = transactionActive.id.toString(),
+                TransactionDate = transactionActive.transactionDate.toString(),
+                TransactionMenu = transactionActive.transactionMenu.toString(),
+                TransactionClass = if(!transactionActive.transactionClass!!) selectionMenuClass[0] else selectionMenuClass[1],
+                TransactionCustomer = transactionActive.transactionCustomer.toString(),
+                TransactionProcess = transactionActive.transactionStateMachine!!,
+                navController =navController
+            )
         }
     }
 }

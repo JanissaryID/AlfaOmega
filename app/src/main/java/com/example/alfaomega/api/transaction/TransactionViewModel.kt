@@ -28,8 +28,9 @@ class TransactionViewModel: ViewModel() {
                     TRANSACTION_ACTIVE_STATE = 0
                     if (response.code() == 200) {
                         response.body()?.let {
-                            TRANSACTION_ACTIVE_RESPONSE = response.body()!!
+                            TRANSACTION_ACTIVE_RESPONSE = response.body()!!.filter { data -> data.transactionStateMachine != 6 } as ArrayList<TransactionModel>
                             TRANSACTION_ACTIVE_STATE = 1
+
 //                            Log.i("info_response", "Data GIANT : ${MENU_LIST_GIANT_RESPONSE}")
                         }
                         if (TRANSACTION_ACTIVE_RESPONSE.isNullOrEmpty()) {

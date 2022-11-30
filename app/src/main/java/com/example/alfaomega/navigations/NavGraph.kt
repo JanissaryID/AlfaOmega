@@ -41,8 +41,7 @@ fun NavGraphSetup(
             route = Screens.Menu.route,
         ){
             LaunchedEffect(key1 = STORE_ID){
-                menuViewModel.getMenuGiant()
-                menuViewModel.getMenuTitan()
+                menuViewModel.getMenu()
             }
             ScreenMenu(navController = navController)
         }

@@ -9,54 +9,20 @@ import retrofit2.Response
 
 class MenuViewModel: ViewModel() {
 
-    fun getMenuGiant(){
+    fun getMenu(){
         try {
-            MenuApp.CreateInstance().fetchMenu(store = STORE_ID, menuClass = false).enqueue(object :
+            MenuApp.CreateInstance().fetchMenu(store = STORE_ID).enqueue(object :
                 Callback<ArrayList<MenuModel>> {
                 override fun onResponse(call: Call<ArrayList<MenuModel>>, response: Response<ArrayList<MenuModel>>) {
                     MENU_STATE = 0
                     if(response.code() == 200){
                         response.body()?.let {
-                            MENU_LIST_GIANT_RESPONSE= response.body()!!
+                            MENU_LIST_GIANT_RESPONSE = response.body()!!.filter { menu -> menu.menuClass == false } as ArrayList<MenuModel>
+                            MENU_LIST_TITAN_RESPONSE = response.body()!!.filter { menu -> menu.menuClass == true } as ArrayList<MenuModel>
                             MENU_STATE = 1
 //                            Log.i("info_response", "Data GIANT : ${MENU_LIST_GIANT_RESPONSE}")
                         }
                         if (MENU_LIST_GIANT_RESPONSE.isNullOrEmpty()){
-                            MENU_STATE = 3
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<ArrayList<MenuModel>>, t: Throwable) {
-                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
-                    if (t.message == t.message){
-                        Log.d("debug menu", "Failed")
-                        MENU_STATE = 2
-//                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
-                    }
-                }
-            })
-        }
-        catch (e : Exception){
-            MENU_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug menu", "ERROR $MENU_ERROR_MESSAGE")
-//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    fun getMenuTitan(){
-        try {
-            MenuApp.CreateInstance().fetchMenu(store = STORE_ID, menuClass = true).enqueue(object :
-                Callback<ArrayList<MenuModel>> {
-                override fun onResponse(call: Call<ArrayList<MenuModel>>, response: Response<ArrayList<MenuModel>>) {
-                    MENU_STATE = 0
-                    if(response.code() == 200){
-                        response.body()?.let {
-                            MENU_LIST_TITAN_RESPONSE = response.body()!!
-                            MENU_STATE = 1
-//                            Log.i("info_response", "Data Titan : ${MENU_LIST_TITAN_RESPONSE}")
-                        }
-                        if (MENU_LIST_TITAN_RESPONSE.isNullOrEmpty()){
                             MENU_STATE = 3
                         }
                     }
