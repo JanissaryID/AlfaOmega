@@ -1,6 +1,7 @@
 package com.example.alfaomega.view.transaction_active
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -20,9 +21,10 @@ fun TransactionActiveLazyColumn(
 //    selectedIndex: Int
 ) {
     val selectionMenuClass = listOf("Giant 8 Kg", "Titan 12 Kg")
+    val selectionPayment = listOf("Cash", "Qris")
 
     LazyColumn(
-        modifier = Modifier.padding(top = 8.dp),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ){
         itemsIndexed(items = transactionActiveModel) { index, transactionActive ->
@@ -30,9 +32,12 @@ fun TransactionActiveLazyColumn(
                 TransactionId = transactionActive.id.toString(),
                 TransactionDate = transactionActive.transactionDate.toString(),
                 TransactionMenu = transactionActive.transactionMenu.toString(),
-                TransactionClass = if(!transactionActive.transactionClass!!) selectionMenuClass[0] else selectionMenuClass[1],
+                TransactionType = if(!transactionActive.transactionClass!!) selectionMenuClass[0] else selectionMenuClass[1],
                 TransactionCustomer = transactionActive.transactionCustomer.toString(),
                 TransactionProcess = transactionActive.transactionStateMachine!!,
+                TransactionPrice = transactionActive.transactionPrice.toString(),
+                transactionPayment = if(!transactionActive.transactionPayment!!) selectionPayment[0] else selectionPayment[1],
+                transactionAdmin = transactionActive.transactionAdmin.toString(),
                 navController =navController
             )
         }

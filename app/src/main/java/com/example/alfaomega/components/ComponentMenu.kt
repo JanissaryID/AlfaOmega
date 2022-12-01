@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -30,8 +31,10 @@ fun ComponentMenu(
         shape = RoundedCornerShape(12.dp)
     ) {
         Surface(
+            color = Color.Transparent,
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier.clickable {
+                TRANSACTION_SCREEN = true
                 NEW_TRANSACATION_MENU = menuTitle
                 NEW_TRANSACATION_PRICE = menuPrice
                 NEW_TRANSACATION_TIME = menuTime
@@ -40,7 +43,6 @@ fun ComponentMenu(
                 NEW_TRANSACATION_IS_DRYER = isDryer
                 NEW_TRANSACATION_CLASS = menuClass
                 navController.navigate(route = Screens.DetailTransaction.route)
-//                Log.i("info_response", "$menuTitle  $menuType  $menuPrice  $menuTime")
             }) {
             Column() {
                 Column(
@@ -57,7 +59,6 @@ fun ComponentMenu(
                         )
                         Text(
                             text = menuPrice,
-//                fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.labelMedium.fontSize,
                         )
                     }
@@ -73,7 +74,6 @@ fun ComponentMenu(
                         )
                         Text(
                             text = "$menuTime Menit",
-//                fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.labelSmall.fontSize,
                         )
                     }

@@ -31,6 +31,9 @@ data class TransactionModel(
 	@field:SerializedName("_id")
 	val id: String? = null,
 
+	@field:SerializedName("transaction_admin")
+	val transactionAdmin: String? = null,
+
 	@field:SerializedName("transaction_customer")
 	val transactionCustomer: String? = null,
 

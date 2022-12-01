@@ -7,12 +7,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
@@ -22,9 +24,12 @@ fun ComponentTransaction(
     TransactionId: String,
     TransactionDate: String,
     TransactionMenu: String,
-    TransactionClass: String,
+    TransactionType: String,
     TransactionCustomer: String,
     TransactionProcess: Int,
+    TransactionPrice: String,
+    transactionPayment: String,
+    transactionAdmin: String,
     navController: NavController
 ) {
     Card(
@@ -32,7 +37,21 @@ fun ComponentTransaction(
         modifier = Modifier.padding(8.dp),
         shape = RoundedCornerShape(12.dp)
     ) {
-        Surface(shape = RoundedCornerShape(12.dp),modifier = Modifier.clickable {  }) {
+        Surface(
+            color = Color.Transparent,
+            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier.clickable {
+                TRANSACTION_SCREEN = false
+                TRANSACATION_CUSTOMER = TransactionCustomer
+                TRANSACATION_MENU = TransactionMenu
+                TRANSACATION_TYPE = TransactionType
+                TRANSACATION_PRICE = TransactionPrice
+                TRANSACATION_PAYMENT = transactionPayment
+                TRANSACATION_DATE = TransactionDate
+                TRANSACATION_ADMIN = transactionAdmin
+                navController.navigate(route = Screens.DetailTransaction.route)
+            }
+        ) {
             Column() {
                 Column(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)
@@ -43,12 +62,10 @@ fun ComponentTransaction(
                     ) {
                         Text(
                             text = TransactionId,
-//                fontWeight = FontWeight.Light,
                             fontSize = MaterialTheme.typography.labelSmall.fontSize,
                         )
                         Text(
                             text = TransactionDate,
-//                fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.labelSmall.fontSize,
                         )
                     }
@@ -60,7 +77,7 @@ fun ComponentTransaction(
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = TransactionClass,
+                        text = TransactionType,
                         fontWeight = FontWeight.Light,
                         fontSize = MaterialTheme.typography.labelSmall.fontSize,
                     )
@@ -78,17 +95,15 @@ fun ComponentTransaction(
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-//                        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp, start = 8.dp, end = 8.dp)
                         ) {
                             Icon(
-                                painter = painterResource(id = R.drawable.ic_baseline_timelapse_24),
+                                painter = painterResource(id = R.drawable.ic_twotone_timelapse_24),
                                 contentDescription = "Icon TImer",
                                 modifier = Modifier.size(32.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Surface(
-//                            modifier = Modifier.background(color = Color.Transparent),
-                                shape = RoundedCornerShape(50)
+                                shape = RoundedCornerShape(50),
                             ) {
                                 when (TransactionProcess){
                                     0 -> {
@@ -96,7 +111,8 @@ fun ComponentTransaction(
                                             text = "Waiting Wash",
                                             fontWeight = FontWeight.SemiBold,
                                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
                                     }
                                     1 -> {
@@ -104,7 +120,8 @@ fun ComponentTransaction(
                                             text = "Washing",
                                             fontWeight = FontWeight.SemiBold,
                                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
                                     }
                                     2 -> {
@@ -112,7 +129,8 @@ fun ComponentTransaction(
                                             text = "Finish Wash",
                                             fontWeight = FontWeight.SemiBold,
                                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
                                     }
                                     3 -> {
@@ -120,7 +138,8 @@ fun ComponentTransaction(
                                             text = "Waiting Dry",
                                             fontWeight = FontWeight.SemiBold,
                                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
                                     }
                                     4 -> {
@@ -128,7 +147,8 @@ fun ComponentTransaction(
                                             text = "Drying",
                                             fontWeight = FontWeight.SemiBold,
                                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
                                     }
                                     5 -> {
@@ -136,7 +156,8 @@ fun ComponentTransaction(
                                             text = "Finish Dry",
                                             fontWeight = FontWeight.SemiBold,
                                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp)
+                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
                                     }
                                 }
@@ -146,6 +167,7 @@ fun ComponentTransaction(
                             text = TransactionCustomer,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
@@ -158,14 +180,14 @@ fun ComponentTransaction(
 @Composable
 fun DefaultPreview() {
     AlfaOmegaTheme {
-        ComponentTransaction(
-            TransactionId = "16283628937356732628",
-            TransactionDate = "08-08-2022",
-            TransactionMenu = "Cuci-Kering",
-            TransactionClass = "Giant 8 Kg",
-            TransactionCustomer = "Putri Sabila",
-            TransactionProcess = 1,
-            navController = rememberNavController()
-        )
+//        ComponentTransaction(
+//            TransactionId = "16283628937356732628",
+//            TransactionDate = "08-08-2022",
+//            TransactionMenu = "Cuci-Kering",
+//            TransactionClass = "Giant 8 Kg",
+//            TransactionCustomer = "Putri Sabila",
+//            TransactionProcess = 1,
+//            navController = rememberNavController()
+//        )
     }
 }

@@ -31,7 +31,10 @@ fun DetailTransaction(
     navController: NavController
 ) {
     var button_clicked by remember { mutableStateOf(false) }
-    var text_name by remember { mutableStateOf(TextFieldValue(NEW_TRANSACATION_CUSTOMER)) }
+    var text_name by remember {
+        if(!TRANSACTION_SCREEN) mutableStateOf(TextFieldValue(TRANSACATION_CUSTOMER))
+        else mutableStateOf(TextFieldValue(NEW_TRANSACATION_CUSTOMER))
+    }
     var payment_value_index by remember {
         mutableStateOf(0)
     }
@@ -77,7 +80,7 @@ fun DetailTransaction(
                     modifier = Modifier.fillMaxWidth(),
                 ){
                     Text(
-                        text = "Name",
+                        text = "Customer",
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
@@ -92,11 +95,14 @@ fun DetailTransaction(
                             focusedIndicatorColor = Color.Transparent,
                             unfocusedIndicatorColor = Color.Transparent,
                             disabledIndicatorColor = Color.Transparent,
-                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                            containerColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textColor = MaterialTheme.colorScheme.surfaceVariant,
+                            disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
                         ),
                         shape = RoundedCornerShape(12.dp),
                         modifier = Modifier.fillMaxWidth(),
-                        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
+                        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+                        readOnly = if(!TRANSACTION_SCREEN) true else false
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
@@ -114,8 +120,14 @@ fun DetailTransaction(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .selectable(
-                                    selected = isSelectedItemMenu(NEW_TRANSACATION_MENU),
-                                    onClick = { onChangeStateMenu(NEW_TRANSACATION_MENU) },
+                                    selected = isSelectedItemMenu(
+                                        if(!TRANSACTION_SCREEN) TRANSACATION_MENU
+                                        else NEW_TRANSACATION_MENU
+                                    ),
+                                    onClick = { onChangeStateMenu(
+                                        if(!TRANSACTION_SCREEN) TRANSACATION_MENU
+                                        else NEW_TRANSACATION_MENU
+                                    ) },
                                     role = Role.RadioButton
                                 )
                                 .padding(8.dp)
@@ -127,7 +139,8 @@ fun DetailTransaction(
                             )
                             Spacer(modifier = Modifier.width(16.dp))
                             Text(
-                                text = NEW_TRANSACATION_MENU,
+                                text = if(!TRANSACTION_SCREEN) TRANSACATION_MENU
+                                else NEW_TRANSACATION_MENU,
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
                             )
@@ -148,8 +161,12 @@ fun DetailTransaction(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .selectable(
-                                    selected = isSelectedItemType(NEW_TRANSACATION_TYPE),
-                                    onClick = { onChangeStateType(NEW_TRANSACATION_TYPE) },
+                                    selected = isSelectedItemType(
+                                        if(!TRANSACTION_SCREEN) TRANSACATION_TYPE
+                                    else NEW_TRANSACATION_TYPE),
+                                    onClick = { onChangeStateType(
+                                        if(!TRANSACTION_SCREEN) TRANSACATION_TYPE
+                                        else NEW_TRANSACATION_TYPE) },
                                     role = Role.RadioButton
                                 )
                                 .padding(8.dp)
@@ -160,11 +177,20 @@ fun DetailTransaction(
                                 enabled = false
                             )
                             Spacer(modifier = Modifier.width(16.dp))
-                            Text(
-                                text = NEW_TRANSACATION_TYPE,
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                            )
+                            if(!TRANSACTION_SCREEN){
+                                Text(
+                                    text = TRANSACATION_TYPE,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                )
+                            }
+                            else {
+                                Text(
+                                    text = NEW_TRANSACATION_TYPE,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                )
+                            }
                         }
                     }
                     Spacer(modifier = Modifier.height(16.dp))
@@ -182,8 +208,14 @@ fun DetailTransaction(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .selectable(
-                                    selected = isSelectedItemPrice(NEW_TRANSACATION_PRICE),
-                                    onClick = { onChangeStatePrice(NEW_TRANSACATION_PRICE) },
+                                    selected = isSelectedItemPrice(
+                                        if(!TRANSACTION_SCREEN) TRANSACATION_PRICE
+                                    else NEW_TRANSACATION_PRICE
+                                    ),
+                                    onClick = { onChangeStatePrice(
+                                        if(!TRANSACTION_SCREEN) TRANSACATION_PRICE
+                                        else NEW_TRANSACATION_PRICE
+                                    ) },
                                     role = Role.RadioButton
                                 )
                                 .padding(8.dp)
@@ -194,11 +226,20 @@ fun DetailTransaction(
                                 enabled = false
                             )
                             Spacer(modifier = Modifier.width(16.dp))
-                            Text(
-                                text = "Rp $NEW_TRANSACATION_PRICE",
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                            )
+                            if(!TRANSACTION_SCREEN){
+                                Text(
+                                    text = "Rp $TRANSACATION_PRICE",
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                )
+                            }
+                            else{
+                                Text(
+                                    text = "Rp $NEW_TRANSACATION_PRICE",
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                )
+                            }
                         }
                     }
                     Spacer(modifier = Modifier.height(16.dp))
@@ -207,7 +248,7 @@ fun DetailTransaction(
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
-                    paymentMethode.forEachIndexed { indexItem ,item ->
+                    if(!TRANSACTION_SCREEN){
                         Surface(
                             shape = RoundedCornerShape(12.dp),
                             modifier = Modifier.wrapContentSize(),
@@ -217,28 +258,90 @@ fun DetailTransaction(
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier
                                     .selectable(
-                                        selected = isSelectedItemPayment(item),
+                                        selected = isSelectedItemPayment(TRANSACATION_PAYMENT),
                                         onClick = {
-                                            onChangeStatePayment(item)
-                                            payment_value_index = indexItem
-                                                  },
+                                            onChangeStatePayment(TRANSACATION_PAYMENT)
+                                        },
                                         role = Role.RadioButton
                                     )
                                     .padding(8.dp)
                             ) {
                                 RadioButton(
-                                    selected = isSelectedItemPayment(item),
-                                    onClick = null
+                                    selected = true,
+                                    onClick = null,
+                                    enabled = false
                                 )
                                 Spacer(modifier = Modifier.width(16.dp))
                                 Text(
-                                    text = item,
+                                    text = TRANSACATION_PAYMENT,
                                     fontWeight = FontWeight.SemiBold,
                                     fontSize = MaterialTheme.typography.titleMedium.fontSize,
                                 )
                             }
                         }
                     }
+                    else{
+                        paymentMethode.forEachIndexed { indexItem ,item ->
+                            Surface(
+                                shape = RoundedCornerShape(12.dp),
+                                modifier = Modifier.wrapContentSize(),
+                                color = Color.Transparent
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier
+                                        .selectable(
+                                            selected = isSelectedItemPayment(item),
+                                            onClick = {
+                                                onChangeStatePayment(item)
+                                                payment_value_index = indexItem
+                                            },
+                                            role = Role.RadioButton
+                                        )
+                                        .padding(8.dp)
+                                ) {
+                                    RadioButton(
+                                        selected = isSelectedItemPayment(item),
+                                        onClick = null
+                                    )
+                                    Spacer(modifier = Modifier.width(16.dp))
+                                    Text(
+                                        text = item,
+                                        fontWeight = FontWeight.SemiBold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    if(!TRANSACTION_SCREEN){
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "Date Transaction",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = TRANSACATION_DATE,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "Admin",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = TRANSACATION_ADMIN,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        )
+                    }
+
                 }
             }
         }
@@ -251,7 +354,7 @@ fun DetailTransaction(
         }
 
         ButtonView(
-            title = "Create Transaction",
+            title = if(!TRANSACTION_SCREEN) "Pick Machine" else "Create Transaction",
             enable = NEW_TRANSACATION_BUTTON,
             modifier = Modifier.constrainAs(Button){
                 bottom.linkTo(parent.bottom, 16.dp)

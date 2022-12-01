@@ -1,5 +1,7 @@
 package com.example.alfaomega.wallscreens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -12,6 +14,7 @@ import androidx.navigation.NavController
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.components.DetailTransaction
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun WallDetailTransaction(
     paddingValues: PaddingValues,
@@ -21,10 +24,6 @@ fun WallDetailTransaction(
     Surface(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         Column(modifier = Modifier.padding(top = paddingValues.calculateTopPadding())) {
             DetailTransaction(
-//                transcationTitle = "Cuci-Kering",
-//                transcationType = "Giant 8 Kg",
-//                transactionProcess = "Proses Cuci",
-//                transactionAdmin = "Putri Sabila",
                 transactionViewModel = transactionViewModel,
                 navController = navController
             )

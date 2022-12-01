@@ -34,3 +34,20 @@ var MENU_MACHINE_CLASS: Int by mutableStateOf(0)
 //Variable Transaction Active
 var TRANSACTION_ACTIVE_STATE: Int by mutableStateOf(0)
 var TRANSACTION_ACTIVE_RESPONSE: ArrayList<TransactionModel> by mutableStateOf(arrayListOf())
+
+//Variable Transaction
+var TRANSACATION_CUSTOMER: String by mutableStateOf("")
+var TRANSACATION_MENU: String by mutableStateOf("")
+var TRANSACATION_CLASS: String by mutableStateOf("")
+var TRANSACATION_TYPE: String by mutableStateOf("")
+var TRANSACATION_PRICE: String by mutableStateOf("")
+var TRANSACATION_PAYMENT: String by mutableStateOf("")
+var TRANSACATION_DATE: String by mutableStateOf("")
+var TRANSACATION_ADMIN: String by mutableStateOf("")
+var TRANSACATION_TIME: Int by mutableStateOf(0)
+var TRANSACATION_IS_WASHER: Boolean by mutableStateOf(false)
+var TRANSACATION_IS_DRYER: Boolean by mutableStateOf(false)
+var TRANSACATION_BUTTON: Boolean by mutableStateOf(true)
+
+//Variable Screen
+var TRANSACTION_SCREEN: Boolean by mutableStateOf(false)

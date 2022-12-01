@@ -12,7 +12,7 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 fun ScreenMenu(navController: NavController) {
     TopBar(
         typeScreen = false,
-        tittleScreen = "New Transaction",
+        tittleScreen = "Menu",
         wallScreen = 1,
         navController = navController,
         screenBack = Screens.Home.route

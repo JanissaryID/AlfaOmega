@@ -1,6 +1,7 @@
 package com.example.alfaomega.view.menu
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,7 +20,7 @@ fun MenuLazyColumn(
     selectedIndex: Int
 ) {
     LazyColumn(
-        modifier = Modifier.padding(top = 8.dp),
+        modifier = Modifier.padding(top = 8.dp).fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ){
         itemsIndexed(items = menuModel) { index, menu ->

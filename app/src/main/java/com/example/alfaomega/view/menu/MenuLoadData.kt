@@ -84,8 +84,8 @@ fun MachineLoadData(
                     val (StoreImage, TextEmpty) = createRefs()
 
                     Image(painter = painterResource(
-                        id = R.drawable.ic_baseline_timelapse_24),
-                        contentDescription = "Machine Empty",
+                        id = R.drawable.ic_twotone_list_alt_24),
+                        contentDescription = "Menu Empty",
                         modifier = Modifier
                             .wrapContentHeight()
                             .size(200.dp)

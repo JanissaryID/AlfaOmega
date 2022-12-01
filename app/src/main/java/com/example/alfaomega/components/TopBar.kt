@@ -91,11 +91,12 @@ fun SmallTopBar(
                 text = tittleScreen,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )},
             actions = {
                 Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_storefront_24),
+                        painter = painterResource(id = R.drawable.ic_twotone_storefront_24),
                         contentDescription = "Icon Store",
                         modifier = Modifier.clickable { navController.navigate(route = Screens.StoreProfile.route) }
                     )
@@ -121,7 +122,8 @@ fun SmallTopBar(
                                     inclusive = true
                                 }
                             }
-                        }
+                        },
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
