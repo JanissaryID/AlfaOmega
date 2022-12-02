@@ -30,6 +30,11 @@ fun DetailTransaction(
     transactionViewModel: TransactionViewModel,
     navController: NavController
 ) {
+    val selectionProgressMachine = listOf("Pick Washer Machine", "Wash Process", "Finish Wash", "Pick Dryer Machine", "Dry Process", "Finish Dry", "Finish Transaction")
+    var titleButton by remember {
+        mutableStateOf("")
+    }
+
     var button_clicked by remember { mutableStateOf(false) }
     var text_name by remember {
         if(!TRANSACTION_SCREEN) mutableStateOf(TextFieldValue(TRANSACATION_CUSTOMER))
@@ -121,13 +126,15 @@ fun DetailTransaction(
                             modifier = Modifier
                                 .selectable(
                                     selected = isSelectedItemMenu(
-                                        if(!TRANSACTION_SCREEN) TRANSACATION_MENU
+                                        if (!TRANSACTION_SCREEN) TRANSACATION_MENU
                                         else NEW_TRANSACATION_MENU
                                     ),
-                                    onClick = { onChangeStateMenu(
-                                        if(!TRANSACTION_SCREEN) TRANSACATION_MENU
-                                        else NEW_TRANSACATION_MENU
-                                    ) },
+                                    onClick = {
+                                        onChangeStateMenu(
+                                            if (!TRANSACTION_SCREEN) TRANSACATION_MENU
+                                            else NEW_TRANSACATION_MENU
+                                        )
+                                    },
                                     role = Role.RadioButton
                                 )
                                 .padding(8.dp)
@@ -162,11 +169,15 @@ fun DetailTransaction(
                             modifier = Modifier
                                 .selectable(
                                     selected = isSelectedItemType(
-                                        if(!TRANSACTION_SCREEN) TRANSACATION_TYPE
-                                    else NEW_TRANSACATION_TYPE),
-                                    onClick = { onChangeStateType(
-                                        if(!TRANSACTION_SCREEN) TRANSACATION_TYPE
-                                        else NEW_TRANSACATION_TYPE) },
+                                        if (!TRANSACTION_SCREEN) TRANSACATION_TYPE
+                                        else NEW_TRANSACATION_TYPE
+                                    ),
+                                    onClick = {
+                                        onChangeStateType(
+                                            if (!TRANSACTION_SCREEN) TRANSACATION_TYPE
+                                            else NEW_TRANSACATION_TYPE
+                                        )
+                                    },
                                     role = Role.RadioButton
                                 )
                                 .padding(8.dp)
@@ -209,13 +220,15 @@ fun DetailTransaction(
                             modifier = Modifier
                                 .selectable(
                                     selected = isSelectedItemPrice(
-                                        if(!TRANSACTION_SCREEN) TRANSACATION_PRICE
-                                    else NEW_TRANSACATION_PRICE
-                                    ),
-                                    onClick = { onChangeStatePrice(
-                                        if(!TRANSACTION_SCREEN) TRANSACATION_PRICE
+                                        if (!TRANSACTION_SCREEN) TRANSACATION_PRICE
                                         else NEW_TRANSACATION_PRICE
-                                    ) },
+                                    ),
+                                    onClick = {
+                                        onChangeStatePrice(
+                                            if (!TRANSACTION_SCREEN) TRANSACATION_PRICE
+                                            else NEW_TRANSACATION_PRICE
+                                        )
+                                    },
                                     role = Role.RadioButton
                                 )
                                 .padding(8.dp)
@@ -346,15 +359,49 @@ fun DetailTransaction(
             }
         }
 
-        if(!text_name.text.isNullOrEmpty() && !selectedValuePayment.value.isNullOrEmpty() && !button_clicked){
-            NEW_TRANSACATION_BUTTON = true
+        if(!TRANSACTION_SCREEN){
+            if(TRANSACATION_STATUS_MACHINE != 0 && TRANSACATION_STATUS_MACHINE != 3){
+                NEW_TRANSACATION_BUTTON = false
+            }
+            else{
+                NEW_TRANSACATION_BUTTON = true
+            }
         }
         else{
-            NEW_TRANSACATION_BUTTON = false
+            if(!text_name.text.isNullOrEmpty() && !selectedValuePayment.value.isNullOrEmpty() && !button_clicked){
+                NEW_TRANSACATION_BUTTON = true
+            }
+            else{
+                NEW_TRANSACATION_BUTTON = false
+            }
+        }
+
+        when (TRANSACATION_STATUS_MACHINE){
+            0 -> {
+                titleButton = selectionProgressMachine[0]
+            }
+            1 -> {
+                titleButton = selectionProgressMachine[1]
+            }
+            2 -> {
+                titleButton = selectionProgressMachine[2]
+            }
+            3 -> {
+                titleButton = selectionProgressMachine[3]
+            }
+            4 -> {
+                titleButton = selectionProgressMachine[4]
+            }
+            5 -> {
+                titleButton = selectionProgressMachine[5]
+            }
+            6 -> {
+                titleButton = selectionProgressMachine[6]
+            }
         }
 
         ButtonView(
-            title = if(!TRANSACTION_SCREEN) "Pick Machine" else "Create Transaction",
+            title = if(!TRANSACTION_SCREEN) titleButton else "Create Transaction",
             enable = NEW_TRANSACATION_BUTTON,
             modifier = Modifier.constrainAs(Button){
                 bottom.linkTo(parent.bottom, 16.dp)
@@ -363,21 +410,25 @@ fun DetailTransaction(
             }
         ) {
             button_clicked = true
-//            Log.i("info_response", "Payment : ${payment_value_index}")
-            transactionViewModel.insertTransaction(
-                transactionCustomer = text_name.text,
-                transactionMenu = NEW_TRANSACATION_MENU,
-                transactionPrice = NEW_TRANSACATION_PRICE,
-                transactionClass = NEW_TRANSACATION_CLASS,
-                transactionPayment = if(payment_value_index == 0) false else true,
-                transactionStateMachine = if(NEW_TRANSACATION_IS_WASHER) 0
-                                            else if(NEW_TRANSACATION_IS_DRYER) 3
-                                            else if (!NEW_TRANSACATION_IS_WASHER && !NEW_TRANSACATION_IS_DRYER) 6
-                                            else 0,
-                isWasher = NEW_TRANSACATION_IS_WASHER,
-                isDryer = NEW_TRANSACATION_IS_DRYER,
-                navController = navController
-            )
+            if(!TRANSACTION_SCREEN){
+
+            }
+            else{
+                transactionViewModel.insertTransaction(
+                    transactionCustomer = text_name.text,
+                    transactionMenu = NEW_TRANSACATION_MENU,
+                    transactionPrice = NEW_TRANSACATION_PRICE,
+                    transactionClass = NEW_TRANSACATION_CLASS,
+                    transactionPayment = if(payment_value_index == 0) false else true,
+                    transactionStateMachine = if(NEW_TRANSACATION_IS_WASHER) 0
+                    else if(NEW_TRANSACATION_IS_DRYER) 3
+                    else if (!NEW_TRANSACATION_IS_WASHER && !NEW_TRANSACATION_IS_DRYER) 6
+                    else 0,
+                    isWasher = NEW_TRANSACATION_IS_WASHER,
+                    isDryer = NEW_TRANSACATION_IS_DRYER,
+                    navController = navController
+                )
+            }
         }
     }
 }

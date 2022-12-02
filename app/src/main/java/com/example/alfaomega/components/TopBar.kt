@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.alfaomega.R
+import com.example.alfaomega.TRANSACTION_SCREEN
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.wallscreens.WallPicker
@@ -105,28 +106,64 @@ fun SmallTopBar(
         )
     }
     else{
-        SmallTopAppBar(
-            title = {Text(
-                text = tittleScreen,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = MaterialTheme.typography.titleLarge.fontSize,
-            )},
-            navigationIcon = {
-                Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24),
-                        contentDescription = "Icon TImer",
-                        modifier = Modifier.clickable {
-                            navController.navigate(route = screenBack) {
-                                popUpTo(screenBack) {
-                                    inclusive = true
+        if(!TRANSACTION_SCREEN){
+            SmallTopAppBar(
+                title = {Text(
+                    text = tittleScreen,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                )},
+                navigationIcon = {
+                    Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24),
+                            contentDescription = "Icon TImer",
+                            modifier = Modifier.clickable {
+                                navController.navigate(route = screenBack) {
+                                    popUpTo(screenBack) {
+                                        inclusive = true
+                                    }
                                 }
-                            }
-                        },
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                            },
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                },
+                actions = {
+                    Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_twotone_print_24),
+                            contentDescription = "Icon Print",
+                            modifier = Modifier.clickable {  }
+                        )
+                    }
                 }
-            }
-        )
+            )
+        }
+        else{
+            SmallTopAppBar(
+                title = {Text(
+                    text = tittleScreen,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                )},
+                navigationIcon = {
+                    Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24),
+                            contentDescription = "Icon TImer",
+                            modifier = Modifier.clickable {
+                                navController.navigate(route = screenBack) {
+                                    popUpTo(screenBack) {
+                                        inclusive = true
+                                    }
+                                }
+                            },
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            )
+        }
     }
 }

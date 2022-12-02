@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.MENU_LIST_TITAN_RESPONSE
 import com.example.alfaomega.STORE_ID
+import com.example.alfaomega.TRANSACTION_SCREEN
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.screens.ScreenDetailTransaction
@@ -26,13 +27,16 @@ fun NavGraphSetup(
     menuViewModel: MenuViewModel,
     transactionViewModel: TransactionViewModel
     ) {
+
     val context = LocalContext.current
+
     NavHost(navController = navController, startDestination = Screens.Home.route) {
         composable(
             route = Screens.Home.route,
         ) {
             LaunchedEffect(key1 = STORE_ID){
                 transactionViewModel.getTransactionActive()
+                TRANSACTION_SCREEN = true
             }
             ScreenHome(navController = navController)
         }
@@ -42,6 +46,7 @@ fun NavGraphSetup(
         ){
             LaunchedEffect(key1 = STORE_ID){
                 menuViewModel.getMenu()
+                TRANSACTION_SCREEN = true
             }
             ScreenMenu(navController = navController)
         }
@@ -50,8 +55,7 @@ fun NavGraphSetup(
             route = Screens.DetailTransaction.route,
         ){
 //            LaunchedEffect(key1 = STORE_ID){
-//                Log.d("debug", "Qris NavGraph")
-//                paymentViewModel.getQR()
+////                TRANSACTION_SCREEN = false
 //            }
             ScreenDetailTransaction(navController = navController)
         }
@@ -59,10 +63,9 @@ fun NavGraphSetup(
         composable(
             route = Screens.StoreProfile.route,
         ){
-//            LaunchedEffect(key1 = STORE_ID){
-//                Log.d("debug", "Qris NavGraph")
-//                paymentViewModel.getQR()
-//            }
+            LaunchedEffect(key1 = STORE_ID){
+                TRANSACTION_SCREEN = true
+            }
             ScreenStore(navController = navController)
         }
     }

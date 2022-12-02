@@ -4,7 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,6 +32,11 @@ fun ComponentTransaction(
     transactionAdmin: String,
     navController: NavController
 ) {
+    val selectionProgressMachine = listOf("Waiting Wash", "Washing", "Finish Wash", "Waiting Dry", "Drying", "Finish Dry")
+    var titleProcess by remember {
+        mutableStateOf("")
+    }
+
     Card(
         elevation = CardDefaults.cardElevation(6.dp),
         modifier = Modifier.padding(8.dp),
@@ -49,6 +54,7 @@ fun ComponentTransaction(
                 TRANSACATION_PAYMENT = transactionPayment
                 TRANSACATION_DATE = TransactionDate
                 TRANSACATION_ADMIN = transactionAdmin
+                TRANSACATION_STATUS_MACHINE = TransactionProcess
                 navController.navigate(route = Screens.DetailTransaction.route)
             }
         ) {
@@ -107,60 +113,32 @@ fun ComponentTransaction(
                             ) {
                                 when (TransactionProcess){
                                     0 -> {
-                                        Text(
-                                            text = "Waiting Wash",
-                                            fontWeight = FontWeight.SemiBold,
-                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
+                                        titleProcess = selectionProgressMachine[0]
                                     }
                                     1 -> {
-                                        Text(
-                                            text = "Washing",
-                                            fontWeight = FontWeight.SemiBold,
-                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
+                                        titleProcess = selectionProgressMachine[1]
                                     }
                                     2 -> {
-                                        Text(
-                                            text = "Finish Wash",
-                                            fontWeight = FontWeight.SemiBold,
-                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
+                                        titleProcess = selectionProgressMachine[2]
                                     }
                                     3 -> {
-                                        Text(
-                                            text = "Waiting Dry",
-                                            fontWeight = FontWeight.SemiBold,
-                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
+                                        titleProcess = selectionProgressMachine[3]
                                     }
                                     4 -> {
-                                        Text(
-                                            text = "Drying",
-                                            fontWeight = FontWeight.SemiBold,
-                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
+                                        titleProcess = selectionProgressMachine[4]
                                     }
                                     5 -> {
-                                        Text(
-                                            text = "Finish Dry",
-                                            fontWeight = FontWeight.SemiBold,
-                                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
+                                        titleProcess = selectionProgressMachine[5]
                                     }
                                 }
+
+                                Text(
+                                    text = titleProcess,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
                             }
                         }
                         Text(
