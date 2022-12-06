@@ -46,10 +46,9 @@ fun MachineItem(
 //                        MACHINE_NUMBER = machineModel.machineNumber!!
 //                        MACHINE_TIME = machineModel.priceTime!!
 //                        MACHINE_PACKET = machineModel.isPacket!!
-
+//                        Log.i("info_response", "Selected Machine : ${index}")
+//                        Log.i("info_response", "Selected Machine Bool : ${selected}")
                         onClick.invoke(index)
-                        Log.i("info_response", "Selected Machine : ${index}")
-                        Log.i("info_response", "Selected Machine Bool : ${selected}")
                     }
                 },
             color = if (usedMachine){ MaterialTheme.colorScheme.secondary }

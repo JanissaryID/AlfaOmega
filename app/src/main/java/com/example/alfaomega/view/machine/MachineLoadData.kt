@@ -1,6 +1,5 @@
 package com.example.alfaomega.view.machine
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -25,12 +24,9 @@ fun MachineLoadData(
     selectedIndex: Int,
     machine: List<MachineModel>,
     navController: NavController,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
 ) {
     val context = LocalContext.current
-
-//    Log.i("info_response", "Selected Machine : ${selectedIndex}")
-//    Log.i("info_response", "Selected Machine Bool : ${selected}")
 
     when (machineState) {
         0 -> {

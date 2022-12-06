@@ -1,6 +1,7 @@
 package com.example.alfaomega.wallscreens
 
 import android.util.Log
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -9,9 +10,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.machine.MachineModel
+import com.example.alfaomega.components.ButtonView
+import com.example.alfaomega.components.DetailTransaction
 import com.example.alfaomega.view.machine.MachineLoadData
 
 @Composable
@@ -41,23 +45,42 @@ fun WallMachine(
         machine = LIST_MACHINE_DRYER_TITAN
     }
 
-    Surface(
-        color = Color.Transparent,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                start = 16.dp,
-                end = 16.dp,
-                top = paddingValues.calculateTopPadding(),
-                bottom = paddingValues.calculateBottomPadding()
-            )
+    ConstraintLayout(modifier = Modifier.padding(
+        start = 16.dp,
+        end = 16.dp,
+        top = paddingValues.calculateTopPadding(),
+        bottom = paddingValues.calculateBottomPadding()
+    ).fillMaxSize()
     ) {
-        MachineLoadData(
-            machineState = MACHINE_STATE,
-            machine = machine,
-            navController = navController,
-            selectedIndex = selectedIndex,
-            onItemClick = onItemClick
-        )
+        val (Content, ButtonActive) = createRefs()
+
+        Surface(
+            color = Color.Transparent,
+            modifier = Modifier.constrainAs(Content){
+                top.linkTo(parent.top)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+            }
+        ) {
+            MachineLoadData(
+                machineState = MACHINE_STATE,
+                machine = machine,
+                navController = navController,
+                selectedIndex = selectedIndex,
+                onItemClick = onItemClick,
+            )
+        }
+
+        ButtonView(
+            title = "Active Machine",
+            enable = true,
+            modifier = Modifier.constrainAs(ButtonActive){
+                bottom.linkTo(parent.bottom, 16.dp)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+            }
+        ) {
+
+        }
     }
 }
