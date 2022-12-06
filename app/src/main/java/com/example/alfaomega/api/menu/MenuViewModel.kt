@@ -60,17 +60,13 @@ class MenuViewModel: ViewModel() {
                             var WashTimeTitan: ArrayList<MenuModel> =  response.body()!!.filter { menu -> menu.menuClass == true && menu.isWasher == true && menu.isDryer == false} as ArrayList<MenuModel>
                             var DryTimeTitan: ArrayList<MenuModel> =  response.body()!!.filter { menu -> menu.menuClass == true && menu.isWasher == false && menu.isDryer == true} as ArrayList<MenuModel>
 
-                            Log.i("info_response", "TIME 2 : ${WashTimeGiant[0].menuTime!!.toInt()}  ${DryTimeGiant[0].menuTime!!.toInt()}  ${WashTimeTitan[0].menuTime!!.toInt()}  ${DryTimeTitan[0].menuTime!!.toInt()}")
+//                            Log.i("info_response", "TIME 2 : ${WashTimeGiant[0].menuTime!!.toInt()}  ${DryTimeGiant[0].menuTime!!.toInt()}  ${WashTimeTitan[0].menuTime!!.toInt()}  ${DryTimeTitan[0].menuTime!!.toInt()}")
 
                             TIME_WASHER_GIANT = WashTimeGiant[0].menuTime!!.toInt()
                             TIME_DRYER_GIANT = DryTimeGiant[0].menuTime!!.toInt()
                             TIME_WASHER_TITAN = WashTimeTitan[0].menuTime!!.toInt()
                             TIME_DRYER_TITAN = DryTimeTitan[0].menuTime!!.toInt()
 
-//                            protoViewModel.updateWashTimeGiant(1)
-//                            protoViewModel.updateDryTimeGiant(2)
-//                            protoViewModel.updateWashTimeTitan(3)
-//                            protoViewModel.updateDryTimeTitan(4)
                             MENU_STATE = 1
 //                            Log.i("i`nfo_response", "Data GIANT : ${MENU_LIST_GIANT_RESPONSE}")
                         }
