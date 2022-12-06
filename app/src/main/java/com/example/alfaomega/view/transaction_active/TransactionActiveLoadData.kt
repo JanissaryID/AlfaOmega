@@ -99,7 +99,7 @@ fun TransactionActiveLoadData(
                     )
 
                     Text(
-                        text = "Type Menu",
+                        text = "Transaction Empty",
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleLarge.fontSize,
                         modifier = Modifier

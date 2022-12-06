@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName
 data class MachineModel(
 
 	@field:SerializedName("machine_type")
-	val machineType: Any? = null,
+	val machineType: Boolean? = null,
 
 	@field:SerializedName("transaction_id")
-	val transactionId: Any? = null,
+	val transactionId: String? = null,
 
 	@field:SerializedName("machine_status")
-	val machineStatus: Any? = null,
+	val machineStatus: Boolean? = null,
 
 	@field:SerializedName("interupt")
-	val interupt: Any? = null,
+	val interupt: Boolean? = null,
 
 	@field:SerializedName("machine_number")
 	val machineNumber: Int? = null,
@@ -26,7 +26,7 @@ data class MachineModel(
 	val machineStore: String? = null,
 
 	@field:SerializedName("interupt_update")
-	val interuptUpdate: Any? = null,
+	val interuptUpdate: Boolean? = null,
 
 	@field:SerializedName("machine_class")
 	val machineClass: Boolean? = null,
@@ -35,7 +35,7 @@ data class MachineModel(
 	val id: String? = null,
 
 	@field:SerializedName("firmware_version")
-	val firmwareVersion: Any? = null,
+	val firmwareVersion: String? = null,
 
 	@field:SerializedName("machine_debug")
 	val machineDebug: Int? = null

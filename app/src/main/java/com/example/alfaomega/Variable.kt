@@ -3,6 +3,7 @@ package com.example.alfaomega
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.menu.MenuModel
 import com.example.alfaomega.api.transaction.TransactionModel
 
@@ -38,7 +39,7 @@ var TRANSACTION_ACTIVE_RESPONSE: ArrayList<TransactionModel> by mutableStateOf(a
 //Variable Transaction
 var TRANSACATION_CUSTOMER: String by mutableStateOf("")
 var TRANSACATION_MENU: String by mutableStateOf("")
-var TRANSACATION_CLASS: String by mutableStateOf("")
+var TRANSACATION_CLASS: Boolean by mutableStateOf(false)
 var TRANSACATION_TYPE: String by mutableStateOf("")
 var TRANSACATION_PRICE: String by mutableStateOf("")
 var TRANSACATION_PAYMENT: String by mutableStateOf("")
@@ -52,3 +53,11 @@ var TRANSACATION_BUTTON: Boolean by mutableStateOf(true)
 
 //Variable Screen
 var TRANSACTION_SCREEN: Boolean by mutableStateOf(false)
+
+//Variable Machine
+var LIST_MACHINE_DRYER_GIANT: ArrayList<MachineModel> by mutableStateOf(arrayListOf())
+var LIST_MACHINE_WASHER_GIANT: ArrayList<MachineModel> by mutableStateOf(arrayListOf())
+var LIST_MACHINE_DRYER_TITAN: ArrayList<MachineModel> by mutableStateOf(arrayListOf())
+var LIST_MACHINE_WASHER_TITAN: ArrayList<MachineModel> by mutableStateOf(arrayListOf())
+var MACHINE_STATE: Int by mutableStateOf(0)
+var MACHINE_ERROR_MESSAGE: String by mutableStateOf("")

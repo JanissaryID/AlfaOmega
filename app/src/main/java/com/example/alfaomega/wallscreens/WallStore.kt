@@ -32,9 +32,6 @@ import com.example.alfaomega.components.StoreMenuItem
 fun WallStore(
     navController: NavController,
     paddingValues: PaddingValues,
-//    storeName: String,
-//    storeCity: String,
-//    storeAddress: String
 ) {
     var list: ArrayList<MenuStoreModel> = arrayListOf()
     list.addAll(MenuStore.listData)

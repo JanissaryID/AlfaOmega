@@ -4,27 +4,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.alfaomega.TRANSACTION_SCREEN
 import com.example.alfaomega.components.TopBar
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
 @Composable
-fun ScreenMenu(navController: NavController) {
-
+fun ScreenMachine(navController: NavController) {
     TopBar(
         typeScreen = false,
-        tittleScreen = "Menu",
-        wallScreen = 1,
+        tittleScreen = "Pick Machine",
+        wallScreen = 4,
         navController = navController,
-        screenBack = Screens.Home.route
+        screenBack = Screens.DetailTransaction.route
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ViewMenu() {
+fun ViewMachine() {
     AlfaOmegaTheme {
-        ScreenMenu(navController = rememberNavController())
+        ScreenMachine(navController = rememberNavController())
     }
 }

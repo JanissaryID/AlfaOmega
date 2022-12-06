@@ -22,7 +22,6 @@ import com.example.alfaomega.view.menu.MachineLoadData
 fun WallMenu(
     paddingValues: PaddingValues,
     navController: NavController,
-    menuViewModel: MenuViewModel
 ) {
 //    val onItemClick = { index: Int -> selectedIndex = index}
     val selectionMenuClass = listOf("Giant", "Titan")

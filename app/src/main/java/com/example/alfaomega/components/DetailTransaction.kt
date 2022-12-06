@@ -21,6 +21,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.transaction.TransactionViewModel
+import com.example.alfaomega.navigations.Screens
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -411,7 +412,7 @@ fun DetailTransaction(
         ) {
             button_clicked = true
             if(!TRANSACTION_SCREEN){
-
+                navController.navigate(route = Screens.Machine.route)
             }
             else{
                 transactionViewModel.insertTransaction(

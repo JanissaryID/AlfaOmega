@@ -13,19 +13,18 @@ import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.MENU_LIST_TITAN_RESPONSE
 import com.example.alfaomega.STORE_ID
 import com.example.alfaomega.TRANSACTION_SCREEN
+import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
-import com.example.alfaomega.screens.ScreenDetailTransaction
-import com.example.alfaomega.screens.ScreenHome
-import com.example.alfaomega.screens.ScreenMenu
-import com.example.alfaomega.screens.ScreenStore
+import com.example.alfaomega.screens.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavGraphSetup(
     navController: NavHostController,
     menuViewModel: MenuViewModel,
-    transactionViewModel: TransactionViewModel
+    transactionViewModel: TransactionViewModel,
+    machineViewModel: MachineViewModel
     ) {
 
     val context = LocalContext.current
@@ -54,9 +53,6 @@ fun NavGraphSetup(
         composable(
             route = Screens.DetailTransaction.route,
         ){
-//            LaunchedEffect(key1 = STORE_ID){
-////                TRANSACTION_SCREEN = false
-//            }
             ScreenDetailTransaction(navController = navController)
         }
 
@@ -67,6 +63,16 @@ fun NavGraphSetup(
                 TRANSACTION_SCREEN = true
             }
             ScreenStore(navController = navController)
+        }
+
+        composable(
+            route = Screens.Machine.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                machineViewModel.getMachine()
+                TRANSACTION_SCREEN = true
+            }
+            ScreenMachine(navController = navController)
         }
     }
 }

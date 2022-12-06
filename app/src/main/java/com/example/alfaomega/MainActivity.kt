@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.navigations.NavGraphSetup
@@ -26,6 +27,7 @@ class MainActivity : ComponentActivity() {
     lateinit var navController: NavHostController
     val menuViewModel by viewModels<MenuViewModel>()
     val transactionViewModel by viewModels<TransactionViewModel>()
+    val machineViewModel by viewModels<MachineViewModel>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +43,8 @@ class MainActivity : ComponentActivity() {
                     NavGraphSetup(
                         navController = navController,
                         menuViewModel = menuViewModel,
-                        transactionViewModel = transactionViewModel
+                        transactionViewModel = transactionViewModel,
+                        machineViewModel = machineViewModel
                     )
                 }
             }

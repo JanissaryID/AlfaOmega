@@ -23,8 +23,7 @@ import com.example.alfaomega.view.transaction_active.TransactionActiveLoadData
 @Composable
 fun WallHome(
     paddingValues: PaddingValues,
-    navController: NavController,
-    transactionViewModel: TransactionViewModel
+    navController: NavController
 ) {
 
     Surface(

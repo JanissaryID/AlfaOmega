@@ -99,7 +99,7 @@ fun MachineLoadData(
                     )
 
                     Text(
-                        text = "Type Menu",
+                        text = "Menu Empty",
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleLarge.fontSize,
                         modifier = Modifier
