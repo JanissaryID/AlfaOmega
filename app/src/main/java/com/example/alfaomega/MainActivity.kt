@@ -2,6 +2,7 @@ package com.example.alfaomega
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -19,6 +20,7 @@ import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.navigations.NavGraphSetup
+import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.screens.ScreenMenu
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
@@ -28,12 +30,22 @@ class MainActivity : ComponentActivity() {
     val menuViewModel by viewModels<MenuViewModel>()
     val transactionViewModel by viewModels<TransactionViewModel>()
     val machineViewModel by viewModels<MachineViewModel>()
+    val protoViewModel by viewModels<ProtoViewModel>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             AlfaOmegaTheme {
+
+//                protoViewModel.getData.observe(this,{
+////                    TIME_WASHER_GIANT = it.timewashergiant
+//                    TIME_WASHER_TITAN = it.timewashertitan
+////                    TIME_DRYER_GIANT = it.timedryergiant
+//                    TIME_DRYER_TITAN = it.timedryertitan
+//                    Log.i("info_response", "TIME : ${it.timewashergiant}  ${it.timewashertitan}  ${it.timedryergiant}  ${it.timedryertitan}")
+//                })
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -44,8 +56,11 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         menuViewModel = menuViewModel,
                         transactionViewModel = transactionViewModel,
-                        machineViewModel = machineViewModel
+                        machineViewModel = machineViewModel,
+                        protoViewModel = protoViewModel
                     )
+
+                    Log.i("info_response", "TIME : ${TIME_WASHER_GIANT}  ${TIME_WASHER_TITAN}  ${TIME_DRYER_GIANT}  ${TIME_DRYER_TITAN}")
                 }
             }
         }

@@ -61,3 +61,7 @@ var LIST_MACHINE_DRYER_TITAN: ArrayList<MachineModel> by mutableStateOf(arrayLis
 var LIST_MACHINE_WASHER_TITAN: ArrayList<MachineModel> by mutableStateOf(arrayListOf())
 var MACHINE_STATE: Int by mutableStateOf(0)
 var MACHINE_ERROR_MESSAGE: String by mutableStateOf("")
+var TIME_WASHER_GIANT: Int by mutableStateOf(0)
+var TIME_WASHER_TITAN: Int by mutableStateOf(0)
+var TIME_DRYER_GIANT: Int by mutableStateOf(0)
+var TIME_DRYER_TITAN: Int by mutableStateOf(0)

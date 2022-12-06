@@ -60,6 +60,7 @@ fun WallMachine(
                 top.linkTo(parent.top)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
+                bottom.linkTo(ButtonActive.top)
             }
         ) {
             MachineLoadData(

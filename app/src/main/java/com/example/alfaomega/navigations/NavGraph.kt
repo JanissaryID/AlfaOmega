@@ -16,6 +16,7 @@ import com.example.alfaomega.TRANSACTION_SCREEN
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
+import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.screens.*
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -24,7 +25,8 @@ fun NavGraphSetup(
     navController: NavHostController,
     menuViewModel: MenuViewModel,
     transactionViewModel: TransactionViewModel,
-    machineViewModel: MachineViewModel
+    machineViewModel: MachineViewModel,
+    protoViewModel: ProtoViewModel
     ) {
 
     val context = LocalContext.current
@@ -35,6 +37,7 @@ fun NavGraphSetup(
         ) {
             LaunchedEffect(key1 = STORE_ID){
                 transactionViewModel.getTransactionActive()
+                menuViewModel.getTime()
                 TRANSACTION_SCREEN = true
             }
             ScreenHome(navController = navController)

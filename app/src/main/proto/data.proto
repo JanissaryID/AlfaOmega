@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_package = "com.example.alfaomega";
+option java_multiple_files = true;
+
+message DataPreferences {
+  // filter for showing / hiding completed tasks
+  string STORE_ID = 1;
+//  uint32 TIME_WASHER_GIANT = 2;
+//  uint32 TIME_DRYER_GIANT = 3;
+//  uint32 TIME_WASHER_TITAN = 4;
+//  uint32 TIME_DRYER_TITAN = 5;
+}
