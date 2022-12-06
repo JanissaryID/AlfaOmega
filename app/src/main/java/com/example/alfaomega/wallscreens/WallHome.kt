@@ -25,7 +25,6 @@ fun WallHome(
     paddingValues: PaddingValues,
     navController: NavController
 ) {
-
     Surface(
         color = Color.Transparent,
         modifier = Modifier

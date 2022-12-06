@@ -53,6 +53,7 @@ var TRANSACATION_BUTTON: Boolean by mutableStateOf(true)
 
 //Variable Screen
 var TRANSACTION_SCREEN: Boolean by mutableStateOf(false)
+var MACHINE_SCREEN: Boolean by mutableStateOf(false)
 
 //Variable Machine
 var LIST_MACHINE_DRYER_GIANT: ArrayList<MachineModel> by mutableStateOf(arrayListOf())

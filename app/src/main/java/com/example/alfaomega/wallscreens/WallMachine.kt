@@ -30,7 +30,9 @@ fun WallMachine(
         mutableStateOf(arrayListOf())
     }
 
-    TRANSACTION_SCREEN = false
+    if(MACHINE_SCREEN){
+        TRANSACTION_SCREEN = false
+    }
 
     if(TRANSACATION_CLASS == false && TRANSACATION_STATUS_MACHINE == 0){
         machine = LIST_MACHINE_WASHER_GIANT

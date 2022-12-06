@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.example.alfaomega.MACHINE_SCREEN
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.components.DetailTransaction
 
@@ -21,6 +22,8 @@ fun WallDetailTransaction(
     navController: NavController,
     transactionViewModel: TransactionViewModel
 ) {
+    MACHINE_SCREEN = false
+
     Surface(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         Column(modifier = Modifier.padding(top = paddingValues.calculateTopPadding())) {
             DetailTransaction(

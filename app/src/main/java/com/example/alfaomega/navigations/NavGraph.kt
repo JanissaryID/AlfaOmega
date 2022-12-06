@@ -10,6 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.alfaomega.MACHINE_SCREEN
 import com.example.alfaomega.MENU_LIST_TITAN_RESPONSE
 import com.example.alfaomega.STORE_ID
 import com.example.alfaomega.TRANSACTION_SCREEN
@@ -56,6 +57,9 @@ fun NavGraphSetup(
         composable(
             route = Screens.DetailTransaction.route,
         ){
+            LaunchedEffect(key1 = STORE_ID){
+                MACHINE_SCREEN = true
+            }
             ScreenDetailTransaction(navController = navController)
         }
 
