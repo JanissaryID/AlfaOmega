@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.alfaomega.*
 import com.example.alfaomega.api.machine.MachineModel
 
 @Composable
@@ -40,14 +41,23 @@ fun MachineItem(
                 .padding(7.dp)
                 .clickable {
                     if (!usedMachine) {
-//                        Log.d("debug", "Selected Machine $selected")
-//                        MACHINE_SELECTED = selected
-//                        MACHINE_ID = machineModel.id!!
-//                        MACHINE_NUMBER = machineModel.machineNumber!!
-//                        MACHINE_TIME = machineModel.priceTime!!
-//                        MACHINE_PACKET = machineModel.isPacket!!
-//                        Log.i("info_response", "Selected Machine : ${index}")
-//                        Log.i("info_response", "Selected Machine Bool : ${selected}")
+                        MACHINE_ID = machineModel.id!!
+                        MACHINE_CLASS = machineModel.machineClass!!
+                        MACHINE_TYPE = machineModel.machineType!!
+
+                        if(!machineModel.machineClass!! && !machineModel.machineType!!){
+                            MACHINE_TIME = TIME_WASHER_GIANT
+                        }
+                        else if(machineModel.machineClass!! && !machineModel.machineType!!){
+                            MACHINE_TIME = TIME_WASHER_TITAN
+                        }
+                        else if(!machineModel.machineClass!! && machineModel.machineType!!){
+                            MACHINE_TIME = TIME_DRYER_GIANT
+                        }
+                        else if(machineModel.machineClass!! && machineModel.machineType!!){
+                            MACHINE_TIME = TIME_DRYER_TITAN
+                        }
+
                         onClick.invoke(index)
                     }
                 },
@@ -60,7 +70,9 @@ fun MachineItem(
                 text = machineModel.machineNumber.toString(),
                 fontWeight = FontWeight.SemiBold,
                 fontSize = MaterialTheme.typography.headlineLarge.fontSize,
-                modifier = Modifier.padding(24.dp).fillMaxSize(),
+                modifier = Modifier
+                    .padding(24.dp)
+                    .fillMaxSize(),
                 textAlign = TextAlign.Center
             )
         }

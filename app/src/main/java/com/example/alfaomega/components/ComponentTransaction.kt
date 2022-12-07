@@ -31,6 +31,7 @@ fun ComponentTransaction(
     transactionPayment: String,
     transactionAdmin: String,
     transactionClass: Boolean,
+    transactionID: String,
     navController: NavController
 ) {
     val selectionProgressMachine = listOf("Waiting Wash", "Washing", "Finish Wash", "Waiting Dry", "Drying", "Finish Dry")
@@ -57,6 +58,7 @@ fun ComponentTransaction(
                 TRANSACATION_ADMIN = transactionAdmin
                 TRANSACATION_STATUS_MACHINE = TransactionProcess
                 TRANSACATION_CLASS = transactionClass
+                TRANSACATION_ID = transactionID
                 navController.navigate(route = Screens.DetailTransaction.route)
             }
         ) {

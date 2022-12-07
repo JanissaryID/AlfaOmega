@@ -14,6 +14,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.machine.MachineModel
+import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.components.ButtonView
 import com.example.alfaomega.components.DetailTransaction
 import com.example.alfaomega.view.machine.MachineLoadData
@@ -22,6 +23,7 @@ import com.example.alfaomega.view.machine.MachineLoadData
 fun WallMachine(
     paddingValues: PaddingValues,
     navController: NavController,
+    machineViewModel: MachineViewModel = MachineViewModel()
 ) {
     var selectedIndex by remember { mutableStateOf(-1) }
     val onItemClick = { index: Int -> selectedIndex = index}
@@ -76,14 +78,21 @@ fun WallMachine(
 
         ButtonView(
             title = "Active Machine",
-            enable = true,
+            enable = MACHINE_BUTTON_UPDATE,
             modifier = Modifier.constrainAs(ButtonActive){
                 bottom.linkTo(parent.bottom, 16.dp)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
             }
         ) {
+            MACHINE_BUTTON_UPDATE = false
 
+            machineViewModel.updateMachine(
+                idMachine = MACHINE_ID,
+                idTransaction = TRANSACATION_ID,
+                timeMachine = MACHINE_TIME,
+                navController = navController
+            )
         }
     }
 }

@@ -2,7 +2,9 @@ package com.example.alfaomega.api.machine
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.navigations.Screens
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,6 +44,67 @@ class MachineViewModel: ViewModel() {
         catch (e : Exception){
             MACHINE_ERROR_MESSAGE = e.message.toString()
             Log.d("debug menu", "ERROR $MACHINE_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun updateMachine(
+        idMachine: String,
+        idTransaction: String,
+        timeMachine: Int,
+        navController: NavController
+    ){
+        val bodyDataUpdate = MachineModel(
+            machineStatus = true,
+            transactionId = idTransaction,
+            machineTime = timeMachine,
+        )
+
+        try {
+            MachineApp.CreateInstance().updateMachine(id = idMachine, bodyDataUpdate).enqueue(object :
+                Callback<MachineModel> {
+                override fun onResponse(call: Call<MachineModel>, response: Response<MachineModel>) {
+                    Log.d("debug", "Code Update Machine ${response}")
+//                    debugViewModel.insertDebug(
+//                        responseCode = response.code()!!,
+//                        responseBody = "${response.body()}",
+//                        responseLog =  "${response}"
+//                    )
+                    if(response.code() == 200){
+                        val responseBodyData = response.body()
+                        Log.d("debug", "Body Update Machine ${response.body()}")
+                        if (responseBodyData!!.machineStatus!!){
+
+                            MACHINE_BUTTON_UPDATE = true
+
+                            navController.navigate(route = Screens.Home.route){
+                                popUpTo(Screens.Home.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                        else{
+                            updateMachine(
+                                idMachine = idMachine,
+                                idTransaction = idTransaction,
+                                timeMachine = timeMachine,
+                                navController = navController
+                            )
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<MachineModel>, t: Throwable) {
+                    Log.d("error", t.message.toString())
+                    if (t.message == t.message){
+//                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            MACHINE_ERROR_MESSAGE = e.message.toString()
+            Log.d("debug", "ERROR $MACHINE_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }

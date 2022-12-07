@@ -39,6 +39,7 @@ fun TransactionActiveLazyColumn(
                 transactionPayment = if(!transactionActive.transactionPayment!!) selectionPayment[0] else selectionPayment[1],
                 transactionAdmin = transactionActive.transactionAdmin.toString(),
                 transactionClass = transactionActive.transactionClass!!,
+                transactionID = transactionActive.id!!,
                 navController =navController
             )
         }
