@@ -10,10 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.alfaomega.MACHINE_SCREEN
-import com.example.alfaomega.MENU_LIST_TITAN_RESPONSE
-import com.example.alfaomega.STORE_ID
-import com.example.alfaomega.TRANSACTION_SCREEN
+import com.example.alfaomega.*
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
@@ -40,6 +37,10 @@ fun NavGraphSetup(
                 transactionViewModel.getTransactionActive()
                 menuViewModel.getTime()
                 TRANSACTION_SCREEN = true
+
+                TRANSACATION_IS_WASHER = false
+                TRANSACATION_IS_DRYER = false
+                NEW_TRANSACATION_CUSTOMER = ""
             }
             ScreenHome(navController = navController)
         }

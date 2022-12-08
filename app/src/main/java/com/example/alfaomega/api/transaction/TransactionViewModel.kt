@@ -8,6 +8,8 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.machine.MachineApp
+import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.navigations.Screens
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,8 +32,6 @@ class TransactionViewModel: ViewModel() {
                         response.body()?.let {
                             TRANSACTION_ACTIVE_RESPONSE = response.body()!!.filter { data -> data.transactionStateMachine != 6 } as ArrayList<TransactionModel>
                             TRANSACTION_ACTIVE_STATE = 1
-
-//                            Log.i("info_response", "Data GIANT : ${MENU_LIST_GIANT_RESPONSE}")
                         }
                         if (TRANSACTION_ACTIVE_RESPONSE.isNullOrEmpty()) {
                             TRANSACTION_ACTIVE_STATE = 3
@@ -40,18 +40,16 @@ class TransactionViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<ArrayList<TransactionModel>>, t: Throwable) {
-                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
+                    Log.d("debug_transaction", "Fail get Data ${t.message.toString()}")
                     if (t.message == t.message) {
-                        Log.d("debug menu", "Failed")
+                        Log.d("debug_transaction", "Failed")
                         TRANSACTION_ACTIVE_STATE = 2
-//                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
                     }
                 }
             })
         } catch (e: Exception) {
-            MENU_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug menu", "ERROR $MENU_ERROR_MESSAGE")
-//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+            TRANSACTION_ERROR = e.message.toString()
+            Log.d("debug_transaction", "ERROR $TRANSACTION_ERROR")
         }
     }
 
@@ -65,7 +63,7 @@ class TransactionViewModel: ViewModel() {
         transactionStateMachine: Int,
         isWasher: Boolean,
         isDryer: Boolean,
-        navController: NavController,
+        navController: NavController
     ){
         val current = LocalDateTime.now()
 
@@ -104,15 +102,61 @@ class TransactionViewModel: ViewModel() {
             }
 
             override fun onFailure(call: Call<TransactionModel>, t: Throwable) {
-                Log.d("error", t.message.toString())
+                Log.d("debug_transaction", t.message.toString())
                 if (t.message == t.message){
-
+                    TRANSACTION_ERROR = t.message.toString()
                     NEW_TRANSACATION_BUTTON = true
-
-//                    Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
                 }
             }
         })
     }
 
+    fun updateTransaction(
+        idTransaction: String,
+        transactionStateMachine: Int,
+        navController: NavController
+    ){
+        val bodyUpdate = TransactionModel(
+            transactionStateMachine = transactionStateMachine,
+        )
+
+        try {
+            TransactionApp.CreateInstance().updateMachine(id = idTransaction, updateData = bodyUpdate).enqueue(object :
+                Callback<TransactionModel> {
+                override fun onResponse(call: Call<TransactionModel>, response: Response<TransactionModel>) {
+                    if(response.code() == 200){
+                        val responseBodyData = response.body()
+                        if (responseBodyData!!.transactionStateMachine!! ==  6){
+
+                            NEW_TRANSACATION_BUTTON = true
+
+                            navController.navigate(route = Screens.Home.route){
+                                popUpTo(Screens.Home.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                        else{
+                            updateTransaction(
+                                idTransaction = idTransaction,
+                                transactionStateMachine = 6,
+                                navController = navController
+                            )
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<TransactionModel>, t: Throwable) {
+                    Log.d("error", t.message.toString())
+                    if (t.message == t.message){
+                        TRANSACTION_ERROR = t.message.toString()
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            TRANSACTION_ERROR = e.message.toString()
+            Log.d("debug_transaction", "ERROR $MACHINE_ERROR_MESSAGE")
+        }
+    }
 }

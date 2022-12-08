@@ -40,7 +40,9 @@ fun TransactionActiveLazyColumn(
                 transactionAdmin = transactionActive.transactionAdmin.toString(),
                 transactionClass = transactionActive.transactionClass!!,
                 transactionID = transactionActive.id!!,
-                navController =navController
+                transactionIsWasher = transactionActive.isWasher!!,
+                transactionIsDryer = transactionActive.isDryer!!,
+                navController = navController
             )
         }
     }

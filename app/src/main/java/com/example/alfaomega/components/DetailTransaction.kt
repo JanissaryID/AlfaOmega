@@ -360,43 +360,46 @@ fun DetailTransaction(
             }
         }
 
-        if(!TRANSACTION_SCREEN){
-            if(TRANSACATION_STATUS_MACHINE != 0 && TRANSACATION_STATUS_MACHINE != 3){
-                NEW_TRANSACATION_BUTTON = false
-            }
-            else{
-                NEW_TRANSACATION_BUTTON = true
-            }
-        }
-        else{
-            if(!text_name.text.isNullOrEmpty() && !selectedValuePayment.value.isNullOrEmpty() && !button_clicked){
-                NEW_TRANSACATION_BUTTON = true
-            }
-            else{
-                NEW_TRANSACATION_BUTTON = false
-            }
-        }
-
         when (TRANSACATION_STATUS_MACHINE){
             0 -> {
+                NEW_TRANSACATION_BUTTON = true
                 titleButton = selectionProgressMachine[0]
             }
             1 -> {
+                NEW_TRANSACATION_BUTTON = false
                 titleButton = selectionProgressMachine[1]
             }
             2 -> {
-                titleButton = selectionProgressMachine[2]
+                NEW_TRANSACATION_BUTTON = true
+                if(TRANSACATION_IS_WASHER && TRANSACATION_IS_DRYER){
+                    TRANSACATION_STATUS_MACHINE = 3
+                    titleButton = selectionProgressMachine[3]
+                }
+                else{
+                    TRANSACATION_STATUS_MACHINE = 6
+                    titleButton = selectionProgressMachine[6]
+                }
             }
             3 -> {
+                NEW_TRANSACATION_BUTTON = true
                 titleButton = selectionProgressMachine[3]
             }
             4 -> {
+                NEW_TRANSACATION_BUTTON = false
                 titleButton = selectionProgressMachine[4]
             }
             5 -> {
-                titleButton = selectionProgressMachine[5]
+                NEW_TRANSACATION_BUTTON = true
+                if(TRANSACATION_IS_DRYER){
+                    TRANSACATION_STATUS_MACHINE = 6
+                    titleButton = selectionProgressMachine[6]
+                }
+                else{
+                    titleButton = selectionProgressMachine[5]
+                }
             }
             6 -> {
+                NEW_TRANSACATION_BUTTON = true
                 titleButton = selectionProgressMachine[6]
             }
         }
@@ -411,8 +414,18 @@ fun DetailTransaction(
             }
         ) {
             button_clicked = true
+
             if(!TRANSACTION_SCREEN){
-                navController.navigate(route = Screens.Machine.route)
+                if(TRANSACATION_STATUS_MACHINE == 6){
+                    transactionViewModel.updateTransaction(
+                        idTransaction = TRANSACATION_ID,
+                        transactionStateMachine = 6,
+                        navController = navController
+                    )
+                }
+                else{
+                    navController.navigate(route = Screens.Machine.route)
+                }
             }
             else{
                 transactionViewModel.insertTransaction(

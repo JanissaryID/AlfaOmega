@@ -51,6 +51,7 @@ var TRANSACATION_STATUS_MACHINE: Int by mutableStateOf(0)
 var TRANSACATION_IS_WASHER: Boolean by mutableStateOf(false)
 var TRANSACATION_IS_DRYER: Boolean by mutableStateOf(false)
 var TRANSACATION_BUTTON: Boolean by mutableStateOf(true)
+var TRANSACTION_ERROR: String by mutableStateOf("")
 
 //Variable Screen
 var TRANSACTION_SCREEN: Boolean by mutableStateOf(false)

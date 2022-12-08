@@ -1,11 +1,9 @@
 package com.example.alfaomega.api.transaction
 
+import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.menu.MenuModel
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface TransactionService {
     @GET("NewTransaction")
@@ -15,4 +13,9 @@ interface TransactionService {
 
     @POST("NewTransaction")
     fun insertTransactions(@Body statusData: TransactionModel) : Call<TransactionModel>
+
+    @PATCH("NewTransaction/{id}")
+    fun updateMachine(
+        @Path("id") id: String?, @Body updateData : TransactionModel
+    ): Call<TransactionModel>
 }

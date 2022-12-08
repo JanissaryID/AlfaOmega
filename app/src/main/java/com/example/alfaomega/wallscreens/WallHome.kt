@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.alfaomega.TRANSACATION_IS_DRYER
+import com.example.alfaomega.TRANSACATION_IS_WASHER
 import com.example.alfaomega.TRANSACTION_ACTIVE_RESPONSE
 import com.example.alfaomega.TRANSACTION_ACTIVE_STATE
 import com.example.alfaomega.api.transaction.TransactionViewModel
