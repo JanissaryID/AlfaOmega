@@ -11,15 +11,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.components.ComponentMenuClass
-import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.view.menu.MachineLoadData
 import com.example.alfaomega.view.store.StoreLoadData
+import com.example.alfaomega.view.transaction_list.TransactionListLoadData
 
 @Composable
-fun WallStoreList(
+fun WallTransactionList(
     paddingValues: PaddingValues,
     navController: NavController,
-    protoViewModel: ProtoViewModel
 ) {
     Surface(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         Column(modifier = Modifier
@@ -28,11 +27,10 @@ fun WallStoreList(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            StoreLoadData(
-                storeState = STORE_STATE,
-                store = STORE_LIST_RESPONSE,
-                navController = navController,
-                protoViewModel = protoViewModel
+            TransactionListLoadData(
+                transactionState = TRANSACTION_STATE,
+                transactionList = TRANSACTION_RESPONSE,
+                navController = navController
             )
         }
     }

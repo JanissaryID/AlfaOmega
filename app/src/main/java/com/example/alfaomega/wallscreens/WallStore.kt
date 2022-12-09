@@ -104,7 +104,9 @@ fun WallStore(
                         ItemStoreMenu(
                             title = menu.titleName,
                             subTitle = menu.subTitle,
-                            iconMenu = menu.menuIcon
+                            iconMenu = menu.menuIcon,
+                            screenMenuItem = menu.screensMenu,
+                            navController = navController
                         )
                     }
                 }

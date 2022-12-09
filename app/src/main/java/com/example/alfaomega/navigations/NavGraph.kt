@@ -98,5 +98,15 @@ fun NavGraphSetup(
             }
             ScreenStoreList(navController = navController, protoViewModel = protoViewModel)
         }
+
+        composable(
+            route = Screens.TransactionList.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                transactionViewModel.getTransactionNow()
+                TRANSACTION_SCREEN = true
+            }
+            ScreenTransactionList(navController = navController, protoViewModel = protoViewModel)
+        }
     }
 }

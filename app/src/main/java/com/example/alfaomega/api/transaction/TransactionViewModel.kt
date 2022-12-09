@@ -159,4 +159,44 @@ class TransactionViewModel: ViewModel() {
             Log.d("debug_transaction", "ERROR $MACHINE_ERROR_MESSAGE")
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getTransactionNow() {
+        val current = LocalDateTime.now()
+
+        val formatDay = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val date = current.format(formatDay)
+
+        try {
+            TransactionApp.CreateInstance().fetchTransactionNow(date = date).enqueue(object :
+                Callback<ArrayList<TransactionModel>> {
+                override fun onResponse(
+                    call: Call<ArrayList<TransactionModel>>,
+                    response: Response<ArrayList<TransactionModel>>
+                ) {
+                    TRANSACTION_STATE = 0
+                    if (response.code() == 200) {
+                        response.body()?.let {
+                            TRANSACTION_RESPONSE = response.body()!!
+                            TRANSACTION_STATE = 1
+                        }
+                        if (TRANSACTION_RESPONSE.isNullOrEmpty()) {
+                            TRANSACTION_STATE = 3
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ArrayList<TransactionModel>>, t: Throwable) {
+                    Log.d("debug_transaction", "Fail get Data ${t.message.toString()}")
+                    if (t.message == t.message) {
+                        Log.d("debug_transaction", "Failed")
+                        TRANSACTION_STATE = 2
+                    }
+                }
+            })
+        } catch (e: Exception) {
+            TRANSACTION_ERROR = e.message.toString()
+            Log.d("debug_transaction", "ERROR $TRANSACTION_ERROR")
+        }
+    }
 }

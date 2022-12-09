@@ -1,6 +1,7 @@
 package com.example.alfaomega.`object`
 
 import com.example.alfaomega.R
+import com.example.alfaomega.navigations.Screens
 
 object MenuStore {
 
@@ -22,6 +23,12 @@ object MenuStore {
         R.drawable.ic_twotone_person_24,
     )
 
+    private val screensMenu = arrayOf(
+        Screens.Home.route,
+        Screens.TransactionList.route,
+        Screens.Home.route,
+    )
+
     val listData: ArrayList<MenuStoreModel>
         get() {
             val list = arrayListOf<MenuStoreModel>()
@@ -30,6 +37,7 @@ object MenuStore {
                 menuItemStore.titleName = titleName[position]
                 menuItemStore.subTitle = subTitle[position]
                 menuItemStore.menuIcon = menuIcon[position]
+                menuItemStore.screensMenu = screensMenu[position]
                 list.add(menuItemStore)
             }
             return list

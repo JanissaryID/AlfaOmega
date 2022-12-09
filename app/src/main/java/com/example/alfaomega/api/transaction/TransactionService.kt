@@ -18,4 +18,9 @@ interface TransactionService {
     fun updateMachine(
         @Path("id") id: String?, @Body updateData : TransactionModel
     ): Call<TransactionModel>
+
+    @GET("NewTransaction")
+    fun fetchTransactionNow(
+        @Query(value="transaction_date", encoded=true) date: String?,
+    ): Call<ArrayList<TransactionModel>>
 }

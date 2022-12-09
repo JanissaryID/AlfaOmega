@@ -17,16 +17,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
+import com.example.alfaomega.navigations.Screens
 
 @Composable
 fun ItemStoreMenu(
     title: String,
     subTitle: String,
-    iconMenu: Int
+    iconMenu: Int,
+    screenMenuItem: String,
+    navController: NavController
 ) {
     Surface(
         color = Color.Transparent,
-        modifier = Modifier.clickable {  }
+        modifier = Modifier.clickable {
+            navController.navigate(route = screenMenuItem)
+        }
     ) {
         ConstraintLayout(modifier = Modifier.fillMaxSize().padding(16.dp)) {
 

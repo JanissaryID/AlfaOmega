@@ -57,6 +57,8 @@ var TRANSACATION_IS_WASHER: Boolean by mutableStateOf(false)
 var TRANSACATION_IS_DRYER: Boolean by mutableStateOf(false)
 var TRANSACATION_BUTTON: Boolean by mutableStateOf(true)
 var TRANSACTION_ERROR: String by mutableStateOf("")
+var TRANSACTION_RESPONSE: ArrayList<TransactionModel> by mutableStateOf(arrayListOf())
+var TRANSACTION_STATE: Int by mutableStateOf(0)
 
 //Variable Screen
 var TRANSACTION_SCREEN: Boolean by mutableStateOf(false)

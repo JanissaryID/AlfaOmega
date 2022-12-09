@@ -18,7 +18,6 @@ import com.example.alfaomega.components.ComponentTransaction
 fun TransactionActiveLazyColumn(
     transactionActiveModel: List<TransactionModel>,
     navController: NavController,
-//    selectedIndex: Int
 ) {
     val selectionMenuClass = listOf("Giant 8 Kg", "Titan 12 Kg")
     val selectionPayment = listOf("Cash", "Qris")
