@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.screens.*
@@ -24,6 +25,7 @@ fun NavGraphSetup(
     menuViewModel: MenuViewModel,
     transactionViewModel: TransactionViewModel,
     machineViewModel: MachineViewModel,
+    storeViewModel: StoreViewModel,
     protoViewModel: ProtoViewModel
     ) {
 
@@ -34,15 +36,18 @@ fun NavGraphSetup(
             route = Screens.Home.route,
         ) {
             LaunchedEffect(key1 = STORE_ID){
-                transactionViewModel.getTransactionActive()
-                menuViewModel.getTime()
-                TRANSACTION_SCREEN = true
+                if (!STORE_ID.isNullOrEmpty()){
+                    transactionViewModel.getTransactionActive()
+                    menuViewModel.getTime()
 
-                TRANSACATION_IS_WASHER = false
-                TRANSACATION_IS_DRYER = false
-                NEW_TRANSACATION_CUSTOMER = ""
+                    TRANSACTION_SCREEN = true
+
+                    TRANSACATION_IS_WASHER = false
+                    TRANSACATION_IS_DRYER = false
+                    NEW_TRANSACATION_CUSTOMER = ""
+                }
             }
-            ScreenHome(navController = navController)
+            ScreenHome(navController = navController, protoViewModel = protoViewModel)
         }
 
         composable(
@@ -52,7 +57,7 @@ fun NavGraphSetup(
                 menuViewModel.getMenu()
                 TRANSACTION_SCREEN = true
             }
-            ScreenMenu(navController = navController)
+            ScreenMenu(navController = navController, protoViewModel = protoViewModel)
         }
 
         composable(
@@ -61,7 +66,7 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
                 MACHINE_SCREEN = true
             }
-            ScreenDetailTransaction(navController = navController)
+            ScreenDetailTransaction(navController = navController, protoViewModel = protoViewModel)
         }
 
         composable(
@@ -70,7 +75,7 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
                 TRANSACTION_SCREEN = true
             }
-            ScreenStore(navController = navController)
+            ScreenStore(navController = navController, protoViewModel = protoViewModel)
         }
 
         composable(
@@ -80,7 +85,17 @@ fun NavGraphSetup(
                 machineViewModel.getMachine()
                 TRANSACTION_SCREEN = true
             }
-            ScreenMachine(navController = navController)
+            ScreenMachine(navController = navController, protoViewModel = protoViewModel)
+        }
+
+        composable(
+            route = Screens.Store.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                storeViewModel.getStore()
+                TRANSACTION_SCREEN = true
+            }
+            ScreenStoreList(navController = navController, protoViewModel = protoViewModel)
         }
     }
 }

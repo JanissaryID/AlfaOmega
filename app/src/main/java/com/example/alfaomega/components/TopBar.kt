@@ -1,5 +1,7 @@
 package com.example.alfaomega.components
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
@@ -16,8 +18,10 @@ import com.example.alfaomega.R
 import com.example.alfaomega.TRANSACTION_SCREEN
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.navigations.Screens
+import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.wallscreens.WallPicker
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
@@ -26,6 +30,7 @@ fun TopBar(
     wallScreen: Int,
     navController: NavController,
     screenBack: String,
+    protoViewModel: ProtoViewModel
 ) {
     if (typeScreen){
         Scaffold(topBar = {
@@ -42,6 +47,7 @@ fun TopBar(
                     wallScreen = wallScreen,
                     paddingValues = it,
                     navController = navController,
+                    protoViewModel = protoViewModel
                 )
             },
             floatingActionButton = {
@@ -72,6 +78,7 @@ fun TopBar(
                     wallScreen = wallScreen,
                     paddingValues = it,
                     navController = navController,
+                    protoViewModel = protoViewModel
                 )
             }
         )

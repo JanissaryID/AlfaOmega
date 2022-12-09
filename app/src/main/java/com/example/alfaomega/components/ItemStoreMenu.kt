@@ -17,10 +17,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.alfaomega.R
 
 @Composable
-fun StoreMenuItem(
+fun ItemStoreMenu(
     title: String,
     subTitle: String,
     iconMenu: Int

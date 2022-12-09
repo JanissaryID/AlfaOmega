@@ -10,7 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.api.machine.MachineModel
-import com.example.alfaomega.components.MachineItem
+import com.example.alfaomega.components.ItemMachine
 
 @Composable
 fun MachineLazyGrid(
@@ -25,7 +25,7 @@ fun MachineLazyGrid(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ){
         itemsIndexed(items = machineModel){ index, machine ->
-            MachineItem(
+            ItemMachine(
                 machineModel = machine,
                 usedMachine = machine.machineStatus!!,
                 index = if(selectedIndex != index) index else -1,

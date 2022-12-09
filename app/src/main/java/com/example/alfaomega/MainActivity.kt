@@ -14,10 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.navigations.NavGraphSetup
 import com.example.alfaomega.proto.ProtoViewModel
@@ -30,22 +32,23 @@ class MainActivity : ComponentActivity() {
     val menuViewModel by viewModels<MenuViewModel>()
     val transactionViewModel by viewModels<TransactionViewModel>()
     val machineViewModel by viewModels<MachineViewModel>()
-    val protoViewModel by viewModels<ProtoViewModel>()
+    val storeViewModel by viewModels<StoreViewModel>()
+
+    private lateinit var protoViewModel: ProtoViewModel
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        protoViewModel = ViewModelProvider(this).get(ProtoViewModel::class.java)
+        protoViewModel.getData.observe(this,{
+            STORE_ID = it.storeid
+//            Log.d("info_response", "STORE ID ${it.storeid}")
+//            Log.d("info_response", "STORE ID 2 $STORE_ID")
+        })
+
         setContent {
             AlfaOmegaTheme {
-
-//                protoViewModel.getData.observe(this,{
-////                    TIME_WASHER_GIANT = it.timewashergiant
-//                    TIME_WASHER_TITAN = it.timewashertitan
-////                    TIME_DRYER_GIANT = it.timedryergiant
-//                    TIME_DRYER_TITAN = it.timedryertitan
-//                    Log.i("info_response", "TIME : ${it.timewashergiant}  ${it.timewashertitan}  ${it.timedryergiant}  ${it.timedryertitan}")
-//                })
-
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -57,10 +60,11 @@ class MainActivity : ComponentActivity() {
                         menuViewModel = menuViewModel,
                         transactionViewModel = transactionViewModel,
                         machineViewModel = machineViewModel,
+                        storeViewModel = storeViewModel,
                         protoViewModel = protoViewModel
                     )
 
-                    Log.i("info_response", "TIME : ${TIME_WASHER_GIANT}  ${TIME_WASHER_TITAN}  ${TIME_DRYER_GIANT}  ${TIME_DRYER_TITAN}")
+                    Log.i("info_response", "TIME : ${TIME_WASHER_GIANT}  ${TIME_WASHER_TITAN}  ${TIME_DRYER_GIANT}  ${TIME_DRYER_TITAN}  -  ${STORE_ID}")
                 }
             }
         }

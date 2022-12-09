@@ -1,8 +1,5 @@
 package com.example.alfaomega.wallscreens
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,8 +7,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,8 +20,8 @@ import com.example.alfaomega.STORE_CITY
 import com.example.alfaomega.STORE_NAME
 import com.example.alfaomega.`object`.MenuStore
 import com.example.alfaomega.`object`.MenuStoreModel
-import com.example.alfaomega.components.ComponentTransaction
-import com.example.alfaomega.components.StoreMenuItem
+import com.example.alfaomega.components.ItemStoreMenu
+import com.example.alfaomega.navigations.Screens
 
 @Composable
 fun WallStore(
@@ -56,7 +51,9 @@ fun WallStore(
             ) {
                 Surface(
                     shape = RoundedCornerShape(100),
-                    modifier = Modifier.clickable { },
+                    modifier = Modifier.clickable {
+                        navController.navigate(route = Screens.Store.route)
+                    },
                     color = Color.Transparent
                 ) {
                     Box(
@@ -104,7 +101,7 @@ fun WallStore(
                     verticalArrangement = Arrangement.spacedBy(0.dp)
                 ){
                     items(items = list) { menu ->
-                        StoreMenuItem(
+                        ItemStoreMenu(
                             title = menu.titleName,
                             subTitle = menu.subTitle,
                             iconMenu = menu.menuIcon
