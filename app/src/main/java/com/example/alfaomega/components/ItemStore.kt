@@ -38,7 +38,11 @@ fun ItemStore(
                 STORE_CITY = storeCity
                 STORE_ADDRESS = storeAddress
                 protoViewModel.updateStoreID(keyStore = storeId)
-                navController.navigate(route = Screens.Home.route)
+                navController.navigate(route = Screens.Home.route){
+                    popUpTo(Screens.Home.route) {
+                        inclusive = true
+                    }
+                }
             }) {
             Column() {
                 Column(
