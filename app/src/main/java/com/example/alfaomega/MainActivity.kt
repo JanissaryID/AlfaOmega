@@ -43,8 +43,6 @@ class MainActivity : ComponentActivity() {
         protoViewModel = ViewModelProvider(this).get(ProtoViewModel::class.java)
         protoViewModel.getData.observe(this,{
             STORE_ID = it.storeid
-//            Log.d("info_response", "STORE ID ${it.storeid}")
-//            Log.d("info_response", "STORE ID 2 $STORE_ID")
         })
 
         setContent {

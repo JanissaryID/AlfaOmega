@@ -21,9 +21,9 @@ var NEW_TRANSACATION_BUTTON: Boolean by mutableStateOf(true)
 
 
 //Variable Store
-var STORE_NAME: String by mutableStateOf("Alfa Omega")
-var STORE_CITY: String by mutableStateOf("Salatiga")
-var STORE_ADDRESS: String by mutableStateOf("Jl. Pemuda Pancasila")
+var STORE_NAME: String by mutableStateOf("")
+var STORE_CITY: String by mutableStateOf("")
+var STORE_ADDRESS: String by mutableStateOf("")
 //var STORE_ID: String by mutableStateOf("6385c1a3964c12ebc5e5fdb7")
 var STORE_ID: String by mutableStateOf("")
 var STORE_LIST_RESPONSE: ArrayList<StoreModel> by mutableStateOf(arrayListOf())

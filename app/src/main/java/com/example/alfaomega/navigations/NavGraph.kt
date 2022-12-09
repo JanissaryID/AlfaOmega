@@ -39,6 +39,7 @@ fun NavGraphSetup(
                 if (!STORE_ID.isNullOrEmpty()){
                     transactionViewModel.getTransactionActive()
                     menuViewModel.getTime()
+                    storeViewModel.GetStore()
 
                     TRANSACTION_SCREEN = true
 
@@ -92,7 +93,7 @@ fun NavGraphSetup(
             route = Screens.Store.route,
         ){
             LaunchedEffect(key1 = STORE_ID){
-                storeViewModel.getStore()
+                storeViewModel.FetchStore()
                 TRANSACTION_SCREEN = true
             }
             ScreenStoreList(navController = navController, protoViewModel = protoViewModel)

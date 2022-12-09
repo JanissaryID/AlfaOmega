@@ -10,4 +10,9 @@ interface StoreService {
     @GET("NewStore")
     fun fetchStore(): Call<ArrayList<StoreModel>>
 
+    @GET("NewStore")
+    fun getStore(
+        @Query(value="_id", encoded=true) id: String?
+    ): Call<ArrayList<StoreModel>>
+
 }
