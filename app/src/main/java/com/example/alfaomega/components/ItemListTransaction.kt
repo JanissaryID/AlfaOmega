@@ -27,10 +27,12 @@ fun ItemListTransaction(
                     text = transactionName,
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = MaterialTheme.typography.labelLarge.fontSize,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
                     text = transactionDate,
                     fontSize = MaterialTheme.typography.labelMedium.fontSize,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
@@ -42,11 +44,13 @@ fun ItemListTransaction(
                     text = transactionType,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = MaterialTheme.typography.labelSmall.fontSize,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
                     text = "IDR ${transactionPrice}",
                     fontWeight = FontWeight.SemiBold,
                     fontSize = MaterialTheme.typography.labelMedium.fontSize,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
