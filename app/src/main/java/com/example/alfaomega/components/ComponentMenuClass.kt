@@ -35,6 +35,7 @@ fun ComponentMenuClass(
         Text(
             text = titleMenu,
             fontWeight = FontWeight.ExtraBold,
+            color = if(!selected) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
             fontSize = MaterialTheme.typography.titleMedium.fontSize,
         )
         if(!selected){

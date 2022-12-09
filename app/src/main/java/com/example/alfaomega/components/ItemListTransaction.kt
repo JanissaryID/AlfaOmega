@@ -44,7 +44,8 @@ fun ItemListTransaction(
                     fontSize = MaterialTheme.typography.labelSmall.fontSize,
                 )
                 Text(
-                    text = transactionPrice,
+                    text = "IDR ${transactionPrice}",
+                    fontWeight = FontWeight.SemiBold,
                     fontSize = MaterialTheme.typography.labelMedium.fontSize,
                 )
             }

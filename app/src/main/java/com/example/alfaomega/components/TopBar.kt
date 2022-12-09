@@ -119,6 +119,7 @@ fun SmallTopBar(
                     text = tittleScreen,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )},
                 navigationIcon = {
                     Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
@@ -153,6 +154,7 @@ fun SmallTopBar(
                     text = tittleScreen,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )},
                 navigationIcon = {
                     Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {

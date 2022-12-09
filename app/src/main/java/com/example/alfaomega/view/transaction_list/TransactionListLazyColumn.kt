@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -30,6 +32,7 @@ fun TransactionListLazyColumn(
                 transactionDate = transactionList.transactionDate!!,
                 transactionPrice = transactionList.transactionPrice!!
             )
+            Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f))
         }
     }
 }

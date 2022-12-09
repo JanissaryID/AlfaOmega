@@ -20,18 +20,16 @@ fun WallTransactionList(
     paddingValues: PaddingValues,
     navController: NavController,
 ) {
-    Surface(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(top = paddingValues.calculateTopPadding()),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            TransactionListLoadData(
-                transactionState = TRANSACTION_STATE,
-                transactionList = TRANSACTION_RESPONSE,
-                navController = navController
-            )
-        }
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(top = paddingValues.calculateTopPadding()),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        TransactionListLoadData(
+            transactionState = TRANSACTION_STATE,
+            transactionList = TRANSACTION_RESPONSE,
+            navController = navController
+        )
     }
 }
