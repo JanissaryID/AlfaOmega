@@ -25,6 +25,7 @@ fun WallPicker(
         4 -> WallMachine(paddingValues = paddingValues, navController = navController)
         5 -> WallStoreList(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel)
         6 -> WallTransactionList(paddingValues = paddingValues, navController = navController)
+        7 -> WallLogin(paddingValues = paddingValues, navController = navController)
         else -> print("Opps tidak ada")
     }
 }

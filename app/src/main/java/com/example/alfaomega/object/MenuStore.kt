@@ -26,7 +26,7 @@ object MenuStore {
     private val screensMenu = arrayOf(
         Screens.Home.route,
         Screens.TransactionList.route,
-        Screens.Home.route,
+        Screens.Login.route,
     )
 
     val listData: ArrayList<MenuStoreModel>
