@@ -43,6 +43,8 @@ class MainActivity : ComponentActivity() {
         protoViewModel = ViewModelProvider(this).get(ProtoViewModel::class.java)
         protoViewModel.getData.observe(this,{
             STORE_ID = it.storeid
+            USER_NAME = it.username
+            USER_TYPE = it.usertype
         })
 
         setContent {
@@ -62,7 +64,8 @@ class MainActivity : ComponentActivity() {
                         protoViewModel = protoViewModel
                     )
 
-                    Log.i("info_response", "TIME : ${TIME_WASHER_GIANT}  ${TIME_WASHER_TITAN}  ${TIME_DRYER_GIANT}  ${TIME_DRYER_TITAN}  -  ${STORE_ID}")
+//                    Log.i("info_response", "TIME : ${TIME_WASHER_GIANT}  ${TIME_WASHER_TITAN}  ${TIME_DRYER_GIANT}  ${TIME_DRYER_TITAN}  -  ${STORE_ID}")
+                    Log.i("info_response", "Proto : ${STORE_ID}  ${USER_NAME}  ${USER_TYPE}")
                 }
             }
         }

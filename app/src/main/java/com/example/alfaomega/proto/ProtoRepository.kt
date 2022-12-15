@@ -27,25 +27,23 @@ class ProtoRepository(context: Context) {
             }
         }
 
-//    val readProtoStateFlow: StateFlow<DataPreferences> get() = dataProto
-
     suspend fun updateStore(keyStore: String){
         datastore.updateData { preference ->
             preference.toBuilder().setSTOREID(keyStore).build()
         }
     }
 
-//    suspend fun updateWashTimeGiant(WashTimeGiant: Int){
-//        datastore.updateData { preference ->
-//            preference.toBuilder().setTIMEWASHERGIANT(WashTimeGiant).build()
-//        }
-//    }
+    suspend fun updateNameUser(Nameuser: String){
+        datastore.updateData { preference ->
+            preference.toBuilder().setUSERNAME(Nameuser).build()
+        }
+    }
 //
-//    suspend fun updateDryTimeGiant(DryTimeGiant: Int){
-//        datastore.updateData { preference ->
-//            preference.toBuilder().setTIMEDRYERGIANT(DryTimeGiant).build()
-//        }
-//    }
+    suspend fun updateTypeUser(Typeuser: Int){
+        datastore.updateData { preference ->
+            preference.toBuilder().setUSERTYPE(Typeuser).build()
+        }
+    }
 //
 //    suspend fun updateWashTimeTitan(WashTimeTitan: Int){
 //        datastore.updateData { preference ->

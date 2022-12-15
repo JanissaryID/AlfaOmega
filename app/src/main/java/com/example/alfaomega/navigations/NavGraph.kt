@@ -17,6 +17,8 @@ import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.screens.*
+import com.example.alfaomega.screens.developer.ScreenHomeDeveloper
+import com.example.alfaomega.screens.owner.ScreenHomeOwner
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -47,8 +49,17 @@ fun NavGraphSetup(
                     TRANSACATION_IS_DRYER = false
                     NEW_TRANSACATION_CUSTOMER = ""
                 }
+                BUTTON_LOGIN_CLICKED = false
             }
-            ScreenHome(navController = navController, protoViewModel = protoViewModel)
+            if(USER_TYPE == 0){
+                ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel)
+            }
+            else if(USER_TYPE == 1){
+                ScreenHome(navController = navController, protoViewModel = protoViewModel)
+            }
+            else{
+                ScreenHomeDeveloper(navController = navController, protoViewModel = protoViewModel)
+            }
         }
 
         composable(

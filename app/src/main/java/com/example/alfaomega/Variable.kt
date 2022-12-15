@@ -80,3 +80,12 @@ var MACHINE_CLASS: Boolean by mutableStateOf(false)
 var MACHINE_TYPE: Boolean by mutableStateOf(false)
 var MACHINE_TIME: Int by mutableStateOf(0)
 var MACHINE_BUTTON_UPDATE: Boolean by mutableStateOf(true)
+
+//Variable user
+var USER_STATE: Int by mutableStateOf(0)
+var USER_TYPE: Int by mutableStateOf(0)
+var USER_NAME: String by mutableStateOf("")
+var USER_ERROR_MESSAGE: String by mutableStateOf("")
+var BUTTON_LOGIN: Boolean by mutableStateOf(true)
+var BUTTON_LOGIN_CLICKED: Boolean by mutableStateOf(false)
+var FAILED_LOGIN: Boolean by mutableStateOf(false)

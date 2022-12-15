@@ -17,13 +17,13 @@ class ProtoViewModel(application: Application): AndroidViewModel(application) {
         repository.updateStore(keyStore = keyStore)
     }
 
-//    fun updateWashTimeGiant(WashTimeGiant: Int) = viewModelScope.launch(Dispatchers.IO){
-//        repository.updateWashTimeGiant(WashTimeGiant = WashTimeGiant)
-//    }
+    fun updateNameUser(Nameuser: String) = viewModelScope.launch(Dispatchers.IO){
+        repository.updateNameUser(Nameuser = Nameuser)
+    }
 //
-//    fun updateDryTimeGiant(DryTimeGiant: Int) = viewModelScope.launch(Dispatchers.IO){
-//        repository.updateDryTimeGiant(DryTimeGiant = DryTimeGiant)
-//    }
+    fun updateTypeUser(TypeUser: Int) = viewModelScope.launch(Dispatchers.IO){
+        repository.updateTypeUser(Typeuser = TypeUser)
+    }
 //
 //    fun updateWashTimeTitan(WashTimeTitan: Int) = viewModelScope.launch(Dispatchers.IO){
 //        repository.updateWashTimeTitan(WashTimeTitan = WashTimeTitan)
