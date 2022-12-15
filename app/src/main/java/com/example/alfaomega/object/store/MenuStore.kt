@@ -1,4 +1,4 @@
-package com.example.alfaomega.`object`
+package com.example.alfaomega.`object`.store
 
 import com.example.alfaomega.R
 import com.example.alfaomega.navigations.Screens

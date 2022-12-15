@@ -18,8 +18,8 @@ import com.example.alfaomega.R
 import com.example.alfaomega.STORE_ADDRESS
 import com.example.alfaomega.STORE_CITY
 import com.example.alfaomega.STORE_NAME
-import com.example.alfaomega.`object`.MenuStore
-import com.example.alfaomega.`object`.MenuStoreModel
+import com.example.alfaomega.`object`.store.MenuStore
+import com.example.alfaomega.`object`.store.MenuStoreModel
 import com.example.alfaomega.components.ItemStoreMenu
 import com.example.alfaomega.navigations.Screens
 

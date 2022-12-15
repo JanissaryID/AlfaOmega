@@ -1,6 +1,4 @@
-package com.example.alfaomega.`object`
-
-import com.example.alfaomega.navigations.Screens
+package com.example.alfaomega.`object`.store
 
 data class MenuStoreModel(
     var titleName: String = "",

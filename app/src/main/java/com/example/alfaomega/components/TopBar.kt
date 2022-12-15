@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.TRANSACTION_SCREEN
+import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
@@ -33,35 +34,57 @@ fun TopBar(
     protoViewModel: ProtoViewModel
 ) {
     if (typeScreen){
-        Scaffold(topBar = {
-            SmallTopBar(
-                typeScreen = typeScreen,
-                tittleScreen = tittleScreen,
-                navController = navController,
-                screenBack = screenBack
-            )
-        },
-            content = {
-//            WallHome(paddingValues = it)
-                WallPicker(
-                    wallScreen = wallScreen,
-                    paddingValues = it,
+        if(USER_TYPE == 1){
+            Scaffold(topBar = {
+                SmallTopBar(
+                    typeScreen = typeScreen,
+                    tittleScreen = tittleScreen,
                     navController = navController,
-                    protoViewModel = protoViewModel
+                    screenBack = screenBack
                 )
             },
-            floatingActionButton = {
-                FloatingActionButton(
-                    onClick = { navController.navigate(route = Screens.Menu.route) }
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.fluent_add_12_filled),
-                        contentDescription = "Icon Add",
-                        modifier = Modifier.size(24.dp)
+                content = {
+//            WallHome(paddingValues = it)
+                    WallPicker(
+                        wallScreen = wallScreen,
+                        paddingValues = it,
+                        navController = navController,
+                        protoViewModel = protoViewModel
+                    )
+                },
+                floatingActionButton = {
+                    FloatingActionButton(
+                        onClick = { navController.navigate(route = Screens.Menu.route) }
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.fluent_add_12_filled),
+                            contentDescription = "Icon Add",
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                }
+            )
+        }
+        else{
+            Scaffold(topBar = {
+                SmallTopBar(
+                    typeScreen = typeScreen,
+                    tittleScreen = tittleScreen,
+                    navController = navController,
+                    screenBack = screenBack
+                )
+            },
+                content = {
+//            WallHome(paddingValues = it)
+                    WallPicker(
+                        wallScreen = wallScreen,
+                        paddingValues = it,
+                        navController = navController,
+                        protoViewModel = protoViewModel
                     )
                 }
-            }
-        )
+            )
+        }
     }
     else{
         Scaffold(topBar = {
@@ -94,23 +117,35 @@ fun SmallTopBar(
     screenBack: String
 ) {
     if(typeScreen){
-        SmallTopAppBar(
-            title = {Text(
-                text = tittleScreen,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )},
-            actions = {
-                Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_twotone_storefront_24),
-                        contentDescription = "Icon Store",
-                        modifier = Modifier.clickable { navController.navigate(route = Screens.StoreProfile.route) }
-                    )
+        if(USER_TYPE == 1){
+            SmallTopAppBar(
+                title = {Text(
+                    text = tittleScreen,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )},
+                actions = {
+                    Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_twotone_storefront_24),
+                            contentDescription = "Icon Store",
+                            modifier = Modifier.clickable { navController.navigate(route = Screens.StoreProfile.route) }
+                        )
+                    }
                 }
-            }
-        )
+            )
+        }
+        else{
+            SmallTopAppBar(
+                title = {Text(
+                    text = tittleScreen,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )}
+            )
+        }
     }
     else{
         if(!TRANSACTION_SCREEN){
