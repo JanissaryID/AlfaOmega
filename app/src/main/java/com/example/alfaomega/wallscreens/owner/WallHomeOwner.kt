@@ -22,11 +22,13 @@ import com.example.alfaomega.`object`.owner.MenuOwner
 import com.example.alfaomega.`object`.owner.MenuOwnerModel
 import com.example.alfaomega.components.ItemStoreMenu
 import com.example.alfaomega.navigations.Screens
+import com.example.alfaomega.proto.ProtoViewModel
 
 @Composable
 fun WallHomeOwner(
     navController: NavController,
     paddingValues: PaddingValues,
+    protoViewModel: ProtoViewModel
 ) {
     var list: ArrayList<MenuOwnerModel> = arrayListOf()
     list.addAll(MenuOwner.listData)
@@ -106,7 +108,9 @@ fun WallHomeOwner(
                             subTitle = menu.subTitle,
                             iconMenu = menu.menuIcon,
                             screenMenuItem = menu.screensMenu,
-                            navController = navController
+                            typeMenu = menu.typeMenu,
+                            navController = navController,
+                            protoViewModel = protoViewModel
                         )
                     }
                 }

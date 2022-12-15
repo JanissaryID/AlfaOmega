@@ -18,7 +18,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.example.alfaomega.USER_NAME
+import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.navigations.Screens
+import com.example.alfaomega.proto.ProtoViewModel
 
 @Composable
 fun ItemStoreMenu(
@@ -26,12 +29,21 @@ fun ItemStoreMenu(
     subTitle: String,
     iconMenu: Int,
     screenMenuItem: String,
-    navController: NavController
+    typeMenu: Boolean,
+    navController: NavController,
+    protoViewModel: ProtoViewModel
 ) {
     Surface(
         color = Color.Transparent,
         modifier = Modifier.clickable {
-            navController.navigate(route = screenMenuItem)
+            if (typeMenu){
+                protoViewModel.updateNameUser(Nameuser = "")
+                protoViewModel.updateTypeUser(TypeUser = 1)
+                navController.navigate(route = screenMenuItem)
+            }
+            else{
+                navController.navigate(route = screenMenuItem)
+            }
         }
     ) {
         ConstraintLayout(modifier = Modifier.fillMaxSize().padding(16.dp)) {

@@ -29,6 +29,12 @@ object MenuStore {
         Screens.Login.route,
     )
 
+    private val typeMenu = booleanArrayOf(
+        false,
+        false,
+        false
+    )
+
     val listData: ArrayList<MenuStoreModel>
         get() {
             val list = arrayListOf<MenuStoreModel>()
@@ -38,6 +44,7 @@ object MenuStore {
                 menuItemStore.subTitle = subTitle[position]
                 menuItemStore.menuIcon = menuIcon[position]
                 menuItemStore.screensMenu = screensMenu[position]
+                menuItemStore.typeMenu = typeMenu[position]
                 list.add(menuItemStore)
             }
             return list

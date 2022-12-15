@@ -34,7 +34,15 @@ object MenuOwner {
         Screens.Home.route,
         Screens.TransactionList.route,
         Screens.Login.route,
-        Screens.Login.route,
+        Screens.Home.route,
+    )
+
+    private val typeMenu = booleanArrayOf(
+        false,
+        false,
+        false,
+        false,
+        true
     )
 
     val listData: ArrayList<MenuOwnerModel>
@@ -46,6 +54,7 @@ object MenuOwner {
                 menuItemOwner.subTitle = subTitle[position]
                 menuItemOwner.menuIcon = menuIcon[position]
                 menuItemOwner.screensMenu = screensMenu[position]
+                menuItemOwner.typeMenu = typeMenu[position]
                 list.add(menuItemOwner)
             }
             return list

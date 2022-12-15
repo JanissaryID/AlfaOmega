@@ -22,11 +22,13 @@ import com.example.alfaomega.`object`.store.MenuStore
 import com.example.alfaomega.`object`.store.MenuStoreModel
 import com.example.alfaomega.components.ItemStoreMenu
 import com.example.alfaomega.navigations.Screens
+import com.example.alfaomega.proto.ProtoViewModel
 
 @Composable
 fun WallStore(
     navController: NavController,
     paddingValues: PaddingValues,
+    protoViewModel: ProtoViewModel
 ) {
     var list: ArrayList<MenuStoreModel> = arrayListOf()
     list.addAll(MenuStore.listData)
@@ -106,7 +108,9 @@ fun WallStore(
                             subTitle = menu.subTitle,
                             iconMenu = menu.menuIcon,
                             screenMenuItem = menu.screensMenu,
-                            navController = navController
+                            typeMenu = menu.typeMenu,
+                            navController = navController,
+                            protoViewModel = protoViewModel
                         )
                     }
                 }

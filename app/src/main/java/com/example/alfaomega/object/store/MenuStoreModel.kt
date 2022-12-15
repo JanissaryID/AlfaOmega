@@ -5,4 +5,5 @@ data class MenuStoreModel(
     var subTitle: String = "",
     var menuIcon: Int = 0,
     var screensMenu: String = "",
+    var typeMenu: Boolean = false
 )
