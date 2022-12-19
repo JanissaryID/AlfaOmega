@@ -1,4 +1,4 @@
-package com.example.alfaomega.screens.developer
+package com.example.alfaomega.screens.owner
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -12,16 +12,16 @@ import com.example.alfaomega.proto.ProtoViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScreenHomeDeveloper(navController: NavController, protoViewModel: ProtoViewModel) {
+fun ScreenMenuEditOwner(navController: NavController, protoViewModel: ProtoViewModel) {
 
-    val tittleScreen = stringResource(R.string.DebugTitle)
-    val screenBack = Screens.StoreProfile.route
-    val floatingRoute = Screens.Menu.route
-    val icon = R.drawable.ic_twotone_storefront_24
-    val TopBar = 1
-    val wallScrreen = 29
-    val desctiptionTopBar = "icon Store"
-    val routeAction = Screens.Store.route
+    val tittleScreen = stringResource(R.string.EditMenuTitle)
+    val screenBack = Screens.MenuOwner.route
+    val floatingRoute = "Screens.Home.route"
+    val icon = R.drawable.ic_twotone_delete_24
+    val TopBar = 4
+    val wallScrreen = 9
+    val desctiptionTopBar = "icon Delete"
+    val routeAction = Screens.Home.route
 
     Scaffold1(
         tittleScreen = tittleScreen,

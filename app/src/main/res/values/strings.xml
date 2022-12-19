@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">AlfaOmega</string>
+    <string name="TransactionActiveTitle">Transaction Active</string>
+    <string name="StoreTitle">Store</string>
+    <string name="Menu">Menu</string>
+    <string name="DetailTransactionTitle">Detail Transaction</string>
+    <string name="CreateTransactionTitle">Create Transaction</string>
+    <string name="WashmachineTitle">Wash Machine</string>
+    <string name="DryMachineTitle">Dry Machine</string>
+    <string name="LoginTitle">Login</string>
+    <string name="ListStoreTitle">List Store</string>
+    <string name="ListTransactionTitle">List Transaction</string>
+    <string name="OwnerTitle">Owner</string>
+    <string name="DebugTitle">Debug</string>
+    <string name="EditMenuTitle">Edit Menu</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.alfaomega.view.menu
+package com.example.alfaomega.view.admin.menu
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize

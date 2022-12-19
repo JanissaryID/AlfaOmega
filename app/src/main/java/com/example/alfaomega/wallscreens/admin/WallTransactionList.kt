@@ -10,10 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
-import com.example.alfaomega.components.ComponentMenuClass
-import com.example.alfaomega.view.menu.MachineLoadData
-import com.example.alfaomega.view.store.StoreLoadData
-import com.example.alfaomega.view.transaction_list.TransactionListLoadData
+import com.example.alfaomega.view.admin.transaction_list.TransactionListLoadData
 
 @Composable
 fun WallTransactionList(

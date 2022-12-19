@@ -1,4 +1,4 @@
-package com.example.alfaomega.view.transaction_active
+package com.example.alfaomega.view.admin.transaction_active
 
 import android.util.Log
 import android.widget.Toast
@@ -18,7 +18,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.api.transaction.TransactionModel
-import com.example.alfaomega.view.menu.MenuLazyColumn
+import com.example.alfaomega.view.admin.menu.MenuLazyColumn
 
 @Composable
 fun TransactionActiveLoadData(

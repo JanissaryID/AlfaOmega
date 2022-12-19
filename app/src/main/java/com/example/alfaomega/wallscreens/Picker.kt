@@ -11,6 +11,7 @@ import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.wallscreens.developer.WallHomeDeveloper
 import com.example.alfaomega.wallscreens.owner.WallHomeOwner
+import com.example.alfaomega.wallscreens.owner.WallMenuEditOwner
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -30,7 +31,8 @@ fun WallPicker(
         6 -> WallTransactionList(paddingValues = paddingValues, navController = navController)
         7 -> WallLogin(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel, userViewModel = UserViewModel())
         8 -> WallHomeOwner(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel)
-        9 -> WallHomeDeveloper()
+        9 -> WallMenuEditOwner()
+        29 -> WallHomeDeveloper()
         else -> print("Opps tidak ada")
     }
 }

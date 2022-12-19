@@ -17,7 +17,7 @@ import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.components.ButtonView
 import com.example.alfaomega.components.DetailTransaction
-import com.example.alfaomega.view.machine.MachineLoadData
+import com.example.alfaomega.view.admin.machine.MachineLoadData
 
 @Composable
 fun WallMachine(

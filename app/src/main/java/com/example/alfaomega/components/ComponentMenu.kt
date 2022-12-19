@@ -42,7 +42,12 @@ fun ComponentMenu(
                 NEW_TRANSACATION_IS_WASHER = isWasher
                 NEW_TRANSACATION_IS_DRYER = isDryer
                 NEW_TRANSACATION_CLASS = menuClass
-                navController.navigate(route = Screens.DetailTransaction.route)
+                if(USER_TYPE == 0){
+                    navController.navigate(route = Screens.MenuEditOwner.route)
+                }
+                else{
+                    navController.navigate(route = Screens.DetailTransaction.route)
+                }
             }) {
             Column() {
                 Column(
@@ -72,10 +77,10 @@ fun ComponentMenu(
                             fontWeight = FontWeight.SemiBold,
                             fontSize = MaterialTheme.typography.labelSmall.fontSize,
                         )
-                        Text(
-                            text = "$menuTime Menit",
-                            fontSize = MaterialTheme.typography.labelSmall.fontSize,
-                        )
+//                        Text(
+//                            text = "$menuTime Menit",
+//                            fontSize = MaterialTheme.typography.labelSmall.fontSize,
+//                        )
                     }
                 }
             }

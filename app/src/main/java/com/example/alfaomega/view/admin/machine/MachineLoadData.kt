@@ -1,4 +1,4 @@
-package com.example.alfaomega.view.store
+package com.example.alfaomega.view.admin.machine
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -16,21 +16,19 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.R
-import com.example.alfaomega.api.store.StoreModel
-import com.example.alfaomega.proto.ProtoViewModel
+import com.example.alfaomega.api.machine.MachineModel
 
 @Composable
-fun StoreLoadData(
-    storeState: Int,
-    store: List<StoreModel>,
+fun MachineLoadData(
+    machineState: Int,
+    selectedIndex: Int,
+    machine: List<MachineModel>,
     navController: NavController,
-    protoViewModel: ProtoViewModel
+    onItemClick: (Int) -> Unit,
 ) {
     val context = LocalContext.current
 
-//    Log.i("Check State", "This Is $menuState")
-
-    when (storeState) {
+    when (machineState) {
         0 -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -40,16 +38,16 @@ fun StoreLoadData(
             }
         }
         1 -> {
-//            Log.d("debug", "Success")
-            if (!store.isNullOrEmpty()){
+            if (!machine.isNullOrEmpty()){
                 Box(
                     modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.TopCenter
+                    contentAlignment = Alignment.Center
                 ) {
-                    StoreLazyColumn(
-                        storeModel = store,
+                    MachineLazyGrid(
+                        machineModel = machine,
                         navController = navController,
-                        protoViewModel = protoViewModel
+                        selectedIndex = selectedIndex,
+                        onItemClick = onItemClick
                     )
                 }
             }
@@ -83,7 +81,7 @@ fun StoreLoadData(
 
                     Image(painter = painterResource(
                         id = R.drawable.ic_twotone_list_alt_24),
-                        contentDescription = "Store Empty",
+                        contentDescription = "Machine Empty",
                         modifier = Modifier
                             .wrapContentHeight()
                             .size(200.dp)
@@ -97,7 +95,7 @@ fun StoreLoadData(
                     )
 
                     Text(
-                        text = "Store Empty",
+                        text = "Machine Empty",
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleLarge.fontSize,
                         modifier = Modifier

@@ -1,4 +1,4 @@
-package com.example.alfaomega.view.menu
+package com.example.alfaomega.view.admin.menu
 
 import android.util.Log
 import android.widget.Toast
@@ -20,7 +20,7 @@ import com.example.alfaomega.R
 import com.example.alfaomega.api.menu.MenuModel
 
 @Composable
-fun MachineLoadData(
+fun MenuLoadData(
     menuState: Int,
     selectedIndex: Int,
     menu: List<MenuModel>,

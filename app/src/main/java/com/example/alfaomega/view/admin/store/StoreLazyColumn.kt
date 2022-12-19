@@ -1,4 +1,4 @@
-package com.example.alfaomega.view.store
+package com.example.alfaomega.view.admin.store
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize

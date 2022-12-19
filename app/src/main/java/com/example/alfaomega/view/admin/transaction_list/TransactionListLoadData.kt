@@ -1,4 +1,4 @@
-package com.example.alfaomega.view.machine
+package com.example.alfaomega.view.admin.transaction_list
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -16,19 +16,18 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.R
-import com.example.alfaomega.api.machine.MachineModel
+import com.example.alfaomega.api.transaction.TransactionModel
+import com.example.alfaomega.view.admin.transaction_active.TransactionActiveLazyColumn
 
 @Composable
-fun MachineLoadData(
-    machineState: Int,
-    selectedIndex: Int,
-    machine: List<MachineModel>,
+fun TransactionListLoadData(
+    transactionState: Int,
+    transactionList: List<TransactionModel>,
     navController: NavController,
-    onItemClick: (Int) -> Unit,
 ) {
     val context = LocalContext.current
 
-    when (machineState) {
+    when (transactionState) {
         0 -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -38,18 +37,15 @@ fun MachineLoadData(
             }
         }
         1 -> {
-            if (!machine.isNullOrEmpty()){
+//            Log.d("debug", "Success")
+            if (!transactionList.isNullOrEmpty()){
                 Box(
                     modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.TopCenter
                 ) {
-                    MachineLazyGrid(
-                        machineModel = machine,
-                        navController = navController,
-                        selectedIndex = selectedIndex,
-                        onItemClick = onItemClick
-                    )
+                    TransactionListLazyColumn(transactionListModel = transactionList, navController = navController)
                 }
+
             }
         }
         2 -> {
@@ -81,7 +77,7 @@ fun MachineLoadData(
 
                     Image(painter = painterResource(
                         id = R.drawable.ic_twotone_list_alt_24),
-                        contentDescription = "Machine Empty",
+                        contentDescription = "Transaction Empty",
                         modifier = Modifier
                             .wrapContentHeight()
                             .size(200.dp)
@@ -95,7 +91,7 @@ fun MachineLoadData(
                     )
 
                     Text(
-                        text = "Machine Empty",
+                        text = "Transaction Empty",
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleLarge.fontSize,
                         modifier = Modifier

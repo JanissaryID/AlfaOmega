@@ -31,8 +31,8 @@ object MenuOwner {
 
     private val screensMenu = arrayOf(
         Screens.Home.route,
-        Screens.Home.route,
-        Screens.TransactionList.route,
+        Screens.MenuOwner.route,
+        Screens.TransactionOwner.route,
         Screens.Login.route,
         Screens.Home.route,
     )

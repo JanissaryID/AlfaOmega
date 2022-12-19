@@ -1,4 +1,4 @@
-package com.example.alfaomega.view.machine
+package com.example.alfaomega.view.admin.machine
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement

@@ -3,11 +3,11 @@ package com.example.alfaomega.screens
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.alfaomega.TRANSACTION_SCREEN
-import com.example.alfaomega.components.TopBar
+import com.example.alfaomega.R
+import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
@@ -16,15 +16,26 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 @Composable
 fun ScreenStore(navController: NavController, protoViewModel: ProtoViewModel) {
 
-//    TRANSACTION_SCREEN = true
+    val tittleScreen = stringResource(R.string.StoreTitle)
+    val screenBack = Screens.Home.route
+    val floatingRoute = Screens.Menu.route
+    val icon = R.drawable.ic_twotone_storefront_24
+    val TopBar = 2
+    val wallScrreen = 3
+    val desctiptionTopBar = "icon Store"
+    val routeAction = Screens.Store.route
 
-    TopBar(
-        typeScreen = false,
-        tittleScreen = "Store",
-        wallScreen = 3,
+    Scaffold1(
+        tittleScreen = tittleScreen,
+        wallScreen = wallScrreen,
         navController = navController,
-        screenBack = Screens.Home.route,
-        protoViewModel = protoViewModel
+        screenBack = screenBack,
+        protoViewModel = protoViewModel,
+        floatingRoute = floatingRoute,
+        TopBar = TopBar,
+        icon = icon,
+        description = desctiptionTopBar,
+        route =routeAction
     )
 }
 

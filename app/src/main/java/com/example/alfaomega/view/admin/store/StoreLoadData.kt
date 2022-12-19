@@ -1,4 +1,4 @@
-package com.example.alfaomega.view.transaction_list
+package com.example.alfaomega.view.admin.store
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -16,18 +16,21 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.R
-import com.example.alfaomega.api.transaction.TransactionModel
-import com.example.alfaomega.view.transaction_active.TransactionActiveLazyColumn
+import com.example.alfaomega.api.store.StoreModel
+import com.example.alfaomega.proto.ProtoViewModel
 
 @Composable
-fun TransactionListLoadData(
-    transactionState: Int,
-    transactionList: List<TransactionModel>,
+fun StoreLoadData(
+    storeState: Int,
+    store: List<StoreModel>,
     navController: NavController,
+    protoViewModel: ProtoViewModel
 ) {
     val context = LocalContext.current
 
-    when (transactionState) {
+//    Log.i("Check State", "This Is $menuState")
+
+    when (storeState) {
         0 -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -38,14 +41,17 @@ fun TransactionListLoadData(
         }
         1 -> {
 //            Log.d("debug", "Success")
-            if (!transactionList.isNullOrEmpty()){
+            if (!store.isNullOrEmpty()){
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.TopCenter
                 ) {
-                    TransactionListLazyColumn(transactionListModel = transactionList, navController = navController)
+                    StoreLazyColumn(
+                        storeModel = store,
+                        navController = navController,
+                        protoViewModel = protoViewModel
+                    )
                 }
-
             }
         }
         2 -> {
@@ -77,7 +83,7 @@ fun TransactionListLoadData(
 
                     Image(painter = painterResource(
                         id = R.drawable.ic_twotone_list_alt_24),
-                        contentDescription = "Transaction Empty",
+                        contentDescription = "Store Empty",
                         modifier = Modifier
                             .wrapContentHeight()
                             .size(200.dp)
@@ -91,7 +97,7 @@ fun TransactionListLoadData(
                     )
 
                     Text(
-                        text = "Transaction Empty",
+                        text = "Store Empty",
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleLarge.fontSize,
                         modifier = Modifier

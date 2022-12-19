@@ -19,6 +19,9 @@ import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.screens.*
 import com.example.alfaomega.screens.developer.ScreenHomeDeveloper
 import com.example.alfaomega.screens.owner.ScreenHomeOwner
+import com.example.alfaomega.screens.owner.ScreenMenuEditOwner
+import com.example.alfaomega.screens.owner.ScreenMenuOwner
+import com.example.alfaomega.screens.owner.ScreenTransactionOwner
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -128,6 +131,36 @@ fun NavGraphSetup(
 //                TRANSACTION_SCREEN = true
 //            }
             ScreenLogin(navController = navController, protoViewModel = protoViewModel)
+        }
+
+        composable(
+            route = Screens.MenuOwner.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                menuViewModel.getMenu()
+                TRANSACTION_SCREEN = true
+            }
+            ScreenMenuOwner(navController = navController, protoViewModel = protoViewModel)
+        }
+
+        composable(
+            route = Screens.TransactionOwner.route,
+        ){
+//            LaunchedEffect(key1 = STORE_ID){
+//                menuViewModel.getMenu()
+//                TRANSACTION_SCREEN = true
+//            }
+            ScreenTransactionOwner(navController = navController, protoViewModel = protoViewModel)
+        }
+
+        composable(
+            route = Screens.MenuEditOwner.route,
+        ){
+//            LaunchedEffect(key1 = STORE_ID){
+//                menuViewModel.getMenu()
+//                TRANSACTION_SCREEN = true
+//            }
+            ScreenMenuEditOwner(navController = navController, protoViewModel = protoViewModel)
         }
     }
 }

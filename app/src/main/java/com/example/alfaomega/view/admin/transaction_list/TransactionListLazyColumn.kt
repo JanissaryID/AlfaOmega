@@ -1,4 +1,4 @@
-package com.example.alfaomega.view.transaction_list
+package com.example.alfaomega.view.admin.transaction_list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize

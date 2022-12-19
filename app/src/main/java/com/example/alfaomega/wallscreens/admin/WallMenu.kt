@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.components.ComponentMenuClass
-import com.example.alfaomega.view.menu.MachineLoadData
+import com.example.alfaomega.view.admin.menu.MenuLoadData
 
 @Composable
 fun WallMenu(
@@ -53,7 +53,7 @@ fun WallMenu(
                     )
                 }
             }
-            MachineLoadData(
+            MenuLoadData(
                 navController = navController,
                 menu = if (selected_index_class == 0) MENU_LIST_GIANT_RESPONSE else MENU_LIST_TITAN_RESPONSE,
                 menuState = MENU_STATE,

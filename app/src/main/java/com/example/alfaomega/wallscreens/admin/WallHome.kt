@@ -20,7 +20,7 @@ import com.example.alfaomega.TRANSACTION_ACTIVE_RESPONSE
 import com.example.alfaomega.TRANSACTION_ACTIVE_STATE
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.components.ComponentTransaction
-import com.example.alfaomega.view.transaction_active.TransactionActiveLoadData
+import com.example.alfaomega.view.admin.transaction_active.TransactionActiveLoadData
 
 @Composable
 fun WallHome(
