@@ -8,6 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.TRANSACATION_STATUS_MACHINE
+import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
@@ -38,7 +39,7 @@ fun ScreenMachine(navController: NavController, protoViewModel: ProtoViewModel) 
         TopBar = TopBar,
         icon = icon,
         description = desctiptionTopBar,
-        route =routeAction
+        route = routeAction
     )
 
 //    TopBar(

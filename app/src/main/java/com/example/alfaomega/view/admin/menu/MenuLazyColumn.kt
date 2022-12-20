@@ -31,7 +31,9 @@ fun MenuLazyColumn(
                 menuTime = menu.menuTime!!,
                 isWasher = menu.isWasher!!,
                 isDryer = menu.isDryer!!,
+                isService = menu.isService!!,
                 menuClass = menu.menuClass!!,
+                idmenu = menu.id!!,
                 navController = navController
             )
         }

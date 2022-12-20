@@ -22,7 +22,9 @@ fun ComponentMenu(
     menuTime: Int,
     isWasher: Boolean,
     isDryer: Boolean,
+    isService: Boolean,
     menuClass: Boolean,
+    idmenu: String,
     navController: NavController
 ) {
     Card(
@@ -34,18 +36,28 @@ fun ComponentMenu(
             color = Color.Transparent,
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier.clickable {
-                TRANSACTION_SCREEN = true
-                NEW_TRANSACATION_MENU = menuTitle
-                NEW_TRANSACATION_PRICE = menuPrice
-                NEW_TRANSACATION_TIME = menuTime
-                NEW_TRANSACATION_TYPE = menuType
-                NEW_TRANSACATION_IS_WASHER = isWasher
-                NEW_TRANSACATION_IS_DRYER = isDryer
-                NEW_TRANSACATION_CLASS = menuClass
+
                 if(USER_TYPE == 0){
+                    EDIT_MODE = true
+                    TITLE_MENU_EDIT = menuTitle
+                    PRICE_MENU_EDIT = menuPrice
+                    WASHER_MENU_EDIT = isWasher
+                    DRYER_MENU_EDIT = isDryer
+                    SERVICE_MENU_EDIT = isService
+                    CLASS_MENU_EDIT_STRING = if(menuClass) "Titan" else "Giant"
+                    ID_MENU_EDIT = idmenu
+                    MENU_SCREEN_TYPE = true
                     navController.navigate(route = Screens.MenuEditOwner.route)
                 }
                 else{
+                    TRANSACTION_SCREEN = true
+                    NEW_TRANSACATION_MENU = menuTitle
+                    NEW_TRANSACATION_PRICE = menuPrice
+                    NEW_TRANSACATION_TIME = menuTime
+                    NEW_TRANSACATION_TYPE = menuType
+                    NEW_TRANSACATION_IS_WASHER = isWasher
+                    NEW_TRANSACATION_IS_DRYER = isDryer
+                    NEW_TRANSACATION_CLASS = menuClass
                     navController.navigate(route = Screens.DetailTransaction.route)
                 }
             }) {

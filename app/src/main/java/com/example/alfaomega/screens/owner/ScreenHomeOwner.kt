@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.example.alfaomega.EDIT_MODE
+import com.example.alfaomega.MENU_SCREEN_TYPE
 import com.example.alfaomega.R
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
@@ -24,6 +26,8 @@ fun ScreenHomeOwner(navController: NavController, protoViewModel: ProtoViewModel
     val wallScrreen = 8
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.Store.route
+
+    MENU_SCREEN_TYPE = false
 
     Scaffold1(
         tittleScreen = tittleScreen,

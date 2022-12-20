@@ -19,6 +19,7 @@ fun WallPicker(
     wallScreen: Int,
     paddingValues: PaddingValues,
     navController: NavController,
+    menuViewModel: MenuViewModel,
     protoViewModel: ProtoViewModel
 ) {
     when(wallScreen){
@@ -31,7 +32,7 @@ fun WallPicker(
         6 -> WallTransactionList(paddingValues = paddingValues, navController = navController)
         7 -> WallLogin(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel, userViewModel = UserViewModel())
         8 -> WallHomeOwner(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel)
-        9 -> WallMenuEditOwner()
+        9 -> WallMenuEditOwner(paddingValues = paddingValues, navController = navController, menuViewModel = menuViewModel)
         29 -> WallHomeDeveloper()
         else -> print("Opps tidak ada")
     }

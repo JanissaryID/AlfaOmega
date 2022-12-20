@@ -25,7 +25,7 @@ fun TopBarPicker(
         1 -> TopBar1(tittleScreen = tittleScreen)
         2 -> TopBar2(tittleScreen = tittleScreen, navController = navController, screenBack = screenBack)
         3 -> TopBar3(tittleScreen = tittleScreen, navController = navController, route = route, icon = icon, description = description)
-        4 -> TopBar4(tittleScreen = tittleScreen, navController = navController, screenBack = screenBack, icon = icon, description = description)
+        4 -> TopBar4(tittleScreen = tittleScreen, navController = navController, screenBack = screenBack, icon = icon, description = description, actionNav = route)
         else -> print("Opps tidak ada")
     }
 }

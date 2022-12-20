@@ -1,5 +1,6 @@
 package com.example.alfaomega.components.topbar
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,7 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
+import com.example.alfaomega.*
 import com.example.alfaomega.R
+import com.example.alfaomega.api.menu.MenuViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -18,7 +21,9 @@ fun TopBar4(
     navController: NavController,
     screenBack: String,
     icon: Int,
-    description: String
+    description: String,
+    actionNav: String,
+    menuViewModel: MenuViewModel = MenuViewModel()
 ) {
     SmallTopAppBar(
         title = {
@@ -50,7 +55,21 @@ fun TopBar4(
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = description,
-                    modifier = Modifier.clickable {  }
+                    modifier = Modifier.clickable {
+                        if(USER_TYPE == 0){
+                            if(MENU_SCREEN_TYPE && EDIT_MODE){
+                                menuViewModel.deleteMenu(navController = navController, idMenu = ID_MENU_EDIT)
+                                navController.navigate(route = actionNav) {
+                                    popUpTo(actionNav) {
+                                        inclusive = true
+                                    }
+                                }
+                            }
+                        }
+                        else{
+
+                        }
+                    }
                 )
             }
         }

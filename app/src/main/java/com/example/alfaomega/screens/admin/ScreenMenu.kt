@@ -35,7 +35,7 @@ fun ScreenMenu(navController: NavController, protoViewModel: ProtoViewModel) {
         TopBar = TopBar,
         icon = icon,
         description = desctiptionTopBar,
-        route =routeAction
+        route = routeAction
     )
 
 //    TopBar(

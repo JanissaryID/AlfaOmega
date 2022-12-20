@@ -8,6 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.TRANSACTION_SCREEN
+import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
@@ -17,7 +18,7 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 @Composable
 fun ScreenDetailTransaction(
     navController: NavController,
-    protoViewModel: ProtoViewModel
+    protoViewModel: ProtoViewModel,
 ) {
 
     val tittleScreen =if(!TRANSACTION_SCREEN)
@@ -41,7 +42,7 @@ fun ScreenDetailTransaction(
         TopBar = TopBar,
         icon = icon,
         description = desctiptionTopBar,
-        route =routeAction
+        route = routeAction
     )
 }
 

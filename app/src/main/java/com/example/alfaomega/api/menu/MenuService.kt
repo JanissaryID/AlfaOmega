@@ -1,13 +1,24 @@
 package com.example.alfaomega.api.menu
 
+import com.example.alfaomega.api.machine.MachineModel
+import com.example.alfaomega.api.transaction.TransactionModel
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface MenuService {
     @GET("NewMenu")
     fun fetchMenu(
         @Query(value="menu_store", encoded=true) store: String?
-//        @Query(value="menu_class", encoded=true) menuClass: Boolean?
     ): Call<ArrayList<MenuModel>>
+
+    @PATCH("NewMenu/{id}")
+    fun updateMenu(
+        @Path("id") id: String?, @Body updateData : MenuModel
+    ): Call<MenuModel>
+
+    @POST("NewMenu")
+    fun insertMenu(@Body statusData: MenuModel) : Call<MenuModel>
+
+    @DELETE("NewMenu/{id}")
+    fun deleteMenu( @Path("id") id: String? ): Call<MenuModel>
 }

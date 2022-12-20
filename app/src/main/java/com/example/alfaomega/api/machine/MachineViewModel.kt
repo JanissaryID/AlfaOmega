@@ -65,11 +65,6 @@ class MachineViewModel: ViewModel() {
                 Callback<MachineModel> {
                 override fun onResponse(call: Call<MachineModel>, response: Response<MachineModel>) {
                     Log.d("debug", "Code Update Machine ${response}")
-//                    debugViewModel.insertDebug(
-//                        responseCode = response.code()!!,
-//                        responseBody = "${response.body()}",
-//                        responseLog =  "${response}"
-//                    )
                     if(response.code() == 200){
                         val responseBodyData = response.body()
                         Log.d("debug", "Body Update Machine ${response.body()}")

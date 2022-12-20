@@ -13,4 +13,14 @@
     <string name="OwnerTitle">Owner</string>
     <string name="DebugTitle">Debug</string>
     <string name="EditMenuTitle">Edit Menu</string>
+    <string name="SaveChanges">Save Changes</string>
+    <string name="CreateMenu">Create Menu</string>
+    <string name="TitleMenuEdit">Title Menu</string>
+    <string name="PriceTitle">Price</string>
+    <string name="TypeMenuTitle">Type Menu</string>
+    <string name="ClassMenu">Class Menu</string>
+    <string name="WasherTitle">Washer</string>
+    <string name="DryerTitle">Dryer</string>
+    <string name="ServiceTitle">Service</string>
+    <string name="CreateMenuTitle">Create Menu</string>
 </resources>

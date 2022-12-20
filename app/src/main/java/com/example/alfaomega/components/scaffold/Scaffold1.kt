@@ -6,6 +6,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
+import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.components.topbar.TopBarPicker
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.wallscreens.WallPicker
@@ -19,6 +20,7 @@ fun Scaffold1(
     navController: NavController,
     screenBack: String,
     protoViewModel: ProtoViewModel,
+    menuViewModel: MenuViewModel = MenuViewModel(),
     floatingRoute: String,
     TopBar: Int,
     icon: Int,
@@ -42,7 +44,8 @@ fun Scaffold1(
                 wallScreen = wallScreen,
                 paddingValues = it,
                 navController = navController,
-                protoViewModel = protoViewModel
+                protoViewModel = protoViewModel,
+                menuViewModel = menuViewModel
             )
         }
     )
