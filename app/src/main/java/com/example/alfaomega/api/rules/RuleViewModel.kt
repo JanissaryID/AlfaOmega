@@ -6,14 +6,10 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.alfaomega.*
-import com.example.alfaomega.api.menu.MenuApp
-import com.example.alfaomega.api.menu.MenuModel
 import com.example.alfaomega.navigations.Screens
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class RuleViewModel : ViewModel() {
 
@@ -26,7 +22,7 @@ class RuleViewModel : ViewModel() {
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_RULE = response.body()!!
-                            Log.i("info_response", "Body : ${response.body()}")
+//                            Log.i("info_response", "Body : ${response.body()}")
                             RULE_STATE = 1
                         }
                         if (LIST_RULE.isNullOrEmpty()){
