@@ -5,8 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.menu.MenuModel
+import com.example.alfaomega.api.rules.RuleModel
 import com.example.alfaomega.api.store.StoreModel
 import com.example.alfaomega.api.transaction.TransactionModel
+import com.example.alfaomega.api.user.UserModel
 
 //Variable New Transaction
 var NEW_TRANSACATION_CUSTOMER: String by mutableStateOf("")
@@ -87,6 +89,7 @@ var USER_ERROR_MESSAGE: String by mutableStateOf("")
 var BUTTON_LOGIN: Boolean by mutableStateOf(true)
 var BUTTON_LOGIN_CLICKED: Boolean by mutableStateOf(false)
 var FAILED_LOGIN: Boolean by mutableStateOf(false)
+var LIST_USER: ArrayList<UserModel> by mutableStateOf(arrayListOf())
 
 //Variable ownerMenu
 var EDIT_MODE: Boolean by mutableStateOf(true)
@@ -102,4 +105,12 @@ var DRYER_MENU_EDIT: Boolean by mutableStateOf(false)
 var SERVICE_MENU_EDIT: Boolean by mutableStateOf(false)
 var BUTTON_MENU_EDIT: Boolean by mutableStateOf(false)
 var MENU_SCREEN_TYPE: Boolean by mutableStateOf(false)
-//var FAILED_LOGIN: Boolean by mutableStateOf(false)
+
+//Variable Rule
+var LIST_RULE: ArrayList<RuleModel> by mutableStateOf(arrayListOf())
+var RULE_STATE: Int by mutableStateOf(0)
+var RULE_ERROR_MESSAGE: String by mutableStateOf("")
+var RULE_TEXT_EDIT: String by mutableStateOf("")
+var RULES_SCREEN_TYPE: Boolean by mutableStateOf(false)
+var ID_RULE_EDIT: String by mutableStateOf("")
+var BUTTON_RULE_EDIT: Boolean by mutableStateOf(false)

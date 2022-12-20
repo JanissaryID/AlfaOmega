@@ -44,7 +44,8 @@ fun Scaffold2(
             screenBack = screenBack,
             icon = icon,
             description = description,
-            route = route
+            route = route,
+            protoViewModel = protoViewModel
         )
     },
         content = {

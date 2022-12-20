@@ -1,12 +1,17 @@
 package com.example.alfaomega.api.user
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.machine.MachineModel
+import com.example.alfaomega.api.rules.RuleApp
+import com.example.alfaomega.api.rules.RuleModel
 import com.example.alfaomega.api.store.StoreApp
 import com.example.alfaomega.api.store.StoreModel
 import com.example.alfaomega.navigations.Screens
@@ -94,4 +99,155 @@ class UserViewModel : ViewModel() {
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun getUser(){
+        try {
+            UserApp.CreateInstance().fetchUser().enqueue(object :
+                Callback<ArrayList<UserModel>> {
+                override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
+                    USER_STATE = 0
+                    if(response.code() == 200){
+                        response.body()?.let {
+                            LIST_USER = response.body()!!.filter { user -> user.typeUser == 1} as ArrayList<UserModel>
+                            USER_STATE = 1
+                        }
+                        if (LIST_RULE.isNullOrEmpty()){
+                            USER_STATE = 3
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ArrayList<UserModel>>, t: Throwable) {
+                    if (t.message == t.message){
+                        USER_STATE = 2
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            USER_ERROR_MESSAGE = e.message.toString()
+            Log.d("debug menu", "ERROR $USER_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun updateUser(
+        idUser: String,
+        nameUser: String,
+        passwordUser: String,
+        navController: NavController
+    ){
+        val bodyDataUpdate = UserModel(
+            username = nameUser,
+            passwordUser = passwordUser
+        )
+
+        try {
+            UserApp.CreateInstance().updateUser(id = idUser, bodyDataUpdate).enqueue(object :
+                Callback<UserModel> {
+                override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+                    if(response.code() == 200){
+                        val responseBodyData = response.body()
+                        if (!responseBodyData!!.id.isNullOrEmpty()){
+
+//                            BUTTON_MENU_EDIT = true
+//
+//                            navController.navigate(route = Screens.MenuOwner.route){
+//                                popUpTo(Screens.MenuOwner.route) {
+//                                    inclusive = true
+//                                }
+//                            }
+                        }
+                        else{
+                            updateUser(
+                                idUser = idUser,
+                                nameUser = nameUser,
+                                passwordUser = passwordUser,
+                                navController = navController
+                            )
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<UserModel>, t: Throwable) {
+                    Log.d("error", t.message.toString())
+                    if (t.message == t.message){
+//                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            USER_ERROR_MESSAGE = e.message.toString()
+            Log.d("debug", "ERROR $USER_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun insertUser(
+        username: String,
+        passwordUser: String,
+        navController: NavController
+    ){
+        val bodyUpdate = UserModel(
+            username = username,
+            passwordUser = passwordUser
+        )
+
+        UserApp.CreateInstance().insertUser(bodyUpdate).enqueue(object :
+            Callback<UserModel> {
+            override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+                if(response.code() == 201){
+//                    navController.navigate(route = Screens.MenuOwner.route){
+//                        popUpTo(Screens.MenuOwner.route) {
+//                            inclusive = true
+//                        }
+//                    }
+                }
+            }
+
+            override fun onFailure(call: Call<UserModel>, t: Throwable) {
+//                Log.d("debug_transaction", t.message.toString())
+                if (t.message == t.message){
+                    USER_ERROR_MESSAGE = t.message.toString()
+//                    BUTTON_MENU_EDIT = true
+                }
+            }
+        })
+    }
+
+    fun deleteUser(
+        iduser: String,
+        navController: NavController
+    ){
+        try {
+            UserApp.CreateInstance().deleteUser(id = iduser).enqueue(object :
+                Callback<UserModel> {
+                override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+//                    Log.d("debug", "Code Delete Menu ${response.code()}")
+                    if(response.code() == 200){
+//                        navController.navigate(route = Screens.MenuOwner.route){
+//                            popUpTo(Screens.MenuOwner.route) {
+//                                inclusive = true
+//                            }
+//                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<UserModel>, t: Throwable) {
+                    Log.d("error", t.message.toString())
+                    if (t.message == t.message){
+//                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            USER_ERROR_MESSAGE = e.message.toString()
+            Log.d("debug", "ERROR $USER_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }

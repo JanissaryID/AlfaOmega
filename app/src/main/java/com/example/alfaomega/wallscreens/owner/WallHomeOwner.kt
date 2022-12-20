@@ -77,7 +77,7 @@ fun WallHomeOwner(
                 fontSize = MaterialTheme.typography.headlineLarge.fontSize,
                 color = MaterialTheme.colorScheme.primary
             )
-            Spacer(modifier = Modifier.height(0.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = STORE_CITY,
                 fontWeight = FontWeight.Normal,
@@ -91,7 +91,7 @@ fun WallHomeOwner(
                 fontSize = MaterialTheme.typography.labelLarge.fontSize,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(32.dp))
             Card(
                 elevation = CardDefaults.cardElevation(6.dp),
                 modifier = Modifier

@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.api.rules.RuleViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -23,7 +24,8 @@ fun TopBar4(
     icon: Int,
     description: String,
     actionNav: String,
-    menuViewModel: MenuViewModel = MenuViewModel()
+    menuViewModel: MenuViewModel = MenuViewModel(),
+    ruleViewModel: RuleViewModel = RuleViewModel()
 ) {
     SmallTopAppBar(
         title = {
@@ -59,6 +61,14 @@ fun TopBar4(
                         if(USER_TYPE == 0){
                             if(MENU_SCREEN_TYPE && EDIT_MODE){
                                 menuViewModel.deleteMenu(navController = navController, idMenu = ID_MENU_EDIT)
+                                navController.navigate(route = actionNav) {
+                                    popUpTo(actionNav) {
+                                        inclusive = true
+                                    }
+                                }
+                            }
+                            if(RULES_SCREEN_TYPE && EDIT_MODE){
+                                ruleViewModel.deleteRule(navController = navController, idRule = ID_RULE_EDIT)
                                 navController.navigate(route = actionNav) {
                                     popUpTo(actionNav) {
                                         inclusive = true

@@ -13,15 +13,14 @@ import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
+import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.screens.*
 import com.example.alfaomega.screens.developer.ScreenHomeDeveloper
-import com.example.alfaomega.screens.owner.ScreenHomeOwner
-import com.example.alfaomega.screens.owner.ScreenMenuEditOwner
-import com.example.alfaomega.screens.owner.ScreenMenuOwner
-import com.example.alfaomega.screens.owner.ScreenTransactionOwner
+import com.example.alfaomega.screens.owner.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -31,7 +30,9 @@ fun NavGraphSetup(
     transactionViewModel: TransactionViewModel,
     machineViewModel: MachineViewModel,
     storeViewModel: StoreViewModel,
-    protoViewModel: ProtoViewModel
+    protoViewModel: ProtoViewModel,
+    ruleViewModel: RuleViewModel,
+    userViewModel: UserViewModel
     ) {
 
     val context = LocalContext.current
@@ -161,6 +162,36 @@ fun NavGraphSetup(
 //                TRANSACTION_SCREEN = true
 //            }
             ScreenMenuEditOwner(navController = navController, protoViewModel = protoViewModel)
+        }
+
+        composable(
+            route = Screens.RulesOwner.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                ruleViewModel.getRules()
+//                TRANSACTION_SCREEN = true
+            }
+            ScreenRulesOwner(navController = navController, protoViewModel = protoViewModel)
+        }
+
+        composable(
+            route = Screens.UserOwner.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                userViewModel.getUser()
+//                TRANSACTION_SCREEN = true
+            }
+            ScreenUserOwner(navController = navController, protoViewModel = protoViewModel)
+        }
+
+        composable(
+            route = Screens.RulesEditOwner.route,
+        ){
+//            LaunchedEffect(key1 = STORE_ID){
+//                userViewModel.getUser()
+////                TRANSACTION_SCREEN = true
+//            }
+            ScreenRulesEditOwner(navController = navController, protoViewModel = protoViewModel)
         }
     }
 }

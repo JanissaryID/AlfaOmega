@@ -62,6 +62,7 @@ fun ItemStoreMenu(
                 Icon(
                     painter = painterResource(id = iconMenu),
                     contentDescription = "Icon TImer",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier
                         .size(52.dp)
                         .padding(13.dp)

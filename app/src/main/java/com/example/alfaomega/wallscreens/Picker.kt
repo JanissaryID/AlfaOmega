@@ -6,12 +6,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.wallscreens.developer.WallHomeDeveloper
-import com.example.alfaomega.wallscreens.owner.WallHomeOwner
-import com.example.alfaomega.wallscreens.owner.WallMenuEditOwner
+import com.example.alfaomega.wallscreens.owner.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -33,6 +33,9 @@ fun WallPicker(
         7 -> WallLogin(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel, userViewModel = UserViewModel())
         8 -> WallHomeOwner(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel)
         9 -> WallMenuEditOwner(paddingValues = paddingValues, navController = navController, menuViewModel = menuViewModel)
+        10 -> WallRulesOwner(paddingValues = paddingValues, navController = navController)
+        11 -> WallUserOwner(paddingValues = paddingValues, navController = navController)
+        12 -> WallRulesEditOwner(paddingValues = paddingValues, navController = navController, ruleViewModel = RuleViewModel())
         29 -> WallHomeDeveloper()
         else -> print("Opps tidak ada")
     }

@@ -10,7 +10,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.example.alfaomega.R
+import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.navigations.Screens
+import com.example.alfaomega.proto.ProtoViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -19,7 +21,8 @@ fun TopBar3(
     navController: NavController,
     route: String,
     icon: Int,
-    description: String
+    description: String,
+    protoViewModel: ProtoViewModel
 ) {
     SmallTopAppBar(
         title = {
@@ -35,7 +38,14 @@ fun TopBar3(
                     painter = painterResource(id = icon),
                     contentDescription = description,
                     modifier = Modifier.clickable {
-                        navController.navigate(route = route)
+                        if(USER_TYPE != 1){
+                            protoViewModel.updateNameUser(Nameuser = "")
+                            protoViewModel.updateTypeUser(TypeUser = 1)
+                            navController.navigate(route = route)
+                        }
+                        else{
+                            navController.navigate(route = route)
+                        }
                     }
                 )
             }

@@ -10,15 +10,15 @@ object MenuOwner {
         "Menu",
         "Transaction",
         "Employee",
-        "Logout"
+//        "Logout"
     )
 
     private val subTitle = arrayOf(
-        "Check Printer",
+        "Rules of Laundry to Customers",
         "Add, Edit, and Delete list Menu",
         "Show All Transaction Today",
         "Add, Edit, and Delete Employee",
-        "Logout from Owner Mode"
+//        "Logout from Owner Mode"
     )
 
     private val menuIcon = intArrayOf(
@@ -26,15 +26,15 @@ object MenuOwner {
         R.drawable.ic_twotone_menu_book_24,
         R.drawable.ic_twotone_list_alt_24,
         R.drawable.ic_twotone_person_24,
-        R.drawable.ic_twotone_logout_24
+//        R.drawable.ic_twotone_logout_24
     )
 
     private val screensMenu = arrayOf(
-        Screens.Home.route,
+        Screens.RulesOwner.route,
         Screens.MenuOwner.route,
         Screens.TransactionOwner.route,
-        Screens.Login.route,
-        Screens.Home.route,
+        Screens.UserOwner.route,
+//        Screens.Home.route,
     )
 
     private val typeMenu = booleanArrayOf(
@@ -42,7 +42,7 @@ object MenuOwner {
         false,
         false,
         false,
-        true
+//        true
     )
 
     val listData: ArrayList<MenuOwnerModel>
@@ -54,7 +54,7 @@ object MenuOwner {
                 menuItemOwner.subTitle = subTitle[position]
                 menuItemOwner.menuIcon = menuIcon[position]
                 menuItemOwner.screensMenu = screensMenu[position]
-                menuItemOwner.typeMenu = typeMenu[position]
+//                menuItemOwner.typeMenu = typeMenu[position]
                 list.add(menuItemOwner)
             }
             return list

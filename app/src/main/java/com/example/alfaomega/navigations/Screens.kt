@@ -10,10 +10,12 @@ sealed class Screens(val route: String){
     object TransactionList: Screens(route = "list_transaction_screen")
     object Login: Screens(route = "login_screen")
 
-    object HomeOwner: Screens(route = "owner_screen")
     object MenuOwner: Screens(route = "menu_owner_screen")
     object MenuEditOwner: Screens(route = "menu_edit_owner_screen")
     object TransactionOwner: Screens(route = "transcation_owner_screen")
+    object RulesOwner: Screens(route = "rules_screen")
+    object RulesEditOwner: Screens(route = "rules_edit_owner_screen")
+    object UserOwner: Screens(route = "user_screen")
 
     object HomeDeveloper: Screens(route = "developer_screen")
 }

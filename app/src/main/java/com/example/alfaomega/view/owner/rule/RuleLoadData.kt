@@ -1,4 +1,4 @@
-package com.example.alfaomega.view.admin.transaction_list
+package com.example.alfaomega.view.owner.rule
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -18,18 +18,18 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.R
-import com.example.alfaomega.api.transaction.TransactionModel
-import com.example.alfaomega.view.admin.transaction_active.TransactionActiveLazyColumn
+import com.example.alfaomega.api.rules.RuleModel
 
 @Composable
-fun TransactionListLoadData(
-    transactionState: Int,
-    transactionList: List<TransactionModel>,
+fun RuleLoadData(
+    ruleState: Int,
+    rule: List<RuleModel>,
     navController: NavController,
+//    onItemClick: (Int) -> Unit
 ) {
     val context = LocalContext.current
 
-    when (transactionState) {
+    when (ruleState) {
         0 -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -40,12 +40,15 @@ fun TransactionListLoadData(
         }
         1 -> {
 //            Log.d("debug", "Success")
-            if (!transactionList.isNullOrEmpty()){
+            if (!rule.isNullOrEmpty()){
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.TopCenter
                 ) {
-                    TransactionListLazyColumn(transactionListModel = transactionList, navController = navController)
+                    RuleLazyColumn(
+                        navController = navController,
+                        ruleModel = rule,
+                    )
                 }
 
             }
@@ -79,7 +82,7 @@ fun TransactionListLoadData(
 
                     Icon(painter = painterResource(
                         id = R.drawable.ic_twotone_list_alt_24),
-                        contentDescription = "Transaction Empty",
+                        contentDescription = stringResource(R.string.RuleEmptyTitle),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier
                             .wrapContentHeight()
@@ -94,7 +97,7 @@ fun TransactionListLoadData(
                     )
 
                     Text(
-                        text = "Transaction Empty",
+                        text = stringResource(R.string.RuleEmptyTitle),
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleLarge.fontSize,
                         color = MaterialTheme.colorScheme.primary,

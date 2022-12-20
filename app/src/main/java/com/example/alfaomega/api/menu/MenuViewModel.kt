@@ -182,12 +182,6 @@ class MenuViewModel: ViewModel() {
         menuClass: Boolean,
         navController: NavController
     ){
-        val current = LocalDateTime.now()
-
-        val formatDay = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val date = current.format(formatDay)
-
-
         val bodyUpdate = MenuModel(
             isWasher = isWasher,
             isDryer = isDryer,

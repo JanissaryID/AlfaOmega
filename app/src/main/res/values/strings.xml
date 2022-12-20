@@ -23,4 +23,10 @@
     <string name="DryerTitle">Dryer</string>
     <string name="ServiceTitle">Service</string>
     <string name="CreateMenuTitle">Create Menu</string>
+    <string name="RulesTitle">Rules</string>
+    <string name="RuleEmptyTitle">Rule Empty</string>
+    <string name="TryAgainTitle">Try Again</string>
+    <string name="EditRuleTitle">Edit Rule</string>
+    <string name="CreateRuleTitle">Create Rule</string>
+    <string name="RuleTitle">Rule</string>
 </resources>

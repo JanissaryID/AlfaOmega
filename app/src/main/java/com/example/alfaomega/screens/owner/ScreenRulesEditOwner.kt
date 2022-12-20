@@ -4,32 +4,25 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.alfaomega.EDIT_MODE
-import com.example.alfaomega.MENU_SCREEN_TYPE
 import com.example.alfaomega.R
-import com.example.alfaomega.RULES_SCREEN_TYPE
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
-import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScreenHomeOwner(navController: NavController, protoViewModel: ProtoViewModel) {
+fun ScreenRulesEditOwner(navController: NavController, protoViewModel: ProtoViewModel) {
 
-    val tittleScreen = stringResource(R.string.OwnerTitle)
-    val screenBack = Screens.StoreProfile.route
-    val floatingRoute = Screens.Menu.route
-    val icon = R.drawable.ic_twotone_logout_24
-    val TopBar = 3
-    val wallScrreen = 8
-    val desctiptionTopBar = "icon Store"
-    val routeAction = Screens.Home.route
-
-    MENU_SCREEN_TYPE = false
-    RULES_SCREEN_TYPE = false
+    val tittleScreen = if(EDIT_MODE) stringResource(R.string.EditRuleTitle) else stringResource(R.string.CreateRuleTitle)
+    val screenBack = Screens.RulesOwner.route
+    val floatingRoute = Screens.Home.route
+    val icon = R.drawable.ic_twotone_delete_24
+    val TopBar = if(EDIT_MODE) 4 else 2
+    val wallScrreen = 12
+    val desctiptionTopBar = "icon Delete"
+    val routeAction = Screens.RulesOwner.route
 
     Scaffold1(
         tittleScreen = tittleScreen,
@@ -41,14 +34,6 @@ fun ScreenHomeOwner(navController: NavController, protoViewModel: ProtoViewModel
         TopBar = TopBar,
         icon = icon,
         description = desctiptionTopBar,
-        route =routeAction
+        route = routeAction
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ViewHome() {
-    AlfaOmegaTheme {
-//        ScreenHome(navController = rememberNavController())
-    }
 }

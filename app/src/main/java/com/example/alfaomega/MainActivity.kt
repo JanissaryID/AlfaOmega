@@ -19,8 +19,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
+import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.navigations.NavGraphSetup
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.screens.ScreenMenu
@@ -33,6 +35,8 @@ class MainActivity : ComponentActivity() {
     val transactionViewModel by viewModels<TransactionViewModel>()
     val machineViewModel by viewModels<MachineViewModel>()
     val storeViewModel by viewModels<StoreViewModel>()
+    val ruleViewModel by viewModels<RuleViewModel>()
+    val userViewModel by viewModels<UserViewModel>()
 
     private lateinit var protoViewModel: ProtoViewModel
 
@@ -61,7 +65,9 @@ class MainActivity : ComponentActivity() {
                         transactionViewModel = transactionViewModel,
                         machineViewModel = machineViewModel,
                         storeViewModel = storeViewModel,
-                        protoViewModel = protoViewModel
+                        protoViewModel = protoViewModel,
+                        ruleViewModel = ruleViewModel,
+                        userViewModel = userViewModel
                     )
 
 //                    Log.i("info_response", "TIME : ${TIME_WASHER_GIANT}  ${TIME_WASHER_TITAN}  ${TIME_DRYER_GIANT}  ${TIME_DRYER_TITAN}  -  ${STORE_ID}")
