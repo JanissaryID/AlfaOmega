@@ -7,7 +7,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.alfaomega.R
+import com.example.alfaomega.STORE_ID
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.components.scaffold.Scaffold2
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
@@ -17,27 +19,45 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 @Composable
 fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel) {
 
-    val tittleScreen = stringResource(R.string.TransactionActiveTitle)
+    val tittleScreen = if(STORE_ID.isNullOrEmpty()) stringResource(R.string.HelloTItle) else stringResource(R.string.TransactionActiveTitle)
     val screenBack = Screens.Home.route
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_storefront_24
-    val TopBar = 3
-    val wallScrreen = 0
+    val TopBar = if(STORE_ID.isNullOrEmpty()) 1 else 3
+    val wallScrreen = if(STORE_ID.isNullOrEmpty()) 20 else 0
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.StoreProfile.route
 
-    Scaffold2(
-        tittleScreen = tittleScreen,
-        wallScreen = wallScrreen,
-        navController = navController,
-        screenBack = screenBack,
-        protoViewModel = protoViewModel,
-        floatingRoute = floatingRoute,
-        TopBar = TopBar,
-        icon = icon,
-        description = desctiptionTopBar,
-        route =routeAction
-    )
+    if(STORE_ID.isNullOrEmpty())
+    {
+        Scaffold1(
+            tittleScreen = tittleScreen,
+            wallScreen = wallScrreen,
+            navController = navController,
+            screenBack = screenBack,
+            protoViewModel = protoViewModel,
+            floatingRoute = floatingRoute,
+            TopBar = TopBar,
+            icon = icon,
+            description = desctiptionTopBar,
+            route =routeAction
+        )
+    }
+    else
+    {
+        Scaffold2(
+            tittleScreen = tittleScreen,
+            wallScreen = wallScrreen,
+            navController = navController,
+            screenBack = screenBack,
+            protoViewModel = protoViewModel,
+            floatingRoute = floatingRoute,
+            TopBar = TopBar,
+            icon = icon,
+            description = desctiptionTopBar,
+            route =routeAction
+        )
+    }
 }
 
 @Preview(showBackground = true)
