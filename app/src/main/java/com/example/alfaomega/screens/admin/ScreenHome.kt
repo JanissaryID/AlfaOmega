@@ -27,7 +27,7 @@ fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel) {
     val wallScrreen = if(STORE_ID.isNullOrEmpty()) 20 else 0
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.StoreProfile.route
-
+//
     if(STORE_ID.isNullOrEmpty())
     {
         Scaffold1(
