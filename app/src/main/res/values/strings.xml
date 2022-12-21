@@ -29,4 +29,9 @@
     <string name="EditRuleTitle">Edit Rule</string>
     <string name="CreateRuleTitle">Create Rule</string>
     <string name="RuleTitle">Rule</string>
+    <string name="UserEmptyTitle">User Empty</string>
+    <string name="EditUserTitle">Edit User</string>
+    <string name="CreateUserTitle">Create User</string>
+    <string name="UsernameTitle">Username</string>
+    <string name="PasswordTitle">Password</string>
 </resources>

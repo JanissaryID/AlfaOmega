@@ -7,6 +7,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.alfaomega.LIST_USER
+import com.example.alfaomega.USER_STATE
+import com.example.alfaomega.view.owner.user.UserLoadData
 
 @Composable
 fun WallUserOwner(paddingValues: PaddingValues, navController: NavController) {
@@ -17,12 +20,7 @@ fun WallUserOwner(paddingValues: PaddingValues, navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-//            StoreLoadData(
-//                storeState = STORE_STATE,
-//                store = STORE_LIST_RESPONSE,
-//                navController = navController,
-//                protoViewModel = protoViewModel
-//            )
+            UserLoadData(userState = USER_STATE, user = LIST_USER, navController = navController)
         }
     }
 }

@@ -5,25 +5,26 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import com.example.alfaomega.EDIT_MODE
 import com.example.alfaomega.R
-import com.example.alfaomega.components.scaffold.Scaffold2
+import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScreenUserOwner(navController: NavController, protoViewModel: ProtoViewModel) {
+fun ScreenUserEditOwner(navController: NavController, protoViewModel: ProtoViewModel) {
 
-    val tittleScreen = "Admin"
-    val screenBack = Screens.Home.route
-    val floatingRoute = Screens.UserEditOwner.route
-    val icon = R.drawable.ic_twotone_storefront_24
-    val TopBar = 2
-    val wallScrreen = 11
-    val desctiptionTopBar = "icon Store"
-    val routeAction = Screens.Store.route
+    val tittleScreen = if(EDIT_MODE) stringResource(R.string.EditUserTitle) else stringResource(R.string.CreateUserTitle)
+    val screenBack = Screens.UserOwner.route
+    val floatingRoute = Screens.Home.route
+    val icon = R.drawable.ic_twotone_delete_24
+    val TopBar = if(EDIT_MODE) 4 else 2
+    val wallScrreen = 13
+    val desctiptionTopBar = "icon Delete"
+    val routeAction = Screens.UserOwner.route
 
-    Scaffold2(
+    Scaffold1(
         tittleScreen = tittleScreen,
         wallScreen = wallScrreen,
         navController = navController,
@@ -33,6 +34,6 @@ fun ScreenUserOwner(navController: NavController, protoViewModel: ProtoViewModel
         TopBar = TopBar,
         icon = icon,
         description = desctiptionTopBar,
-        route =routeAction
+        route = routeAction
     )
 }

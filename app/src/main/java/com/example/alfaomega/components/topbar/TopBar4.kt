@@ -14,6 +14,7 @@ import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
+import com.example.alfaomega.api.user.UserViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -25,7 +26,8 @@ fun TopBar4(
     description: String,
     actionNav: String,
     menuViewModel: MenuViewModel = MenuViewModel(),
-    ruleViewModel: RuleViewModel = RuleViewModel()
+    ruleViewModel: RuleViewModel = RuleViewModel(),
+    userViewModel: UserViewModel = UserViewModel()
 ) {
     SmallTopAppBar(
         title = {
@@ -69,6 +71,14 @@ fun TopBar4(
                             }
                             if(RULES_SCREEN_TYPE && EDIT_MODE){
                                 ruleViewModel.deleteRule(navController = navController, idRule = ID_RULE_EDIT)
+                                navController.navigate(route = actionNav) {
+                                    popUpTo(actionNav) {
+                                        inclusive = true
+                                    }
+                                }
+                            }
+                            if(USER_SCREEN_TYPE && EDIT_MODE){
+                                userViewModel.deleteUser(navController = navController, iduser = ID_USER_EDIT)
                                 navController.navigate(route = actionNav) {
                                     popUpTo(actionNav) {
                                         inclusive = true

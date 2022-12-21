@@ -178,7 +178,7 @@ fun NavGraphSetup(
             route = Screens.UserOwner.route,
         ){
             LaunchedEffect(key1 = STORE_ID){
-                userViewModel.getUser()
+                userViewModel.fetchUser()
 //                TRANSACTION_SCREEN = true
             }
             ScreenUserOwner(navController = navController, protoViewModel = protoViewModel)
@@ -187,11 +187,13 @@ fun NavGraphSetup(
         composable(
             route = Screens.RulesEditOwner.route,
         ){
-//            LaunchedEffect(key1 = STORE_ID){
-//                userViewModel.getUser()
-////                TRANSACTION_SCREEN = true
-//            }
             ScreenRulesEditOwner(navController = navController, protoViewModel = protoViewModel)
+        }
+
+        composable(
+            route = Screens.UserEditOwner.route,
+        ){
+            ScreenUserEditOwner(navController = navController, protoViewModel = protoViewModel)
         }
     }
 }

@@ -61,9 +61,6 @@ fun Scaffold2(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-//                    if(USER_TYPE == 0) {
-//
-//                    }
                     EDIT_MODE = false
                     navController.navigate(route = floatingRoute)
                 }

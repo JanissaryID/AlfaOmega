@@ -114,3 +114,10 @@ var RULE_TEXT_EDIT: String by mutableStateOf("")
 var RULES_SCREEN_TYPE: Boolean by mutableStateOf(false)
 var ID_RULE_EDIT: String by mutableStateOf("")
 var BUTTON_RULE_EDIT: Boolean by mutableStateOf(false)
+
+//Variable User
+var USER_NAME_EDIT: String by mutableStateOf("")
+var USER_PASSWORD_EDIT: String by mutableStateOf("")
+var USER_SCREEN_TYPE: Boolean by mutableStateOf(false)
+var ID_USER_EDIT: String by mutableStateOf("")
+var BUTTON_USER_EDIT: Boolean by mutableStateOf(false)

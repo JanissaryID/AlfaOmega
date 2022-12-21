@@ -6,10 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import com.example.alfaomega.EDIT_MODE
-import com.example.alfaomega.MENU_SCREEN_TYPE
-import com.example.alfaomega.R
-import com.example.alfaomega.RULES_SCREEN_TYPE
+import com.example.alfaomega.*
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
@@ -30,6 +27,8 @@ fun ScreenHomeOwner(navController: NavController, protoViewModel: ProtoViewModel
 
     MENU_SCREEN_TYPE = false
     RULES_SCREEN_TYPE = false
+    USER_SCREEN_TYPE = false
+
 
     Scaffold1(
         tittleScreen = tittleScreen,

@@ -100,7 +100,7 @@ class UserViewModel : ViewModel() {
         }
     }
 
-    fun getUser(){
+    fun fetchUser(){
         try {
             UserApp.CreateInstance().fetchUser().enqueue(object :
                 Callback<ArrayList<UserModel>> {
@@ -109,9 +109,10 @@ class UserViewModel : ViewModel() {
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_USER = response.body()!!.filter { user -> user.typeUser == 1} as ArrayList<UserModel>
+                            Log.i("info_response", "User : ${LIST_USER}")
                             USER_STATE = 1
                         }
-                        if (LIST_RULE.isNullOrEmpty()){
+                        if (LIST_USER.isNullOrEmpty()){
                             USER_STATE = 3
                         }
                     }
@@ -150,13 +151,13 @@ class UserViewModel : ViewModel() {
                         val responseBodyData = response.body()
                         if (!responseBodyData!!.id.isNullOrEmpty()){
 
-//                            BUTTON_MENU_EDIT = true
-//
-//                            navController.navigate(route = Screens.MenuOwner.route){
-//                                popUpTo(Screens.MenuOwner.route) {
-//                                    inclusive = true
-//                                }
-//                            }
+                            BUTTON_USER_EDIT = true
+
+                            navController.navigate(route = Screens.UserOwner.route){
+                                popUpTo(Screens.UserOwner.route) {
+                                    inclusive = true
+                                }
+                            }
                         }
                         else{
                             updateUser(
@@ -192,18 +193,20 @@ class UserViewModel : ViewModel() {
     ){
         val bodyUpdate = UserModel(
             username = username,
-            passwordUser = passwordUser
+            passwordUser = passwordUser,
+            typeUser = 1
         )
 
         UserApp.CreateInstance().insertUser(bodyUpdate).enqueue(object :
             Callback<UserModel> {
             override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+//                Log.d("debug_user", response.toString())
                 if(response.code() == 201){
-//                    navController.navigate(route = Screens.MenuOwner.route){
-//                        popUpTo(Screens.MenuOwner.route) {
-//                            inclusive = true
-//                        }
-//                    }
+                    navController.navigate(route = Screens.UserOwner.route){
+                        popUpTo(Screens.UserOwner.route) {
+                            inclusive = true
+                        }
+                    }
                 }
             }
 
@@ -227,11 +230,11 @@ class UserViewModel : ViewModel() {
                 override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
 //                    Log.d("debug", "Code Delete Menu ${response.code()}")
                     if(response.code() == 200){
-//                        navController.navigate(route = Screens.MenuOwner.route){
-//                            popUpTo(Screens.MenuOwner.route) {
-//                                inclusive = true
-//                            }
-//                        }
+                        navController.navigate(route = Screens.UserOwner.route){
+                            popUpTo(Screens.UserOwner.route) {
+                                inclusive = true
+                            }
+                        }
                     }
                 }
 
