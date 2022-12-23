@@ -1,9 +1,12 @@
 package com.example.alfaomega.api.machine
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.navigations.Screens
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,7 +55,8 @@ class MachineViewModel: ViewModel() {
         idMachine: String,
         idTransaction: String,
         timeMachine: Int,
-        navController: NavController
+        navController: NavController,
+        logViewModel: LogViewModel = LogViewModel()
     ){
         val bodyDataUpdate = MachineModel(
             machineStatus = true,
@@ -63,6 +67,7 @@ class MachineViewModel: ViewModel() {
         try {
             MachineApp.CreateInstance().updateMachine(id = idMachine, bodyDataUpdate).enqueue(object :
                 Callback<MachineModel> {
+                @RequiresApi(Build.VERSION_CODES.O)
                 override fun onResponse(call: Call<MachineModel>, response: Response<MachineModel>) {
                     Log.d("debug", "Code Update Machine ${response}")
                     if(response.code() == 200){
@@ -71,6 +76,16 @@ class MachineViewModel: ViewModel() {
                         if (responseBodyData!!.machineStatus!!){
 
                             MACHINE_BUTTON_UPDATE = true
+
+                            logViewModel.insertLog(
+                                log = response.toString(),
+                                machineNumber = MACHINE_NUMBER,
+                                machineStore = STORE_ID,
+                                codeResponse = response.code().toString(),
+                                machineStatus = true,
+                                machineClass = MACHINE_CLASS,
+                                machineType = MACHINE_TYPE
+                            )
 
                             navController.navigate(route = Screens.Home.route){
                                 popUpTo(Screens.Home.route) {

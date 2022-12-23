@@ -79,6 +79,7 @@ var MACHINE_ID: String by mutableStateOf("")
 var MACHINE_CLASS: Boolean by mutableStateOf(false)
 var MACHINE_TYPE: Boolean by mutableStateOf(false)
 var MACHINE_TIME: Int by mutableStateOf(0)
+var MACHINE_NUMBER: Int by mutableStateOf(0)
 var MACHINE_BUTTON_UPDATE: Boolean by mutableStateOf(true)
 
 //Variable user
