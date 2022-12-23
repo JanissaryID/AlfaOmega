@@ -14,10 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.example.alfaomega.R
 import com.example.alfaomega.USER_NAME
 import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.navigations.Screens
@@ -36,9 +38,9 @@ fun ItemStoreMenu(
     Surface(
         color = Color.Transparent,
         modifier = Modifier.clickable {
-            if (typeMenu){
-                protoViewModel.updateNameUser(Nameuser = "")
-                protoViewModel.updateTypeUser(TypeUser = 1)
+            if(USER_TYPE == 3){
+                protoViewModel.updateTypeUser(0)
+                protoViewModel.updateNameUser("")
                 navController.navigate(route = screenMenuItem)
             }
             else{
@@ -61,7 +63,7 @@ fun ItemStoreMenu(
             ) {
                 Icon(
                     painter = painterResource(id = iconMenu),
-                    contentDescription = "Icon TImer",
+                    contentDescription = "Icon Menu",
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier
                         .size(52.dp)

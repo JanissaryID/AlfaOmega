@@ -60,7 +60,7 @@ fun TopBar4(
                     painter = painterResource(id = icon),
                     contentDescription = description,
                     modifier = Modifier.clickable {
-                        if(USER_TYPE == 0){
+                        if(USER_TYPE == 1){
                             if(MENU_SCREEN_TYPE && EDIT_MODE){
                                 menuViewModel.deleteMenu(navController = navController, idMenu = ID_MENU_EDIT)
                                 navController.navigate(route = actionNav) {

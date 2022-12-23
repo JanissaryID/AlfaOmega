@@ -55,14 +55,17 @@ fun NavGraphSetup(
                 }
                 BUTTON_LOGIN_CLICKED = false
             }
-            if(USER_TYPE == 0){
-                ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel)
-            }
-            else if(USER_TYPE == 1){
+            if(USER_TYPE == 3){
                 ScreenHome(navController = navController, protoViewModel = protoViewModel)
             }
-            else{
+            else if(USER_TYPE == 2){
                 ScreenHomeDeveloper(navController = navController, protoViewModel = protoViewModel)
+            }
+            else if(USER_TYPE == 1){
+                ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel)
+            }
+            else{
+                ScreenHome(navController = navController, protoViewModel = protoViewModel)
             }
         }
 

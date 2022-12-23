@@ -37,7 +37,7 @@ fun ComponentMenu(
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier.clickable {
 
-                if(USER_TYPE == 0){
+                if(USER_TYPE == 1){
                     EDIT_MODE = true
                     TITLE_MENU_EDIT = menuTitle
                     PRICE_MENU_EDIT = menuPrice

@@ -38,9 +38,9 @@ fun TopBar3(
                     painter = painterResource(id = icon),
                     contentDescription = description,
                     modifier = Modifier.clickable {
-                        if(USER_TYPE != 1){
+                        if(USER_TYPE != 3){
                             protoViewModel.updateNameUser(Nameuser = "")
-                            protoViewModel.updateTypeUser(TypeUser = 1)
+                            protoViewModel.updateTypeUser(TypeUser = 0)
                             navController.navigate(route = route)
                         }
                         else{

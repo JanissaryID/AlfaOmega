@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -11,13 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.alfaomega.*
 import com.example.alfaomega.R
-import com.example.alfaomega.STORE_ADDRESS
-import com.example.alfaomega.STORE_CITY
-import com.example.alfaomega.STORE_NAME
 import com.example.alfaomega.`object`.store.MenuStore
 import com.example.alfaomega.`object`.store.MenuStoreModel
 import com.example.alfaomega.components.ItemStoreMenu
@@ -36,8 +36,8 @@ fun WallStore(
     Surface(
         color = Color.Transparent,
         modifier = Modifier
-        .fillMaxSize()
-        .padding(top = paddingValues.calculateTopPadding())) {
+            .fillMaxSize()
+            .padding(top = paddingValues.calculateTopPadding())) {
         Column(
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp)
@@ -102,16 +102,29 @@ fun WallStore(
                 LazyColumn(modifier = Modifier.wrapContentSize(),
                     verticalArrangement = Arrangement.spacedBy(0.dp)
                 ){
-                    items(items = list) { menu ->
-                        ItemStoreMenu(
-                            title = menu.titleName,
-                            subTitle = menu.subTitle,
-                            iconMenu = menu.menuIcon,
-                            screenMenuItem = menu.screensMenu,
-                            typeMenu = menu.typeMenu,
-                            navController = navController,
-                            protoViewModel = protoViewModel
-                        )
+                    itemsIndexed(items = list) { index, menu ->
+                        if(index == 2 && USER_TYPE == 3){
+                            ItemStoreMenu(
+                                title = stringResource(id = R.string.LogoutTitle),
+                                subTitle = stringResource(R.string.LogoutAccountTitle),
+                                iconMenu = menu.menuIcon,
+                                screenMenuItem = Screens.Home.route,
+                                typeMenu = menu.typeMenu,
+                                navController = navController,
+                                protoViewModel = protoViewModel
+                            )
+                        }
+                        else{
+                            ItemStoreMenu(
+                                title = menu.titleName,
+                                subTitle = menu.subTitle,
+                                iconMenu = menu.menuIcon,
+                                screenMenuItem = menu.screensMenu,
+                                typeMenu = menu.typeMenu,
+                                navController = navController,
+                                protoViewModel = protoViewModel
+                            )
+                        }
                     }
                 }
             }

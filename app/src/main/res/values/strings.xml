@@ -35,4 +35,6 @@
     <string name="UsernameTitle">Username</string>
     <string name="PasswordTitle">Password</string>
     <string name="HelloTItle">Hello</string>
+    <string name="LogoutTitle">Logout</string>
+    <string name="LogoutAccountTitle">Logout Account</string>
 </resources>

@@ -52,13 +52,13 @@ class UserViewModel : ViewModel() {
                                 FAILED_LOGIN = true
                             }
                             else{
-                                if(userListResponse[0].typeUser == 0){
+                                if(userListResponse[0].typeUser == 1){
                                     USER_NAME = selectionUser[0]
                                     USER_TYPE = userListResponse[0].typeUser!!
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
                                 }
-                                else if(userListResponse[0].typeUser == 1){
+                                else if(userListResponse[0].typeUser == 3){
                                     USER_NAME = userListResponse[0].username!!
                                     USER_TYPE = userListResponse[0].typeUser!!
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
@@ -194,7 +194,7 @@ class UserViewModel : ViewModel() {
         val bodyUpdate = UserModel(
             username = username,
             passwordUser = passwordUser,
-            typeUser = 1
+            typeUser = 0
         )
 
         UserApp.CreateInstance().insertUser(bodyUpdate).enqueue(object :

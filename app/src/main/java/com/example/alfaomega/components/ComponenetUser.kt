@@ -33,7 +33,7 @@ fun ComponentUser(
             color = Color.Transparent,
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier.clickable {
-                if(USER_TYPE == 0) {
+                if(USER_TYPE == 1) {
                     EDIT_MODE = true
                     USER_NAME_EDIT = name
                     USER_PASSWORD_EDIT = password
