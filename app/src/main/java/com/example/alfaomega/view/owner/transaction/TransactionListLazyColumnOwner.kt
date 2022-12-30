@@ -1,2 +1,37 @@
 package com.example.alfaomega.view.owner.transaction
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.alfaomega.api.transaction.TransactionModel
+import com.example.alfaomega.components.ItemListTransaction
+
+@Composable
+fun TransactionListLazyColumnOwner(
+    transactionListModel: List<TransactionModel>,
+    navController: NavController,
+) {
+    val selectionMenuClass = listOf("Giant 8 Kg", "Titan 12 Kg")
+
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ){
+        itemsIndexed(items = transactionListModel) { index, transactionList ->
+            ItemListTransaction(
+                transactionName = transactionList.transactionMenu!!,
+                transactionType = if(!transactionList.transactionClass!!) selectionMenuClass[0] else selectionMenuClass[1],
+                transactionDate = transactionList.transactionDate!!,
+                transactionPrice = transactionList.transactionPrice!!
+            )
+            Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f))
+        }
+    }
+}

@@ -22,5 +22,12 @@ interface TransactionService {
     @GET("NewTransaction")
     fun fetchTransactionNow(
         @Query(value="transaction_date", encoded=true) date: String?,
+        @Query(value="transaction_store", encoded=true) store: String?,
+    ): Call<ArrayList<TransactionModel>>
+
+    @GET("NewTransaction")
+    fun fetchTransactionDate(
+        @Query(value="transaction_date", encoded=true) date: String?,
+        @Query(value="transaction_store", encoded=true) store: String?,
     ): Call<ArrayList<TransactionModel>>
 }

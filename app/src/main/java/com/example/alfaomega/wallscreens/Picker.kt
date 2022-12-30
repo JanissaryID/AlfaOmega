@@ -41,6 +41,7 @@ fun WallPicker(
         13 -> WallUserEditOwner(paddingValues = paddingValues, navController = navController, userViewModel = UserViewModel())
         20 -> WallFirstOwner(navController = navController, paddingValues = paddingValues)
         21 -> WallFirstAdminLogin(paddingValues = paddingValues)
+        22 -> WallTransactionOwner(paddingValues = paddingValues, navController = navController)
         29 -> WallHomeDeveloper()
         else -> print("Opps tidak ada")
     }

@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
     val storeViewModel by viewModels<StoreViewModel>()
     val ruleViewModel by viewModels<RuleViewModel>()
     val userViewModel by viewModels<UserViewModel>()
+    val logViewModel by viewModels<LogViewModel>()
 
     private lateinit var protoViewModel: ProtoViewModel
 
@@ -67,10 +69,9 @@ class MainActivity : ComponentActivity() {
                         storeViewModel = storeViewModel,
                         protoViewModel = protoViewModel,
                         ruleViewModel = ruleViewModel,
-                        userViewModel = userViewModel
+                        userViewModel = userViewModel,
+                        logViewModel = logViewModel
                     )
-
-//                    Log.i("info_response", "TIME : ${TIME_WASHER_GIANT}  ${TIME_WASHER_TITAN}  ${TIME_DRYER_GIANT}  ${TIME_DRYER_TITAN}  -  ${STORE_ID}")
                     Log.i("info_response", "Proto : ${STORE_ID}  ${USER_NAME}  ${USER_TYPE}")
                 }
             }

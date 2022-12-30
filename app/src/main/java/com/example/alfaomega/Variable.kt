@@ -3,6 +3,7 @@ package com.example.alfaomega
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.example.alfaomega.api.log.LogModel
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.menu.MenuModel
 import com.example.alfaomega.api.rules.RuleModel
@@ -122,3 +123,10 @@ var USER_PASSWORD_EDIT: String by mutableStateOf("")
 var USER_SCREEN_TYPE: Boolean by mutableStateOf(false)
 var ID_USER_EDIT: String by mutableStateOf("")
 var BUTTON_USER_EDIT: Boolean by mutableStateOf(false)
+
+//Transaction Owner
+var DATE_SCREEN_TYPE: Boolean by mutableStateOf(false)
+var DATE_PICK: String by mutableStateOf("")
+var LOG_STATE: Int by mutableStateOf(0)
+var LOG_ERROR_MESSAGE: String by mutableStateOf("")
+var LIST_LOG: ArrayList<LogModel> by mutableStateOf(arrayListOf())

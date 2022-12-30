@@ -17,9 +17,9 @@ fun ScreenTransactionOwner(navController: NavController, protoViewModel: ProtoVi
     val tittleScreen = stringResource(R.string.ListTransactionTitle)
     val screenBack = Screens.Home.route
     val floatingRoute = Screens.Menu.route
-    val icon = R.drawable.ic_twotone_storefront_24
-    val TopBar = 2
-    val wallScrreen = 6
+    val icon = R.drawable.ic_twotone_today_24
+    val TopBar = 5
+    val wallScrreen = 22
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.Store.route
 

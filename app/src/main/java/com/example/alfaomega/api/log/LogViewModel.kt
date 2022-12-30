@@ -17,42 +17,46 @@ import java.time.format.DateTimeFormatter
 
 class LogViewModel: ViewModel() {
 
-//    fun getLog(){
-//        try {
-//            LogApp.CreateInstance().fetchLogMachine(store = STORE_ID).enqueue(object :
-//                Callback<ArrayList<MenuModel>> {
-//                override fun onResponse(call: Call<ArrayList<MenuModel>>, response: Response<ArrayList<MenuModel>>) {
-//                    MENU_STATE = 0
-//                    if(response.code() == 200){
-//                        response.body()?.let {
-//                            MENU_LIST_GIANT_RESPONSE = response.body()!!.filter { menu -> menu.menuClass == false } as ArrayList<MenuModel>
-//                            MENU_LIST_TITAN_RESPONSE = response.body()!!.filter { menu -> menu.menuClass == true } as ArrayList<MenuModel>
-//
-//                            MENU_STATE = 1
-////                            Log.i("i`nfo_response", "Data GIANT : ${MENU_LIST_GIANT_RESPONSE}")
-//                        }
-//                        if (MENU_LIST_GIANT_RESPONSE.isNullOrEmpty()){
-//                            MENU_STATE = 3
-//                        }
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<ArrayList<MenuModel>>, t: Throwable) {
-//                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
-//                    if (t.message == t.message){
-//                        Log.d("debug menu", "Failed")
-//                        MENU_STATE = 2
-////                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            })
-//        }
-//        catch (e : Exception){
-//            MENU_ERROR_MESSAGE = e.message.toString()
-//            Log.d("debug menu", "ERROR $MENU_ERROR_MESSAGE")
-////            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
-//        }
-//    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun fetchLog(){
+        try {
+            val current = LocalDateTime.now()
+
+            val formatDay = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+            val date = current.format(formatDay)
+
+            LogApp.CreateInstance().fetchLogMachine(store = STORE_ID, date = if(DATE_PICK.isNullOrEmpty()) date else DATE_PICK).enqueue(object :
+                Callback<ArrayList<LogModel>> {
+                override fun onResponse(call: Call<ArrayList<LogModel>>, response: Response<ArrayList<LogModel>>) {
+                    LOG_STATE = 0
+                    if(response.code() == 200){
+                        response.body()?.let {
+                            LIST_LOG = response.body()!!
+
+                            LOG_STATE = 1
+                        }
+                        if (LIST_LOG.isNullOrEmpty()){
+                            LOG_STATE = 3
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ArrayList<LogModel>>, t: Throwable) {
+                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
+                    if (t.message == t.message){
+                        Log.d("debug menu", "Failed")
+                        LOG_STATE = 2
+//                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            LOG_ERROR_MESSAGE = e.message.toString()
+            Log.d("debug menu", "ERROR $LOG_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun insertLog(

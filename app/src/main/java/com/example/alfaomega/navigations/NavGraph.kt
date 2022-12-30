@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
@@ -32,7 +33,8 @@ fun NavGraphSetup(
     storeViewModel: StoreViewModel,
     protoViewModel: ProtoViewModel,
     ruleViewModel: RuleViewModel,
-    userViewModel: UserViewModel
+    userViewModel: UserViewModel,
+    logViewModel: LogViewModel
     ) {
 
     val context = LocalContext.current
@@ -150,10 +152,11 @@ fun NavGraphSetup(
         composable(
             route = Screens.TransactionOwner.route,
         ){
-//            LaunchedEffect(key1 = STORE_ID){
-//                menuViewModel.getMenu()
-//                TRANSACTION_SCREEN = true
-//            }
+            LaunchedEffect(key1 = STORE_ID){
+                transactionViewModel.getTransactionNowDate()
+                logViewModel.fetchLog()
+                TRANSACTION_SCREEN = true
+            }
             ScreenTransactionOwner(navController = navController, protoViewModel = protoViewModel)
         }
 
