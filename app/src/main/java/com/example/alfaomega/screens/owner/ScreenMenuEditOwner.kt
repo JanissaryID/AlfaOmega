@@ -7,13 +7,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.example.alfaomega.EDIT_MODE
 import com.example.alfaomega.R
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScreenMenuEditOwner(navController: NavController, protoViewModel: ProtoViewModel) {
+fun ScreenMenuEditOwner(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
     val tittleScreen = if(EDIT_MODE) stringResource(R.string.EditMenuTitle) else stringResource(R.string.CreateMenuTitle)
     val screenBack = Screens.MenuOwner.route
@@ -34,6 +35,7 @@ fun ScreenMenuEditOwner(navController: NavController, protoViewModel: ProtoViewM
         TopBar = TopBar,
         icon = icon,
         description = desctiptionTopBar,
-        route = routeAction
+        route = routeAction,
+        bluetoothViewModel = bluetoothViewModel
     )
 }

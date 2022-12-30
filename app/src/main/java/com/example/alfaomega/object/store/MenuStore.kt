@@ -24,7 +24,7 @@ object MenuStore {
     )
 
     private val screensMenu = arrayOf(
-        Screens.Home.route,
+        Screens.Bluetooth.route,
         Screens.TransactionList.route,
         Screens.Login.route,
     )

@@ -1,5 +1,6 @@
 package com.example.alfaomega
 
+import androidx.activity.ComponentActivity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,6 +11,8 @@ import com.example.alfaomega.api.rules.RuleModel
 import com.example.alfaomega.api.store.StoreModel
 import com.example.alfaomega.api.transaction.TransactionModel
 import com.example.alfaomega.api.user.UserModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.MultiplePermissionsState
 
 //Variable New Transaction
 var NEW_TRANSACATION_CUSTOMER: String by mutableStateOf("")
@@ -124,9 +127,16 @@ var USER_SCREEN_TYPE: Boolean by mutableStateOf(false)
 var ID_USER_EDIT: String by mutableStateOf("")
 var BUTTON_USER_EDIT: Boolean by mutableStateOf(false)
 
-//Transaction Owner
+//Variable Transaction Owner
 var DATE_SCREEN_TYPE: Boolean by mutableStateOf(false)
 var DATE_PICK: String by mutableStateOf("")
 var LOG_STATE: Int by mutableStateOf(0)
 var LOG_ERROR_MESSAGE: String by mutableStateOf("")
 var LIST_LOG: ArrayList<LogModel> by mutableStateOf(arrayListOf())
+
+//Variable Bluetooth
+var ADDRESS_DEVICE: String by mutableStateOf("")
+var UUID_DEVICE: String by mutableStateOf("")
+var BLUETOOTH_STATE: Int by mutableStateOf(0)
+
+var MY_CONTEXT : ComponentActivity? = null

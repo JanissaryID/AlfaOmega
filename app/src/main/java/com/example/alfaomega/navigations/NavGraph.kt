@@ -18,11 +18,16 @@ import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.api.user.UserViewModel
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.screens.*
+import com.example.alfaomega.screens.admin.ScreenBluetooth
 import com.example.alfaomega.screens.developer.ScreenHomeDeveloper
 import com.example.alfaomega.screens.owner.*
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.MultiplePermissionsState
 
+@OptIn(ExperimentalPermissionsApi::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavGraphSetup(
@@ -34,7 +39,8 @@ fun NavGraphSetup(
     protoViewModel: ProtoViewModel,
     ruleViewModel: RuleViewModel,
     userViewModel: UserViewModel,
-    logViewModel: LogViewModel
+    logViewModel: LogViewModel,
+    bluetoothViewModel: BluetoothViewModel
     ) {
 
     val context = LocalContext.current
@@ -58,16 +64,16 @@ fun NavGraphSetup(
                 BUTTON_LOGIN_CLICKED = false
             }
             if(USER_TYPE == 3){
-                ScreenHome(navController = navController, protoViewModel = protoViewModel)
+                ScreenHome(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
             else if(USER_TYPE == 2){
-                ScreenHomeDeveloper(navController = navController, protoViewModel = protoViewModel)
+                ScreenHomeDeveloper(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
             else if(USER_TYPE == 1){
-                ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel)
+                ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
             else{
-                ScreenHome(navController = navController, protoViewModel = protoViewModel)
+                ScreenHome(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
         }
 
@@ -78,7 +84,7 @@ fun NavGraphSetup(
                 menuViewModel.getMenu()
                 TRANSACTION_SCREEN = true
             }
-            ScreenMenu(navController = navController, protoViewModel = protoViewModel)
+            ScreenMenu(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
@@ -87,7 +93,7 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
                 MACHINE_SCREEN = true
             }
-            ScreenDetailTransaction(navController = navController, protoViewModel = protoViewModel)
+            ScreenDetailTransaction(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
@@ -96,7 +102,7 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
                 TRANSACTION_SCREEN = true
             }
-            ScreenStore(navController = navController, protoViewModel = protoViewModel)
+            ScreenStore(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
@@ -106,7 +112,7 @@ fun NavGraphSetup(
                 machineViewModel.getMachine()
                 TRANSACTION_SCREEN = true
             }
-            ScreenMachine(navController = navController, protoViewModel = protoViewModel)
+            ScreenMachine(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
@@ -116,7 +122,7 @@ fun NavGraphSetup(
                 storeViewModel.FetchStore()
                 TRANSACTION_SCREEN = true
             }
-            ScreenStoreList(navController = navController, protoViewModel = protoViewModel)
+            ScreenStoreList(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
@@ -126,7 +132,7 @@ fun NavGraphSetup(
                 transactionViewModel.getTransactionNow()
                 TRANSACTION_SCREEN = true
             }
-            ScreenTransactionList(navController = navController, protoViewModel = protoViewModel)
+            ScreenTransactionList(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
@@ -136,7 +142,17 @@ fun NavGraphSetup(
 //                transactionViewModel.getTransactionNow()
 //                TRANSACTION_SCREEN = true
 //            }
-            ScreenLogin(navController = navController, protoViewModel = protoViewModel)
+            ScreenLogin(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+        }
+
+        composable(
+            route = Screens.Bluetooth.route,
+        ){
+//            LaunchedEffect(key1 = STORE_ID){
+//                transactionViewModel.getTransactionNow()
+//                TRANSACTION_SCREEN = true
+//            }
+            ScreenBluetooth(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
@@ -146,7 +162,7 @@ fun NavGraphSetup(
                 menuViewModel.getMenu()
                 TRANSACTION_SCREEN = true
             }
-            ScreenMenuOwner(navController = navController, protoViewModel = protoViewModel)
+            ScreenMenuOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
@@ -157,7 +173,7 @@ fun NavGraphSetup(
                 logViewModel.fetchLog()
                 TRANSACTION_SCREEN = true
             }
-            ScreenTransactionOwner(navController = navController, protoViewModel = protoViewModel)
+            ScreenTransactionOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
@@ -167,7 +183,7 @@ fun NavGraphSetup(
 //                menuViewModel.getMenu()
 //                TRANSACTION_SCREEN = true
 //            }
-            ScreenMenuEditOwner(navController = navController, protoViewModel = protoViewModel)
+            ScreenMenuEditOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
@@ -177,7 +193,7 @@ fun NavGraphSetup(
                 ruleViewModel.getRules()
 //                TRANSACTION_SCREEN = true
             }
-            ScreenRulesOwner(navController = navController, protoViewModel = protoViewModel)
+            ScreenRulesOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
@@ -187,19 +203,19 @@ fun NavGraphSetup(
                 userViewModel.fetchUser()
 //                TRANSACTION_SCREEN = true
             }
-            ScreenUserOwner(navController = navController, protoViewModel = protoViewModel)
+            ScreenUserOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
             route = Screens.RulesEditOwner.route,
         ){
-            ScreenRulesEditOwner(navController = navController, protoViewModel = protoViewModel)
+            ScreenRulesEditOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
             route = Screens.UserEditOwner.route,
         ){
-            ScreenUserEditOwner(navController = navController, protoViewModel = protoViewModel)
+            ScreenUserEditOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
     }
 }

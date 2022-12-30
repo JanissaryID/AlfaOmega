@@ -9,7 +9,9 @@ import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.api.user.UserViewModel
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.proto.ProtoViewModel
+import com.example.alfaomega.wallscreens.admin.WallBluetooth
 import com.example.alfaomega.wallscreens.developer.WallHomeDeveloper
 import com.example.alfaomega.wallscreens.firstwall.WallFirstAdminLogin
 import com.example.alfaomega.wallscreens.firstwall.WallFirstOwner
@@ -22,7 +24,8 @@ fun WallPicker(
     paddingValues: PaddingValues,
     navController: NavController,
     menuViewModel: MenuViewModel,
-    protoViewModel: ProtoViewModel
+    protoViewModel: ProtoViewModel,
+    bluetoothViewModel: BluetoothViewModel
 ) {
     when(wallScreen){
         0 -> WallHome(paddingValues = paddingValues, navController = navController)
@@ -42,6 +45,7 @@ fun WallPicker(
         20 -> WallFirstOwner(navController = navController, paddingValues = paddingValues)
         21 -> WallFirstAdminLogin(paddingValues = paddingValues)
         22 -> WallTransactionOwner(paddingValues = paddingValues, navController = navController)
+        23 -> WallBluetooth(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         29 -> WallHomeDeveloper()
         else -> print("Opps tidak ada")
     }

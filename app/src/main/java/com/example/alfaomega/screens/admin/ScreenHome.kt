@@ -10,6 +10,7 @@ import com.example.alfaomega.R
 import com.example.alfaomega.STORE_ID
 import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.components.scaffold.Scaffold2
 import com.example.alfaomega.navigations.Screens
@@ -18,7 +19,7 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel) {
+fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
     val tittleScreen = if(STORE_ID.isNullOrEmpty()) stringResource(R.string.HelloTItle) else if(USER_TYPE == 0) stringResource(R.string.HelloTItle) else stringResource(R.string.TransactionActiveTitle)
     val screenBack = Screens.Home.route
@@ -41,7 +42,8 @@ fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel) {
             TopBar = TopBar,
             icon = icon,
             description = desctiptionTopBar,
-            route =routeAction
+            route =routeAction,
+            bluetoothViewModel = bluetoothViewModel
         )
     }
     else
@@ -57,7 +59,8 @@ fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel) {
                 TopBar = TopBar,
                 icon = icon,
                 description = desctiptionTopBar,
-                route =routeAction
+                route =routeAction,
+                bluetoothViewModel = bluetoothViewModel
             )
         }
         else{
@@ -71,7 +74,8 @@ fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel) {
                 TopBar = TopBar,
                 icon = icon,
                 description = desctiptionTopBar,
-                route =routeAction
+                route =routeAction,
+                bluetoothViewModel = bluetoothViewModel
             )
         }
     }

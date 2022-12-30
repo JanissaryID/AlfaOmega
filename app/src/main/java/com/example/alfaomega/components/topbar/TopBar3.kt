@@ -1,5 +1,7 @@
 package com.example.alfaomega.components.topbar
 
+import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,10 +13,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.USER_TYPE
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.MultiplePermissionsState
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun TopBar3(
     tittleScreen: String,
@@ -22,7 +27,10 @@ fun TopBar3(
     route: String,
     icon: Int,
     description: String,
-    protoViewModel: ProtoViewModel
+    protoViewModel: ProtoViewModel,
+    bluetoothViewModel: BluetoothViewModel,
+    multiplePermissionState: MultiplePermissionsState,
+    context: Context
 ) {
     SmallTopAppBar(
         title = {
@@ -42,9 +50,17 @@ fun TopBar3(
                             protoViewModel.updateNameUser(Nameuser = "")
                             protoViewModel.updateTypeUser(TypeUser = 0)
                             navController.navigate(route = route)
+                            Log.i("info_response", "Check Bluetooth 1")
+                            Log.i("info_response", "${route} 1")
+                            multiplePermissionState.launchMultiplePermissionRequest()
+                            bluetoothViewModel.requestBluetoothPermission()
                         }
                         else{
                             navController.navigate(route = route)
+                            Log.i("info_response", "Check Bluetooth")
+                            Log.i("info_response", "${route}")
+                            multiplePermissionState.launchMultiplePermissionRequest()
+                            bluetoothViewModel.requestBluetoothPermission()
                         }
                     }
                 )

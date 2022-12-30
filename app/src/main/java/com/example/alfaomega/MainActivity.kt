@@ -1,5 +1,6 @@
 package com.example.alfaomega
 
+import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -24,10 +25,14 @@ import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.api.user.UserViewModel
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
+import com.example.alfaomega.bluetoothprinter.PermissionsRequiredState
 import com.example.alfaomega.navigations.NavGraphSetup
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.screens.ScreenMenu
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
 class MainActivity : ComponentActivity() {
 
@@ -40,11 +45,18 @@ class MainActivity : ComponentActivity() {
     val userViewModel by viewModels<UserViewModel>()
     val logViewModel by viewModels<LogViewModel>()
 
-    private lateinit var protoViewModel: ProtoViewModel
+    val bluetoothViewModel by viewModels<BluetoothViewModel>()
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    private lateinit var protoViewModel: ProtoViewModel
+//    private lateinit var bluetoothViewModel: BluetoothViewModel
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    @OptIn(ExperimentalPermissionsApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        bluetoothViewModel.createInstance(this@MainActivity)
+        bluetoothViewModel.checkBluetoothCompatible()
 
         protoViewModel = ViewModelProvider(this).get(ProtoViewModel::class.java)
         protoViewModel.getData.observe(this,{
@@ -55,11 +67,25 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             AlfaOmegaTheme {
+
+                val multiplePermissionState = rememberMultiplePermissionsState(
+                    permissions = listOf(
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.BLUETOOTH,
+                        Manifest.permission.BLUETOOTH_ADMIN,
+                        Manifest.permission.BLUETOOTH_SCAN,
+                        Manifest.permission.BLUETOOTH_ADVERTISE,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    )
+                )
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
                     navController = rememberNavController()
                     NavGraphSetup(
                         navController = navController,
@@ -70,8 +96,13 @@ class MainActivity : ComponentActivity() {
                         protoViewModel = protoViewModel,
                         ruleViewModel = ruleViewModel,
                         userViewModel = userViewModel,
-                        logViewModel = logViewModel
+                        logViewModel = logViewModel,
+                        bluetoothViewModel = bluetoothViewModel
                     )
+
+                    bluetoothViewModel.showPairedDevice(context = this, multiplePermissionState = multiplePermissionState)
+                    MY_CONTEXT = this
+
                     Log.i("info_response", "Proto : ${STORE_ID}  ${USER_NAME}  ${USER_TYPE}")
                 }
             }

@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.TRANSACTION_SCREEN
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
@@ -19,6 +20,7 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 fun ScreenDetailTransaction(
     navController: NavController,
     protoViewModel: ProtoViewModel,
+    bluetoothViewModel: BluetoothViewModel
 ) {
 
     val tittleScreen =if(!TRANSACTION_SCREEN)
@@ -42,7 +44,8 @@ fun ScreenDetailTransaction(
         TopBar = TopBar,
         icon = icon,
         description = desctiptionTopBar,
-        route = routeAction
+        route = routeAction,
+        bluetoothViewModel = bluetoothViewModel
     )
 }
 

@@ -7,6 +7,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.alfaomega.R
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
@@ -14,7 +15,7 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScreenStoreList(navController: NavController, protoViewModel: ProtoViewModel) {
+fun ScreenStoreList(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
     val tittleScreen = stringResource(R.string.ListStoreTitle)
     val screenBack = Screens.StoreProfile.route
@@ -35,7 +36,8 @@ fun ScreenStoreList(navController: NavController, protoViewModel: ProtoViewModel
         TopBar = TopBar,
         icon = icon,
         description = desctiptionTopBar,
-        route =routeAction
+        route =routeAction,
+        bluetoothViewModel = bluetoothViewModel
     )
 }
 

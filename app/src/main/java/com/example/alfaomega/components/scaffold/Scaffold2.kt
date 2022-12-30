@@ -1,5 +1,6 @@
 package com.example.alfaomega.components.scaffold
 
+import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.size
@@ -16,12 +17,15 @@ import com.example.alfaomega.EDIT_MODE
 import com.example.alfaomega.R
 import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.topbar.TopBarPicker
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.wallscreens.WallPicker
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.MultiplePermissionsState
 
 @RequiresApi(Build.VERSION_CODES.O)
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun Scaffold2(
     tittleScreen: String,
@@ -34,7 +38,8 @@ fun Scaffold2(
     TopBar: Int,
     icon: Int,
     description: String,
-    route: String
+    route: String,
+    bluetoothViewModel: BluetoothViewModel
 ) {
     Scaffold(topBar = {
         TopBarPicker(
@@ -45,7 +50,8 @@ fun Scaffold2(
             icon = icon,
             description = description,
             route = route,
-            protoViewModel = protoViewModel
+            protoViewModel = protoViewModel,
+            bluetoothViewModel = bluetoothViewModel
         )
     },
         content = {
@@ -55,7 +61,8 @@ fun Scaffold2(
                 paddingValues = it,
                 navController = navController,
                 protoViewModel = protoViewModel,
-                menuViewModel = menuViewModel
+                menuViewModel = menuViewModel,
+                bluetoothViewModel = bluetoothViewModel
             )
         },
         floatingActionButton = {

@@ -36,10 +36,6 @@ fun TopBar5(
     screenBack: String,
     icon: Int,
     description: String,
-    actionNav: String,
-    menuViewModel: MenuViewModel = MenuViewModel(),
-    ruleViewModel: RuleViewModel = RuleViewModel(),
-    userViewModel: UserViewModel = UserViewModel(),
     transactionViewModel: TransactionViewModel = TransactionViewModel(),
     excelViewModel: ExcelViewModel = ExcelViewModel()
 ) {

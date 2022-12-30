@@ -82,6 +82,8 @@ dependencies {
 
     implementation files('libs\\jxl-2.6.jar')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.google.accompanist:accompanist-permissions:0.24.9-beta'
 }
 
 protobuf {
