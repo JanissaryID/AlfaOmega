@@ -55,20 +55,26 @@ class UserViewModel : ViewModel() {
                                 if(userListResponse[0].typeUser == 1){
                                     USER_NAME = selectionUser[0]
                                     USER_TYPE = userListResponse[0].typeUser!!
+                                    OWNER_ID = userListResponse[0].id!!
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
+                                    protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
                                 }
                                 else if(userListResponse[0].typeUser == 3){
                                     USER_NAME = userListResponse[0].username!!
                                     USER_TYPE = userListResponse[0].typeUser!!
+                                    OWNER_ID = userListResponse[0].idOwner!!
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
+                                    protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
                                 }
                                 else{
                                     USER_NAME = selectionUser[1]
                                     USER_TYPE = userListResponse[0].typeUser!!
+                                    OWNER_ID = userListResponse[0].idOwner!!
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
+                                    protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
                                 }
                                 FAILED_LOGIN = false
                                 navController.navigate(route = screenBack) {
@@ -102,13 +108,15 @@ class UserViewModel : ViewModel() {
 
     fun fetchUser(){
         try {
-            UserApp.CreateInstance().fetchUser().enqueue(object :
+            UserApp.CreateInstance().fetchUser(
+                OwnerId = OWNER_ID
+            ).enqueue(object :
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
                     USER_STATE = 0
                     if(response.code() == 200){
                         response.body()?.let {
-                            LIST_USER = response.body()!!.filter { user -> user.typeUser == 1} as ArrayList<UserModel>
+                            LIST_USER = response.body()!!.filter { user -> user.typeUser == 3} as ArrayList<UserModel>
                             Log.i("info_response", "User : ${LIST_USER}")
                             USER_STATE = 1
                         }

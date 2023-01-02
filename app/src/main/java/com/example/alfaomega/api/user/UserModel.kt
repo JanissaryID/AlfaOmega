@@ -7,6 +7,9 @@ data class UserModel(
 	@field:SerializedName("password_user")
 	val passwordUser: String? = null,
 
+	@field:SerializedName("id_owner")
+	val idOwner: String? = null,
+
 	@field:SerializedName("type_user")
 	val typeUser: Int? = null,
 

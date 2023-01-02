@@ -22,31 +22,15 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
     val tittleScreen = if(STORE_ID.isNullOrEmpty()) stringResource(R.string.HelloTItle) else if(USER_TYPE == 0) stringResource(R.string.HelloTItle) else stringResource(R.string.TransactionActiveTitle)
-    val screenBack = Screens.Home.route
+    val screenBack = if( USER_TYPE == 1 ) Screens.Home.route else Screens.StoreProfile.route
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_storefront_24
-    val TopBar = if(STORE_ID.isNullOrEmpty()) 1 else 3
-    val wallScrreen = if(STORE_ID.isNullOrEmpty()) 20 else if( USER_TYPE == 0 ) 21 else 0
+    val TopBar = if(STORE_ID.isNullOrEmpty()) 1 else if( USER_TYPE == 0 ) 1 else 3
+    val wallScrreen = if( USER_TYPE == 0 ) 7 else if(STORE_ID.isNullOrEmpty()) 20 else 0
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.StoreProfile.route
 //
-    if(STORE_ID.isNullOrEmpty())
-    {
-        Scaffold1(
-            tittleScreen = tittleScreen,
-            wallScreen = wallScrreen,
-            navController = navController,
-            screenBack = screenBack,
-            protoViewModel = protoViewModel,
-            floatingRoute = floatingRoute,
-            TopBar = TopBar,
-            icon = icon,
-            description = desctiptionTopBar,
-            route =routeAction,
-            bluetoothViewModel = bluetoothViewModel
-        )
-    }
-    else
+    if(!STORE_ID.isNullOrEmpty())
     {
         if(USER_TYPE == 0){
             Scaffold1(
@@ -78,6 +62,22 @@ fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel, blu
                 bluetoothViewModel = bluetoothViewModel
             )
         }
+    }
+    else
+    {
+        Scaffold1(
+            tittleScreen = tittleScreen,
+            wallScreen = wallScrreen,
+            navController = navController,
+            screenBack = screenBack,
+            protoViewModel = protoViewModel,
+            floatingRoute = floatingRoute,
+            TopBar = TopBar,
+            icon = icon,
+            description = desctiptionTopBar,
+            route =routeAction,
+            bluetoothViewModel = bluetoothViewModel
+        )
     }
 }
 

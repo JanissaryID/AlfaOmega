@@ -1,6 +1,7 @@
 package com.example.alfaomega.wallscreens.admin
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,11 +27,21 @@ fun WallBluetooth(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BluetoothLoadData(
-                navController = navController,
-                bluetooth = bluetoothViewModel.devices,
-                bluetoothState = BLUETOOTH_STATE
-            )
+            if (!bluetoothViewModel.devices.isNullOrEmpty()){
+                BluetoothLoadData(
+                    navController = navController,
+                    bluetooth = bluetoothViewModel.devices!!,
+                    bluetoothState = BLUETOOTH_STATE
+                )
+            }
+            else{
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
         }
     }
 }

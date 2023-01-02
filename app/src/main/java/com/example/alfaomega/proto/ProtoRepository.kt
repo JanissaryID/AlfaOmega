@@ -44,16 +44,16 @@ class ProtoRepository(context: Context) {
             preference.toBuilder().setUSERTYPE(Typeuser).build()
         }
     }
-//
-//    suspend fun updateWashTimeTitan(WashTimeTitan: Int){
-//        datastore.updateData { preference ->
-//            preference.toBuilder().setTIMEWASHERGIANT(WashTimeTitan).build()
-//        }
-//    }
-//
-//    suspend fun updateDryTimeTitan(DryTimeTitan: Int){
-//        datastore.updateData { preference ->
-//            preference.toBuilder().setTIMEDRYERGIANT(DryTimeTitan).build()
-//        }
-//    }
+
+    suspend fun updateAddressDevice(AddressDevice: String){
+        datastore.updateData { preference ->
+            preference.toBuilder().setADDRESSDEVICE(AddressDevice).build()
+        }
+    }
+
+    suspend fun updateOwnerId(OwnerID: String){
+        datastore.updateData { preference ->
+            preference.toBuilder().setOWNERID(OwnerID).build()
+        }
+    }
 }

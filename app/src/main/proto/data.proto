@@ -9,4 +9,5 @@ message DataPreferences {
   uint32 USER_TYPE = 2;
   string USER_NAME = 3;
   string ADDRESS_DEVICE = 4;
+  string OWNER_ID = 5;
 }

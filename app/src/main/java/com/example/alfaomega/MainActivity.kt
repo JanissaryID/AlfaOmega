@@ -63,6 +63,8 @@ class MainActivity : ComponentActivity() {
             STORE_ID = it.storeid
             USER_NAME = it.username
             USER_TYPE = it.usertype
+            ADDRESS_DEVICE = it.addressdevice
+            OWNER_ID = it.ownerid
         })
 
         setContent {
@@ -100,7 +102,7 @@ class MainActivity : ComponentActivity() {
                         bluetoothViewModel = bluetoothViewModel
                     )
 
-                    bluetoothViewModel.showPairedDevice(context = this, multiplePermissionState = multiplePermissionState)
+//                    bluetoothViewModel.showPairedDevice(context = this, multiplePermissionState = multiplePermissionState)
                     MY_CONTEXT = this
 
                     Log.i("info_response", "Proto : ${STORE_ID}  ${USER_NAME}  ${USER_TYPE}")

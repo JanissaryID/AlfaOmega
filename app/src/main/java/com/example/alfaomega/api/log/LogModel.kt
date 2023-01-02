@@ -10,6 +10,9 @@ data class LogModel(
 	@field:SerializedName("machine_type")
 	val machineType: Boolean? = null,
 
+	@field:SerializedName("store_id")
+	val storeId: String? = null,
+
 	@field:SerializedName("machine_status")
 	val machineStatus: Boolean? = null,
 

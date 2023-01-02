@@ -140,3 +140,5 @@ var UUID_DEVICE: String by mutableStateOf("")
 var BLUETOOTH_STATE: Int by mutableStateOf(0)
 
 var MY_CONTEXT : ComponentActivity? = null
+
+var OWNER_ID: String by mutableStateOf("")

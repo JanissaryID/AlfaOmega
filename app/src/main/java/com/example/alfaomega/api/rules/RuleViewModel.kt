@@ -15,7 +15,9 @@ class RuleViewModel : ViewModel() {
 
     fun getRules(){
         try {
-            RuleApp.CreateInstance().fetchRule().enqueue(object :
+            RuleApp.CreateInstance().fetchRule(
+                OwnerId = OWNER_ID
+            ).enqueue(object :
                 Callback<ArrayList<RuleModel>> {
                 override fun onResponse(call: Call<ArrayList<RuleModel>>, response: Response<ArrayList<RuleModel>>) {
                     RULE_STATE = 0

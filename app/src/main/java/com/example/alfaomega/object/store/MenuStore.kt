@@ -32,7 +32,7 @@ object MenuStore {
     private val typeMenu = booleanArrayOf(
         false,
         false,
-        false
+        true
     )
 
     val listData: ArrayList<MenuStoreModel>

@@ -14,7 +14,9 @@ interface UserService {
     ): Call<ArrayList<UserModel>>
 
     @GET("NewUser")
-    fun fetchUser(): Call<ArrayList<UserModel>>
+    fun fetchUser(
+        @Query(value="id_owner", encoded=true) OwnerId: String?
+    ): Call<ArrayList<UserModel>>
 
     @PATCH("NewUser/{id}")
     fun updateUser(

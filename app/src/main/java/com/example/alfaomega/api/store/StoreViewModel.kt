@@ -10,7 +10,9 @@ import retrofit2.Response
 class StoreViewModel : ViewModel(){
     fun FetchStore(){
         try {
-            StoreApp.CreateInstance().fetchStore().enqueue(object :
+            StoreApp.CreateInstance().fetchStore(
+                OwnerId = OWNER_ID
+            ).enqueue(object :
                 Callback<ArrayList<StoreModel>> {
                 override fun onResponse(call: Call<ArrayList<StoreModel>>, response: Response<ArrayList<StoreModel>>) {
 

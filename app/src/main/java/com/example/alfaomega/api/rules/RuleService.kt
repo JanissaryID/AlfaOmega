@@ -6,7 +6,9 @@ import retrofit2.http.*
 
 interface RuleService {
     @GET("NewPrinter")
-    fun fetchRule(): Call<ArrayList<RuleModel>>
+    fun fetchRule(
+        @Query(value="owner_id", encoded=true) OwnerId: String?
+    ): Call<ArrayList<RuleModel>>
 
     @PATCH("NewPrinter/{id}")
     fun updateRule(

@@ -24,12 +24,12 @@ class ProtoViewModel(application: Application): AndroidViewModel(application) {
     fun updateTypeUser(TypeUser: Int) = viewModelScope.launch(Dispatchers.IO){
         repository.updateTypeUser(Typeuser = TypeUser)
     }
-//
-//    fun updateWashTimeTitan(WashTimeTitan: Int) = viewModelScope.launch(Dispatchers.IO){
-//        repository.updateWashTimeTitan(WashTimeTitan = WashTimeTitan)
-//    }
-//
-//    fun updateDryTimeTitan(DryTimeTitan: Int) = viewModelScope.launch(Dispatchers.IO){
-//        repository.updateDryTimeTitan(DryTimeTitan = DryTimeTitan)
-//    }
+
+    fun updateAddressDevice(AddressDevice: String) = viewModelScope.launch(Dispatchers.IO){
+        repository.updateAddressDevice(AddressDevice = AddressDevice)
+    }
+
+    fun updateOwnerId(OwnerId: String) = viewModelScope.launch(Dispatchers.IO){
+        repository.updateOwnerId(OwnerID = OwnerId)
+    }
 }

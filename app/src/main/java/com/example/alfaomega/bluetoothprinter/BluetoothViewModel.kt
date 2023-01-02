@@ -93,7 +93,7 @@ class BluetoothViewModel: ViewModel() {
 
     var context : Context? = null
 
-    lateinit var devices: Set<BluetoothDevice>
+    var devices: Set<BluetoothDevice>? = null
 
     fun createInstance(appCompatActivity: MainActivity){
         bluetoothManager = appCompatActivity.applicationContext.getSystemService(AppCompatActivity.BLUETOOTH_SERVICE) as BluetoothManager
@@ -113,6 +113,8 @@ class BluetoothViewModel: ViewModel() {
 
         ActivityApp = appCompatActivity
         context = appCompatActivity
+
+
     }
 
     fun requestBluetoothPermission() : Boolean {
@@ -239,9 +241,9 @@ class BluetoothViewModel: ViewModel() {
 
         devices = pairedDevices
 
-        if (devices.isNotEmpty()) {
+        if (devices!!.isNotEmpty()) {
             // Show a list of paired devices here
-            for (device in devices) {
+            for (device in devices!!) {
                 Log.i("Bluetooth_device", "${device.name} -- ${device.type} -- ${device.address} -- ${device.uuids[0]}")
             }
             BLUETOOTH_STATE = 1

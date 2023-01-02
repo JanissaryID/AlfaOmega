@@ -7,6 +7,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.alfaomega.R
+import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
@@ -24,7 +25,7 @@ fun ScreenStoreList(navController: NavController, protoViewModel: ProtoViewModel
     val TopBar = 2
     val wallScrreen = 5
     val desctiptionTopBar = "icon Store"
-    val routeAction = Screens.Store.route
+    val routeAction = if( USER_TYPE == 1 ) Screens.Home.route else Screens.Store.route
 
     Scaffold1(
         tittleScreen = tittleScreen,

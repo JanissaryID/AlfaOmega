@@ -39,12 +39,29 @@ fun ItemStoreMenu(
         color = Color.Transparent,
         modifier = Modifier.clickable {
             if(USER_TYPE == 3){
-                protoViewModel.updateTypeUser(0)
-                protoViewModel.updateNameUser("")
-                navController.navigate(route = screenMenuItem)
+                if(typeMenu){
+                    protoViewModel.updateTypeUser(0)
+                    protoViewModel.updateNameUser("")
+                    protoViewModel.updateStoreID("")
+                    navController.navigate(route = Screens.Home.route){
+                        popUpTo(Screens.Home.route) {
+                            inclusive = true
+                        }
+                    }
+
+                }
+                navController.navigate(route = screenMenuItem){
+                    popUpTo(screenMenuItem) {
+                        inclusive = true
+                    }
+                }
             }
             else{
-                navController.navigate(route = screenMenuItem)
+                navController.navigate(route = screenMenuItem){
+                    popUpTo(screenMenuItem) {
+                        inclusive = true
+                    }
+                }
             }
         }
     ) {

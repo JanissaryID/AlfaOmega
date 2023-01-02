@@ -8,7 +8,9 @@ import retrofit2.http.Query
 interface StoreService {
 
     @GET("NewStore")
-    fun fetchStore(): Call<ArrayList<StoreModel>>
+    fun fetchStore(
+        @Query(value="owner_id", encoded=true) OwnerId: String?
+    ): Call<ArrayList<StoreModel>>
 
     @GET("NewStore")
     fun getStore(

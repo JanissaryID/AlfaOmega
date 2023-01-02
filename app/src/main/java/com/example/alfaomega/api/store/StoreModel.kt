@@ -10,6 +10,9 @@ data class StoreModel(
 	@field:SerializedName("city")
 	val city: String? = null,
 
+	@field:SerializedName("owner_id")
+	val ownerId: String? = null,
+
 	@field:SerializedName("name")
 	val name: String? = null,
 

@@ -1,5 +1,6 @@
 package com.example.alfaomega.navigations
 
+import android.Manifest
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -26,9 +27,11 @@ import com.example.alfaomega.screens.developer.ScreenHomeDeveloper
 import com.example.alfaomega.screens.owner.*
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.MultiplePermissionsState
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
+@RequiresApi(Build.VERSION_CODES.R)
 @OptIn(ExperimentalPermissionsApi::class)
-@RequiresApi(Build.VERSION_CODES.O)
+//@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavGraphSetup(
     navController: NavHostController,
@@ -44,6 +47,18 @@ fun NavGraphSetup(
     ) {
 
     val context = LocalContext.current
+
+    val multiplePermissionState = rememberMultiplePermissionsState(
+        permissions = listOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.BLUETOOTH,
+            Manifest.permission.BLUETOOTH_ADMIN,
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_ADVERTISE,
+            Manifest.permission.BLUETOOTH_CONNECT
+        )
+    )
 
     NavHost(navController = navController, startDestination = Screens.Home.route) {
         composable(
@@ -101,6 +116,7 @@ fun NavGraphSetup(
         ){
             LaunchedEffect(key1 = STORE_ID){
                 TRANSACTION_SCREEN = true
+                bluetoothViewModel.showPairedDevice(context = MY_CONTEXT!!, multiplePermissionState = multiplePermissionState)
             }
             ScreenStore(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
@@ -148,10 +164,9 @@ fun NavGraphSetup(
         composable(
             route = Screens.Bluetooth.route,
         ){
-//            LaunchedEffect(key1 = STORE_ID){
-//                transactionViewModel.getTransactionNow()
-//                TRANSACTION_SCREEN = true
-//            }
+            LaunchedEffect(key1 = STORE_ID){
+                bluetoothViewModel.showPairedDevice(context = MY_CONTEXT!!, multiplePermissionState = multiplePermissionState)
+            }
             ScreenBluetooth(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
