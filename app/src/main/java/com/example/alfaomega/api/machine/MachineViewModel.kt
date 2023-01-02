@@ -16,7 +16,10 @@ class MachineViewModel: ViewModel() {
 
     fun getMachine(){
         try {
-            MachineApp.CreateInstance().fetchMachine(store = STORE_ID).enqueue(object :
+            MachineApp.CreateInstance().fetchMachine(
+                BearerToken = "Bearer " + TOKEN_API,
+                store = STORE_ID
+            ).enqueue(object :
                 Callback<ArrayList<MachineModel>> {
                 override fun onResponse(call: Call<ArrayList<MachineModel>>, response: Response<ArrayList<MachineModel>>) {
                     MENU_STATE = 0
@@ -65,7 +68,11 @@ class MachineViewModel: ViewModel() {
         )
 
         try {
-            MachineApp.CreateInstance().updateMachine(id = idMachine, bodyDataUpdate).enqueue(object :
+            MachineApp.CreateInstance().updateMachine(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = idMachine,
+                bodyDataUpdate
+            ).enqueue(object :
                 Callback<MachineModel> {
                 @RequiresApi(Build.VERSION_CODES.O)
                 override fun onResponse(call: Call<MachineModel>, response: Response<MachineModel>) {

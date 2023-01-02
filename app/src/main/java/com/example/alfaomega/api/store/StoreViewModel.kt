@@ -11,6 +11,7 @@ class StoreViewModel : ViewModel(){
     fun FetchStore(){
         try {
             StoreApp.CreateInstance().fetchStore(
+                BearerToken = "Bearer " + TOKEN_API,
                 OwnerId = OWNER_ID
             ).enqueue(object :
                 Callback<ArrayList<StoreModel>> {
@@ -50,7 +51,9 @@ class StoreViewModel : ViewModel(){
 
     fun GetStore(){
         try {
-            StoreApp.CreateInstance().getStore(id = STORE_ID).enqueue(object :
+            StoreApp.CreateInstance().getStore(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = STORE_ID).enqueue(object :
                 Callback<ArrayList<StoreModel>> {
                 override fun onResponse(call: Call<ArrayList<StoreModel>>, response: Response<ArrayList<StoreModel>>) {
 

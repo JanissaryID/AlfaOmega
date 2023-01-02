@@ -25,7 +25,11 @@ class LogViewModel: ViewModel() {
             val formatDay = DateTimeFormatter.ofPattern("dd-MM-yyyy")
             val date = current.format(formatDay)
 
-            LogApp.CreateInstance().fetchLogMachine(store = STORE_ID, date = if(DATE_PICK.isNullOrEmpty()) date else DATE_PICK).enqueue(object :
+            LogApp.CreateInstance().fetchLogMachine(
+                BearerToken = "Bearer " + TOKEN_API,
+                store = STORE_ID,
+                date = if(DATE_PICK.isNullOrEmpty()) date else DATE_PICK
+            ).enqueue(object :
                 Callback<ArrayList<LogModel>> {
                 override fun onResponse(call: Call<ArrayList<LogModel>>, response: Response<ArrayList<LogModel>>) {
                     LOG_STATE = 0
@@ -89,7 +93,10 @@ class LogViewModel: ViewModel() {
             log = log
         )
 
-        LogApp.CreateInstance().insertLog(bodyUpdate).enqueue(object :
+        LogApp.CreateInstance().insertLog(
+            BearerToken = "Bearer " + TOKEN_API,
+            bodyUpdate
+        ).enqueue(object :
             Callback<LogModel> {
             override fun onResponse(call: Call<LogModel>, response: Response<LogModel>) {
                 if(response.code() == 201){

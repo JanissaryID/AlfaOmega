@@ -22,7 +22,10 @@ class MenuViewModel: ViewModel() {
 
     fun getMenu(){
         try {
-            MenuApp.CreateInstance().fetchMenu(store = STORE_ID).enqueue(object :
+            MenuApp.CreateInstance().fetchMenu(
+                BearerToken = "Bearer " + TOKEN_API,
+                store = STORE_ID
+            ).enqueue(object :
                 Callback<ArrayList<MenuModel>> {
                 override fun onResponse(call: Call<ArrayList<MenuModel>>, response: Response<ArrayList<MenuModel>>) {
                     MENU_STATE = 0
@@ -59,7 +62,10 @@ class MenuViewModel: ViewModel() {
 
     fun getTime(){
         try {
-            MenuApp.CreateInstance().fetchMenu(store = STORE_ID).enqueue(object :
+            MenuApp.CreateInstance().fetchMenu(
+                BearerToken = "Bearer " + TOKEN_API,
+                store = STORE_ID
+            ).enqueue(object :
                 Callback<ArrayList<MenuModel>> {
                 override fun onResponse(call: Call<ArrayList<MenuModel>>, response: Response<ArrayList<MenuModel>>) {
                     MENU_STATE = 0
@@ -124,7 +130,11 @@ class MenuViewModel: ViewModel() {
         )
 
         try {
-            MenuApp.CreateInstance().updateMenu(id = idMenu, bodyDataUpdate).enqueue(object :
+            MenuApp.CreateInstance().updateMenu(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = idMenu,
+                bodyDataUpdate
+            ).enqueue(object :
                 Callback<MenuModel> {
                 override fun onResponse(call: Call<MenuModel>, response: Response<MenuModel>) {
 //                    Log.d("info_update", "Code Update Machine ${response}")
@@ -193,7 +203,10 @@ class MenuViewModel: ViewModel() {
             menuClass = menuClass,
         )
 
-        MenuApp.CreateInstance().insertMenu(bodyUpdate).enqueue(object :
+        MenuApp.CreateInstance().insertMenu(
+            BearerToken = "Bearer " + TOKEN_API,
+            bodyUpdate
+        ).enqueue(object :
             Callback<MenuModel> {
             override fun onResponse(call: Call<MenuModel>, response: Response<MenuModel>) {
 //                Log.d("debug", "Code Insert Transaction ${response}")
@@ -222,7 +235,10 @@ class MenuViewModel: ViewModel() {
         navController: NavController
     ){
         try {
-            MenuApp.CreateInstance().deleteMenu(id = idMenu).enqueue(object :
+            MenuApp.CreateInstance().deleteMenu(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = idMenu
+            ).enqueue(object :
                 Callback<MenuModel> {
                 override fun onResponse(call: Call<MenuModel>, response: Response<MenuModel>) {
 //                    Log.d("debug", "Code Delete Menu ${response.code()}")

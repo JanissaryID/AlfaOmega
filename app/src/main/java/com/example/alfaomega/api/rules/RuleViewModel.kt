@@ -16,6 +16,7 @@ class RuleViewModel : ViewModel() {
     fun getRules(){
         try {
             RuleApp.CreateInstance().fetchRule(
+                BearerToken = "Bearer " + TOKEN_API,
                 OwnerId = OWNER_ID
             ).enqueue(object :
                 Callback<ArrayList<RuleModel>> {
@@ -57,7 +58,10 @@ class RuleViewModel : ViewModel() {
         )
 
         try {
-            RuleApp.CreateInstance().updateRule(id = idRule, bodyDataUpdate).enqueue(object :
+            RuleApp.CreateInstance().updateRule(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = idRule,
+                bodyDataUpdate).enqueue(object :
                 Callback<RuleModel> {
                 override fun onResponse(call: Call<RuleModel>, response: Response<RuleModel>) {
                     if(response.code() == 200){
@@ -106,7 +110,10 @@ class RuleViewModel : ViewModel() {
             rule = ruleText
         )
 
-        RuleApp.CreateInstance().insertRule(bodyUpdate).enqueue(object :
+        RuleApp.CreateInstance().insertRule(
+            BearerToken = "Bearer " + TOKEN_API,
+            bodyUpdate
+        ).enqueue(object :
             Callback<RuleModel> {
             override fun onResponse(call: Call<RuleModel>, response: Response<RuleModel>) {
                 if(response.code() == 201){
@@ -133,7 +140,10 @@ class RuleViewModel : ViewModel() {
         navController: NavController
     ){
         try {
-            RuleApp.CreateInstance().deleteRule(id = idRule).enqueue(object :
+            RuleApp.CreateInstance().deleteRule(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = idRule
+            ).enqueue(object :
                 Callback<RuleModel> {
                 override fun onResponse(call: Call<RuleModel>, response: Response<RuleModel>) {
 //                    Log.d("debug", "Code Delete Menu ${response.code()}")

@@ -35,7 +35,10 @@ class UserViewModel : ViewModel() {
         val screenBack = Screens.Home.route
 
         try {
-            UserApp.CreateInstance().getUser(username = username, password = password).enqueue(object :
+            UserApp.CreateInstance().getUser(
+                BearerToken = "Bearer " + TOKEN_API,
+                username = username,
+                password = password).enqueue(object :
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
 
@@ -109,6 +112,7 @@ class UserViewModel : ViewModel() {
     fun fetchUser(){
         try {
             UserApp.CreateInstance().fetchUser(
+                BearerToken = "Bearer " + TOKEN_API,
                 OwnerId = OWNER_ID
             ).enqueue(object :
                 Callback<ArrayList<UserModel>> {
@@ -152,7 +156,10 @@ class UserViewModel : ViewModel() {
         )
 
         try {
-            UserApp.CreateInstance().updateUser(id = idUser, bodyDataUpdate).enqueue(object :
+            UserApp.CreateInstance().updateUser(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = idUser,
+                bodyDataUpdate).enqueue(object :
                 Callback<UserModel> {
                 override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
                     if(response.code() == 200){
@@ -205,7 +212,9 @@ class UserViewModel : ViewModel() {
             typeUser = 0
         )
 
-        UserApp.CreateInstance().insertUser(bodyUpdate).enqueue(object :
+        UserApp.CreateInstance().insertUser(
+            BearerToken = "Bearer " + TOKEN_API,
+            bodyUpdate).enqueue(object :
             Callback<UserModel> {
             override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
 //                Log.d("debug_user", response.toString())
@@ -233,7 +242,10 @@ class UserViewModel : ViewModel() {
         navController: NavController
     ){
         try {
-            UserApp.CreateInstance().deleteUser(id = iduser).enqueue(object :
+            UserApp.CreateInstance().deleteUser(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = iduser
+            ).enqueue(object :
                 Callback<UserModel> {
                 override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
 //                    Log.d("debug", "Code Delete Menu ${response.code()}")

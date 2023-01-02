@@ -8,17 +8,25 @@ import retrofit2.http.*
 interface MenuService {
     @GET("NewMenu")
     fun fetchMenu(
+        @Header("Authorization") BearerToken: String,
         @Query(value="menu_store", encoded=true) store: String?
     ): Call<ArrayList<MenuModel>>
 
     @PATCH("NewMenu/{id}")
     fun updateMenu(
+        @Header("Authorization") BearerToken: String,
         @Path("id") id: String?, @Body updateData : MenuModel
     ): Call<MenuModel>
 
     @POST("NewMenu")
-    fun insertMenu(@Body statusData: MenuModel) : Call<MenuModel>
+    fun insertMenu(
+        @Header("Authorization") BearerToken: String,
+        @Body statusData: MenuModel
+    ) : Call<MenuModel>
 
     @DELETE("NewMenu/{id}")
-    fun deleteMenu( @Path("id") id: String? ): Call<MenuModel>
+    fun deleteMenu(
+        @Header("Authorization") BearerToken: String,
+        @Path("id") id: String?
+    ): Call<MenuModel>
 }

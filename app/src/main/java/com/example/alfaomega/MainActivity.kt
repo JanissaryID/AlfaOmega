@@ -55,6 +55,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        KEY_API = BuildConfig.KEY_API
+        TOKEN_API = BuildConfig.TOKEN_API
         bluetoothViewModel.createInstance(this@MainActivity)
         bluetoothViewModel.checkBluetoothCompatible()
 
@@ -70,17 +72,17 @@ class MainActivity : ComponentActivity() {
         setContent {
             AlfaOmegaTheme {
 
-                val multiplePermissionState = rememberMultiplePermissionsState(
-                    permissions = listOf(
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.BLUETOOTH,
-                        Manifest.permission.BLUETOOTH_ADMIN,
-                        Manifest.permission.BLUETOOTH_SCAN,
-                        Manifest.permission.BLUETOOTH_ADVERTISE,
-                        Manifest.permission.BLUETOOTH_CONNECT
-                    )
-                )
+//                val multiplePermissionState = rememberMultiplePermissionsState(
+//                    permissions = listOf(
+//                        Manifest.permission.ACCESS_COARSE_LOCATION,
+//                        Manifest.permission.ACCESS_FINE_LOCATION,
+//                        Manifest.permission.BLUETOOTH,
+//                        Manifest.permission.BLUETOOTH_ADMIN,
+//                        Manifest.permission.BLUETOOTH_SCAN,
+//                        Manifest.permission.BLUETOOTH_ADVERTISE,
+//                        Manifest.permission.BLUETOOTH_CONNECT
+//                    )
+//                )
 
                 // A surface container using the 'background' color from the theme
                 Surface(

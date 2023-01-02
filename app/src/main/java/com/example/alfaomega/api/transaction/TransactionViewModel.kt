@@ -21,7 +21,10 @@ class TransactionViewModel: ViewModel() {
 
     fun getTransactionActive() {
         try {
-            TransactionApp.CreateInstance().fetchTransactionActive(store = STORE_ID).enqueue(object :
+            TransactionApp.CreateInstance().fetchTransactionActive(
+                BearerToken = "Bearer " + TOKEN_API,
+                store = STORE_ID
+            ).enqueue(object :
                 Callback<ArrayList<TransactionModel>> {
                 override fun onResponse(
                     call: Call<ArrayList<TransactionModel>>,
@@ -84,7 +87,10 @@ class TransactionViewModel: ViewModel() {
             isDryer = isDryer
         )
 
-        TransactionApp.CreateInstance().insertTransactions(bodyUpdate).enqueue(object :
+        TransactionApp.CreateInstance().insertTransactions(
+            BearerToken = "Bearer " + TOKEN_API,
+            bodyUpdate
+        ).enqueue(object :
             Callback<TransactionModel> {
             override fun onResponse(call: Call<TransactionModel>, response: Response<TransactionModel>) {
 //                Log.d("debug", "Code Insert Transaction ${response}")
@@ -121,7 +127,10 @@ class TransactionViewModel: ViewModel() {
         )
 
         try {
-            TransactionApp.CreateInstance().updateMachine(id = idTransaction, updateData = bodyUpdate).enqueue(object :
+            TransactionApp.CreateInstance().updateMachine(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = idTransaction,
+                updateData = bodyUpdate).enqueue(object :
                 Callback<TransactionModel> {
                 override fun onResponse(call: Call<TransactionModel>, response: Response<TransactionModel>) {
                     if(response.code() == 200){
@@ -168,7 +177,11 @@ class TransactionViewModel: ViewModel() {
         val date = current.format(formatDay)
 
         try {
-            TransactionApp.CreateInstance().fetchTransactionNow(date = date, store = STORE_ID).enqueue(object :
+            TransactionApp.CreateInstance().fetchTransactionNow(
+                BearerToken = "Bearer " + TOKEN_API,
+                date = date,
+                store = STORE_ID
+            ).enqueue(object :
                 Callback<ArrayList<TransactionModel>> {
                 override fun onResponse(
                     call: Call<ArrayList<TransactionModel>>,
@@ -208,7 +221,10 @@ class TransactionViewModel: ViewModel() {
         val date = current.format(formatDay)
 
         try {
-            TransactionApp.CreateInstance().fetchTransactionNow(date = if(DATE_PICK.isNullOrEmpty()) date else DATE_PICK, store = STORE_ID).enqueue(object :
+            TransactionApp.CreateInstance().fetchTransactionNow(
+                BearerToken = "Bearer " + TOKEN_API,
+                date = if(DATE_PICK.isNullOrEmpty()) date else DATE_PICK,
+                store = STORE_ID).enqueue(object :
                 Callback<ArrayList<TransactionModel>> {
                 override fun onResponse(
                     call: Call<ArrayList<TransactionModel>>,

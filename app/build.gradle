@@ -19,6 +19,12 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+        buildConfigField "String", "KEY_API", "\"${properties.getProperty("KEY_API")}\""
+        buildConfigField "String", "TOKEN_API", "\"${properties.getProperty("TOKEN_API")}\""
     }
 
     buildTypes {

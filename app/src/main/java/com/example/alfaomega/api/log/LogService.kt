@@ -1,18 +1,19 @@
 package com.example.alfaomega.api.log
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface LogService {
     @GET("NewLogMachine")
     fun fetchLogMachine(
+        @Header("Authorization") BearerToken: String,
         @Query(value="machine_store", encoded=true) store: String?,
         @Query(value="date", encoded=true) date: String?
     ): Call<ArrayList<LogModel>>
 
     @POST("NewLogMachine")
-    fun insertLog(@Body statusData: LogModel) : Call<LogModel>
+    fun insertLog(
+        @Header("Authorization") BearerToken: String,
+        @Body statusData: LogModel
+    ) : Call<LogModel>
 }

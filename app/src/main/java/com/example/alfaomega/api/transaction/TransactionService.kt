@@ -8,25 +8,32 @@ import retrofit2.http.*
 interface TransactionService {
     @GET("NewTransaction")
     fun fetchTransactionActive(
+        @Header("Authorization") BearerToken: String,
         @Query(value="transaction_store", encoded=true) store: String?,
     ): Call<ArrayList<TransactionModel>>
 
     @POST("NewTransaction")
-    fun insertTransactions(@Body statusData: TransactionModel) : Call<TransactionModel>
+    fun insertTransactions(
+        @Header("Authorization") BearerToken: String,
+        @Body statusData: TransactionModel
+    ) : Call<TransactionModel>
 
     @PATCH("NewTransaction/{id}")
     fun updateMachine(
+        @Header("Authorization") BearerToken: String,
         @Path("id") id: String?, @Body updateData : TransactionModel
     ): Call<TransactionModel>
 
     @GET("NewTransaction")
     fun fetchTransactionNow(
+        @Header("Authorization") BearerToken: String,
         @Query(value="transaction_date", encoded=true) date: String?,
         @Query(value="transaction_store", encoded=true) store: String?,
     ): Call<ArrayList<TransactionModel>>
 
     @GET("NewTransaction")
     fun fetchTransactionDate(
+        @Header("Authorization") BearerToken: String,
         @Query(value="transaction_date", encoded=true) date: String?,
         @Query(value="transaction_store", encoded=true) store: String?,
     ): Call<ArrayList<TransactionModel>>
