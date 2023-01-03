@@ -16,6 +16,7 @@ import com.google.accompanist.permissions.MultiplePermissionsState
 
 //Variable New Transaction
 var NEW_TRANSACATION_CUSTOMER: String by mutableStateOf("")
+var NEW_TRANSACATION_PHONE: String by mutableStateOf("")
 var NEW_TRANSACATION_MENU: String by mutableStateOf("")
 var NEW_TRANSACATION_CLASS: Boolean by mutableStateOf(false)
 var NEW_TRANSACATION_TYPE: String by mutableStateOf("")
@@ -85,7 +86,7 @@ var MACHINE_CLASS: Boolean by mutableStateOf(false)
 var MACHINE_TYPE: Boolean by mutableStateOf(false)
 var MACHINE_TIME: Int by mutableStateOf(0)
 var MACHINE_NUMBER: Int by mutableStateOf(0)
-var MACHINE_BUTTON_UPDATE: Boolean by mutableStateOf(true)
+var MACHINE_BUTTON_UPDATE: Boolean by mutableStateOf(false)
 
 //Variable user
 var USER_STATE: Int by mutableStateOf(0)

@@ -44,6 +44,8 @@ fun ItemMachine(
                         MACHINE_TYPE = machineModel.machineType!!
                         MACHINE_NUMBER = machineModel.machineNumber!!
 
+                        MACHINE_BUTTON_UPDATE = selected
+
                         if(!machineModel.machineClass!! && !machineModel.machineType!!){
                             MACHINE_TIME = TIME_WASHER_GIANT
                         }

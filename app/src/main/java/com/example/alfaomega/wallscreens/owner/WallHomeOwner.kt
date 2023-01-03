@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -32,6 +33,20 @@ fun WallHomeOwner(
 ) {
     var list: ArrayList<MenuOwnerModel> = arrayListOf()
     list.addAll(MenuOwner.listData)
+
+    val selectionMenuTitle = listOf(
+        stringResource(R.string.PrinterTitle),
+        stringResource(R.string.Menu),
+        stringResource(R.string.TransactionTitle),
+        stringResource(R.string.EmployeeTitle),
+    )
+
+    val selectionMenuText = listOf(
+        stringResource(R.string.OwnerRule),
+        stringResource(R.string.OwnerMenu),
+        stringResource(R.string.OwnerTransaction),
+        stringResource(R.string.OwnerEmployee),
+    )
 
     Surface(
         color = Color.Transparent,
@@ -104,8 +119,8 @@ fun WallHomeOwner(
                 ){
                     items(items = list) { menu ->
                         ItemStoreMenu(
-                            title = menu.titleName,
-                            subTitle = menu.subTitle,
+                            title = selectionMenuTitle[menu.titleName],
+                            subTitle = selectionMenuText[menu.subTitle],
                             iconMenu = menu.menuIcon,
                             screenMenuItem = menu.screensMenu,
                             typeMenu = menu.typeMenu,

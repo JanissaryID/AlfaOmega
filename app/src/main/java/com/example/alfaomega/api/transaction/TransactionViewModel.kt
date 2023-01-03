@@ -66,6 +66,7 @@ class TransactionViewModel: ViewModel() {
         transactionStateMachine: Int,
         isWasher: Boolean,
         isDryer: Boolean,
+        phoneCustomer: String,
         navController: NavController
     ){
         val current = LocalDateTime.now()
@@ -84,7 +85,9 @@ class TransactionViewModel: ViewModel() {
             transactionCustomer = transactionCustomer,
             transactionStateMachine = transactionStateMachine,
             isWasher = isWasher,
-            isDryer = isDryer
+            isDryer = isDryer,
+            transactionAdmin = USER_NAME,
+            userPhone = phoneCustomer
         )
 
         TransactionApp.CreateInstance().insertTransactions(

@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -37,7 +38,15 @@ fun DetailTransaction(
     navController: NavController,
     whatsappViewModel: WhatsappViewModel = WhatsappViewModel()
 ) {
-    val selectionProgressMachine = listOf("Pick Washer", "Wash Process", "Finish Wash", "Pick Dryer", "Dry Process", "Finish Dry", "Finish Transaction")
+    val selectionProgressMachine = listOf(
+        stringResource(R.string.PickWasher),
+        stringResource(R.string.WasherProcess),
+        stringResource(R.string.SelesaiMencuci),
+        stringResource(R.string.PickDryer),
+        stringResource(R.string.DryProces),
+        stringResource(R.string.FinishDry),
+        stringResource(R.string.FinishTransaction)
+    )
     var titleButton by remember {
         mutableStateOf("")
     }
@@ -47,7 +56,11 @@ fun DetailTransaction(
     var button_clicked by remember { mutableStateOf(false) }
     var text_name by remember {
         if(!TRANSACTION_SCREEN) mutableStateOf(TextFieldValue(TRANSACATION_CUSTOMER))
-        else mutableStateOf(TextFieldValue(NEW_TRANSACATION_CUSTOMER))
+        else if(!TRANSACATION_PAYMENT.isNullOrEmpty()) mutableStateOf(TextFieldValue(TRANSACATION_CUSTOMER)) else mutableStateOf(TextFieldValue(
+            NEW_TRANSACATION_CUSTOMER))
+    }
+    var text_phone by remember {
+        mutableStateOf(TextFieldValue(NEW_TRANSACATION_PHONE))
     }
     var payment_value_index by remember {
         mutableStateOf(0)
@@ -69,7 +82,7 @@ fun DetailTransaction(
     val isSelectedItemPayment: (String) -> Boolean = { selectedValuePayment.value == it }
     val onChangeStatePayment: (String) -> Unit = { selectedValuePayment.value = it }
 
-    val paymentMethode = listOf("Cash", "Qris")
+    val paymentMethode = listOf(stringResource(R.string.CashTitle), stringResource(R.string.QrisTitle))
 
     val context = LocalContext.current
     
@@ -96,7 +109,7 @@ fun DetailTransaction(
                     modifier = Modifier.fillMaxWidth(),
                 ){
                     Text(
-                        text = "Customer",
+                        text = stringResource(R.string.CustomerTitle),
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
@@ -121,8 +134,36 @@ fun DetailTransaction(
                         readOnly = if(!TRANSACTION_SCREEN) true else false
                     )
                     Spacer(modifier = Modifier.height(16.dp))
+                    if(TRANSACTION_SCREEN){
+                        Text(
+                            text = stringResource(R.string.PhoneTitle),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        TextField(
+                            value = text_phone,
+                            onValueChange ={
+                                text_phone = it
+                            },
+                            singleLine = true,
+                            colors = TextFieldDefaults.textFieldColors(
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent,
+                                disabledIndicatorColor = Color.Transparent,
+                                containerColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                textColor = MaterialTheme.colorScheme.surfaceVariant,
+                                disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
+                            ),
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier.fillMaxWidth(),
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                            readOnly = if(!TRANSACTION_SCREEN) true else false
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "Menu",
+                        text = stringResource(id = R.string.Menu),
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
@@ -166,7 +207,7 @@ fun DetailTransaction(
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "Type Menu",
+                        text = stringResource(id = R.string.TypeMenuTitle),
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
@@ -217,7 +258,7 @@ fun DetailTransaction(
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "Price",
+                        text = stringResource(id = R.string.PriceTitle),
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
@@ -268,7 +309,7 @@ fun DetailTransaction(
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "Payment",
+                        text = stringResource(R.string.PaymentTitle),
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
@@ -342,7 +383,7 @@ fun DetailTransaction(
                     if(!TRANSACTION_SCREEN){
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
-                            text = "Date Transaction",
+                            text = stringResource(R.string.DateTransactionTitle),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
                         )
@@ -354,7 +395,7 @@ fun DetailTransaction(
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
-                            text = "Admin",
+                            text = stringResource(R.string.Admin),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
                         )
@@ -370,57 +411,68 @@ fun DetailTransaction(
             }
         }
 
-        when (TRANSACATION_STATUS_MACHINE){
-            0 -> {
-                NEW_TRANSACATION_BUTTON = true
-                titleButton = selectionProgressMachine[0]
-                StatMessage = 0
-            }
-            1 -> {
-                NEW_TRANSACATION_BUTTON = false
-                titleButton = selectionProgressMachine[1]
-                StatMessage = 0
-            }
-            2 -> {
-                NEW_TRANSACATION_BUTTON = true
-                if(TRANSACATION_IS_WASHER && TRANSACATION_IS_DRYER){
-                    TRANSACATION_STATUS_MACHINE = 3
+        if(!TRANSACTION_SCREEN){
+            when (TRANSACATION_STATUS_MACHINE){
+                0 -> {
+                    NEW_TRANSACATION_BUTTON = true
+                    titleButton = selectionProgressMachine[0]
+                    StatMessage = 0
+                }
+                1 -> {
+                    NEW_TRANSACATION_BUTTON = false
+                    titleButton = selectionProgressMachine[1]
+                    StatMessage = 0
+                }
+                2 -> {
+                    NEW_TRANSACATION_BUTTON = true
+                    if(TRANSACATION_IS_WASHER && TRANSACATION_IS_DRYER){
+                        TRANSACATION_STATUS_MACHINE = 3
+                        titleButton = selectionProgressMachine[3]
+                        StatMessage = 0
+                    }
+                    else{
+                        TRANSACATION_STATUS_MACHINE = 6
+                        titleButton = selectionProgressMachine[6]
+                        StatMessage = 1
+                    }
+                }
+                3 -> {
+                    NEW_TRANSACATION_BUTTON = true
                     titleButton = selectionProgressMachine[3]
                     StatMessage = 0
                 }
-                else{
-                    TRANSACATION_STATUS_MACHINE = 6
-                    titleButton = selectionProgressMachine[6]
-                    StatMessage = 1
-                }
-            }
-            3 -> {
-                NEW_TRANSACATION_BUTTON = true
-                titleButton = selectionProgressMachine[3]
-                StatMessage = 0
-            }
-            4 -> {
-                NEW_TRANSACATION_BUTTON = false
-                titleButton = selectionProgressMachine[4]
-                StatMessage = 0
-            }
-            5 -> {
-                NEW_TRANSACATION_BUTTON = true
-                if(TRANSACATION_IS_DRYER){
-                    TRANSACATION_STATUS_MACHINE = 6
-                    titleButton = selectionProgressMachine[6]
-                    StatMessage = 1
-                }
-                else{
-                    titleButton = selectionProgressMachine[5]
+                4 -> {
+                    NEW_TRANSACATION_BUTTON = false
+                    titleButton = selectionProgressMachine[4]
                     StatMessage = 0
                 }
+                5 -> {
+                    NEW_TRANSACATION_BUTTON = true
+                    if(TRANSACATION_IS_DRYER){
+                        TRANSACATION_STATUS_MACHINE = 6
+                        titleButton = selectionProgressMachine[6]
+                        StatMessage = 1
+                    }
+                    else{
+                        titleButton = selectionProgressMachine[5]
+                        StatMessage = 0
+                    }
+                }
+                6 -> {
+                    NEW_TRANSACATION_BUTTON = true
+                    titleButton = selectionProgressMachine[6]
+                    StatMessage = 1
+                }
             }
-            6 -> {
+        }
+        else{
+            if(!text_name.text.isNullOrEmpty() && !paymentMethode.isEmpty()){
                 NEW_TRANSACATION_BUTTON = true
-                titleButton = selectionProgressMachine[6]
-                StatMessage = 1
             }
+            else{
+                NEW_TRANSACATION_BUTTON = false
+            }
+
         }
 
         Row(modifier = Modifier
@@ -434,7 +486,7 @@ fun DetailTransaction(
         ) {
             Surface(modifier = Modifier.weight(1f)) {
                 ButtonView(
-                    title = if(!TRANSACTION_SCREEN) titleButton else "Create Transaction",
+                    title = if(!TRANSACTION_SCREEN) titleButton else stringResource(R.string.CreateTransactionTitle),
                     enable = NEW_TRANSACATION_BUTTON,
                 ) {
                     button_clicked = true
@@ -464,6 +516,7 @@ fun DetailTransaction(
                             else 0,
                             isWasher = NEW_TRANSACATION_IS_WASHER,
                             isDryer = NEW_TRANSACATION_IS_DRYER,
+                            phoneCustomer = text_phone.text,
                             navController = navController
                         )
                     }
@@ -474,12 +527,11 @@ fun DetailTransaction(
                 Surface(modifier = Modifier.weight(1f)) {
                     ButtonView(
                         title = stringResource(R.string.Whatsapp),
-                        enable = true,
+                        enable = if(TRANSACTION_NUMBER.isNullOrEmpty()) false else true,
                         colorButton = Color("#25d366".toColorInt()),
                         typeButton = true
                     ) {
                         if(StatMessage == 1){
-//                            Log.d("debug_number", "${TRANSACTION_NUMBER.drop(1)}")
                             whatsappViewModel.SendMessage(
                                 context = context,
                                 phone = "+62 ${TRANSACTION_NUMBER.drop(1)}",
@@ -487,7 +539,6 @@ fun DetailTransaction(
                             )
                         }
                         else{
-//                            Log.d("debug_number", "${TRANSACTION_NUMBER.drop(1)}")
                             whatsappViewModel.SendMessage(
                                 context = context,
                                 phone = "+62 ${TRANSACTION_NUMBER.drop(1)}",

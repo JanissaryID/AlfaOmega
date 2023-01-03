@@ -7,10 +7,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.R
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.components.ButtonView
@@ -74,7 +76,7 @@ fun WallMachine(
         }
 
         ButtonView(
-            title = "Active Machine",
+            title = stringResource(R.string.ActiveMachine),
             enable = MACHINE_BUTTON_UPDATE,
             modifier = Modifier.constrainAs(ButtonActive){
                 bottom.linkTo(parent.bottom, 16.dp)

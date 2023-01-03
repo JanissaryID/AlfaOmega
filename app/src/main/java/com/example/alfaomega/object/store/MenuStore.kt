@@ -5,16 +5,16 @@ import com.example.alfaomega.navigations.Screens
 
 object MenuStore {
 
-    private val titleName = arrayOf(
-        "Printer",
-        "Transaction",
-        "Account",
+    private val titleName = intArrayOf(
+        0,
+        1,
+        2,
     )
 
-    private val subTitle = arrayOf(
-        "Check Printer",
-        "Show All Transaction Today",
-        "Login Account",
+    private val subTitle = intArrayOf(
+        0,
+        1,
+        2,
     )
 
     private val menuIcon = intArrayOf(

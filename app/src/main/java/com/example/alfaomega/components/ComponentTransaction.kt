@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,7 +38,14 @@ fun ComponentTransaction(
     transactionNumber: String,
     navController: NavController
 ) {
-    val selectionProgressMachine = listOf("Waiting Wash", "Washing", "Finish Wash", "Waiting Dry", "Drying", "Finish Dry")
+    val selectionProgressMachine = listOf(
+        stringResource(R.string.WaitingWash),
+        stringResource(R.string.Washing),
+        stringResource(R.string.FinishWash),
+        stringResource(R.string.MenungguPengering),
+        stringResource(R.string.Drying),
+        stringResource(R.string.FinishDrying)
+            )
     var titleProcess by remember {
         mutableStateOf("")
     }

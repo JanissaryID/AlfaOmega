@@ -75,6 +75,7 @@ fun NavGraphSetup(
                     TRANSACATION_IS_WASHER = false
                     TRANSACATION_IS_DRYER = false
                     NEW_TRANSACATION_CUSTOMER = ""
+                    TRANSACATION_PAYMENT = ""
                 }
                 BUTTON_LOGIN_CLICKED = false
             }

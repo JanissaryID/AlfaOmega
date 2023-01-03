@@ -33,6 +33,18 @@ fun WallStore(
     var list: ArrayList<MenuStoreModel> = arrayListOf()
     list.addAll(MenuStore.listData)
 
+    val selectionMenuTitle = listOf(
+        stringResource(R.string.PrinterTitle),
+        stringResource(R.string.TransactionTitle),
+        stringResource(R.string.LoginTitle)
+    )
+
+    val selectionMenuText = listOf(
+        stringResource(R.string.CheckPrinter),
+        stringResource(R.string.ShowAllTransaction),
+        stringResource(R.string.LoginAccount),
+    )
+
     Surface(
         color = Color.Transparent,
         modifier = Modifier
@@ -116,8 +128,8 @@ fun WallStore(
                         }
                         else{
                             ItemStoreMenu(
-                                title = menu.titleName,
-                                subTitle = menu.subTitle,
+                                title = selectionMenuTitle[menu.titleName],
+                                subTitle = selectionMenuText[menu.subTitle],
                                 iconMenu = menu.menuIcon,
                                 screenMenuItem = menu.screensMenu,
                                 typeMenu = menu.typeMenu,

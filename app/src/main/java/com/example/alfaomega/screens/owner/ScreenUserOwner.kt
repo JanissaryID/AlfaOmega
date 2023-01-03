@@ -15,7 +15,7 @@ import com.example.alfaomega.proto.ProtoViewModel
 @Composable
 fun ScreenUserOwner(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
-    val tittleScreen = "Admin"
+    val tittleScreen = stringResource(R.string.EmployeeTitle)
     val screenBack = Screens.Home.route
     val floatingRoute = Screens.UserEditOwner.route
     val icon = R.drawable.ic_twotone_storefront_24

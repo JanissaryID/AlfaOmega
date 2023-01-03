@@ -5,20 +5,18 @@ import com.example.alfaomega.navigations.Screens
 
 object MenuOwner {
 
-    private val titleName = arrayOf(
-        "Printer",
-        "Menu",
-        "Transaction",
-        "Employee",
-//        "Logout"
+    private val titleName = intArrayOf(
+        0,
+        1,
+        2,
+        3
     )
 
-    private val subTitle = arrayOf(
-        "Rules of Laundry to Customers",
-        "Add, Edit, and Delete list Menu",
-        "Show All Transaction Today",
-        "Add, Edit, and Delete Employee",
-//        "Logout from Owner Mode"
+    private val subTitle = intArrayOf(
+        0,
+        1,
+        2,
+        3
     )
 
     private val menuIcon = intArrayOf(

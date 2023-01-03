@@ -7,8 +7,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.alfaomega.R
 import com.example.alfaomega.api.menu.MenuModel
 import com.example.alfaomega.api.transaction.TransactionModel
 import com.example.alfaomega.components.ComponentMenu
@@ -20,7 +22,7 @@ fun TransactionActiveLazyColumn(
     navController: NavController,
 ) {
     val selectionMenuClass = listOf("Giant 8 Kg", "Titan 12 Kg")
-    val selectionPayment = listOf("Cash", "Qris")
+    val selectionPayment = listOf(stringResource(R.string.CashTitle), stringResource(R.string.QrisTitle))
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
