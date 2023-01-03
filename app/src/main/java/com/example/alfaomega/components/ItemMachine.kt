@@ -25,7 +25,7 @@ fun ItemMachine(
     selected: Boolean,
     onClick: (Int) -> Unit
 ) {
-    val context = LocalContext.current
+//    val context = LocalContext.current
 
     Card(
         modifier = Modifier.padding(top = 10.dp, bottom = 10.dp, start = 4.dp, end = 4.dp),

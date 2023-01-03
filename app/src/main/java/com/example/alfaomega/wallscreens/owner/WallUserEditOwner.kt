@@ -19,7 +19,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
-import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.components.ButtonView
 

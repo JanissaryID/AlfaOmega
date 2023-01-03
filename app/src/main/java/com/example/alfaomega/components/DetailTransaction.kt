@@ -1,7 +1,6 @@
 package com.example.alfaomega.components
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
@@ -12,14 +11,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.core.graphics.toColorInt
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.R
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.navigations.Screens
 
@@ -31,7 +33,7 @@ fun DetailTransaction(
     transactionViewModel: TransactionViewModel,
     navController: NavController
 ) {
-    val selectionProgressMachine = listOf("Pick Washer Machine", "Wash Process", "Finish Wash", "Pick Dryer Machine", "Dry Process", "Finish Dry", "Finish Transaction")
+    val selectionProgressMachine = listOf("Pick Washer", "Wash Process", "Finish Wash", "Pick Dryer", "Dry Process", "Finish Dry", "Finish Transaction")
     var titleButton by remember {
         mutableStateOf("")
     }
@@ -404,44 +406,63 @@ fun DetailTransaction(
             }
         }
 
-        ButtonView(
-            title = if(!TRANSACTION_SCREEN) titleButton else "Create Transaction",
-            enable = NEW_TRANSACATION_BUTTON,
-            modifier = Modifier.constrainAs(Button){
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .constrainAs(Button) {
                 bottom.linkTo(parent.bottom, 16.dp)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
-            }
+            },
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            button_clicked = true
+            Surface(modifier = Modifier.weight(1f)) {
+                ButtonView(
+                    title = if(!TRANSACTION_SCREEN) titleButton else "Create Transaction",
+                    enable = NEW_TRANSACATION_BUTTON,
+                ) {
+                    button_clicked = true
 
-            if(!TRANSACTION_SCREEN){
-                if(TRANSACATION_STATUS_MACHINE == 6){
-                    transactionViewModel.updateTransaction(
-                        idTransaction = TRANSACATION_ID,
-                        transactionStateMachine = 6,
-                        navController = navController
-                    )
-                }
-                else{
-                    navController.navigate(route = Screens.Machine.route)
+                    if(!TRANSACTION_SCREEN){
+                        if(TRANSACATION_STATUS_MACHINE == 6){
+                            transactionViewModel.updateTransaction(
+                                idTransaction = TRANSACATION_ID,
+                                transactionStateMachine = 6,
+                                navController = navController
+                            )
+                        }
+                        else{
+                            navController.navigate(route = Screens.Machine.route)
+                        }
+                    }
+                    else{
+                        transactionViewModel.insertTransaction(
+                            transactionCustomer = text_name.text,
+                            transactionMenu = NEW_TRANSACATION_MENU,
+                            transactionPrice = NEW_TRANSACATION_PRICE,
+                            transactionClass = NEW_TRANSACATION_CLASS,
+                            transactionPayment = if(payment_value_index == 0) false else true,
+                            transactionStateMachine = if(NEW_TRANSACATION_IS_WASHER) 0
+                            else if(NEW_TRANSACATION_IS_DRYER) 3
+                            else if (!NEW_TRANSACATION_IS_WASHER && !NEW_TRANSACATION_IS_DRYER) 6
+                            else 0,
+                            isWasher = NEW_TRANSACATION_IS_WASHER,
+                            isDryer = NEW_TRANSACATION_IS_DRYER,
+                            navController = navController
+                        )
+                    }
                 }
             }
-            else{
-                transactionViewModel.insertTransaction(
-                    transactionCustomer = text_name.text,
-                    transactionMenu = NEW_TRANSACATION_MENU,
-                    transactionPrice = NEW_TRANSACATION_PRICE,
-                    transactionClass = NEW_TRANSACATION_CLASS,
-                    transactionPayment = if(payment_value_index == 0) false else true,
-                    transactionStateMachine = if(NEW_TRANSACATION_IS_WASHER) 0
-                    else if(NEW_TRANSACATION_IS_DRYER) 3
-                    else if (!NEW_TRANSACATION_IS_WASHER && !NEW_TRANSACATION_IS_DRYER) 6
-                    else 0,
-                    isWasher = NEW_TRANSACATION_IS_WASHER,
-                    isDryer = NEW_TRANSACATION_IS_DRYER,
-                    navController = navController
-                )
+            if(!TRANSACTION_SCREEN){
+                Spacer(modifier = Modifier.width(16.dp))
+                Surface(modifier = Modifier.weight(1f)) {
+                    ButtonView(
+                        title = stringResource(R.string.Whatsapp),
+                        enable = true,
+                        colorButton = Color("#25d366".toColorInt())
+                    ) {
+                        //                button_clicked = true
+                    }
+                }
             }
         }
     }

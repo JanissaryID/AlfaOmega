@@ -1,7 +1,5 @@
 package com.example.alfaomega.wallscreens
 
-import android.util.Log
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,7 +14,6 @@ import com.example.alfaomega.*
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.components.ButtonView
-import com.example.alfaomega.components.DetailTransaction
 import com.example.alfaomega.view.admin.machine.MachineLoadData
 
 @Composable

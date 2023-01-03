@@ -71,10 +71,10 @@ class MenuViewModel: ViewModel() {
                     MENU_STATE = 0
                     if(response.code() == 200){
                         response.body()?.let {
-                            var WashTimeGiant: ArrayList<MenuModel> =  response.body()!!.filter { menu -> menu.menuClass == false && menu.isWasher == true && menu.isDryer == false} as ArrayList<MenuModel>
-                            var DryTimeGiant: ArrayList<MenuModel> =  response.body()!!.filter { menu -> menu.menuClass == false && menu.isWasher == false && menu.isDryer == true} as ArrayList<MenuModel>
-                            var WashTimeTitan: ArrayList<MenuModel> =  response.body()!!.filter { menu -> menu.menuClass == true && menu.isWasher == true && menu.isDryer == false} as ArrayList<MenuModel>
-                            var DryTimeTitan: ArrayList<MenuModel> =  response.body()!!.filter { menu -> menu.menuClass == true && menu.isWasher == false && menu.isDryer == true} as ArrayList<MenuModel>
+//                            var WashTimeGiant: ArrayList<MenuModel> =  response.body()!!.filter { menu -> menu.menuClass == false && menu.isWasher == true && menu.isDryer == false} as ArrayList<MenuModel>
+//                            var DryTimeGiant: ArrayList<MenuModel> =  response.body()!!.filter { menu -> menu.menuClass == false && menu.isWasher == false && menu.isDryer == true} as ArrayList<MenuModel>
+//                            var WashTimeTitan: ArrayList<MenuModel> =  response.body()!!.filter { menu -> menu.menuClass == true && menu.isWasher == true && menu.isDryer == false} as ArrayList<MenuModel>
+//                            var DryTimeTitan: ArrayList<MenuModel> =  response.body()!!.filter { menu -> menu.menuClass == true && menu.isWasher == false && menu.isDryer == true} as ArrayList<MenuModel>
 
 //                            Log.i("info_response", "TIME 2 : ${WashTimeGiant[0].menuTime!!.toInt()}  ${DryTimeGiant[0].menuTime!!.toInt()}  ${WashTimeTitan[0].menuTime!!.toInt()}  ${DryTimeTitan[0].menuTime!!.toInt()}")
 

@@ -67,7 +67,7 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
                 if (!STORE_ID.isNullOrEmpty()){
                     transactionViewModel.getTransactionActive()
-                    menuViewModel.getTime()
+//                    menuViewModel.getTime()
                     storeViewModel.GetStore()
 
                     TRANSACTION_SCREEN = true

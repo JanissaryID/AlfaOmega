@@ -39,4 +39,5 @@
     <string name="LogoutAccountTitle">Logout Account</string>
     <string name="PrinterTitle">Printer</string>
     <string name="BluetoothEmpty">Bluetooth Empty</string>
+    <string name="Whatsapp">Whatsapp</string>
 </resources>
