@@ -1,6 +1,7 @@
 package com.example.alfaomega.components
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
@@ -11,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +26,7 @@ import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.navigations.Screens
+import com.example.alfaomega.whatsapp.WhatsappViewModel
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -31,12 +34,15 @@ import com.example.alfaomega.navigations.Screens
 @Composable
 fun DetailTransaction(
     transactionViewModel: TransactionViewModel,
-    navController: NavController
+    navController: NavController,
+    whatsappViewModel: WhatsappViewModel = WhatsappViewModel()
 ) {
     val selectionProgressMachine = listOf("Pick Washer", "Wash Process", "Finish Wash", "Pick Dryer", "Dry Process", "Finish Dry", "Finish Transaction")
     var titleButton by remember {
         mutableStateOf("")
     }
+
+    var StatMessage: Int = 0
 
     var button_clicked by remember { mutableStateOf(false) }
     var text_name by remember {
@@ -64,6 +70,8 @@ fun DetailTransaction(
     val onChangeStatePayment: (String) -> Unit = { selectedValuePayment.value = it }
 
     val paymentMethode = listOf("Cash", "Qris")
+
+    val context = LocalContext.current
     
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
 
@@ -366,43 +374,52 @@ fun DetailTransaction(
             0 -> {
                 NEW_TRANSACATION_BUTTON = true
                 titleButton = selectionProgressMachine[0]
+                StatMessage = 0
             }
             1 -> {
                 NEW_TRANSACATION_BUTTON = false
                 titleButton = selectionProgressMachine[1]
+                StatMessage = 0
             }
             2 -> {
                 NEW_TRANSACATION_BUTTON = true
                 if(TRANSACATION_IS_WASHER && TRANSACATION_IS_DRYER){
                     TRANSACATION_STATUS_MACHINE = 3
                     titleButton = selectionProgressMachine[3]
+                    StatMessage = 0
                 }
                 else{
                     TRANSACATION_STATUS_MACHINE = 6
                     titleButton = selectionProgressMachine[6]
+                    StatMessage = 1
                 }
             }
             3 -> {
                 NEW_TRANSACATION_BUTTON = true
                 titleButton = selectionProgressMachine[3]
+                StatMessage = 0
             }
             4 -> {
                 NEW_TRANSACATION_BUTTON = false
                 titleButton = selectionProgressMachine[4]
+                StatMessage = 0
             }
             5 -> {
                 NEW_TRANSACATION_BUTTON = true
                 if(TRANSACATION_IS_DRYER){
                     TRANSACATION_STATUS_MACHINE = 6
                     titleButton = selectionProgressMachine[6]
+                    StatMessage = 1
                 }
                 else{
                     titleButton = selectionProgressMachine[5]
+                    StatMessage = 0
                 }
             }
             6 -> {
                 NEW_TRANSACATION_BUTTON = true
                 titleButton = selectionProgressMachine[6]
+                StatMessage = 1
             }
         }
 
@@ -458,9 +475,25 @@ fun DetailTransaction(
                     ButtonView(
                         title = stringResource(R.string.Whatsapp),
                         enable = true,
-                        colorButton = Color("#25d366".toColorInt())
+                        colorButton = Color("#25d366".toColorInt()),
+                        typeButton = true
                     ) {
-                        //                button_clicked = true
+                        if(StatMessage == 1){
+//                            Log.d("debug_number", "${TRANSACTION_NUMBER.drop(1)}")
+                            whatsappViewModel.SendMessage(
+                                context = context,
+                                phone = "+62 ${TRANSACTION_NUMBER.drop(1)}",
+                                message = whatsappViewModel.Finish_Message
+                            )
+                        }
+                        else{
+//                            Log.d("debug_number", "${TRANSACTION_NUMBER.drop(1)}")
+                            whatsappViewModel.SendMessage(
+                                context = context,
+                                phone = "+62 ${TRANSACTION_NUMBER.drop(1)}",
+                                message = whatsappViewModel.Send_Message
+                            )
+                        }
                     }
                 }
             }

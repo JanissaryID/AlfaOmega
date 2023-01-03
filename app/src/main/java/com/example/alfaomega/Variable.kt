@@ -63,6 +63,7 @@ var TRANSACATION_IS_DRYER: Boolean by mutableStateOf(false)
 var TRANSACTION_ERROR: String by mutableStateOf("")
 var TRANSACTION_RESPONSE: ArrayList<TransactionModel> by mutableStateOf(arrayListOf())
 var TRANSACTION_STATE: Int by mutableStateOf(0)
+var TRANSACTION_NUMBER: String by mutableStateOf("")
 
 //Variable Screen
 var TRANSACTION_SCREEN: Boolean by mutableStateOf(false)
