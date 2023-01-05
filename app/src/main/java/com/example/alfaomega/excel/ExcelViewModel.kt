@@ -20,6 +20,7 @@ import jxl.write.WritableCellFormat
 import jxl.write.WritableFont
 import jxl.write.WritableWorkbook
 import java.io.File
+import java.text.NumberFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -120,7 +121,15 @@ class ExcelViewModel: ViewModel() {
     fun TransactionReport(date: String, SheetTitle: String){
         val sheet = workbook!!.createSheet(SheetTitle, 0)
         var rowExcel = 0
-        var totalPrice = 0
+        var totalPriceQris = 0
+        var totalPriceCash = 0
+
+        val localeID = Locale("in", "ID")
+        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+        numberFormat.setMaximumFractionDigits(0)
+//        val convert = numberFormat.format(1000000)
+//        val myNumber = 1000000.0
+//        val formattedNumber: String = formatter.format(myNumber)
 
         sheet.setColumnView(0,4)
         sheet.setColumnView(1,35)
@@ -157,16 +166,27 @@ class ExcelViewModel: ViewModel() {
             sheet.addCell(Label(1, index + 6, TRANSACTION_RESPONSE[index].transactionMenu, FormatExcelColumn(format = 6)))
             sheet.addCell(Label(2, index + 6, if(TRANSACTION_RESPONSE[index].transactionClass!!) "Titan" else "Giant", FormatExcelColumn(format = 2)))
             sheet.addCell(Label(3, index + 6, if(TRANSACTION_RESPONSE[index].transactionPayment!!) "Qris" else "Cash", FormatExcelColumn(format = 2)))
-            sheet.addCell(Label(4, index + 6, TRANSACTION_RESPONSE[index].transactionPrice, FormatExcelColumn(format = 2)))
+            sheet.addCell(Label(4, index + 6, numberFormat.format(TRANSACTION_RESPONSE[index].transactionPrice!!.toInt()), FormatExcelColumn(format = 8)))
 
             rowExcel = index
-            totalPrice += TRANSACTION_RESPONSE[index].transactionPrice!!.toInt()
+            if(TRANSACTION_RESPONSE[index].transactionPayment!!){
+                totalPriceQris += TRANSACTION_RESPONSE[index].transactionPrice!!.toInt()
+            }
+            else{
+                totalPriceCash += TRANSACTION_RESPONSE[index].transactionPrice!!.toInt()
+            }
         }
 
         sheet.mergeCells(0, rowExcel + 7, 3, rowExcel + 7)
         sheet.addCell(Label(0, rowExcel + 7, "Jumlah", FormatExcelColumn(format = 3)))
 
-        sheet.addCell(Label(4, rowExcel + 7, totalPrice.toString(), FormatExcelColumn(format = 3)))
+        sheet.addCell(Label(4, rowExcel + 7, numberFormat.format((totalPriceQris + totalPriceCash)), FormatExcelColumn(format = 9)))
+
+        sheet.addCell(Label(1, rowExcel + 9, "Jumlah Pembayaran Tunai", FormatExcelColumn(format = 7)))
+        sheet.addCell(Label(1, rowExcel + 10, "Jumlah Pembayaran Qris", FormatExcelColumn(format = 7)))
+
+        sheet.addCell(Label(2, rowExcel + 9, ": ${numberFormat.format(totalPriceCash)}", FormatExcelColumn(format = 10)))
+        sheet.addCell(Label(2, rowExcel + 10, ": ${numberFormat.format(totalPriceQris)}", FormatExcelColumn(format = 10)))
 
         stateExcel = 1
     }
@@ -321,6 +341,27 @@ class ExcelViewModel: ViewModel() {
                 format7.alignment = Alignment.LEFT
 //                format6.setBorder(Border.ALL, BorderLineStyle.THIN)
                 formatFont = format7
+            }
+            8 -> {
+                val font8 = WritableFont(WritableFont.ARIAL, 11)
+                val format8 = WritableCellFormat(font8)
+                format8.alignment = Alignment.RIGHT
+                format8.setBorder(Border.ALL, BorderLineStyle.THIN)
+                formatFont = format8
+            }
+            9 -> {
+                val font9 = WritableFont(WritableFont.ARIAL, 11, WritableFont.BOLD)
+                val format9 = WritableCellFormat(font9)
+                format9.alignment = Alignment.RIGHT
+                format9.setBorder(Border.ALL, BorderLineStyle.THIN)
+                formatFont = format9
+            }
+            10 -> {
+                val font10 = WritableFont(WritableFont.ARIAL, 11, WritableFont.BOLD)
+                val format10 = WritableCellFormat(font10)
+                format10.alignment = Alignment.LEFT
+//                format10.setBorder(Border.ALL, BorderLineStyle.THIN)
+                formatFont = format10
             }
         }
         return formatFont
