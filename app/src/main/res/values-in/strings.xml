@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">WashWush</string>
+    <string name="app_name">aluma</string>
     <string name="TransactionActiveTitle">Transaksi Aktif</string>
     <string name="StoreTitle">Toko</string>
     <string name="Menu">Menu</string>
