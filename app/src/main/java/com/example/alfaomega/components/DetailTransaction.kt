@@ -28,6 +28,8 @@ import com.example.alfaomega.R
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.whatsapp.WhatsappViewModel
+import java.text.NumberFormat
+import java.util.*
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -83,6 +85,10 @@ fun DetailTransaction(
     val onChangeStatePayment: (String) -> Unit = { selectedValuePayment.value = it }
 
     val paymentMethode = listOf(stringResource(R.string.CashTitle), stringResource(R.string.QrisTitle))
+
+    val localeID = Locale("in", "ID")
+    val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+    numberFormat.setMaximumFractionDigits(0)
 
     val context = LocalContext.current
     
@@ -293,17 +299,19 @@ fun DetailTransaction(
                             Spacer(modifier = Modifier.width(16.dp))
                             if(!TRANSACTION_SCREEN){
                                 Text(
-                                    text = "Rp $TRANSACATION_PRICE",
+                                    text = "${numberFormat.format(TRANSACATION_PRICE.toInt())}",
                                     fontWeight = FontWeight.SemiBold,
                                     fontSize = MaterialTheme.typography.titleMedium.fontSize,
                                 )
                             }
                             else{
-                                Text(
-                                    text = "Rp $NEW_TRANSACATION_PRICE",
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                )
+                                if(!NEW_TRANSACATION_PRICE.isNullOrEmpty()){
+                                    Text(
+                                        text = "${numberFormat.format(NEW_TRANSACATION_PRICE.toInt())}",
+                                        fontWeight = FontWeight.SemiBold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    )
+                                }
                             }
                         }
                     }

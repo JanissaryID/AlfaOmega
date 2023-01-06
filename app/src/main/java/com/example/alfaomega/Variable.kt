@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import com.example.alfaomega.api.log.LogModel
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.menu.MenuModel
+import com.example.alfaomega.api.problem.ProblemModel
 import com.example.alfaomega.api.rules.RuleModel
 import com.example.alfaomega.api.store.StoreModel
 import com.example.alfaomega.api.transaction.TransactionModel
@@ -140,6 +141,11 @@ var LIST_LOG: ArrayList<LogModel> by mutableStateOf(arrayListOf())
 var ADDRESS_DEVICE: String by mutableStateOf("")
 var UUID_DEVICE: String by mutableStateOf("")
 var BLUETOOTH_STATE: Int by mutableStateOf(0)
+
+//Variable Problem Machine
+var LIST_PROBLEM_MACHINE: ArrayList<ProblemModel> by mutableStateOf(arrayListOf())
+var PROBLEM_MACHINE_STATE: Int by mutableStateOf(0)
+var PROBLEM_MACHINE_ERROR_MESSAGE: String by mutableStateOf("")
 
 var MY_CONTEXT : ComponentActivity? = null
 

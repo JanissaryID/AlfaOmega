@@ -127,9 +127,6 @@ class ExcelViewModel: ViewModel() {
         val localeID = Locale("in", "ID")
         val numberFormat = NumberFormat.getCurrencyInstance(localeID)
         numberFormat.setMaximumFractionDigits(0)
-//        val convert = numberFormat.format(1000000)
-//        val myNumber = 1000000.0
-//        val formattedNumber: String = formatter.format(myNumber)
 
         sheet.setColumnView(0,4)
         sheet.setColumnView(1,35)
@@ -188,7 +185,7 @@ class ExcelViewModel: ViewModel() {
         sheet.addCell(Label(2, rowExcel + 9, ": ${numberFormat.format(totalPriceCash)}", FormatExcelColumn(format = 10)))
         sheet.addCell(Label(2, rowExcel + 10, ": ${numberFormat.format(totalPriceQris)}", FormatExcelColumn(format = 10)))
 
-        stateExcel = 1
+
     }
 
     fun MachineReport(date: String, SheetTitle: String) {
@@ -290,6 +287,8 @@ class ExcelViewModel: ViewModel() {
         sheet.addCell(Label(3, rowExcel + 11, ": $totalDryer", FormatExcelColumn(format = 7)))
         sheet.addCell(Label(3, rowExcel + 12, ": $totalWahserTitan", FormatExcelColumn(format = 7)))
         sheet.addCell(Label(3, rowExcel + 13, ": $totalDryerTitan", FormatExcelColumn(format = 7)))
+
+        stateExcel = 1
     }
 
     fun FormatExcelColumn(format: Int): WritableCellFormat{

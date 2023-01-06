@@ -11,6 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.api.menu.MenuModel
+import java.text.NumberFormat
+import java.util.*
 import com.example.alfaomega.components.ComponentMenu as ComponentMenu
 
 @Composable
@@ -19,6 +21,10 @@ fun MenuLazyColumn(
     navController: NavController,
     selectedIndex: Int
 ) {
+    val localeID = Locale("in", "ID")
+    val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+    numberFormat.setMaximumFractionDigits(0)
+
     LazyColumn(
         modifier = Modifier.padding(top = 8.dp).fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -34,6 +40,7 @@ fun MenuLazyColumn(
                 isService = menu.isService!!,
                 menuClass = menu.menuClass!!,
                 idmenu = menu.id!!,
+                priceTitle = numberFormat.format(menu.menuPrice!!.toInt()),
                 navController = navController
             )
         }

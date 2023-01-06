@@ -38,9 +38,11 @@ class LogViewModel: ViewModel() {
                             LIST_LOG = response.body()!!
 
                             LOG_STATE = 1
+                            Log.d("get_log", "$LIST_LOG")
                         }
                         if (LIST_LOG.isNullOrEmpty()){
                             LOG_STATE = 3
+                            fetchLog()
                         }
                     }
                 }

@@ -13,6 +13,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.navigations.Screens
+import java.text.NumberFormat
+import java.util.*
 
 @Composable
 fun ComponentMenu(
@@ -24,6 +26,7 @@ fun ComponentMenu(
     isDryer: Boolean,
     isService: Boolean,
     menuClass: Boolean,
+    priceTitle: String,
     idmenu: String,
     navController: NavController
 ) {
@@ -75,7 +78,7 @@ fun ComponentMenu(
                             fontSize = MaterialTheme.typography.labelLarge.fontSize,
                         )
                         Text(
-                            text = menuPrice,
+                            text = priceTitle,
                             fontSize = MaterialTheme.typography.labelMedium.fontSize,
                         )
                     }
