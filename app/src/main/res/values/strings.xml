@@ -72,4 +72,8 @@
     <string name="OwnerMenu">Add, Edit, and Delete list Menu</string>
     <string name="OwnerTransaction">Show All Transaction Today</string>
     <string name="OwnerEmployee">Add, Edit, and Delete Employee</string>
+    <string name="ReportTitle">Report Machine</string>
+    <string name="ReportEmpty">Report Empty</string>
+    <string name="ReportMachine">Report Machine</string>
+    <string name="ReportMachineText">Report Machine if has damaged</string>
 </resources>

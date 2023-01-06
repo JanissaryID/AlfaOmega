@@ -21,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.api.problem.ProblemViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
@@ -44,6 +45,7 @@ class MainActivity : ComponentActivity() {
     val ruleViewModel by viewModels<RuleViewModel>()
     val userViewModel by viewModels<UserViewModel>()
     val logViewModel by viewModels<LogViewModel>()
+    val problemViewModel by viewModels<ProblemViewModel>()
 
     val bluetoothViewModel by viewModels<BluetoothViewModel>()
 
@@ -87,7 +89,8 @@ class MainActivity : ComponentActivity() {
                         ruleViewModel = ruleViewModel,
                         userViewModel = userViewModel,
                         logViewModel = logViewModel,
-                        bluetoothViewModel = bluetoothViewModel
+                        bluetoothViewModel = bluetoothViewModel,
+                        problemViewModel = problemViewModel
                     )
 
 //                    bluetoothViewModel.showPairedDevice(context = this, multiplePermissionState = multiplePermissionState)

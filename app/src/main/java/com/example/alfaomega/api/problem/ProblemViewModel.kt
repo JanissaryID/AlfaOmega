@@ -23,6 +23,7 @@ class ProblemViewModel: ViewModel() {
                 Callback<ArrayList<ProblemModel>> {
                 override fun onResponse(call: Call<ArrayList<ProblemModel>>, response: Response<ArrayList<ProblemModel>>) {
                     PROBLEM_MACHINE_STATE = 0
+                    Log.d("get_log", "$response")
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_PROBLEM_MACHINE = response.body()!!
@@ -32,7 +33,7 @@ class ProblemViewModel: ViewModel() {
                         }
                         if (LIST_PROBLEM_MACHINE.isNullOrEmpty()){
                             PROBLEM_MACHINE_STATE = 3
-                            fetchProblem()
+//                            fetchProblem()
                         }
                     }
                 }

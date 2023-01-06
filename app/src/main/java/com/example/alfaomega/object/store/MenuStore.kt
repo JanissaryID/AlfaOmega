@@ -9,27 +9,32 @@ object MenuStore {
         0,
         1,
         2,
+        3,
     )
 
     private val subTitle = intArrayOf(
         0,
         1,
         2,
+        3,
     )
 
     private val menuIcon = intArrayOf(
         R.drawable.ic_twotone_print_24,
         R.drawable.ic_twotone_list_alt_24,
+        R.drawable.ic_twotone_report_24,
         R.drawable.ic_twotone_person_24,
     )
 
     private val screensMenu = arrayOf(
         Screens.Bluetooth.route,
         Screens.TransactionList.route,
+        Screens.ReportMachine.route,
         Screens.Login.route,
     )
 
     private val typeMenu = booleanArrayOf(
+        false,
         false,
         false,
         true

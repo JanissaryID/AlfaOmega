@@ -36,12 +36,14 @@ fun WallStore(
     val selectionMenuTitle = listOf(
         stringResource(R.string.PrinterTitle),
         stringResource(R.string.TransactionTitle),
+        stringResource(R.string.ReportMachine),
         stringResource(R.string.LoginTitle)
     )
 
     val selectionMenuText = listOf(
         stringResource(R.string.CheckPrinter),
         stringResource(R.string.ShowAllTransaction),
+        stringResource(R.string.ReportMachineText),
         stringResource(R.string.LoginAccount),
     )
 
@@ -115,7 +117,7 @@ fun WallStore(
                     verticalArrangement = Arrangement.spacedBy(0.dp)
                 ){
                     itemsIndexed(items = list) { index, menu ->
-                        if(index == 2 && USER_TYPE == 3){
+                        if(index == 3 && USER_TYPE == 3){
                             ItemStoreMenu(
                                 title = stringResource(id = R.string.LogoutTitle),
                                 subTitle = stringResource(R.string.LogoutAccountTitle),

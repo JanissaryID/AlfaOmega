@@ -73,4 +73,8 @@
     <string name="OwnerMenu">Tambah, Ubah, dan Hapus Menu</string>
     <string name="OwnerTransaction">Transaksi Hari ini</string>
     <string name="OwnerEmployee">Tambah, Ubah, dan Hapus Karyawan</string>
+    <string name="ReportTitle">Laporan Mesin</string>
+    <string name="ReportEmpty">Laporan Kosong</string>
+    <string name="ReportMachine">Laporan Mesin</string>
+    <string name="ReportMachineText">Laporkan mesin jika rusak</string>
 </resources>

@@ -15,6 +15,7 @@ import com.example.alfaomega.*
 import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.api.problem.ProblemViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
@@ -23,6 +24,7 @@ import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.screens.*
 import com.example.alfaomega.screens.admin.ScreenBluetooth
+import com.example.alfaomega.screens.admin.ScreenReportMachine
 import com.example.alfaomega.screens.developer.ScreenHomeDeveloper
 import com.example.alfaomega.screens.owner.*
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -43,7 +45,8 @@ fun NavGraphSetup(
     ruleViewModel: RuleViewModel,
     userViewModel: UserViewModel,
     logViewModel: LogViewModel,
-    bluetoothViewModel: BluetoothViewModel
+    bluetoothViewModel: BluetoothViewModel,
+    problemViewModel: ProblemViewModel
     ) {
 
     val context = LocalContext.current
@@ -232,6 +235,16 @@ fun NavGraphSetup(
             route = Screens.UserEditOwner.route,
         ){
             ScreenUserEditOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+        }
+
+        composable(
+            route = Screens.ReportMachine.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                problemViewModel.fetchProblem()
+//                TRANSACTION_SCREEN = true
+            }
+            ScreenReportMachine(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
     }
 }

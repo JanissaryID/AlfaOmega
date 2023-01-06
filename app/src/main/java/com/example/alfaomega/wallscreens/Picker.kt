@@ -12,6 +12,7 @@ import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.wallscreens.admin.WallBluetooth
+import com.example.alfaomega.wallscreens.admin.WallReportMachine
 import com.example.alfaomega.wallscreens.developer.WallHomeDeveloper
 import com.example.alfaomega.wallscreens.firstwall.WallFirstAdminLogin
 import com.example.alfaomega.wallscreens.firstwall.WallFirstOwner
@@ -46,6 +47,7 @@ fun WallPicker(
         21 -> WallFirstAdminLogin(paddingValues = paddingValues)
         22 -> WallTransactionOwner(paddingValues = paddingValues, navController = navController)
         23 -> WallBluetooth(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+        24 -> WallReportMachine(paddingValues = paddingValues, navController = navController)
         29 -> WallHomeDeveloper()
         else -> print("Opps tidak ada")
     }
