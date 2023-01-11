@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var protoViewModel: ProtoViewModel
 
-    @RequiresApi(Build.VERSION_CODES.R)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

@@ -22,7 +22,7 @@ import com.example.alfaomega.R
 import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.components.ButtonView
 
-@RequiresApi(Build.VERSION_CODES.O)
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WallUserEditOwner(

@@ -11,6 +11,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
@@ -29,7 +30,7 @@ fun WallMenu(
     val on_click_index_class = { index: Int -> selected_index_class = index}
 
     Spacer(modifier = Modifier.width(8.dp))
-    Surface(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
+    Surface(color = Color.Transparent, modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         Column(modifier = Modifier
             .fillMaxSize()
             .padding(top = paddingValues.calculateTopPadding()),

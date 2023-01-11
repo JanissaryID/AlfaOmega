@@ -101,7 +101,7 @@ class RuleViewModel : ViewModel() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun insertRule(
         ruleText: String,
         navController: NavController

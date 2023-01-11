@@ -33,7 +33,7 @@ class ExcelViewModel: ViewModel() {
 
     lateinit var formatFont: WritableCellFormat
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun createExcelSheetTransaction(date: String) {
         var dateTitle = date
         var csvFile = ""
@@ -68,7 +68,7 @@ class ExcelViewModel: ViewModel() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun createExcelSheet(date: String) {
         var dateTitle = date
         var csvFile = ""

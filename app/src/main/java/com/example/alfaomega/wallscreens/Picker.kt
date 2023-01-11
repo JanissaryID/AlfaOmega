@@ -18,7 +18,7 @@ import com.example.alfaomega.wallscreens.firstwall.WallFirstAdminLogin
 import com.example.alfaomega.wallscreens.firstwall.WallFirstOwner
 import com.example.alfaomega.wallscreens.owner.*
 
-@RequiresApi(Build.VERSION_CODES.O)
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun WallPicker(
     wallScreen: Int,

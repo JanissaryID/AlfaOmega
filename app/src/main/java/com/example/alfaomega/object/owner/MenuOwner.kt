@@ -9,14 +9,16 @@ object MenuOwner {
         0,
         1,
         2,
-        3
+        3,
+        4
     )
 
     private val subTitle = intArrayOf(
         0,
         1,
         2,
-        3
+        3,
+        4
     )
 
     private val menuIcon = intArrayOf(
@@ -24,7 +26,7 @@ object MenuOwner {
         R.drawable.ic_twotone_menu_book_24,
         R.drawable.ic_twotone_list_alt_24,
         R.drawable.ic_twotone_person_24,
-//        R.drawable.ic_twotone_logout_24
+        R.drawable.ic_twotone_report_24,
     )
 
     private val screensMenu = arrayOf(
@@ -32,7 +34,7 @@ object MenuOwner {
         Screens.MenuOwner.route,
         Screens.TransactionOwner.route,
         Screens.UserOwner.route,
-//        Screens.Home.route,
+        Screens.ReportMachine.route,
     )
 
     private val typeMenu = booleanArrayOf(
@@ -40,6 +42,7 @@ object MenuOwner {
         false,
         false,
         false,
+        false
 //        true
     )
 

@@ -222,7 +222,7 @@ class BluetoothViewModel: ViewModel() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.R)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @OptIn(ExperimentalPermissionsApi::class)
     fun showPairedDevice(context: Context, multiplePermissionState: MultiplePermissionsState){
 

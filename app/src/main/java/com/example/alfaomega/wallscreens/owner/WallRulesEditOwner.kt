@@ -20,7 +20,7 @@ import com.example.alfaomega.*
 import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.components.ButtonView
 
-@RequiresApi(Build.VERSION_CODES.O)
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WallRulesEditOwner(

@@ -74,7 +74,7 @@ class MachineViewModel: ViewModel() {
                 bodyDataUpdate
             ).enqueue(object :
                 Callback<MachineModel> {
-                @RequiresApi(Build.VERSION_CODES.O)
+                @RequiresApi(Build.VERSION_CODES.TIRAMISU)
                 override fun onResponse(call: Call<MachineModel>, response: Response<MachineModel>) {
                     Log.d("debug", "Code Update Machine ${response}")
                     if(response.code() == 200){

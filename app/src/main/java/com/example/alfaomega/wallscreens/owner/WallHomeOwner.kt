@@ -39,6 +39,7 @@ fun WallHomeOwner(
         stringResource(R.string.Menu),
         stringResource(R.string.TransactionTitle),
         stringResource(R.string.EmployeeTitle),
+        stringResource(R.string.ReportMachine)
     )
 
     val selectionMenuText = listOf(
@@ -46,6 +47,7 @@ fun WallHomeOwner(
         stringResource(R.string.OwnerMenu),
         stringResource(R.string.OwnerTransaction),
         stringResource(R.string.OwnerEmployee),
+        stringResource(R.string.ReportMachineOwner)
     )
 
     Surface(
@@ -106,7 +108,7 @@ fun WallHomeOwner(
                 fontSize = MaterialTheme.typography.labelLarge.fontSize,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Card(
                 elevation = CardDefaults.cardElevation(6.dp),
                 modifier = Modifier

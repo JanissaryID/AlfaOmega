@@ -53,7 +53,7 @@ class ProblemViewModel: ViewModel() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun insertProblem(
         admin: String,
         store: String,
@@ -110,7 +110,7 @@ class ProblemViewModel: ViewModel() {
                 bodyDataUpdate
             ).enqueue(object :
                 Callback<ProblemModel> {
-                @RequiresApi(Build.VERSION_CODES.O)
+                @RequiresApi(Build.VERSION_CODES.TIRAMISU)
                 override fun onResponse(call: Call<ProblemModel>, response: Response<ProblemModel>) {
                     Log.d("debug", "Code Update Machine ${response}")
                     if(response.code() == 200){

@@ -32,7 +32,7 @@ import java.text.NumberFormat
 import java.util.*
 
 
-@RequiresApi(Build.VERSION_CODES.O)
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailTransaction(

@@ -17,7 +17,7 @@ import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
-@RequiresApi(Build.VERSION_CODES.O)
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 

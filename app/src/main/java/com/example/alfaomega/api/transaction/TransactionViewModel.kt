@@ -56,7 +56,7 @@ class TransactionViewModel: ViewModel() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun insertTransaction(
         transactionClass: Boolean,
         transactionMenu: String,
@@ -172,7 +172,7 @@ class TransactionViewModel: ViewModel() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun getTransactionNow() {
         val current = LocalDateTime.now()
 
@@ -216,7 +216,7 @@ class TransactionViewModel: ViewModel() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun getTransactionNowDate() {
         val current = LocalDateTime.now()
 

@@ -76,4 +76,5 @@
     <string name="ReportEmpty">Report Empty</string>
     <string name="ReportMachine">Report Machine</string>
     <string name="ReportMachineText">Report Machine if has damaged</string>
+    <string name="ReportMachineOwner">Show All Report Machine</string>
 </resources>

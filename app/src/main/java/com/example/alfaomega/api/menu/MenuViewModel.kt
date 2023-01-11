@@ -181,7 +181,7 @@ class MenuViewModel: ViewModel() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun insertMenu(
         isWasher: Boolean,
         isDryer: Boolean,

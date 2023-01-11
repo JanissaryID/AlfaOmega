@@ -200,7 +200,7 @@ class UserViewModel : ViewModel() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun insertUser(
         username: String,
         passwordUser: String,

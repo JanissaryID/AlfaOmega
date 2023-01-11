@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter
 
 class LogViewModel: ViewModel() {
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun fetchLog(){
         try {
             val current = LocalDateTime.now()
@@ -64,7 +64,7 @@ class LogViewModel: ViewModel() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun insertLog(
         machineType: Boolean,
         machineClass: Boolean,
