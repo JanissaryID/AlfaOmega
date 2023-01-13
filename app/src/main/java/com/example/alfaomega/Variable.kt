@@ -153,3 +153,5 @@ var OWNER_ID: String by mutableStateOf("")
 
 var KEY_API: String by mutableStateOf("")
 var TOKEN_API: String by mutableStateOf("")
+
+var STAT_GET_DATA: Boolean by mutableStateOf(false)

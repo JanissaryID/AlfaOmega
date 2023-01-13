@@ -31,6 +31,9 @@ data class MachineModel(
 	@field:SerializedName("machine_debug")
 	val machineDebug: Int? = null,
 
+	@field:SerializedName("url")
+	val url: String? = null,
+
 	@field:SerializedName("machine_number")
 	val machineNumber: Int? = null,
 

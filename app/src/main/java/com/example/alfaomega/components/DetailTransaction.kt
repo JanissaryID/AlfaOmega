@@ -65,7 +65,7 @@ fun DetailTransaction(
         mutableStateOf(TextFieldValue(NEW_TRANSACATION_PHONE))
     }
     var payment_value_index by remember {
-        mutableStateOf(0)
+        mutableStateOf(2)
     }
 
     val selectedValueMenu = remember { mutableStateOf("") }
@@ -471,10 +471,15 @@ fun DetailTransaction(
                     titleButton = selectionProgressMachine[6]
                     StatMessage = 1
                 }
+                7 -> {
+                    NEW_TRANSACATION_BUTTON = true
+                    titleButton = selectionProgressMachine[6]
+                    StatMessage = 1
+                }
             }
         }
         else{
-            if(!text_name.text.isNullOrEmpty() && !paymentMethode.isEmpty()){
+            if(!text_name.text.isNullOrEmpty() && payment_value_index != 2){
                 NEW_TRANSACATION_BUTTON = true
             }
             else{
@@ -500,7 +505,7 @@ fun DetailTransaction(
                     button_clicked = true
 
                     if(!TRANSACTION_SCREEN){
-                        if(TRANSACATION_STATUS_MACHINE == 6){
+                        if(TRANSACATION_STATUS_MACHINE == 6 || TRANSACATION_STATUS_MACHINE == 7){
                             transactionViewModel.updateTransaction(
                                 idTransaction = TRANSACATION_ID,
                                 transactionStateMachine = 6,
@@ -520,7 +525,7 @@ fun DetailTransaction(
                             transactionPayment = if(payment_value_index == 0) false else true,
                             transactionStateMachine = if(NEW_TRANSACATION_IS_WASHER) 0
                             else if(NEW_TRANSACATION_IS_DRYER) 3
-                            else if (!NEW_TRANSACATION_IS_WASHER && !NEW_TRANSACATION_IS_DRYER) 6
+                            else if (!NEW_TRANSACATION_IS_WASHER && !NEW_TRANSACATION_IS_DRYER) 7
                             else 0,
                             isWasher = NEW_TRANSACATION_IS_WASHER,
                             isDryer = NEW_TRANSACATION_IS_DRYER,

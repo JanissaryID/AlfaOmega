@@ -15,6 +15,7 @@ import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.machine.MachineViewModel
+import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.components.ButtonView
 import com.example.alfaomega.view.admin.machine.MachineLoadData
 
@@ -22,7 +23,7 @@ import com.example.alfaomega.view.admin.machine.MachineLoadData
 fun WallMachine(
     paddingValues: PaddingValues,
     navController: NavController,
-    machineViewModel: MachineViewModel = MachineViewModel()
+    machineViewModel: MachineViewModel = MachineViewModel(),
 ) {
     var selectedIndex by remember { mutableStateOf(-1) }
     val onItemClick = { index: Int -> selectedIndex = index}
@@ -92,6 +93,8 @@ fun WallMachine(
                 timeMachine = MACHINE_TIME,
                 navController = navController
             )
+
+
         }
     }
 }

@@ -44,8 +44,9 @@ fun ComponentTransaction(
         stringResource(R.string.FinishWash),
         stringResource(R.string.MenungguPengering),
         stringResource(R.string.Drying),
-        stringResource(R.string.FinishDrying)
-            )
+        stringResource(R.string.FinishDrying),
+        stringResource(R.string.FinishTransaction)
+    )
     var titleProcess by remember {
         mutableStateOf("")
     }
@@ -147,6 +148,9 @@ fun ComponentTransaction(
                                     }
                                     5 -> {
                                         titleProcess = selectionProgressMachine[5]
+                                    }
+                                    7 -> {
+                                        titleProcess = selectionProgressMachine[6]
                                     }
                                 }
 

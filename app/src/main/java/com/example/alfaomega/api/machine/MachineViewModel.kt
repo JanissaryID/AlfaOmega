@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.log.LogViewModel
+import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.navigations.Screens
 import retrofit2.Call
 import retrofit2.Callback
@@ -59,7 +60,8 @@ class MachineViewModel: ViewModel() {
         idTransaction: String,
         timeMachine: Int,
         navController: NavController,
-        logViewModel: LogViewModel = LogViewModel()
+        logViewModel: LogViewModel = LogViewModel(),
+        transactionViewModel: TransactionViewModel = TransactionViewModel()
     ){
         val bodyDataUpdate = MachineModel(
             machineStatus = true,
@@ -93,6 +95,8 @@ class MachineViewModel: ViewModel() {
                                 machineClass = MACHINE_CLASS,
                                 machineType = MACHINE_TYPE
                             )
+
+                            transactionViewModel.getTransactionActiveOnce()
 
                             navController.navigate(route = Screens.Home.route){
                                 popUpTo(Screens.Home.route) {

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -104,7 +105,7 @@ fun TopBar5(
                 )
             }
             Spacer(modifier = Modifier.width(24.dp))
-            Surface(shape = RoundedCornerShape(20), modifier = Modifier.wrapContentSize()) {
+            Surface(shape = RoundedCornerShape(20), modifier = Modifier.wrapContentSize().padding(end = 8.dp)) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_twotone_download_24),
                     contentDescription = description,

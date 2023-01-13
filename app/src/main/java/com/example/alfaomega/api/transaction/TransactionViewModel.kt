@@ -6,11 +6,16 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.machine.MachineApp
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.navigations.Screens
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +24,52 @@ import java.time.format.DateTimeFormatter
 
 class TransactionViewModel: ViewModel() {
 
+    @ExperimentalCoroutinesApi
     fun getTransactionActive() {
+        viewModelScope.launch(Dispatchers.IO) {
+            while (USER_TYPE == 3 && STAT_GET_DATA){
+                try {
+                    TransactionApp.CreateInstance().fetchTransactionActive(
+                        BearerToken = "Bearer " + TOKEN_API,
+                        store = STORE_ID
+                    ).enqueue(object :
+                        Callback<ArrayList<TransactionModel>> {
+                        override fun onResponse(
+                            call: Call<ArrayList<TransactionModel>>,
+                            response: Response<ArrayList<TransactionModel>>
+                        ) {
+                            TRANSACTION_ACTIVE_STATE = 0
+                            if (response.code() == 200) {
+                                response.body()?.let {
+                                    TRANSACTION_ACTIVE_RESPONSE = response.body()!!.filter { data -> data.transactionStateMachine != 6 } as ArrayList<TransactionModel>
+                                    TRANSACTION_ACTIVE_STATE = 1
+                                    Log.d("debug_transaction", "Success get data transcaction")
+                                }
+                                if (TRANSACTION_ACTIVE_RESPONSE.isNullOrEmpty()) {
+                                    TRANSACTION_ACTIVE_STATE = 3
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ArrayList<TransactionModel>>, t: Throwable) {
+                            Log.d("debug_transaction", "Fail get Data ${t.message.toString()}")
+                            if (t.message == t.message) {
+                                Log.d("debug_transaction", "Failed")
+                                TRANSACTION_ACTIVE_STATE = 2
+                            }
+                        }
+                    })
+                }
+                catch (e: Exception) {
+                    TRANSACTION_ERROR = e.message.toString()
+                    Log.d("debug_transaction", "ERROR $TRANSACTION_ERROR")
+                }
+                delay(1000)
+            }
+        }
+    }
+
+    fun getTransactionActiveOnce() {
         try {
             TransactionApp.CreateInstance().fetchTransactionActive(
                 BearerToken = "Bearer " + TOKEN_API,
@@ -35,6 +85,7 @@ class TransactionViewModel: ViewModel() {
                         response.body()?.let {
                             TRANSACTION_ACTIVE_RESPONSE = response.body()!!.filter { data -> data.transactionStateMachine != 6 } as ArrayList<TransactionModel>
                             TRANSACTION_ACTIVE_STATE = 1
+                            Log.d("debug_transaction", "Success get data transcaction")
                         }
                         if (TRANSACTION_ACTIVE_RESPONSE.isNullOrEmpty()) {
                             TRANSACTION_ACTIVE_STATE = 3
@@ -50,7 +101,8 @@ class TransactionViewModel: ViewModel() {
                     }
                 }
             })
-        } catch (e: Exception) {
+        }
+        catch (e: Exception) {
             TRANSACTION_ERROR = e.message.toString()
             Log.d("debug_transaction", "ERROR $TRANSACTION_ERROR")
         }

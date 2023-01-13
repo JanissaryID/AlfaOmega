@@ -7,6 +7,7 @@ import android.widget.DatePicker
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -16,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
@@ -69,7 +71,7 @@ fun TopBar4(
             }
         },
         actions = {
-            Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
+            Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize().padding(end = 8.dp)) {
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = description,

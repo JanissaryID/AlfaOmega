@@ -3,6 +3,7 @@ package com.example.alfaomega.components.topbar
 import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -11,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.USER_TYPE
@@ -44,7 +46,7 @@ fun TopBar3(
         },
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
         actions = {
-            Surface(color = Color.Transparent, shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
+            Surface(color = Color.Transparent, shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize().padding(end = 8.dp)) {
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = description,
