@@ -22,10 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
-import com.example.alfaomega.api.menu.MenuViewModel
-import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
-import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.excel.ExcelViewModel
 import java.util.*
 
