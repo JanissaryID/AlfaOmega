@@ -184,31 +184,36 @@ class BluetoothViewModel: ViewModel() {
         context: Context,
         multiplePermissionState: MultiplePermissionsState
     ){
-        if (ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.BLUETOOTH_CONNECT
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            multiplePermissionState.launchMultiplePermissionRequest()
-            return
-        }
-        bluetoothSocket = bluetoothAdapter!!.getRemoteDevice(address).createRfcommSocketToServiceRecord(
-            UUID.fromString(uuidDevice))
-//        Log.i("Bluetooth_device", "${device.uuids[1].toString()}")
         try {
-
-            bluetoothAdapter.cancelDiscovery()
-            bluetoothSocket!!.connect()
-
-            if (bluetoothSocket!!.isConnected){
-                Log.i("Bluetooth", "Connected")
+            if (ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.BLUETOOTH_CONNECT
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                multiplePermissionState.launchMultiplePermissionRequest()
+                return
             }
-            else{
-                Log.i("Bluetooth", "Disconnect")
+            bluetoothSocket = bluetoothAdapter!!.getRemoteDevice(address).createRfcommSocketToServiceRecord(
+                UUID.fromString(uuidDevice))
+//        Log.i("Bluetooth_device", "${device.uuids[1].toString()}")
+            try {
+
+                bluetoothAdapter.cancelDiscovery()
+                bluetoothSocket!!.connect()
+
+                if (bluetoothSocket!!.isConnected){
+                    Log.i("Bluetooth", "Connected")
+                }
+                else{
+                    Log.i("Bluetooth", "Disconnect")
+                }
+            }
+            catch (e: Exception){
+                Log.i("Bluetooth_debug", "Error ${e}")
             }
         }
         catch (e: Exception){
-            Log.i("Bluetooth", "Error")
+            Log.i("Bluetooth_debug", "Error ${e}")
         }
     }
 
