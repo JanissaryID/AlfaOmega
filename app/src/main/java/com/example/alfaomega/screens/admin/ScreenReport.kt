@@ -18,7 +18,7 @@ import com.example.alfaomega.proto.ProtoViewModel
 fun ScreenReportMachine(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
     val tittleScreen = stringResource(R.string.ReportTitle)
-    val screenBack = Screens.StoreProfile.route
+    val screenBack = if(USER_TYPE == 1) Screens.Home.route else Screens.StoreProfile.route
     val floatingRoute = Screens.RulesEditOwner.route
     val icon = R.drawable.ic_twotone_storefront_24
     val TopBar = 2

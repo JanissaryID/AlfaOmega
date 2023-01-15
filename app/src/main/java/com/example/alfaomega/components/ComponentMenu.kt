@@ -8,10 +8,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.R
 import com.example.alfaomega.navigations.Screens
 import java.text.NumberFormat
 import java.util.*
@@ -30,6 +32,8 @@ fun ComponentMenu(
     idmenu: String,
     navController: NavController
 ) {
+    val selectionMenuClass = listOf(stringResource(R.string.MenuGiant), stringResource(R.string.MenuTitan))
+
     Card(
         elevation = CardDefaults.cardElevation(6.dp),
         modifier = Modifier.padding(8.dp),
@@ -47,7 +51,7 @@ fun ComponentMenu(
                     WASHER_MENU_EDIT = isWasher
                     DRYER_MENU_EDIT = isDryer
                     SERVICE_MENU_EDIT = isService
-                    CLASS_MENU_EDIT_STRING = if(menuClass) "Titan" else "Giant"
+                    CLASS_MENU_EDIT_STRING = if(menuClass) selectionMenuClass[1] else selectionMenuClass[0]
                     ID_MENU_EDIT = idmenu
                     MENU_SCREEN_TYPE = true
                     navController.navigate(route = Screens.MenuEditOwner.route)

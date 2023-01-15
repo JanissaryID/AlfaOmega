@@ -21,7 +21,7 @@ fun TransactionActiveLazyColumn(
     transactionActiveModel: List<TransactionModel>,
     navController: NavController,
 ) {
-    val selectionMenuClass = listOf("Giant 8 Kg", "Titan 12 Kg")
+    val selectionMenuClass = listOf(stringResource(R.string.MenuGiant), stringResource(R.string.MenuTitan))
     val selectionPayment = listOf(stringResource(R.string.CashTitle), stringResource(R.string.QrisTitle))
 
     LazyColumn(

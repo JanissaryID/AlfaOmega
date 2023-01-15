@@ -12,9 +12,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.R
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.components.ComponentMenuClass
 import com.example.alfaomega.view.admin.menu.MenuLoadData
@@ -25,7 +27,7 @@ fun WallMenu(
     navController: NavController,
 ) {
 //    val onItemClick = { index: Int -> selectedIndex = index}
-    val selectionMenuClass = listOf("Giant", "Titan")
+    val selectionMenuClass = listOf(stringResource(R.string.MenuGiant), stringResource(R.string.MenuTitan))
     var selected_index_class by remember {mutableStateOf(MENU_MACHINE_CLASS)}
     val on_click_index_class = { index: Int -> selected_index_class = index}
 

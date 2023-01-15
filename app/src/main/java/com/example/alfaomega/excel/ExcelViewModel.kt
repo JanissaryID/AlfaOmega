@@ -161,7 +161,7 @@ class ExcelViewModel: ViewModel() {
 //                rowExcel
             sheet.addCell(Label(0, index + 6, (index + 1).toString(), FormatExcelColumn(format = 2)))
             sheet.addCell(Label(1, index + 6, TRANSACTION_RESPONSE[index].transactionMenu, FormatExcelColumn(format = 6)))
-            sheet.addCell(Label(2, index + 6, if(TRANSACTION_RESPONSE[index].transactionClass!!) "Titan" else "Giant", FormatExcelColumn(format = 2)))
+            sheet.addCell(Label(2, index + 6, if(TRANSACTION_RESPONSE[index].transactionClass!!) "Besar" else "Kecil", FormatExcelColumn(format = 2)))
             sheet.addCell(Label(3, index + 6, if(TRANSACTION_RESPONSE[index].transactionPayment!!) "Qris" else "Cash", FormatExcelColumn(format = 2)))
             sheet.addCell(Label(4, index + 6, numberFormat.format(TRANSACTION_RESPONSE[index].transactionPrice!!.toInt()), FormatExcelColumn(format = 8)))
 

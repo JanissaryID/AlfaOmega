@@ -8,8 +8,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.alfaomega.R
 import com.example.alfaomega.api.menu.MenuModel
 import java.text.NumberFormat
 import java.util.*
@@ -25,6 +27,8 @@ fun MenuLazyColumn(
     val numberFormat = NumberFormat.getCurrencyInstance(localeID)
     numberFormat.setMaximumFractionDigits(0)
 
+    val selectionMenuClass = listOf(stringResource(R.string.MenuGiant), stringResource(R.string.MenuTitan))
+
     LazyColumn(
         modifier = Modifier.padding(top = 8.dp).fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -32,7 +36,7 @@ fun MenuLazyColumn(
         itemsIndexed(items = menuModel) { index, menu ->
             ComponentMenu(
                 menuTitle = menu.menuTitle.toString(),
-                menuType = if(selectedIndex == 0) "Giant 8 Kg" else "Titan 12 Kg",
+                menuType = if(selectedIndex == 0) selectionMenuClass[0] else selectionMenuClass[1],
                 menuPrice = menu.menuPrice.toString(),
                 menuTime = menu.menuTime!!,
                 isWasher = menu.isWasher!!,

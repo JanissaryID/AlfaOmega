@@ -90,7 +90,7 @@ fun WallMachine(
             machineViewModel.updateMachine(
                 idMachine = MACHINE_ID,
                 idTransaction = TRANSACATION_ID,
-                timeMachine = MACHINE_TIME,
+                timeMachine = 0,
                 navController = navController
             )
 

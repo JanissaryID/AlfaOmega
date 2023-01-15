@@ -46,18 +46,18 @@ fun ItemMachine(
 
                         MACHINE_BUTTON_UPDATE = selected
 
-                        if(!machineModel.machineClass!! && !machineModel.machineType!!){
-                            MACHINE_TIME = TIME_WASHER_GIANT
-                        }
-                        else if(machineModel.machineClass!! && !machineModel.machineType!!){
-                            MACHINE_TIME = TIME_WASHER_TITAN
-                        }
-                        else if(!machineModel.machineClass!! && machineModel.machineType!!){
-                            MACHINE_TIME = TIME_DRYER_GIANT
-                        }
-                        else if(machineModel.machineClass!! && machineModel.machineType!!){
-                            MACHINE_TIME = TIME_DRYER_TITAN
-                        }
+//                        if(!machineModel.machineClass!! && !machineModel.machineType!!){
+//                            MACHINE_TIME = TIME_WASHER_GIANT
+//                        }
+//                        else if(machineModel.machineClass!! && !machineModel.machineType!!){
+//                            MACHINE_TIME = TIME_WASHER_TITAN
+//                        }
+//                        else if(!machineModel.machineClass!! && machineModel.machineType!!){
+//                            MACHINE_TIME = TIME_DRYER_GIANT
+//                        }
+//                        else if(machineModel.machineClass!! && machineModel.machineType!!){
+//                            MACHINE_TIME = TIME_DRYER_TITAN
+//                        }
 
                         onClick.invoke(index)
                     }

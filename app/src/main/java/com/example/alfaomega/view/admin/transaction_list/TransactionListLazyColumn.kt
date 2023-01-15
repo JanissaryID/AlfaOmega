@@ -8,8 +8,10 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.alfaomega.R
 import com.example.alfaomega.api.transaction.TransactionModel
 import com.example.alfaomega.components.ComponentTransaction
 import com.example.alfaomega.components.ItemListTransaction
@@ -19,7 +21,7 @@ fun TransactionListLazyColumn(
     transactionListModel: List<TransactionModel>,
     navController: NavController,
 ) {
-    val selectionMenuClass = listOf("Giant 8 Kg", "Titan 12 Kg")
+    val selectionMenuClass = listOf(stringResource(R.string.MenuGiant), stringResource(R.string.MenuTitan))
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),

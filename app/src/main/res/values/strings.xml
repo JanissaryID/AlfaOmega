@@ -80,4 +80,6 @@
     <string name="DetailReportTitle">Detail Report</string>
     <string name="problemClearTitle">Problem Clear</string>
     <string name="ProblemTitle">Problem</string>
+    <string name="MenuGiant">Small</string>
+    <string name="MenuTitan">Large</string>
 </resources>

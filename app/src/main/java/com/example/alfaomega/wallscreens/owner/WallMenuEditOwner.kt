@@ -54,7 +54,7 @@ fun WallMenuEditOwner(
     val isSelectedItemType: (String) -> Boolean = { selectedValueType.value == it }
     val onChangeStateType: (String) -> Unit = { selectedValueType.value = it }
 
-    val classMachine = listOf("Giant", "Titan")
+    val classMachine = listOf(stringResource(R.string.MenuGiant), stringResource(R.string.MenuTitan))
 
     val checkedStateWasher = remember {
         if(EDIT_MODE) mutableStateOf(WASHER_MENU_EDIT)

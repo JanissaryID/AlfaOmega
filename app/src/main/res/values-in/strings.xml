@@ -81,4 +81,6 @@
     <string name="DetailReportTitle">Detail Laporan</string>
     <string name="problemClearTitle">Laporan Selesai</string>
     <string name="ProblemTitle">Kerusakan</string>
+    <string name="MenuGiant">Kecil</string>
+    <string name="MenuTitan">Besar</string>
 </resources>
