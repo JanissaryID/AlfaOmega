@@ -27,10 +27,8 @@ import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
-import com.example.alfaomega.bluetoothprinter.PermissionsRequiredState
 import com.example.alfaomega.navigations.NavGraphSetup
 import com.example.alfaomega.proto.ProtoViewModel
-import com.example.alfaomega.screens.ScreenMenu
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState

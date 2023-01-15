@@ -32,7 +32,8 @@ fun WallBluetooth(
                 BluetoothLoadData(
                     navController = navController,
                     bluetooth = bluetoothViewModel.devices!!,
-                    bluetoothState = BLUETOOTH_STATE
+                    bluetoothState = BLUETOOTH_STATE,
+                    protoViewModel = protoViewModel
                 )
             }
             else{

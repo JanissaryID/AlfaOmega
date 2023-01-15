@@ -12,8 +12,6 @@ import com.example.alfaomega.api.rules.RuleModel
 import com.example.alfaomega.api.store.StoreModel
 import com.example.alfaomega.api.transaction.TransactionModel
 import com.example.alfaomega.api.user.UserModel
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.MultiplePermissionsState
 
 //Variable New Transaction
 var NEW_TRANSACATION_CUSTOMER: String by mutableStateOf("")

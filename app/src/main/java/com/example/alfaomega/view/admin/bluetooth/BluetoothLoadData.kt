@@ -19,6 +19,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.api.machine.MachineModel
+import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.view.admin.machine.MachineLazyGrid
 
 @Composable
@@ -27,6 +28,7 @@ fun BluetoothLoadData(
 //    selectedIndex: Int,
     bluetooth: Set<BluetoothDevice>,
     navController: NavController,
+    protoViewModel: ProtoViewModel
 //    onItemClick: (Int) -> Unit,
 ) {
     val context = LocalContext.current
@@ -48,7 +50,7 @@ fun BluetoothLoadData(
                 ) {
                     BluetoothLazyColumn(
                         bluetoothDevice = bluetooth.toList(),
-//                        protoViewModel = pro,
+                        protoViewModel = protoViewModel,
                         navController = navController
                     )
                 }

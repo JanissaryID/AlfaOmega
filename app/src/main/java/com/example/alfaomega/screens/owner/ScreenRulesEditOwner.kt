@@ -7,6 +7,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.example.alfaomega.EDIT_MODE
 import com.example.alfaomega.R
+import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
@@ -16,11 +17,11 @@ import com.example.alfaomega.proto.ProtoViewModel
 @Composable
 fun ScreenRulesEditOwner(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
-    val tittleScreen = if(EDIT_MODE) stringResource(R.string.EditRuleTitle) else stringResource(R.string.CreateRuleTitle)
-    val screenBack = Screens.RulesOwner.route
+    val tittleScreen = if(USER_TYPE == 1) stringResource(R.string.DetailReportTitle) else if(EDIT_MODE) stringResource(R.string.EditRuleTitle) else stringResource(R.string.CreateRuleTitle)
+    val screenBack = if(USER_TYPE == 1) Screens.ReportMachine.route else Screens.RulesOwner.route
     val floatingRoute = Screens.Home.route
     val icon = R.drawable.ic_twotone_delete_24
-    val TopBar = if(EDIT_MODE) 4 else 2
+    val TopBar = if(USER_TYPE == 1) 2 else if(EDIT_MODE) 4 else 2
     val wallScrreen = 12
     val desctiptionTopBar = "icon Delete"
     val routeAction = Screens.RulesOwner.route

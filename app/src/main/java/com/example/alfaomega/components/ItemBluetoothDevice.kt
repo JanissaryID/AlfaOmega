@@ -10,10 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.alfaomega.STORE_ADDRESS
-import com.example.alfaomega.STORE_CITY
-import com.example.alfaomega.STORE_NAME
-import com.example.alfaomega.TRANSACTION_SCREEN
+import com.example.alfaomega.*
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
 
@@ -21,7 +18,7 @@ import com.example.alfaomega.proto.ProtoViewModel
 fun ItemBluetoothDevice(
     nameDevice: String,
     addressDevice: String,
-//    protoViewModel: ProtoViewModel,
+    protoViewModel: ProtoViewModel,
 ) {
     Card(
         elevation = CardDefaults.cardElevation(6.dp),
@@ -32,6 +29,8 @@ fun ItemBluetoothDevice(
             color = Color.Transparent,
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier.clickable {
+                protoViewModel.updateAddressDevice(AddressDevice = addressDevice)
+
 //                TRANSACTION_SCREEN = true
 //                STORE_NAME = storeName
 //                STORE_CITY = storeCity

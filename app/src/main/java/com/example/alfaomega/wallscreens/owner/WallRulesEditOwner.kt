@@ -17,8 +17,11 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.R
+import com.example.alfaomega.api.problem.ProblemViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.components.ButtonView
+import com.example.alfaomega.navigations.Screens
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,7 +29,8 @@ import com.example.alfaomega.components.ButtonView
 fun WallRulesEditOwner(
     paddingValues: PaddingValues,
     ruleViewModel: RuleViewModel,
-    navController: NavController
+    navController: NavController,
+    problemViewModel: ProblemViewModel = ProblemViewModel()
 ) {
 
     var button_clicked by remember { mutableStateOf(false) }
@@ -59,12 +63,13 @@ fun WallRulesEditOwner(
                         modifier = Modifier.fillMaxWidth(),
                     ){
                         Text(
-                            text = stringResource(com.example.alfaomega.R.string.RuleTitle),
+                            text = if (USER_TYPE == 1) stringResource(R.string.ProblemTitle) else stringResource(com.example.alfaomega.R.string.RuleTitle),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         TextField(
+                            enabled = if(USER_TYPE == 1) false else true,
                             value = text_rule,
                             onValueChange ={
                                 text_rule = it
@@ -94,8 +99,7 @@ fun WallRulesEditOwner(
             }
 
             ButtonView(
-                title = if(EDIT_MODE) stringResource(com.example.alfaomega.R.string.SaveChanges) else stringResource(
-                    com.example.alfaomega.R.string.CreateRuleTitle),
+                title = if(USER_TYPE == 1) stringResource(R.string.problemClearTitle) else if(EDIT_MODE) stringResource(com.example.alfaomega.R.string.SaveChanges) else stringResource(com.example.alfaomega.R.string.CreateRuleTitle),
                 enable = BUTTON_MENU_EDIT,
                 modifier = Modifier.constrainAs(Button){
                     bottom.linkTo(parent.bottom, 16.dp)
@@ -105,18 +109,31 @@ fun WallRulesEditOwner(
             ) {
                 button_clicked = true
 
-                if(EDIT_MODE){
-                    ruleViewModel.updateRule(
-                        idRule = ID_RULE_EDIT,
-                        ruleText = text_rule.text,
-                        navController = navController
-                    )
+                if(USER_TYPE == 1){
+                    problemViewModel.updateProblem(idProblem = ID_RULE_EDIT) // im lazy to create a new component
+                    // so i reused component rule for problem machinne. id and text same name,
+                    // but have different value in passing data lazycolumn
+
+                    navController.navigate(route = Screens.ReportMachine.route){
+                        popUpTo(Screens.Home.route) {
+                            inclusive = true
+                        }
+                    }
                 }
                 else{
-                    ruleViewModel.insertRule(
-                        ruleText = text_rule.text,
-                        navController = navController
-                    )
+                    if(EDIT_MODE){
+                        ruleViewModel.updateRule(
+                            idRule = ID_RULE_EDIT,
+                            ruleText = text_rule.text,
+                            navController = navController
+                        )
+                    }
+                    else{
+                        ruleViewModel.insertRule(
+                            ruleText = text_rule.text,
+                            navController = navController
+                        )
+                    }
                 }
             }
         }

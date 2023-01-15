@@ -18,7 +18,7 @@ import com.example.alfaomega.proto.ProtoViewModel
 @Composable
 fun BluetoothLazyColumn(
     bluetoothDevice: List<BluetoothDevice>,
-//    protoViewModel: ProtoViewModel,
+    protoViewModel: ProtoViewModel,
     navController: NavController,
 ) {
     LazyColumn(
@@ -30,7 +30,8 @@ fun BluetoothLazyColumn(
         itemsIndexed(items = bluetoothDevice) { index, device ->
             ItemBluetoothDevice(
                 nameDevice = device.name,
-                addressDevice = device.address
+                addressDevice = device.address,
+                protoViewModel = protoViewModel
             )
         }
     }

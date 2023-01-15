@@ -27,6 +27,7 @@ fun ReportLazyColumn(
                 indexNumber = problem.machineNumber!!,
                 ruleText = problem.problem!!,
                 idRule = problem.id!!,
+                solvedMachine = problem.isSolved!!,
                 navController = navController
             )
         }

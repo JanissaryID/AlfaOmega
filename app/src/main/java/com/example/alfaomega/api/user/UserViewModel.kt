@@ -41,7 +41,7 @@ class UserViewModel : ViewModel() {
                 password = password).enqueue(object :
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
-
+                    Log.d("debug_user", "$response")
                     USER_STATE = 0
 
                     if(response.code() == 200){
@@ -87,6 +87,10 @@ class UserViewModel : ViewModel() {
                                 }
                             }
                         }
+                    }
+                    else{
+                        BUTTON_LOGIN_CLICKED = false
+                        FAILED_LOGIN = true
                     }
                 }
 

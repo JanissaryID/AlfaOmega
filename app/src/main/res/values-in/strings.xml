@@ -78,4 +78,7 @@
     <string name="ReportMachine">Laporan Mesin</string>
     <string name="ReportMachineText">Laporkan mesin jika rusak</string>
     <string name="ReportMachineOwner">Daftar Mesin Rusak</string>
+    <string name="DetailReportTitle">Detail Laporan</string>
+    <string name="problemClearTitle">Laporan Selesai</string>
+    <string name="ProblemTitle">Kerusakan</string>
 </resources>

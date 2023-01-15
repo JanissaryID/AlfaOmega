@@ -19,6 +19,7 @@ fun ComponentRule(
     ruleText: String,
     indexNumber: Int,
     idRule: String,
+    solvedMachine: Boolean = false,
     navController: NavController
 ) {
     Card(
@@ -29,7 +30,9 @@ fun ComponentRule(
         Surface(
             color = Color.Transparent,
             shape = RoundedCornerShape(12.dp),
-            modifier = Modifier.clickable {
+            modifier = Modifier.clickable(
+                enabled = !solvedMachine
+            ) {
                 if(USER_TYPE == 1) {
                     EDIT_MODE = true
                     RULE_TEXT_EDIT = ruleText

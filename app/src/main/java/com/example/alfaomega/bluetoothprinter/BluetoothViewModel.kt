@@ -174,7 +174,6 @@ class BluetoothViewModel: ViewModel() {
 
     @OptIn(ExperimentalPermissionsApi::class)
     fun connectBluetooth(
-//        device: BluetoothDevice,
         address: String,
         uuidDevice: String,
         context: Context,

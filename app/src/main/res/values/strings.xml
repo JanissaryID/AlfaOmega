@@ -77,4 +77,7 @@
     <string name="ReportMachine">Report Machine</string>
     <string name="ReportMachineText">Report Machine if has damaged</string>
     <string name="ReportMachineOwner">Show All Report Machine</string>
+    <string name="DetailReportTitle">Detail Report</string>
+    <string name="problemClearTitle">Problem Clear</string>
+    <string name="ProblemTitle">Problem</string>
 </resources>
