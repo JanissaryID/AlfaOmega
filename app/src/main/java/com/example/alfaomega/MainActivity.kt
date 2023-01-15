@@ -65,6 +65,7 @@ class MainActivity : ComponentActivity() {
             USER_TYPE = it.usertype
             ADDRESS_DEVICE = it.addressdevice
             OWNER_ID = it.ownerid
+            UUID_DEVICE = it.uuidstring
         })
 
         setContent {
@@ -75,6 +76,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    ruleViewModel.getRules()
 
                     navController = rememberNavController()
                     NavGraphSetup(
@@ -94,7 +96,7 @@ class MainActivity : ComponentActivity() {
 //                    bluetoothViewModel.showPairedDevice(context = this, multiplePermissionState = multiplePermissionState)
                     MY_CONTEXT = this
 
-                    Log.i("info_response", "Proto : ${STORE_ID}  ${USER_NAME}  ${USER_TYPE}")
+                    Log.i("info_response", "Proto : ${STORE_ID}  ${USER_NAME}  ${USER_TYPE} ${UUID_DEVICE} ${ADDRESS_DEVICE}")
                 }
             }
         }

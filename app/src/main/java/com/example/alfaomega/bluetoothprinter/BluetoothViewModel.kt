@@ -157,15 +157,20 @@ class BluetoothViewModel: ViewModel() {
         }
     }
 
-    fun sendCommandAlign(){
+    fun sendCommandAlign(command: ByteArray){
         if(bluetoothSocket != null){
             try{
-                bluetoothSocket!!.outputStream.write(RESET_PRINTER)
-//                bluetoothSocket!!.outputStream.write(TEXT_ALIGN_RIGHT)
-//                bluetoothSocket!!.outputStream.write(TEXT_SIZE_NORMAL)
-//                bluetoothSocket!!.outputStream.write(TEXT_FONT_D)
-//                bluetoothSocket!!.outputStream.write(TEXT_UNDERLINE_ON)
-//                bluetoothSocket!!.outputStream.write(10)
+                bluetoothSocket!!.outputStream.write(command)
+            }catch(e: IOException){
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun sendCommandAlign(command: Byte){
+        if(bluetoothSocket != null){
+            try{
+                bluetoothSocket!!.outputStream.write(command.toInt())
             }catch(e: IOException){
                 e.printStackTrace()
             }

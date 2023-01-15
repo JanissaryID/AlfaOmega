@@ -25,7 +25,7 @@ class RuleViewModel : ViewModel() {
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_RULE = response.body()!!
-//                            Log.i("info_response", "Body : ${response.body()}")
+                            Log.i("info_response", "Body : ${response.body()}")
                             RULE_STATE = 1
                         }
                         if (LIST_RULE.isNullOrEmpty()){

@@ -56,4 +56,10 @@ class ProtoRepository(context: Context) {
             preference.toBuilder().setOWNERID(OwnerID).build()
         }
     }
+
+    suspend fun updateUUID(UUID_Device: String){
+        datastore.updateData { preference ->
+            preference.toBuilder().setUUIDSTRING(UUID_Device).build()
+        }
+    }
 }

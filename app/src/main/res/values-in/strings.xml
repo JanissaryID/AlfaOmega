@@ -18,7 +18,7 @@
     <string name="CreateMenu">Buat Menu</string>
     <string name="TitleMenuEdit">Nama Menu</string>
     <string name="PriceTitle">Harga</string>
-    <string name="TypeMenuTitle">Tipe Menu</string>
+    <string name="TypeMenuTitle">Tipe Mesin</string>
     <string name="ClassMenu">Kelas Menu</string>
     <string name="WasherTitle">Pencuci</string>
     <string name="DryerTitle">Pengering</string>

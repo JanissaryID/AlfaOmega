@@ -17,7 +17,7 @@
     <string name="CreateMenu">Create Menu</string>
     <string name="TitleMenuEdit">Title Menu</string>
     <string name="PriceTitle">Price</string>
-    <string name="TypeMenuTitle">Type Menu</string>
+    <string name="TypeMenuTitle">Type Machine</string>
     <string name="ClassMenu">Class Menu</string>
     <string name="WasherTitle">Washer</string>
     <string name="DryerTitle">Dryer</string>

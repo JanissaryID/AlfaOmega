@@ -1,5 +1,6 @@
 package com.example.alfaomega.components
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,6 +19,7 @@ import com.example.alfaomega.proto.ProtoViewModel
 fun ItemBluetoothDevice(
     nameDevice: String,
     addressDevice: String,
+    uuidDevice: String,
     protoViewModel: ProtoViewModel,
 ) {
     Card(
@@ -30,6 +32,10 @@ fun ItemBluetoothDevice(
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier.clickable {
                 protoViewModel.updateAddressDevice(AddressDevice = addressDevice)
+                protoViewModel.updateUUID(UUID_Device = uuidDevice)
+
+
+//                protoViewModel.upda
 
 //                TRANSACTION_SCREEN = true
 //                STORE_NAME = storeName

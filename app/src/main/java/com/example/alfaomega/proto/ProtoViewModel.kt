@@ -32,4 +32,8 @@ class ProtoViewModel(application: Application): AndroidViewModel(application) {
     fun updateOwnerId(OwnerId: String) = viewModelScope.launch(Dispatchers.IO){
         repository.updateOwnerId(OwnerID = OwnerId)
     }
+
+    fun updateUUID(UUID_Device: String) = viewModelScope.launch(Dispatchers.IO){
+        repository.updateUUID(UUID_Device = UUID_Device)
+    }
 }

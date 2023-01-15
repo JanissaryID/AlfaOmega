@@ -56,7 +56,7 @@ fun TopBarPicker(
         2 -> TopBar2(tittleScreen = tittleScreen, navController = navController, screenBack = screenBack)
         3 -> TopBar3(tittleScreen = tittleScreen, navController = navController, route = route, icon = icon, description = description,
             protoViewModel = protoViewModel, multiplePermissionState = multiplePermissionState, context = MY_CONTEXT!!, bluetoothViewModel = bluetoothViewModel)
-        4 -> TopBar4(tittleScreen = tittleScreen, navController = navController, screenBack = screenBack, icon = icon, description = description, actionNav = route)
+        4 -> TopBar4(tittleScreen = tittleScreen, navController = navController, screenBack = screenBack, icon = icon, description = description, actionNav = route, multiplePermissionState = multiplePermissionState, bluetoothViewModel = bluetoothViewModel)
         5 -> TopBar5(tittleScreen = tittleScreen, navController = navController, screenBack = screenBack, icon = icon, description = description)
         else -> print("Opps tidak ada")
     }
