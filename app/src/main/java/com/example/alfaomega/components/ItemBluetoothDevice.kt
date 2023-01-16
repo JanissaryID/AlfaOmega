@@ -25,28 +25,18 @@ fun ItemBluetoothDevice(
     Card(
         elevation = CardDefaults.cardElevation(6.dp),
         modifier = Modifier.padding(8.dp),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(12.dp),
+        colors = if(addressDevice == ADDRESS_DEVICE) CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceTint)
+                else CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Surface(
             color = Color.Transparent,
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier.clickable {
+
                 protoViewModel.updateAddressDevice(AddressDevice = addressDevice)
                 protoViewModel.updateUUID(UUID_Device = uuidDevice)
 
-
-//                protoViewModel.upda
-
-//                TRANSACTION_SCREEN = true
-//                STORE_NAME = storeName
-//                STORE_CITY = storeCity
-//                STORE_ADDRESS = storeAddress
-//                protoViewModel.updateStoreID(keyStore = storeId)
-//                navController.navigate(route = Screens.Home.route){
-//                    popUpTo(Screens.Home.route) {
-//                        inclusive = true
-//                    }
-//                }
             }) {
             Column() {
                 Column(
