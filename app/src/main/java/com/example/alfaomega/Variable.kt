@@ -148,3 +148,5 @@ var KEY_API: String by mutableStateOf("")
 var TOKEN_API: String by mutableStateOf("")
 
 var STAT_GET_DATA: Boolean by mutableStateOf(false)
+
+var STAT_BLUETOOTH_CONNECT: Boolean by mutableStateOf(false)

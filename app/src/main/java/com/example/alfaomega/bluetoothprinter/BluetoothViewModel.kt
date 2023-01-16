@@ -16,10 +16,13 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
-import com.example.alfaomega.BLUETOOTH_STATE
-import com.example.alfaomega.MainActivity
+import androidx.lifecycle.viewModelScope
+import com.example.alfaomega.*
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.MultiplePermissionsState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 import java.io.IOException
 import java.util.*
 
@@ -94,20 +97,20 @@ class BluetoothViewModel: ViewModel() {
     var context : Context? = null
 
     var devices: Set<BluetoothDevice>? = null
-
+    @ExperimentalCoroutinesApi
     fun createInstance(appCompatActivity: MainActivity){
         bluetoothManager = appCompatActivity.applicationContext.getSystemService(AppCompatActivity.BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothAdapter = bluetoothManager.adapter
 
-        Log.i("CheckBluetooth", ":request permission.....")
+        Log.i("Bluetooth_debug", ":request permission.....")
 
         activityResultLauncher = appCompatActivity.registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                Log.i("CheckBluetooth", ":request permission result ok")
+                Log.i("Bluetooth_debug", ":request permission result ok")
             } else {
-                Log.i("CheckBluetooth", ":request permission result canceled / denied")
+                Log.i("Bluetooth_debug", ":request permission result canceled / denied")
             }
         }
 
@@ -116,36 +119,36 @@ class BluetoothViewModel: ViewModel() {
 
 
     }
-
+    @ExperimentalCoroutinesApi
     fun requestBluetoothPermission() : Boolean {
 
         var statPermission : Boolean = false
 
         if (bluetoothAdapter?.isEnabled == false) {
-            Log.i("CheckBluetooth", ":Bluetooth Off Condition Wanna Turn On?")
+            Log.i("Bluetooth_debug", ":Bluetooth Off Condition Wanna Turn On?")
             val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             activityResultLauncher.launch(enableBluetoothIntent)
 
             statPermission = false
         }
         else{
-            Log.i("CheckBluetooth", ":Bluetooth On Condition")
+            Log.i("Bluetooth_debug", ":Bluetooth On Condition")
             statPermission = true
 //            STAT_BLUETOOTH = true
         }
         return statPermission
     }
-
+    @ExperimentalCoroutinesApi
     fun checkBluetoothCompatible(){
         if (bluetoothAdapter == null) {
             // Device doesn't support Bluetooth
-            Log.i("CheckBluetooth", ":Device not Supported BLuetooth")
+            Log.i("Bluetooth_debug", ":Device not Supported BLuetooth")
         }
         else{
-            Log.i("CheckBluetooth", ":Device Supported BLuetooth")
+            Log.i("Bluetooth_debug", ":Device Supported BLuetooth")
         }
     }
-
+    @ExperimentalCoroutinesApi
     fun sendCommand(input: String){
         if(bluetoothSocket != null){
             try{
@@ -156,7 +159,7 @@ class BluetoothViewModel: ViewModel() {
             }
         }
     }
-
+    @ExperimentalCoroutinesApi
     fun sendCommandAlign(command: ByteArray){
         if(bluetoothSocket != null){
             try{
@@ -166,7 +169,7 @@ class BluetoothViewModel: ViewModel() {
             }
         }
     }
-
+    @ExperimentalCoroutinesApi
     fun sendCommandAlign(command: Byte){
         if(bluetoothSocket != null){
             try{
@@ -178,52 +181,58 @@ class BluetoothViewModel: ViewModel() {
     }
 
     @OptIn(ExperimentalPermissionsApi::class)
+    @ExperimentalCoroutinesApi
     fun connectBluetooth(
         address: String,
         uuidDevice: String,
         context: Context,
         multiplePermissionState: MultiplePermissionsState
     ){
-        try {
-            if (ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.BLUETOOTH_CONNECT
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                multiplePermissionState.launchMultiplePermissionRequest()
-                return
-            }
-            bluetoothSocket = bluetoothAdapter!!.getRemoteDevice(address).createRfcommSocketToServiceRecord(
-                UUID.fromString(uuidDevice))
-//        Log.i("Bluetooth_device", "${device.uuids[1].toString()}")
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-
-                bluetoothAdapter.cancelDiscovery()
-                bluetoothSocket!!.connect()
-
-                if (bluetoothSocket!!.isConnected){
-                    Log.i("Bluetooth", "Connected")
+                if (ActivityCompat.checkSelfPermission(
+                        context,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    multiplePermissionState.launchMultiplePermissionRequest()
+//                    return
                 }
-                else{
-                    Log.i("Bluetooth", "Disconnect")
+                bluetoothSocket = bluetoothAdapter!!.getRemoteDevice(address).createRfcommSocketToServiceRecord(
+                    UUID.fromString(uuidDevice))
+                try {
+                    bluetoothAdapter.cancelDiscovery()
+                    bluetoothSocket!!.connect()
+
+                    if (bluetoothSocket!!.isConnected){
+                        STAT_BLUETOOTH_CONNECT = true
+                        Log.i("Bluetooth_debug", "Connected")
+                    }
+                    else{
+                        STAT_BLUETOOTH_CONNECT = false
+                        Log.i("Bluetooth_debug", "Disconnect")
+                    }
+                }
+                catch (e: Exception){
+                    STAT_BLUETOOTH_CONNECT = false
+                    Log.i("Bluetooth_debug", "Error ${e}")
                 }
             }
             catch (e: Exception){
+                STAT_BLUETOOTH_CONNECT = false
                 Log.i("Bluetooth_debug", "Error ${e}")
             }
         }
-        catch (e: Exception){
-            Log.i("Bluetooth_debug", "Error ${e}")
-        }
     }
 
+    @ExperimentalCoroutinesApi
     fun disconnectBluetooth(){
         if(bluetoothSocket != null){
             try {
                 bluetoothSocket!!.close()
                 bluetoothSocket = null
                 if (bluetoothSocket == null){
-                    Log.i("Bluetooth", "Disconnect")
+                    Log.i("Bluetooth_debug", "Disconnect")
                 }
             }catch(e: IOException){
                 e.printStackTrace()
@@ -233,6 +242,7 @@ class BluetoothViewModel: ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @OptIn(ExperimentalPermissionsApi::class)
+    @ExperimentalCoroutinesApi
     fun showPairedDevice(context: Context, multiplePermissionState: MultiplePermissionsState){
 
         BLUETOOTH_STATE = 0
@@ -256,6 +266,82 @@ class BluetoothViewModel: ViewModel() {
                 Log.i("Bluetooth_device", "${device.name} -- ${device.type} -- ${device.address} -- ${device.uuids[0]}")
             }
             BLUETOOTH_STATE = 1
+        }
+    }
+    @ExperimentalCoroutinesApi
+    fun writeNota(){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                sendCommandAlign(command = RESET_PRINTER)
+                sendCommandAlign(command = TEXT_ALIGN_CENTER)
+                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+                sendCommandAlign(command = TEXT_SIZE_BIG_2)
+                sendCommand("$STORE_NAME")
+
+                sendCommandAlign(command = RESET_PRINTER)
+                sendCommandAlign(command = TEXT_ALIGN_CENTER)
+                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+                sendCommand("$STORE_ADDRESS, $STORE_CITY")
+
+                sendCommandAlign(command = LF)
+                sendCommandAlign(command = RESET_PRINTER)
+                sendCommandAlign(command = TEXT_ALIGN_LEFT)
+                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+                sendCommand("Customer: $TRANSACATION_CUSTOMER")
+                sendCommandAlign(command = RESET_PRINTER)
+                sendCommandAlign(command = TEXT_ALIGN_LEFT)
+                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+                sendCommand("Tanggal Masuk: $TRANSACATION_DATE")
+
+                sendCommandAlign(command = LF)
+                sendCommandAlign(command = RESET_PRINTER)
+                sendCommandAlign(command = TEXT_ALIGN_LEFT)
+                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+                sendCommand("Jenis Layanan: ${if(TRANSACATION_CLASS) "Mesin Besar - " else "Mesin Kecil - "}")
+                sendCommand("$TRANSACATION_MENU")
+                sendCommandAlign(command = LF)
+                sendCommandAlign(command = RESET_PRINTER)
+                sendCommandAlign(command = TEXT_ALIGN_LEFT)
+                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+                sendCommand("Harga: Rp.$TRANSACATION_PRICE")
+
+                sendCommandAlign(command = LF)
+                sendCommandAlign(command = RESET_PRINTER)
+                sendCommandAlign(command = TEXT_ALIGN_LEFT)
+                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+                sendCommand("Pembayaran: $TRANSACATION_PAYMENT")
+
+                sendCommandAlign(command = LF)
+                sendCommandAlign(command = RESET_PRINTER)
+                sendCommandAlign(command = TEXT_ALIGN_CENTER)
+                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+                sendCommand("-----Ketentuan-----")
+                sendCommandAlign(command = LF)
+
+                LIST_RULE.forEachIndexed{ index, rule ->
+                    sendCommandAlign(command = RESET_PRINTER)
+                    sendCommandAlign(command = TEXT_ALIGN_LEFT)
+                    sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+                    sendCommand("${index+1}. ${rule.rule}")
+                }
+
+                sendCommandAlign(command = LF)
+                sendCommandAlign(command = RESET_PRINTER)
+                sendCommandAlign(command = TEXT_ALIGN_CENTER)
+                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+                sendCommandAlign(command = LF)
+                sendCommand("Terimakasih")
+
+
+                //End of Transaction
+                sendCommandAlign(command = LF)
+                sendCommandAlign(command = LF)
+                sendCommandAlign(command = LF)
+            }
+            catch(e: IOException){
+                e.printStackTrace()
+                Log.i("Bluetooth_debug", "Error ${e}")
+            }
         }
     }
 }
