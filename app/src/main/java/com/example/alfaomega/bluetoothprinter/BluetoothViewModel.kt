@@ -197,17 +197,17 @@ class BluetoothViewModel: ViewModel() {
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
                     multiplePermissionState.launchMultiplePermissionRequest()
-//                    return
                 }
-                bluetoothSocket = bluetoothAdapter!!.getRemoteDevice(address).createRfcommSocketToServiceRecord(
-                    UUID.fromString(uuidDevice))
+                bluetoothSocket = bluetoothAdapter!!.getRemoteDevice(address)
+                    .createRfcommSocketToServiceRecord(UUID.fromString(uuidDevice))
                 try {
                     bluetoothAdapter.cancelDiscovery()
                     bluetoothSocket!!.connect()
-
+                    Log.i("Bluetooth_debug", "Connecting")
                     if (bluetoothSocket!!.isConnected){
                         STAT_BLUETOOTH_CONNECT = true
                         Log.i("Bluetooth_debug", "Connected")
+                        writeNota()
                     }
                     else{
                         STAT_BLUETOOTH_CONNECT = false
@@ -277,80 +277,81 @@ class BluetoothViewModel: ViewModel() {
             }
         }
     }
-    @ExperimentalCoroutinesApi
+//    @ExperimentalCoroutinesApi
     fun writeNota(){
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                sendCommandAlign(command = RESET_PRINTER)
-                sendCommandAlign(command = TEXT_ALIGN_CENTER)
-                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-                sendCommandAlign(command = TEXT_SIZE_BIG_2)
-                sendCommand("$STORE_NAME")
+//        viewModelScope.launch(Dispatchers.IO) {
+//
+//        }
+        try {
+            sendCommandAlign(command = RESET_PRINTER)
+            sendCommandAlign(command = TEXT_ALIGN_CENTER)
+            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+            sendCommandAlign(command = TEXT_SIZE_BIG_2)
+            sendCommand("$STORE_NAME")
 
-                sendCommandAlign(command = RESET_PRINTER)
-                sendCommandAlign(command = TEXT_ALIGN_CENTER)
-                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-                sendCommand("$STORE_ADDRESS, $STORE_CITY")
+            sendCommandAlign(command = RESET_PRINTER)
+            sendCommandAlign(command = TEXT_ALIGN_CENTER)
+            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+            sendCommand("$STORE_ADDRESS, $STORE_CITY")
 
-                sendCommandAlign(command = LF)
+            sendCommandAlign(command = LF)
+            sendCommandAlign(command = RESET_PRINTER)
+            sendCommandAlign(command = TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+            sendCommand("Customer: $TRANSACATION_CUSTOMER")
+            sendCommandAlign(command = RESET_PRINTER)
+            sendCommandAlign(command = TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+            sendCommand("Tanggal Masuk: $TRANSACATION_DATE")
+
+            sendCommandAlign(command = LF)
+            sendCommandAlign(command = RESET_PRINTER)
+            sendCommandAlign(command = TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+            sendCommand("Jenis Layanan: ${if(TRANSACATION_CLASS) "Mesin Besar - " else "Mesin Kecil - "}")
+            sendCommand("$TRANSACATION_MENU")
+            sendCommandAlign(command = LF)
+            sendCommandAlign(command = RESET_PRINTER)
+            sendCommandAlign(command = TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+            sendCommand("Harga: Rp.$TRANSACATION_PRICE")
+
+            sendCommandAlign(command = LF)
+            sendCommandAlign(command = RESET_PRINTER)
+            sendCommandAlign(command = TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+            sendCommand("Pembayaran: $TRANSACATION_PAYMENT")
+
+            sendCommandAlign(command = LF)
+            sendCommandAlign(command = RESET_PRINTER)
+            sendCommandAlign(command = TEXT_ALIGN_CENTER)
+            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+            sendCommand("-----Ketentuan-----")
+            sendCommandAlign(command = LF)
+
+            LIST_RULE.forEachIndexed{ index, rule ->
                 sendCommandAlign(command = RESET_PRINTER)
                 sendCommandAlign(command = TEXT_ALIGN_LEFT)
                 sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-                sendCommand("Customer: $TRANSACATION_CUSTOMER")
-                sendCommandAlign(command = RESET_PRINTER)
-                sendCommandAlign(command = TEXT_ALIGN_LEFT)
-                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-                sendCommand("Tanggal Masuk: $TRANSACATION_DATE")
-
-                sendCommandAlign(command = LF)
-                sendCommandAlign(command = RESET_PRINTER)
-                sendCommandAlign(command = TEXT_ALIGN_LEFT)
-                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-                sendCommand("Jenis Layanan: ${if(TRANSACATION_CLASS) "Mesin Besar - " else "Mesin Kecil - "}")
-                sendCommand("$TRANSACATION_MENU")
-                sendCommandAlign(command = LF)
-                sendCommandAlign(command = RESET_PRINTER)
-                sendCommandAlign(command = TEXT_ALIGN_LEFT)
-                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-                sendCommand("Harga: Rp.$TRANSACATION_PRICE")
-
-                sendCommandAlign(command = LF)
-                sendCommandAlign(command = RESET_PRINTER)
-                sendCommandAlign(command = TEXT_ALIGN_LEFT)
-                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-                sendCommand("Pembayaran: $TRANSACATION_PAYMENT")
-
-                sendCommandAlign(command = LF)
-                sendCommandAlign(command = RESET_PRINTER)
-                sendCommandAlign(command = TEXT_ALIGN_CENTER)
-                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-                sendCommand("-----Ketentuan-----")
-                sendCommandAlign(command = LF)
-
-                LIST_RULE.forEachIndexed{ index, rule ->
-                    sendCommandAlign(command = RESET_PRINTER)
-                    sendCommandAlign(command = TEXT_ALIGN_LEFT)
-                    sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-                    sendCommand("${index+1}. ${rule.rule}")
-                }
-
-                sendCommandAlign(command = LF)
-                sendCommandAlign(command = RESET_PRINTER)
-                sendCommandAlign(command = TEXT_ALIGN_CENTER)
-                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-                sendCommandAlign(command = LF)
-                sendCommand("Terimakasih")
-
-
-                //End of Transaction
-                sendCommandAlign(command = LF)
-                sendCommandAlign(command = LF)
-                sendCommandAlign(command = LF)
+                sendCommand("${index+1}. ${rule.rule}")
             }
-            catch(e: IOException){
-                e.printStackTrace()
-                Log.i("Bluetooth_debug", "Error ${e}")
-            }
+
+            sendCommandAlign(command = LF)
+            sendCommandAlign(command = RESET_PRINTER)
+            sendCommandAlign(command = TEXT_ALIGN_CENTER)
+            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+            sendCommandAlign(command = LF)
+            sendCommand("Terimakasih")
+
+
+            //End of Transaction
+            sendCommandAlign(command = LF)
+            sendCommandAlign(command = LF)
+            sendCommandAlign(command = LF)
+        }
+        catch(e: IOException){
+            e.printStackTrace()
+            Log.i("Bluetooth_debug", "Error ${e}")
         }
     }
 }

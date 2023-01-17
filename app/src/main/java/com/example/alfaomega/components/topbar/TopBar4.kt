@@ -118,9 +118,7 @@ fun TopBar4(
                                 multiplePermissionState = multiplePermissionState,
                                 uuidDevice = UUID_DEVICE
                             )
-                            if(STAT_BLUETOOTH_CONNECT){
-                                bluetoothViewModel.writeNota()
-                            }
+                            Log.d("Check_Print", "Stat Connect = $STAT_BLUETOOTH_CONNECT")
                         }
                     }
                 )
