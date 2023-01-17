@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.alfaomega.BLUETOOTH_STATE_ON
 import com.example.alfaomega.R
 import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
@@ -60,22 +61,26 @@ fun TopBar3(
                             multiplePermissionState.launchMultiplePermissionRequest()
                             bluetoothViewModel.requestBluetoothPermission()
 
-//                            navController.navigate(route = route)
-                            navController.navigate(route = route) {
-                                popUpTo(route) {
-                                    inclusive = true
+                            if(BLUETOOTH_STATE_ON){
+                                navController.navigate(route = route)
+                                {
+                                    popUpTo(route) {
+                                        inclusive = true
+                                    }
                                 }
                             }
                         }
                         else{
-
                             Log.i("info_response", "Check Bluetooth")
                             Log.i("info_response", "${route}")
                             multiplePermissionState.launchMultiplePermissionRequest()
                             bluetoothViewModel.requestBluetoothPermission()
-                            navController.navigate(route = route) {
-                                popUpTo(route) {
-                                    inclusive = true
+                            if(BLUETOOTH_STATE_ON){
+                                navController.navigate(route = route)
+                                {
+                                    popUpTo(route) {
+                                        inclusive = true
+                                    }
                                 }
                             }
                         }

@@ -131,9 +131,11 @@ var LOG_ERROR_MESSAGE: String by mutableStateOf("")
 var LIST_LOG: ArrayList<LogModel> by mutableStateOf(arrayListOf())
 
 //Variable Bluetooth
+// UUID 00000000-0000-1000-8000-00805f9b34fb
 var ADDRESS_DEVICE: String by mutableStateOf("")
 var UUID_DEVICE: String by mutableStateOf("")
 var BLUETOOTH_STATE: Int by mutableStateOf(0)
+var BLUETOOTH_STATE_ON: Boolean by mutableStateOf(false)
 
 //Variable Problem Machine
 var LIST_PROBLEM_MACHINE: ArrayList<ProblemModel> by mutableStateOf(arrayListOf())
@@ -146,6 +148,7 @@ var OWNER_ID: String by mutableStateOf("")
 
 var KEY_API: String by mutableStateOf("")
 var TOKEN_API: String by mutableStateOf("")
+var URL_SERVER: String by mutableStateOf("https://api.v2.kontenbase.com/query/api/v1/")
 
 var STAT_GET_DATA: Boolean by mutableStateOf(false)
 

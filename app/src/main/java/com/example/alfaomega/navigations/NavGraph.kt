@@ -123,7 +123,7 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
                 STAT_GET_DATA = false
                 TRANSACTION_SCREEN = true
-                bluetoothViewModel.showPairedDevice(context = MY_CONTEXT!!, multiplePermissionState = multiplePermissionState)
+//                bluetoothViewModel.showPairedDevice(context = MY_CONTEXT!!, multiplePermissionState = multiplePermissionState)
             }
             ScreenStore(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }

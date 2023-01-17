@@ -41,7 +41,7 @@ class UserViewModel : ViewModel() {
                 password = password).enqueue(object :
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
-                    Log.d("debug_user", "$response")
+                    Log.d("debug_user", "get error = $response")
                     USER_STATE = 0
 
                     if(response.code() == 200){

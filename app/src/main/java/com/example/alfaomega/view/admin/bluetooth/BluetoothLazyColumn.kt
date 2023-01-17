@@ -34,7 +34,7 @@ fun BluetoothLazyColumn(
             ItemBluetoothDevice(
                 nameDevice = device.name,
                 addressDevice = device.address,
-                uuidDevice = if(device.name == "RPP02N") "${device.uuids[1].toString()}" else "${device.uuids[0].toString()}",
+                uuidDevice = if(device.name == "RPP02N") "UUID 00000000-0000-1000-8000-00805f9b34fb" else "${device.uuids}",
                 protoViewModel = protoViewModel
             )
 //            Log.d("get_log", "Device = ${device.name} uuid = ${if(device.name == "RPP02N") "${device.uuids[1].toString()}" else ""}")

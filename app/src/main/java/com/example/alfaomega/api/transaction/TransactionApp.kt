@@ -1,11 +1,12 @@
 package com.example.alfaomega.api.transaction
 
 import com.example.alfaomega.KEY_API
+import com.example.alfaomega.URL_SERVER
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object TransactionApp {
-    private var BASE_URL = "https://api.v2.kontenbase.com/query/api/v1/$KEY_API/"
+    private var BASE_URL = "$URL_SERVER/$KEY_API/"
 
     fun CreateInstance(): TransactionService {
         val retrofit = Retrofit.Builder()

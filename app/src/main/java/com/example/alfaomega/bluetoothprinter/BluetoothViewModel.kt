@@ -120,23 +120,24 @@ class BluetoothViewModel: ViewModel() {
 
     }
     @ExperimentalCoroutinesApi
-    fun requestBluetoothPermission() : Boolean {
-
-        var statPermission : Boolean = false
-
-        if (bluetoothAdapter?.isEnabled == false) {
-            Log.i("Bluetooth_debug", ":Bluetooth Off Condition Wanna Turn On?")
-            val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            activityResultLauncher.launch(enableBluetoothIntent)
-
-            statPermission = false
-        }
-        else{
-            Log.i("Bluetooth_debug", ":Bluetooth On Condition")
-            statPermission = true
+    fun requestBluetoothPermission(){
+        try {
+            if (bluetoothAdapter?.isEnabled == false) {
+                Log.i("Bluetooth_debug", ":Bluetooth Off Condition Wanna Turn On?")
+                val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                activityResultLauncher.launch(enableBluetoothIntent)
+                BLUETOOTH_STATE_ON = false
+            }
+            else{
+                Log.i("Bluetooth_debug", ":Bluetooth On Condition")
+                BLUETOOTH_STATE_ON = true
 //            STAT_BLUETOOTH = true
+            }
         }
-        return statPermission
+        catch (e: Exception){
+            Log.i("Bluetooth_debug", "Error Bluetooth : $e")
+            BLUETOOTH_STATE_ON = false
+        }
     }
     @ExperimentalCoroutinesApi
     fun checkBluetoothCompatible(){
@@ -247,25 +248,33 @@ class BluetoothViewModel: ViewModel() {
 
         BLUETOOTH_STATE = 0
 
-        val pairedDevices = if (ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.BLUETOOTH_CONNECT
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            multiplePermissionState.launchMultiplePermissionRequest()
-            return
-        }
-        else
-            bluetoothAdapter.bondedDevices
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                Log.i("Bluetooth_debug", "Try Bluetooth")
+                val pairedDevices = if (ActivityCompat.checkSelfPermission(
+                        context,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    multiplePermissionState.launchMultiplePermissionRequest()
+                }
+                else
+                    bluetoothAdapter.bondedDevices
 
-        devices = pairedDevices
+                devices = bluetoothAdapter.bondedDevices
 
-        if (devices!!.isNotEmpty()) {
-            // Show a list of paired devices here
-            for (device in devices!!) {
-                Log.i("Bluetooth_device", "${device.name} -- ${device.type} -- ${device.address} -- ${device.uuids[0]}")
+                if (devices!!.isNotEmpty()) {
+                    // Show a list of paired devices here
+                    for (device in devices!!) {
+                        Log.i("Bluetooth_debug", "${device.name} -- ${device.type} -- ${device.address}")
+                    }
+                    BLUETOOTH_STATE = 1
+                }
             }
-            BLUETOOTH_STATE = 1
+            catch(e: IOException){
+                e.printStackTrace()
+                Log.i("Bluetooth_debug", "${e.printStackTrace()}")
+            }
         }
     }
     @ExperimentalCoroutinesApi
