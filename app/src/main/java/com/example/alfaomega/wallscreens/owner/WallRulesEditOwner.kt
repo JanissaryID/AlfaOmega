@@ -63,13 +63,13 @@ fun WallRulesEditOwner(
                         modifier = Modifier.fillMaxWidth(),
                     ){
                         Text(
-                            text = if (USER_TYPE == 1) stringResource(R.string.ProblemTitle) else stringResource(com.example.alfaomega.R.string.RuleTitle),
+                            text = if (USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.ProblemTitle) else stringResource(R.string.RuleTitle),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         TextField(
-                            enabled = if(USER_TYPE == 1) false else true,
+                            enabled = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) false else true,
                             value = text_rule,
                             onValueChange ={
                                 text_rule = it
@@ -99,7 +99,7 @@ fun WallRulesEditOwner(
             }
 
             ButtonView(
-                title = if(USER_TYPE == 1) stringResource(R.string.problemClearTitle) else if(EDIT_MODE) stringResource(com.example.alfaomega.R.string.SaveChanges) else stringResource(com.example.alfaomega.R.string.CreateRuleTitle),
+                title = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.problemClearTitle) else if(EDIT_MODE) stringResource(com.example.alfaomega.R.string.SaveChanges) else stringResource(com.example.alfaomega.R.string.CreateRuleTitle),
                 enable = BUTTON_MENU_EDIT,
                 modifier = Modifier.constrainAs(Button){
                     bottom.linkTo(parent.bottom, 16.dp)
@@ -109,7 +109,7 @@ fun WallRulesEditOwner(
             ) {
                 button_clicked = true
 
-                if(USER_TYPE == 1){
+                if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN){
                     problemViewModel.updateProblem(idProblem = ID_RULE_EDIT) // im lazy to create a new component
                     // so i reused component rule for problem machinne. id and text same name,
                     // but have different value in passing data lazycolumn

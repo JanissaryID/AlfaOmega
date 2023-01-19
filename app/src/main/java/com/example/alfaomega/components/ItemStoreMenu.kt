@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.example.alfaomega.PROBLEM_MACHINE_STATE_SCREEN
 import com.example.alfaomega.R
 import com.example.alfaomega.USER_NAME
 import com.example.alfaomega.USER_TYPE
@@ -57,6 +58,12 @@ fun ItemStoreMenu(
                 }
             }
             else{
+                if(screenMenuItem == Screens.ReportMachine.route){
+                    PROBLEM_MACHINE_STATE_SCREEN = true
+                }
+                else{
+                    PROBLEM_MACHINE_STATE_SCREEN = false
+                }
                 navController.navigate(route = screenMenuItem){
                     popUpTo(screenMenuItem) {
                         inclusive = true

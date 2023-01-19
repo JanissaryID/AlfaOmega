@@ -141,6 +141,7 @@ var BLUETOOTH_STATE_ON: Boolean by mutableStateOf(false)
 var LIST_PROBLEM_MACHINE: ArrayList<ProblemModel> by mutableStateOf(arrayListOf())
 var PROBLEM_MACHINE_STATE: Int by mutableStateOf(0)
 var PROBLEM_MACHINE_ERROR_MESSAGE: String by mutableStateOf("")
+var PROBLEM_MACHINE_STATE_SCREEN: Boolean by mutableStateOf(false)
 
 var MY_CONTEXT : ComponentActivity? = null
 

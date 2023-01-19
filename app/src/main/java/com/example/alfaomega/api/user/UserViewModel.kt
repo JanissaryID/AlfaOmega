@@ -213,7 +213,8 @@ class UserViewModel : ViewModel() {
         val bodyUpdate = UserModel(
             username = username,
             passwordUser = passwordUser,
-            typeUser = 0
+            typeUser = 3,
+            idOwner = OWNER_ID
         )
 
         UserApp.CreateInstance().insertUser(

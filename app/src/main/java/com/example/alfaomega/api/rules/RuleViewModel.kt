@@ -107,7 +107,8 @@ class RuleViewModel : ViewModel() {
         navController: NavController
     ){
         val bodyUpdate = RuleModel(
-            rule = ruleText
+            rule = ruleText,
+            ownerId = OWNER_ID
         )
 
         RuleApp.CreateInstance().insertRule(

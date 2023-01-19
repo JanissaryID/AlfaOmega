@@ -89,6 +89,7 @@ fun NavGraphSetup(
                 ScreenHomeDeveloper(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
             else if(USER_TYPE == 1){
+                PROBLEM_MACHINE_STATE_SCREEN = false
                 ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
             else{
