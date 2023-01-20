@@ -11,7 +11,7 @@
     <string name="LoginTitle">Masuk</string>
     <string name="ListStoreTitle">Daftar Toko</string>
     <string name="ListTransactionTitle">Daftar Transaksi</string>
-    <string name="OwnerTitle">Owner</string>
+    <string name="OwnerTitle">Pemilik Toko</string>
     <string name="DebugTitle">Debug</string>
     <string name="EditMenuTitle">Ubah Menu</string>
     <string name="SaveChanges">Simpan Perubahan</string>
@@ -83,4 +83,19 @@
     <string name="ProblemTitle">Kerusakan</string>
     <string name="MenuGiant">Kecil</string>
     <string name="MenuTitan">Besar</string>
+    <string name="MachineTitle">Mesin</string>
+    <string name="OwnerTitleDev">Pemilik Toko</string>
+    <string name="TextMachineDev">Tambah, Ubah dan Hapus Mesin</string>
+    <string name="TextOwnerDev">Tambah, Ubah dan Hapus Owner</string>
+    <string name="TextStoreDev">Tambah, Ubah dan Hapus Toko</string>
+    <string name="alumaDevMode">aluma</string>
+    <string name="DevModeTitle">Developer Mode</string>
+    <string name="MadeByLove">Made by Love ♥</string>
+    <string name="EditOwnerTitle">Edit Owner</string>
+    <string name="CreateOwnerTitle">Create Owner</string>
+    <string name="CreateownerTitle">Create Owner</string>
+    <string name="CreateStoreTitle">Create Store</string>
+    <string name="EditStoreTitle">Edit Store</string>
+    <string name="CityTitle">City</string>
+    <string name="AddressTitle">Address</string>
 </resources>

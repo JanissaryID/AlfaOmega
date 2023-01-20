@@ -82,4 +82,19 @@
     <string name="ProblemTitle">Problem</string>
     <string name="MenuGiant">Small</string>
     <string name="MenuTitan">Large</string>
+    <string name="MachineTitle">Machine</string>
+    <string name="OwnerTitleDev">Owner</string>
+    <string name="TextMachineDev">Add, Edit and Delete Machine</string>
+    <string name="TextOwnerDev">Add, Edit and Delete Owner</string>
+    <string name="TextStoreDev">Add, Edit and Delete Store</string>
+    <string name="alumaDevMode">aluma</string>
+    <string name="DevModeTitle">Developer Mode</string>
+    <string name="MadeByLove">Made by Love ♥</string>
+    <string name="EditOwnerTitle">Edit Owner</string>
+    <string name="CreateOwnerTitle">Create Owner</string>
+    <string name="CreateownerTitle">Create Owner</string>
+    <string name="CreateStoreTitle">Create Store</string>
+    <string name="EditStoreTitle">Edit Store</string>
+    <string name="CityTitle">City</string>
+    <string name="AddressTitle">Address</string>
 </resources>

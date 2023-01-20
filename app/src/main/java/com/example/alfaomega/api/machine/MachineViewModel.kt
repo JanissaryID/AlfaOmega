@@ -55,6 +55,43 @@ class MachineViewModel: ViewModel() {
         }
     }
 
+    fun getMachineOwner(){
+        try {
+            MachineApp.CreateInstance().fetchMachine(
+                BearerToken = "Bearer " + TOKEN_API,
+                store = STORE_ID
+            ).enqueue(object :
+                Callback<ArrayList<MachineModel>> {
+                override fun onResponse(call: Call<ArrayList<MachineModel>>, response: Response<ArrayList<MachineModel>>) {
+                    MENU_STATE = 0
+                    if(response.code() == 200){
+                        response.body()?.let {
+                            LIST_MACHINE = response.body()!!
+                            MACHINE_STATE = 1
+                        }
+                        if (LIST_MACHINE.isNullOrEmpty()){
+                            MACHINE_STATE = 3
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ArrayList<MachineModel>>, t: Throwable) {
+                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
+                    if (t.message == t.message){
+                        Log.d("debug menu", "Failed")
+                        MACHINE_STATE = 2
+//                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            MACHINE_ERROR_MESSAGE = e.message.toString()
+            Log.d("debug menu", "ERROR $MACHINE_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun updateMachine(
         idMachine: String,
         idTransaction: String,

@@ -21,4 +21,6 @@ sealed class Screens(val route: String){
     object UserEditOwner: Screens(route = "user_edit_owner_screen")
 
     object HomeDeveloper: Screens(route = "developer_screen")
+    object OwnerListDeveloper: Screens(route = "owner_list_developer_screen")
+    object OwnerEditStoreDeveloper: Screens(route = "owner_edit_store_developer_screen")
 }

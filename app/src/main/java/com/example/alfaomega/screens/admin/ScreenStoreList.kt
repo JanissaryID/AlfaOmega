@@ -10,6 +10,7 @@ import com.example.alfaomega.R
 import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
+import com.example.alfaomega.components.scaffold.Scaffold2
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
@@ -19,27 +20,44 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 fun ScreenStoreList(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
     val tittleScreen = stringResource(R.string.ListStoreTitle)
-    val screenBack = Screens.StoreProfile.route
-    val floatingRoute = Screens.Menu.route
+    val screenBack = if( USER_TYPE == 2 ) Screens.OwnerListDeveloper.route else if(USER_TYPE == 1) Screens.Home.route else Screens.StoreProfile.route
+    val floatingRoute = Screens.OwnerEditStoreDeveloper.route
     val icon = R.drawable.ic_twotone_storefront_24
     val TopBar = 2
     val wallScrreen = 5
     val desctiptionTopBar = "icon Store"
-    val routeAction = if( USER_TYPE == 1 ) Screens.Home.route else Screens.Store.route
+    val routeAction = if( USER_TYPE != 3 ) Screens.Home.route else Screens.Store.route
 
-    Scaffold1(
-        tittleScreen = tittleScreen,
-        wallScreen = wallScrreen,
-        navController = navController,
-        screenBack = screenBack,
-        protoViewModel = protoViewModel,
-        floatingRoute = floatingRoute,
-        TopBar = TopBar,
-        icon = icon,
-        description = desctiptionTopBar,
-        route =routeAction,
-        bluetoothViewModel = bluetoothViewModel
-    )
+    if(USER_TYPE == 2){
+        Scaffold2(
+            tittleScreen = tittleScreen,
+            wallScreen = wallScrreen,
+            navController = navController,
+            screenBack = screenBack,
+            protoViewModel = protoViewModel,
+            floatingRoute = floatingRoute,
+            TopBar = TopBar,
+            icon = icon,
+            description = desctiptionTopBar,
+            route =routeAction,
+            bluetoothViewModel = bluetoothViewModel
+        )
+    }
+    else{
+        Scaffold1(
+            tittleScreen = tittleScreen,
+            wallScreen = wallScrreen,
+            navController = navController,
+            screenBack = screenBack,
+            protoViewModel = protoViewModel,
+            floatingRoute = floatingRoute,
+            TopBar = TopBar,
+            icon = icon,
+            description = desctiptionTopBar,
+            route =routeAction,
+            bluetoothViewModel = bluetoothViewModel
+        )
+    }
 }
 
 @Preview(showBackground = true)

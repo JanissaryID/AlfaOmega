@@ -1,4 +1,4 @@
-package com.example.alfaomega.wallscreens.owner
+package com.example.alfaomega.wallscreens.developer
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -19,6 +19,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
+import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.components.ButtonView
 import com.example.alfaomega.navigations.Screens
@@ -26,20 +27,25 @@ import com.example.alfaomega.navigations.Screens
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WallUserEditOwner(
+fun WallStoreEditDeveloper(
     paddingValues: PaddingValues,
-    userViewModel: UserViewModel,
+    storeViewModel: StoreViewModel,
     navController: NavController
 ) {
 
     var button_clicked by remember { mutableStateOf(false) }
     var text_name by remember {
-        if(EDIT_MODE) mutableStateOf(TextFieldValue(USER_NAME_EDIT))
+        if(EDIT_MODE) mutableStateOf(TextFieldValue(STORE_NAME_EDIT))
         else mutableStateOf(TextFieldValue(""))
     }
 
-    var text_password by remember {
-        if(EDIT_MODE) mutableStateOf(TextFieldValue(USER_PASSWORD_EDIT))
+    var text_address by remember {
+        if(EDIT_MODE) mutableStateOf(TextFieldValue(STORE_ADDRESS_EDIT))
+        else mutableStateOf(TextFieldValue(""))
+    }
+
+    var text_city by remember {
+        if(EDIT_MODE) mutableStateOf(TextFieldValue(STORE_CITY_EDIT))
         else mutableStateOf(TextFieldValue(""))
     }
 
@@ -94,15 +100,15 @@ fun WallUserEditOwner(
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
-                            text = stringResource(R.string.PasswordTitle),
+                            text = stringResource(R.string.AddressTitle),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         TextField(
-                            value = text_password,
+                            value = text_address,
                             onValueChange ={
-                                text_password = it
+                                text_address = it
                             },
                             singleLine = true,
                             colors = TextFieldDefaults.textFieldColors(
@@ -115,26 +121,38 @@ fun WallUserEditOwner(
                             ),
                             shape = RoundedCornerShape(12.dp),
                             modifier = Modifier.fillMaxWidth(),
-                            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                            trailingIcon = {
-                                val visIcon = if (passwordVisible)
-                                    painterResource(id = R.drawable.ic_twotone_visibility_24)
-                                else painterResource(id = R.drawable.ic_twotone_visibility_off_24)
-
-                                // Please provide localized description for accessibility services
-                                val description = if (passwordVisible) "Hide password" else "Show password"
-
-                                IconButton(onClick = {passwordVisible = !passwordVisible}){
-                                    Icon(painter  = visIcon, description, tint = MaterialTheme.colorScheme.surfaceVariant)
-                                }
-                            }
+                            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = stringResource(R.string.CityTitle),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        TextField(
+                            value = text_city,
+                            onValueChange ={
+                                text_city = it
+                            },
+                            singleLine = true,
+                            colors = TextFieldDefaults.textFieldColors(
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent,
+                                disabledIndicatorColor = Color.Transparent,
+                                containerColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                textColor = MaterialTheme.colorScheme.surfaceVariant,
+                                disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
+                            ),
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier.fillMaxWidth(),
+                            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
                         )
                     }
                 }
             }
 
-            if(!text_name.text.isNullOrEmpty() && !text_password.text.isNullOrEmpty() && !button_clicked) {
+            if(!text_name.text.isNullOrEmpty() && !text_address.text.isNullOrEmpty() && !text_city.text.isNullOrEmpty() && !button_clicked) {
                 BUTTON_MENU_EDIT = true
             }
             else{
@@ -142,8 +160,7 @@ fun WallUserEditOwner(
             }
 
             ButtonView(
-                title = if(USER_TYPE ==  2) if(EDIT_MODE) stringResource(R.string.SaveChanges) else stringResource(
-                                    R.string.CreateownerTitle) else if(EDIT_MODE) stringResource(R.string.SaveChanges) else stringResource(R.string.CreateUserTitle),
+                title = if(EDIT_MODE) stringResource(R.string.SaveChanges) else stringResource(R.string.CreateStoreTitle),
                 enable = BUTTON_MENU_EDIT,
                 modifier = Modifier.constrainAs(Button){
                     bottom.linkTo(parent.bottom, 16.dp)
@@ -152,47 +169,25 @@ fun WallUserEditOwner(
                 }
             ) {
                 button_clicked = true
-                if(USER_TYPE == 2){
-                    if(EDIT_MODE){
-                        userViewModel.updateUser(
-                            idUser = ID_USER_EDIT,
-                            nameUser = text_name.text,
-                            passwordUser = text_password.text,
-                            ScreenDestination = Screens.OwnerListDeveloper.route,
-                            navController = navController
-                        )
-                    }
-                    else{
-                        userViewModel.insertUser(
-                            username = text_name.text,
-                            passwordUser = text_password.text,
-                            idOwner = "#",
-                            typeUser = 1,
-                            ScreenDestination = Screens.OwnerListDeveloper.route,
-                            navController = navController
-                        )
-                    }
+                if(EDIT_MODE){
+                    storeViewModel.updateStore(
+                        nameStore = text_name.text,
+                        addressStore = text_address.text,
+                        cityStore = text_city.text,
+                        ownerID = OWNER_ID,
+                        ScreenDestination = Screens.Store.route,
+                        navController = navController
+                    )
                 }
                 else{
-                    if(EDIT_MODE){
-                        userViewModel.updateUser(
-                            idUser = ID_USER_EDIT,
-                            nameUser = text_name.text,
-                            passwordUser = text_password.text,
-                            ScreenDestination = Screens.UserOwner.route,
-                            navController = navController
-                        )
-                    }
-                    else{
-                        userViewModel.insertUser(
-                            username = text_name.text,
-                            passwordUser = text_password.text,
-                            idOwner = OWNER_ID,
-                            typeUser = 3,
-                            ScreenDestination = Screens.UserOwner.route,
-                            navController = navController
-                        )
-                    }
+                    storeViewModel.insertStore(
+                        nameStore = text_name.text,
+                        addressStore = text_address.text,
+                        cityStore = text_city.text,
+                        ownerID = OWNER_ID,
+                        ScreenDestination = Screens.Store.route,
+                        navController = navController
+                    )
                 }
             }
         }

@@ -148,10 +148,45 @@ class UserViewModel : ViewModel() {
         }
     }
 
+    fun fetchOwner(){
+        try {
+            UserApp.CreateInstance().fetcOwner(
+                BearerToken = "Bearer " + TOKEN_API,
+            ).enqueue(object :
+                Callback<ArrayList<UserModel>> {
+                override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
+                    USER_STATE = 0
+                    if(response.code() == 200){
+                        response.body()?.let {
+                            LIST_OWNER = response.body()!!.filter { user -> user.typeUser == 1} as ArrayList<UserModel>
+                            Log.i("info_response", "User : ${LIST_OWNER}")
+                            USER_STATE = 1
+                        }
+                        if (LIST_OWNER.isNullOrEmpty()){
+                            USER_STATE = 3
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ArrayList<UserModel>>, t: Throwable) {
+                    if (t.message == t.message){
+                        USER_STATE = 2
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            USER_ERROR_MESSAGE = e.message.toString()
+            Log.d("debug menu", "ERROR $USER_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun updateUser(
         idUser: String,
         nameUser: String,
         passwordUser: String,
+        ScreenDestination: String,
         navController: NavController
     ){
         val bodyDataUpdate = UserModel(
@@ -172,8 +207,8 @@ class UserViewModel : ViewModel() {
 
                             BUTTON_USER_EDIT = true
 
-                            navController.navigate(route = Screens.UserOwner.route){
-                                popUpTo(Screens.UserOwner.route) {
+                            navController.navigate(route = ScreenDestination){
+                                popUpTo(ScreenDestination) {
                                     inclusive = true
                                 }
                             }
@@ -183,6 +218,7 @@ class UserViewModel : ViewModel() {
                                 idUser = idUser,
                                 nameUser = nameUser,
                                 passwordUser = passwordUser,
+                                ScreenDestination = ScreenDestination,
                                 navController = navController
                             )
                         }
@@ -208,13 +244,16 @@ class UserViewModel : ViewModel() {
     fun insertUser(
         username: String,
         passwordUser: String,
+        idOwner: String,
+        typeUser: Int,
+        ScreenDestination: String,
         navController: NavController
     ){
         val bodyUpdate = UserModel(
             username = username,
             passwordUser = passwordUser,
-            typeUser = 3,
-            idOwner = OWNER_ID
+            typeUser = typeUser,
+            idOwner = idOwner
         )
 
         UserApp.CreateInstance().insertUser(
@@ -224,8 +263,8 @@ class UserViewModel : ViewModel() {
             override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
 //                Log.d("debug_user", response.toString())
                 if(response.code() == 201){
-                    navController.navigate(route = Screens.UserOwner.route){
-                        popUpTo(Screens.UserOwner.route) {
+                    navController.navigate(route = ScreenDestination){
+                        popUpTo(ScreenDestination) {
                             inclusive = true
                         }
                     }
@@ -255,9 +294,18 @@ class UserViewModel : ViewModel() {
                 override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
 //                    Log.d("debug", "Code Delete Menu ${response.code()}")
                     if(response.code() == 200){
-                        navController.navigate(route = Screens.UserOwner.route){
-                            popUpTo(Screens.UserOwner.route) {
-                                inclusive = true
+                        if(USER_TYPE == 2){
+                            navController.navigate(route = Screens.OwnerListDeveloper.route){
+                                popUpTo(Screens.OwnerListDeveloper.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                        else{
+                            navController.navigate(route = Screens.UserOwner.route){
+                                popUpTo(Screens.UserOwner.route) {
+                                    inclusive = true
+                                }
                             }
                         }
                     }

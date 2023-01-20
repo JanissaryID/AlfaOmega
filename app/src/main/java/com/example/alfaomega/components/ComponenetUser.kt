@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -41,6 +42,14 @@ fun ComponentUser(
                     ID_USER_EDIT = idUser
                     navController.navigate(route = Screens.UserEditOwner.route)
                 }
+                else if(USER_TYPE == 2){
+                    OWNER_ID = idUser
+                    navController.navigate(route = Screens.Store.route){
+                        popUpTo(Screens.Store.route) {
+                            inclusive = true
+                        }
+                    }
+                }
             }) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -60,11 +69,33 @@ fun ComponentUser(
                     )
                 }
                 Spacer(modifier = Modifier.width(16.dp))
-                Text(
-                    text = name.toString(),
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = name.toString(),
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    )
+                    ButtonView(
+                        title = "Edit",
+                        enable = true,
+                        modifier = Modifier.width(90.dp)
+                    ) {
+                        EDIT_MODE = true
+                        USER_NAME_EDIT = name
+                        USER_PASSWORD_EDIT = password
+                        USER_SCREEN_TYPE = true
+                        ID_USER_EDIT = idUser
+                        navController.navigate(route = Screens.UserEditOwner.route){
+                            popUpTo(Screens.UserEditOwner.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
+                }
             }
         }
     }

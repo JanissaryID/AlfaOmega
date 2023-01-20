@@ -74,6 +74,7 @@ var LIST_MACHINE_DRYER_GIANT: ArrayList<MachineModel> by mutableStateOf(arrayLis
 var LIST_MACHINE_WASHER_GIANT: ArrayList<MachineModel> by mutableStateOf(arrayListOf())
 var LIST_MACHINE_DRYER_TITAN: ArrayList<MachineModel> by mutableStateOf(arrayListOf())
 var LIST_MACHINE_WASHER_TITAN: ArrayList<MachineModel> by mutableStateOf(arrayListOf())
+var LIST_MACHINE: ArrayList<MachineModel> by mutableStateOf(arrayListOf())
 var MACHINE_STATE: Int by mutableStateOf(0)
 var MACHINE_ERROR_MESSAGE: String by mutableStateOf("")
 var MACHINE_ID: String by mutableStateOf("")
@@ -136,6 +137,8 @@ var ADDRESS_DEVICE: String by mutableStateOf("")
 var UUID_DEVICE: String by mutableStateOf("")
 var BLUETOOTH_STATE: Int by mutableStateOf(0)
 var BLUETOOTH_STATE_ON: Boolean by mutableStateOf(false)
+var MY_CONTEXT : ComponentActivity? = null
+var STAT_BLUETOOTH_CONNECT: Boolean by mutableStateOf(false)
 
 //Variable Problem Machine
 var LIST_PROBLEM_MACHINE: ArrayList<ProblemModel> by mutableStateOf(arrayListOf())
@@ -143,14 +146,23 @@ var PROBLEM_MACHINE_STATE: Int by mutableStateOf(0)
 var PROBLEM_MACHINE_ERROR_MESSAGE: String by mutableStateOf("")
 var PROBLEM_MACHINE_STATE_SCREEN: Boolean by mutableStateOf(false)
 
-var MY_CONTEXT : ComponentActivity? = null
-
-var OWNER_ID: String by mutableStateOf("")
-
+//Variable API
 var KEY_API: String by mutableStateOf("")
 var TOKEN_API: String by mutableStateOf("")
 var URL_SERVER: String by mutableStateOf("https://api.v2.kontenbase.com/query/api/v1/")
 
+//Variable Developer Mode
+var LIST_OWNER: ArrayList<UserModel> by mutableStateOf(arrayListOf())
+var INDEX_MENU_DEV: Int by mutableStateOf(0)
+
+//Variable Owner Mode
+var OWNER_ID: String by mutableStateOf("")
+
+//Variable Store Edit
+var STORE_NAME_EDIT: String by mutableStateOf("")
+var STORE_ADDRESS_EDIT: String by mutableStateOf("")
+var STORE_CITY_EDIT: String by mutableStateOf("")
+
+
 var STAT_GET_DATA: Boolean by mutableStateOf(false)
 
-var STAT_BLUETOOTH_CONNECT: Boolean by mutableStateOf(false)

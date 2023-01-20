@@ -8,6 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.TRANSACATION_STATUS_MACHINE
+import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
@@ -19,10 +20,10 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 @Composable
 fun ScreenMachine(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
-    val tittleScreen = if(TRANSACATION_STATUS_MACHINE == 0)
+    val tittleScreen = if(USER_TYPE == 2) stringResource(R.string.MachineTitle) else if(TRANSACATION_STATUS_MACHINE == 0)
         stringResource(R.string.WashmachineTitle) else
-            stringResource(R.string.DryMachineTitle)
-    val screenBack = Screens.DetailTransaction.route
+        stringResource(R.string.DryMachineTitle)
+    val screenBack = if(USER_TYPE == 2) Screens.OwnerListDeveloper.route else Screens.DetailTransaction.route
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_storefront_24
     val TopBar = 2

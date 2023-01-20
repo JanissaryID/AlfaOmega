@@ -1,8 +1,13 @@
 package com.example.alfaomega.api.store
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.user.UserApp
+import com.example.alfaomega.api.user.UserModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +29,7 @@ class StoreViewModel : ViewModel(){
                             STORE_LIST_RESPONSE = response.body()!!
 
                             STORE_STATE = 1
-//                            Log.i("i`nfo_response", "Data GIANT : ${MENU_LIST_GIANT_RESPONSE}")
+                            Log.i("info_response", "Store = $STORE_LIST_RESPONSE")
                         }
                         if (STORE_LIST_RESPONSE.isNullOrEmpty()){
                             STORE_STATE = 3
@@ -88,6 +93,109 @@ class StoreViewModel : ViewModel(){
         catch (e : Exception){
             STORE_ERROR_MESSAGE = e.message.toString()
             Log.d("debug_store", "ERROR $STORE_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    fun insertStore(
+        nameStore: String,
+        addressStore: String,
+        cityStore: String,
+        ownerID: String,
+        ScreenDestination: String,
+        navController: NavController
+    ){
+        val bodyUpdate = StoreModel(
+            name = nameStore,
+            address = addressStore,
+            city = cityStore,
+            ownerId = ownerID
+        )
+
+        StoreApp.CreateInstance().insertStore(
+            BearerToken = "Bearer " + TOKEN_API,
+            bodyUpdate).enqueue(object :
+            Callback<StoreModel> {
+            override fun onResponse(call: Call<StoreModel>, response: Response<StoreModel>) {
+//                Log.d("debug_user", response.toString())
+                if(response.code() == 201){
+                    navController.navigate(route = ScreenDestination){
+                        popUpTo(ScreenDestination) {
+                            inclusive = true
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<StoreModel>, t: Throwable) {
+//                Log.d("debug_transaction", t.message.toString())
+                if (t.message == t.message){
+                    USER_ERROR_MESSAGE = t.message.toString()
+//                    BUTTON_MENU_EDIT = true
+                }
+            }
+        })
+    }
+
+    fun updateStore(
+        nameStore: String,
+        addressStore: String,
+        cityStore: String,
+        ownerID: String,
+        ScreenDestination: String,
+        navController: NavController
+    ){
+        val bodyUpdate = StoreModel(
+            name = nameStore,
+            address = addressStore,
+            city = cityStore,
+            ownerId = ownerID
+        )
+
+        try {
+            StoreApp.CreateInstance().updateStore(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = ownerID,
+                bodyUpdate).enqueue(object :
+                Callback<StoreModel> {
+                override fun onResponse(call: Call<StoreModel>, response: Response<StoreModel>) {
+                    if(response.code() == 200){
+                        val responseBodyData = response.body()
+                        if (!responseBodyData!!.id.isNullOrEmpty()){
+
+                            BUTTON_USER_EDIT = true
+
+                            navController.navigate(route = ScreenDestination){
+                                popUpTo(ScreenDestination) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                        else{
+                            updateStore(
+                                nameStore = nameStore,
+                                addressStore = addressStore,
+                                cityStore = cityStore,
+                                ownerID = ownerID,
+                                ScreenDestination = ScreenDestination,
+                                navController = navController
+                            )
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<StoreModel>, t: Throwable) {
+                    Log.d("error", t.message.toString())
+                    if (t.message == t.message){
+//                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            USER_ERROR_MESSAGE = e.message.toString()
+            Log.d("debug", "ERROR $USER_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }

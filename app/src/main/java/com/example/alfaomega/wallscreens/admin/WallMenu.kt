@@ -1,12 +1,8 @@
 package com.example.alfaomega.wallscreens
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
-import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.components.ComponentMenuClass
 import com.example.alfaomega.view.admin.menu.MenuLoadData
 
@@ -36,8 +31,8 @@ fun WallMenu(
         Column(modifier = Modifier
             .fillMaxSize()
             .padding(top = paddingValues.calculateTopPadding()),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
 
             LazyRow(

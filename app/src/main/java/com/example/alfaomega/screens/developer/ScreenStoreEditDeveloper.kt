@@ -1,4 +1,4 @@
-package com.example.alfaomega.screens.owner
+package com.example.alfaomega.screens.developer
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -15,15 +15,14 @@ import com.example.alfaomega.proto.ProtoViewModel
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
-fun ScreenUserEditOwner(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
+fun ScreenStoreEditDeveloper(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
-    val tittleScreen = if(USER_TYPE == 2) if(EDIT_MODE) stringResource(R.string.EditOwnerTitle) else stringResource(
-            R.string.CreateOwnerTitle) else if(EDIT_MODE) stringResource(R.string.EditUserTitle) else stringResource(R.string.CreateUserTitle)
-    val screenBack = if(USER_TYPE == 2) Screens.OwnerListDeveloper.route else Screens.UserOwner.route
+    val tittleScreen = if(EDIT_MODE) stringResource(R.string.EditStoreTitle) else stringResource(R.string.CreateStoreTitle)
+    val screenBack = Screens.Store.route
     val floatingRoute = Screens.Home.route
     val icon = R.drawable.ic_twotone_delete_24
     val TopBar = if(EDIT_MODE) 4 else 2
-    val wallScrreen = 13
+    val wallScrreen = 30
     val desctiptionTopBar = "icon Delete"
     val routeAction = Screens.UserOwner.route
 

@@ -19,10 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
-import com.example.alfaomega.PROBLEM_MACHINE_STATE_SCREEN
-import com.example.alfaomega.R
-import com.example.alfaomega.USER_NAME
-import com.example.alfaomega.USER_TYPE
+import com.example.alfaomega.*
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
 
@@ -51,6 +48,13 @@ fun ItemStoreMenu(
                     }
 
                 }
+                navController.navigate(route = screenMenuItem){
+                    popUpTo(screenMenuItem) {
+                        inclusive = true
+                    }
+                }
+            }
+            else if(USER_TYPE == 2){
                 navController.navigate(route = screenMenuItem){
                     popUpTo(screenMenuItem) {
                         inclusive = true

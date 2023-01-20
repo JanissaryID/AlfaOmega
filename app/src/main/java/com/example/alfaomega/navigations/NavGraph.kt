@@ -26,6 +26,8 @@ import com.example.alfaomega.screens.*
 import com.example.alfaomega.screens.admin.ScreenBluetooth
 import com.example.alfaomega.screens.admin.ScreenReportMachine
 import com.example.alfaomega.screens.developer.ScreenHomeDeveloper
+import com.example.alfaomega.screens.developer.ScreenOwnerDeveloper
+import com.example.alfaomega.screens.developer.ScreenStoreEditDeveloper
 import com.example.alfaomega.screens.owner.*
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.MultiplePermissionsState
@@ -262,6 +264,30 @@ fun NavGraphSetup(
 //                TRANSACTION_SCREEN = true
             }
             ScreenReportMachine(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+        }
+
+        composable(
+            route = Screens.OwnerListDeveloper.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                STAT_GET_DATA = false
+                userViewModel.fetchOwner()
+//                menuViewModel.getMenu()
+//                TRANSACTION_SCREEN = true
+            }
+            ScreenOwnerDeveloper(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+        }
+
+        composable(
+            route = Screens.OwnerEditStoreDeveloper.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                STAT_GET_DATA = false
+//                userViewModel.fetchOwner()
+//                menuViewModel.getMenu()
+//                TRANSACTION_SCREEN = true
+            }
+            ScreenStoreEditDeveloper(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
     }
 }

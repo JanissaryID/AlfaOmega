@@ -20,6 +20,11 @@ interface UserService {
         @Query(value="id_owner", encoded=true) OwnerId: String?
     ): Call<ArrayList<UserModel>>
 
+    @GET("NewUser")
+    fun fetcOwner(
+        @Header("Authorization") BearerToken: String,
+    ): Call<ArrayList<UserModel>>
+
     @PATCH("NewUser/{id}")
     fun updateUser(
         @Header("Authorization") BearerToken: String,
