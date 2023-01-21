@@ -2,6 +2,7 @@ package com.example.alfaomega.components.topbar
 
 import android.app.DatePickerDialog
 import android.os.Build
+import android.util.Log
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -58,7 +59,8 @@ fun TopBar5(
     val mDatePickerDialog = DatePickerDialog(
         activity,
         { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-            DATE_PICK = "$mDayOfMonth-${mMonth+1}-$mYear"
+            DATE_PICK = "${(mDayOfMonth).toString().padStart(2, '0')}-${(mMonth+1).toString().padStart(2, '0')}-${(mYear).toString().padStart(4, '0')}"
+//            Log.d("debug_transaction", "Date ${DATE_PICK}")
             transactionViewModel.getTransactionNowDate()
         }, mYear, mMonth, mDay
     )

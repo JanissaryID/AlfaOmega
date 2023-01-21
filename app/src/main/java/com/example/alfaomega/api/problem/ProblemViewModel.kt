@@ -23,13 +23,13 @@ class ProblemViewModel: ViewModel() {
                 Callback<ArrayList<ProblemModel>> {
                 override fun onResponse(call: Call<ArrayList<ProblemModel>>, response: Response<ArrayList<ProblemModel>>) {
                     PROBLEM_MACHINE_STATE = 0
-                    Log.d("get_log", "$response")
+//                    Log.d("get_log", "$response")
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_PROBLEM_MACHINE = response.body()!!
 
                             PROBLEM_MACHINE_STATE = 1
-                            Log.d("get_log", "$LIST_PROBLEM_MACHINE")
+//                            Log.d("get_log", "$LIST_PROBLEM_MACHINE")
                         }
                         if (LIST_PROBLEM_MACHINE.isNullOrEmpty()){
                             PROBLEM_MACHINE_STATE = 3
@@ -39,9 +39,9 @@ class ProblemViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<ArrayList<ProblemModel>>, t: Throwable) {
-                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
+//                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
                     if (t.message == t.message){
-                        Log.d("debug menu", "Failed")
+//                        Log.d("debug menu", "Failed")
                         PROBLEM_MACHINE_STATE = 2
                     }
                 }
@@ -49,7 +49,7 @@ class ProblemViewModel: ViewModel() {
         }
         catch (e : Exception){
             PROBLEM_MACHINE_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug menu", "ERROR $PROBLEM_MACHINE_ERROR_MESSAGE")
+//            Log.d("debug menu", "ERROR $PROBLEM_MACHINE_ERROR_MESSAGE")
         }
     }
 
@@ -112,14 +112,14 @@ class ProblemViewModel: ViewModel() {
                 Callback<ProblemModel> {
                 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
                 override fun onResponse(call: Call<ProblemModel>, response: Response<ProblemModel>) {
-                    Log.d("debug", "Code Update Machine ${response}")
+//                    Log.d("debug", "Code Update Machine ${response}")
                     if(response.code() == 200){
-                        Log.d("debug", "Body Update Machine ${response.body()}")
+//                        Log.d("debug", "Body Update Machine ${response.body()}")
                     }
                 }
 
                 override fun onFailure(call: Call<ProblemModel>, t: Throwable) {
-                    Log.d("error", t.message.toString())
+//                    Log.d("error", t.message.toString())
                     if (t.message == t.message){
 //                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
                     }
@@ -128,7 +128,7 @@ class ProblemViewModel: ViewModel() {
         }
         catch (e : Exception){
             MACHINE_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug", "ERROR $MACHINE_ERROR_MESSAGE")
+//            Log.d("debug", "ERROR $MACHINE_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }

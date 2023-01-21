@@ -248,7 +248,7 @@ fun WallMenuEditOwner(
             ) {
                 button_clicked = true
 
-                Log.d("info_update", "${text_name_menu.text} - ${text_price_menu.text} - ")
+//                Log.d("info_update", "${text_name_menu.text} - ${text_price_menu.text} - ")
 
                 if(EDIT_MODE){
                     menuViewModel.updateMenu(

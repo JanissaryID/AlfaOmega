@@ -105,7 +105,7 @@ fun TopBar4(
                             }
                         }
                         else{
-                            Log.d("Check_Print", "Check_Print")
+//                            Log.d("Check_Print", "Check_Print")
                             bluetoothViewModel.requestBluetoothPermission()
                             bluetoothViewModel.checkBluetoothCompatible()
                             bluetoothViewModel.connectBluetooth(
@@ -114,7 +114,7 @@ fun TopBar4(
                                 multiplePermissionState = multiplePermissionState,
                                 uuidDevice = UUID_DEVICE
                             )
-                            Log.d("Check_Print", "Stat Connect = $STAT_BLUETOOTH_CONNECT")
+//                            Log.d("Check_Print", "Stat Connect = $STAT_BLUETOOTH_CONNECT")
                         }
                     }
                 )

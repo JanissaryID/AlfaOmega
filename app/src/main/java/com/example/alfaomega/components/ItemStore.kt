@@ -33,14 +33,23 @@ fun ItemStore(
             color = Color.Transparent,
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier.clickable {
-                TRANSACTION_SCREEN = true
-                STORE_NAME = storeName
-                STORE_CITY = storeCity
-                STORE_ADDRESS = storeAddress
-                protoViewModel.updateStoreID(keyStore = storeId)
-                navController.navigate(route = Screens.Home.route){
-                    popUpTo(Screens.Home.route) {
-                        inclusive = true
+                if(USER_TYPE == 2){
+                    navController.navigate(route = Screens.Machine.route){
+                        popUpTo(Screens.Machine.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+                else{
+                    TRANSACTION_SCREEN = true
+                    STORE_NAME = storeName
+                    STORE_CITY = storeCity
+                    STORE_ADDRESS = storeAddress
+                    protoViewModel.updateStoreID(keyStore = storeId)
+                    navController.navigate(route = Screens.Home.route){
+                        popUpTo(Screens.Home.route) {
+                            inclusive = true
+                        }
                     }
                 }
             }) {
@@ -72,6 +81,25 @@ fun ItemStore(
                             fontWeight = FontWeight.SemiBold,
                             fontSize = MaterialTheme.typography.labelSmall.fontSize,
                         )
+                    }
+                    if(USER_TYPE == 2){
+                        Spacer(modifier = Modifier.height(16.dp))
+                        ButtonView(
+                            title = "Edit",
+                            enable = true,
+//                            modifier = Modifier.width(90.dp)
+                        ) {
+//                            EDIT_MODE = true
+//                            USER_NAME_EDIT = name
+//                            USER_PASSWORD_EDIT = password
+//                            USER_SCREEN_TYPE = true
+//                            ID_USER_EDIT = idUser
+//                            navController.navigate(route = Screens.UserEditOwner.route){
+//                                popUpTo(Screens.UserEditOwner.route) {
+//                                    inclusive = true
+//                                }
+//                            }
+                        }
                     }
                 }
             }

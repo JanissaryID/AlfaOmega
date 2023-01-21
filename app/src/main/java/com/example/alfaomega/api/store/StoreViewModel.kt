@@ -38,9 +38,9 @@ class StoreViewModel : ViewModel(){
                 }
 
                 override fun onFailure(call: Call<ArrayList<StoreModel>>, t: Throwable) {
-                    Log.d("debug_store", "Fail get Data ${t.message.toString()}")
+//                    Log.d("debug_store", "Fail get Data ${t.message.toString()}")
                     if (t.message == t.message){
-                        Log.d("debug_store", "Failed")
+//                        Log.d("debug_store", "Failed")
                         STORE_STATE = 2
 //                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
                     }
@@ -49,7 +49,7 @@ class StoreViewModel : ViewModel(){
         }
         catch (e : Exception){
             STORE_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug_store", "ERROR $STORE_ERROR_MESSAGE")
+//            Log.d("debug_store", "ERROR $STORE_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
@@ -81,9 +81,9 @@ class StoreViewModel : ViewModel(){
                 }
 
                 override fun onFailure(call: Call<ArrayList<StoreModel>>, t: Throwable) {
-                    Log.d("debug_store", "Fail get Data ${t.message.toString()}")
+//                    Log.d("debug_store", "Fail get Data ${t.message.toString()}")
                     if (t.message == t.message){
-                        Log.d("debug_store", "Failed")
+//                        Log.d("debug_store", "Failed")
                         STORE_STATE = 2
 //                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
                     }
@@ -92,7 +92,7 @@ class StoreViewModel : ViewModel(){
         }
         catch (e : Exception){
             STORE_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug_store", "ERROR $STORE_ERROR_MESSAGE")
+//            Log.d("debug_store", "ERROR $STORE_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
@@ -186,7 +186,7 @@ class StoreViewModel : ViewModel(){
                 }
 
                 override fun onFailure(call: Call<StoreModel>, t: Throwable) {
-                    Log.d("error", t.message.toString())
+//                    Log.d("error", t.message.toString())
                     if (t.message == t.message){
 //                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
                     }
@@ -195,7 +195,7 @@ class StoreViewModel : ViewModel(){
         }
         catch (e : Exception){
             USER_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug", "ERROR $USER_ERROR_MESSAGE")
+//            Log.d("debug", "ERROR $USER_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }

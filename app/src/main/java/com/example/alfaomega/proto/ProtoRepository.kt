@@ -19,7 +19,7 @@ class ProtoRepository(context: Context) {
     val readProto: Flow<DataPreferences> = datastore.data
         .catch { exception ->
             if(exception is IOException){
-                Log.d("debug", exception.message.toString())
+//                Log.d("debug", exception.message.toString())
                 emit(DataPreferences.getDefaultInstance())
             }
             else{

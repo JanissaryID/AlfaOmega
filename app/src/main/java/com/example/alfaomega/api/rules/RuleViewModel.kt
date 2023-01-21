@@ -43,7 +43,7 @@ class RuleViewModel : ViewModel() {
         }
         catch (e : Exception){
             RULE_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug menu", "ERROR $RULE_ERROR_MESSAGE")
+//            Log.d("debug menu", "ERROR $RULE_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
@@ -87,7 +87,7 @@ class RuleViewModel : ViewModel() {
                 }
 
                 override fun onFailure(call: Call<RuleModel>, t: Throwable) {
-                    Log.d("error", t.message.toString())
+//                    Log.d("error", t.message.toString())
                     if (t.message == t.message){
 //                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
                     }
@@ -96,7 +96,7 @@ class RuleViewModel : ViewModel() {
         }
         catch (e : Exception){
             RULE_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug", "ERROR $RULE_ERROR_MESSAGE")
+//            Log.d("debug", "ERROR $RULE_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
@@ -158,7 +158,7 @@ class RuleViewModel : ViewModel() {
                 }
 
                 override fun onFailure(call: Call<RuleModel>, t: Throwable) {
-                    Log.d("error", t.message.toString())
+//                    Log.d("error", t.message.toString())
                     if (t.message == t.message){
 //                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
                     }
@@ -167,7 +167,7 @@ class RuleViewModel : ViewModel() {
         }
         catch (e : Exception){
             RULE_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug", "ERROR $RULE_ERROR_MESSAGE")
+//            Log.d("debug", "ERROR $RULE_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }

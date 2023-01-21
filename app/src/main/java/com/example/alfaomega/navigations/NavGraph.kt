@@ -136,7 +136,12 @@ fun NavGraphSetup(
         ){
             LaunchedEffect(key1 = STORE_ID){
                 STAT_GET_DATA = false
-                machineViewModel.getMachine()
+                if(USER_TYPE == 2){
+                    machineViewModel.getMachineList()
+                }
+                else{
+                    machineViewModel.getMachine()
+                }
                 TRANSACTION_SCREEN = true
             }
             ScreenMachine(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)

@@ -38,7 +38,7 @@ class LogViewModel: ViewModel() {
                             LIST_LOG = response.body()!!
 
                             LOG_STATE = 1
-                            Log.d("get_log", "$LIST_LOG")
+//                            Log.d("get_log", "$LIST_LOG")
                         }
                         if (LIST_LOG.isNullOrEmpty()){
                             LOG_STATE = 3
@@ -48,9 +48,9 @@ class LogViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<ArrayList<LogModel>>, t: Throwable) {
-                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
+//                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
                     if (t.message == t.message){
-                        Log.d("debug menu", "Failed")
+//                        Log.d("debug menu", "Failed")
                         LOG_STATE = 2
 //                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
                     }
@@ -59,7 +59,7 @@ class LogViewModel: ViewModel() {
         }
         catch (e : Exception){
             LOG_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug menu", "ERROR $LOG_ERROR_MESSAGE")
+//            Log.d("debug menu", "ERROR $LOG_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }

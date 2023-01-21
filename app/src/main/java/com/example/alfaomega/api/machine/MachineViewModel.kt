@@ -39,9 +39,9 @@ class MachineViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<ArrayList<MachineModel>>, t: Throwable) {
-                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
+//                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
                     if (t.message == t.message){
-                        Log.d("debug menu", "Failed")
+//                        Log.d("debug menu", "Failed")
                         MACHINE_STATE = 2
 //                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
                     }
@@ -50,12 +50,12 @@ class MachineViewModel: ViewModel() {
         }
         catch (e : Exception){
             MACHINE_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug menu", "ERROR $MACHINE_ERROR_MESSAGE")
+//            Log.d("debug menu", "ERROR $MACHINE_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
 
-    fun getMachineOwner(){
+    fun getMachineList(){
         try {
             MachineApp.CreateInstance().fetchMachine(
                 BearerToken = "Bearer " + TOKEN_API,
@@ -76,9 +76,9 @@ class MachineViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<ArrayList<MachineModel>>, t: Throwable) {
-                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
+//                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
                     if (t.message == t.message){
-                        Log.d("debug menu", "Failed")
+//                        Log.d("debug menu", "Failed")
                         MACHINE_STATE = 2
 //                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
                     }
@@ -87,7 +87,7 @@ class MachineViewModel: ViewModel() {
         }
         catch (e : Exception){
             MACHINE_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug menu", "ERROR $MACHINE_ERROR_MESSAGE")
+//            Log.d("debug menu", "ERROR $MACHINE_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
@@ -115,10 +115,10 @@ class MachineViewModel: ViewModel() {
                 Callback<MachineModel> {
                 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
                 override fun onResponse(call: Call<MachineModel>, response: Response<MachineModel>) {
-                    Log.d("debug", "Code Update Machine ${response}")
+//                    Log.d("debug", "Code Update Machine ${response}")
                     if(response.code() == 200){
                         val responseBodyData = response.body()
-                        Log.d("debug", "Body Update Machine ${response.body()}")
+//                        Log.d("debug", "Body Update Machine ${response.body()}")
                         if (responseBodyData!!.machineStatus!!){
 
                             MACHINE_BUTTON_UPDATE = true
@@ -153,7 +153,7 @@ class MachineViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<MachineModel>, t: Throwable) {
-                    Log.d("error", t.message.toString())
+//                    Log.d("error", t.message.toString())
                     if (t.message == t.message){
 //                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
                     }
@@ -162,7 +162,7 @@ class MachineViewModel: ViewModel() {
         }
         catch (e : Exception){
             MACHINE_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug", "ERROR $MACHINE_ERROR_MESSAGE")
+//            Log.d("debug", "ERROR $MACHINE_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }

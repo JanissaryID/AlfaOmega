@@ -44,9 +44,9 @@ class MenuViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<ArrayList<MenuModel>>, t: Throwable) {
-                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
+//                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
                     if (t.message == t.message){
-                        Log.d("debug menu", "Failed")
+//                        Log.d("debug menu", "Failed")
                         MENU_STATE = 2
 //                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
                     }
@@ -55,7 +55,7 @@ class MenuViewModel: ViewModel() {
         }
         catch (e : Exception){
             MENU_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug menu", "ERROR $MENU_ERROR_MESSAGE")
+//            Log.d("debug menu", "ERROR $MENU_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
@@ -93,9 +93,9 @@ class MenuViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<ArrayList<MenuModel>>, t: Throwable) {
-                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
+//                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
                     if (t.message == t.message){
-                        Log.d("debug menu", "Failed")
+//                        Log.d("debug menu", "Failed")
                         MENU_STATE = 2
 //                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
                     }
@@ -104,7 +104,7 @@ class MenuViewModel: ViewModel() {
         }
         catch (e : Exception){
             MENU_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug menu", "ERROR $MENU_ERROR_MESSAGE")
+//            Log.d("debug menu", "ERROR $MENU_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
@@ -167,7 +167,7 @@ class MenuViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<MenuModel>, t: Throwable) {
-                    Log.d("error", t.message.toString())
+//                    Log.d("error", t.message.toString())
                     if (t.message == t.message){
 //                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
                     }
@@ -176,7 +176,7 @@ class MenuViewModel: ViewModel() {
         }
         catch (e : Exception){
             MENU_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug", "ERROR $MENU_ERROR_MESSAGE")
+//            Log.d("debug", "ERROR $MENU_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
@@ -252,7 +252,7 @@ class MenuViewModel: ViewModel() {
                 }
 
                 override fun onFailure(call: Call<MenuModel>, t: Throwable) {
-                    Log.d("error", t.message.toString())
+//                    Log.d("error", t.message.toString())
                     if (t.message == t.message){
 //                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
                     }
@@ -261,7 +261,7 @@ class MenuViewModel: ViewModel() {
         }
         catch (e : Exception){
             MENU_ERROR_MESSAGE = e.message.toString()
-            Log.d("debug", "ERROR $MENU_ERROR_MESSAGE")
+//            Log.d("debug", "ERROR $MENU_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }

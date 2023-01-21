@@ -44,15 +44,6 @@ fun ScreenMachine(navController: NavController, protoViewModel: ProtoViewModel, 
         route = routeAction,
         bluetoothViewModel = bluetoothViewModel
     )
-
-//    TopBar(
-//        typeScreen = false,
-//        tittleScreen = if(TRANSACATION_STATUS_MACHINE == 0) "Wash Machine" else "Dry Machine",
-//        wallScreen = 4,
-//        navController = navController,
-//        screenBack = Screens.DetailTransaction.route,
-//        protoViewModel = protoViewModel
-//    )
 }
 
 @Preview(showBackground = true)
