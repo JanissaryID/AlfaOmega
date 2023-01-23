@@ -18,10 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.example.alfaomega.*
 import com.example.alfaomega.R
-import com.example.alfaomega.STORE_ADDRESS
-import com.example.alfaomega.STORE_CITY
-import com.example.alfaomega.STORE_NAME
 import com.example.alfaomega.`object`.owner.MenuOwner
 import com.example.alfaomega.`object`.owner.MenuOwnerModel
 import com.example.alfaomega.components.ItemStoreMenu
@@ -36,72 +34,151 @@ fun WallFirstOwner(
     var list: ArrayList<MenuOwnerModel> = arrayListOf()
     list.addAll(MenuOwner.listData)
 
-    Surface(
-        color = Color.Transparent,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                top = paddingValues.calculateTopPadding(),
-                bottom = paddingValues.calculateBottomPadding()
-            )) {
-
-        ConstraintLayout(
+    Column(modifier = Modifier.padding(
+        top = paddingValues.calculateTopPadding(),
+        bottom = paddingValues.calculateBottomPadding()
+    )) {
+        Surface(
+            color = MaterialTheme.colorScheme.primary,
+            shape = RoundedCornerShape(bottomEnd = 42.dp, bottomStart = 42.dp),
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp)
-                .fillMaxSize()
-        ) {
-
-            val (IconMenu, ExplainText) = createRefs()
-
-            Card(
-                elevation = CardDefaults.cardElevation(6.dp),
-                modifier = Modifier
-                    .padding(8.dp)
-                    .size(144.dp)
-                    .constrainAs(IconMenu){
-                        start.linkTo(parent.start)
-                        top.linkTo(parent.top)
-                        end.linkTo(parent.end)
-                    }
-                ,
-                shape = RoundedCornerShape(100),
-            ) {
+                .fillMaxWidth()
+                .height(204.dp)) {
+            Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
+                Text(
+                    text = "Hello, Owner",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = MaterialTheme.typography.headlineLarge.fontSize,
+                    color = MaterialTheme.colorScheme.background
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = "Finance in this month",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    color = MaterialTheme.colorScheme.background.copy(alpha = 0.7f)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Net profit Rp. 7.478.000",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                    color = MaterialTheme.colorScheme.background.copy(alpha = 0.7f)
+                )
+                Spacer(modifier = Modifier.height(10.dp))
                 Surface(
-                    shape = RoundedCornerShape(100),
-                    modifier = Modifier.clickable {
-                        navController.navigate(route = Screens.Store.route)
-                    },
-                    color = Color.Transparent
+                    color =  MaterialTheme.colorScheme.background,
+                    shape = RoundedCornerShape(28.dp),
                 ) {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_twotone_storefront_24),
-                            contentDescription = "Icon TImer",
-                            modifier = Modifier.size(80.dp)
-                        )
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 36.dp, end = 36.dp, top = 12.dp, bottom = 12.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text(
+                                text = "Income",
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = "Rp. 7.860.000",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+                            )
+                        }
+
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text(
+                                text = "Outcome",
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = "Rp. 382.000",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+                            )
+                        }
                     }
                 }
             }
-
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Surface(color = Color.Transparent,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+        ) {
             Text(
-                text = stringResource(R.string.TextPickStoreFirst),
-                lineHeight = 36.sp,
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Normal,
-                fontSize = MaterialTheme.typography.headlineSmall.fontSize,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier
-                    .width(320.dp)
-                    .constrainAs(ExplainText){
-                    start.linkTo(parent.start)
-                    top.linkTo(IconMenu.bottom)
-                    bottom.linkTo(parent.bottom)
-                    end.linkTo(parent.end)
-                }
+                text = "Outlet",
+                fontWeight = FontWeight.Bold,
+                fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                color = MaterialTheme.colorScheme.primary
             )
         }
+
+
+//        ConstraintLayout(
+//            modifier = Modifier
+//                .padding(start = 16.dp, end = 16.dp)
+//                .fillMaxSize()
+//        ) {
+//
+//            val (IconMenu, ExplainText) = createRefs()
+//
+//            Card(
+//                elevation = CardDefaults.cardElevation(6.dp),
+//                modifier = Modifier
+//                    .padding(8.dp)
+//                    .size(144.dp)
+//                    .constrainAs(IconMenu){
+//                        start.linkTo(parent.start)
+//                        top.linkTo(parent.top)
+//                        end.linkTo(parent.end)
+//                    }
+//                ,
+//                shape = RoundedCornerShape(100),
+//            ) {
+//                Surface(
+//                    shape = RoundedCornerShape(100),
+//                    modifier = Modifier.clickable {
+//                        navController.navigate(route = Screens.Store.route)
+//                    },
+//                    color = Color.Transparent
+//                ) {
+//                    Box(
+//                        contentAlignment = Alignment.Center,
+//                        modifier = Modifier.fillMaxSize()
+//                    ) {
+//                        Icon(
+//                            painter = painterResource(id = R.drawable.ic_twotone_storefront_24),
+//                            contentDescription = "Icon TImer",
+//                            modifier = Modifier.size(80.dp)
+//                        )
+//                    }
+//                }
+//            }
+//
+//            Text(
+//                text = stringResource(R.string.TextPickStoreFirst),
+//                lineHeight = 36.sp,
+//                textAlign = TextAlign.Center,
+//                fontWeight = FontWeight.Normal,
+//                fontSize = MaterialTheme.typography.headlineSmall.fontSize,
+//                color = MaterialTheme.colorScheme.onSurfaceVariant,
+//                modifier = Modifier
+//                    .width(320.dp)
+//                    .constrainAs(ExplainText){
+//                    start.linkTo(parent.start)
+//                    top.linkTo(IconMenu.bottom)
+//                    bottom.linkTo(parent.bottom)
+//                    end.linkTo(parent.end)
+//                }
+//            )
+//        }
     }
 }

@@ -34,7 +34,9 @@ fun TopBar3(
     protoViewModel: ProtoViewModel,
     bluetoothViewModel: BluetoothViewModel,
     multiplePermissionState: MultiplePermissionsState,
-    context: Context
+    context: Context,
+    containerColor: Color = Color.Transparent,
+    colorFont: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     SmallTopAppBar(
         title = {
@@ -42,14 +44,15 @@ fun TopBar3(
             text = tittleScreen,
             fontWeight = FontWeight.SemiBold,
             fontSize = MaterialTheme.typography.titleLarge.fontSize,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = colorFont
             )
         },
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = containerColor),
         actions = {
             Surface(color = Color.Transparent, shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize().padding(end = 8.dp)) {
                 Icon(
                     painter = painterResource(id = icon),
+                    tint = colorFont,
                     contentDescription = description,
                     modifier = Modifier.clickable {
                         if(USER_TYPE != 3){

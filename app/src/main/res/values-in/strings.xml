@@ -98,4 +98,5 @@
     <string name="EditStoreTitle">Edit Store</string>
     <string name="CityTitle">City</string>
     <string name="AddressTitle">Address</string>
+    <string name="alumaTitleApp">aluma</string>
 </resources>

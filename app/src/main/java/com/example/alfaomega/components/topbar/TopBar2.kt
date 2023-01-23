@@ -17,7 +17,9 @@ import com.example.alfaomega.R
 fun TopBar2(
     tittleScreen: String,
     navController: NavController,
-    screenBack: String
+    screenBack: String,
+    containerColor: Color = Color.Transparent,
+    colorFont: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     SmallTopAppBar(
         title = {
@@ -25,9 +27,9 @@ fun TopBar2(
             text = tittleScreen,
             fontWeight = FontWeight.SemiBold,
             fontSize = MaterialTheme.typography.titleLarge.fontSize,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = colorFont
         ) },
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = containerColor),
         navigationIcon = {
             Surface(color = Color.Transparent ,shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
                 Icon(

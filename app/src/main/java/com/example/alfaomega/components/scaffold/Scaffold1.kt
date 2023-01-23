@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -31,7 +32,9 @@ fun Scaffold1(
     icon: Int,
     description: String,
     route: String,
-    bluetoothViewModel: BluetoothViewModel
+    bluetoothViewModel: BluetoothViewModel,
+    topBarColor: Color = Color.Transparent,
+    fontTopBar: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     Scaffold(topBar = {
         TopBarPicker(
@@ -43,7 +46,9 @@ fun Scaffold1(
             description = description,
             route = route,
             protoViewModel = protoViewModel,
-            bluetoothViewModel = bluetoothViewModel
+            bluetoothViewModel = bluetoothViewModel,
+            TopBarColor = topBarColor,
+            ColorFontTopBar = fontTopBar
         )
     },
         content = {

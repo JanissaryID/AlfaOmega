@@ -8,7 +8,9 @@ import androidx.compose.ui.text.font.FontWeight
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar1(
-    tittleScreen: String
+    tittleScreen: String,
+    containerColor: Color = Color.Transparent,
+    colorFont: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     SmallTopAppBar(
         title = {
@@ -16,9 +18,9 @@ fun TopBar1(
             text = tittleScreen,
             fontWeight = FontWeight.SemiBold,
             fontSize = MaterialTheme.typography.titleLarge.fontSize,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = colorFont
         )
         },
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = containerColor)
     )
 }

@@ -2,6 +2,7 @@ package com.example.alfaomega.screens.owner
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,7 +18,7 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 @Composable
 fun ScreenHomeOwner(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
-    val tittleScreen = stringResource(R.string.OwnerTitle)
+    val tittleScreen = stringResource(R.string.alumaTitleApp)
     val screenBack = Screens.StoreProfile.route
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_logout_24
@@ -25,6 +26,8 @@ fun ScreenHomeOwner(navController: NavController, protoViewModel: ProtoViewModel
     val wallScrreen = if(STORE_ID.isNullOrEmpty()) 20 else 8
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.Home.route
+    val topBarColor = MaterialTheme.colorScheme.primary
+    val fontTopBar = MaterialTheme.colorScheme.background
 
     MENU_SCREEN_TYPE = false
     RULES_SCREEN_TYPE = false
@@ -42,7 +45,9 @@ fun ScreenHomeOwner(navController: NavController, protoViewModel: ProtoViewModel
         icon = icon,
         description = desctiptionTopBar,
         route =routeAction,
-        bluetoothViewModel = bluetoothViewModel
+        bluetoothViewModel = bluetoothViewModel,
+        topBarColor = topBarColor,
+        fontTopBar = fontTopBar
     )
 }
 

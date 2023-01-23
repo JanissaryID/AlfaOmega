@@ -76,14 +76,15 @@ fun WallLogin(
                         modifier = Modifier.size(112.dp)
                     )
                 }
+                Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = stringResource(id = R.string.LoginTitle),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold,
                     fontSize = MaterialTheme.typography.headlineLarge.fontSize,
                 )
             }
-            Spacer(modifier = Modifier.height(64.dp))
+            Spacer(modifier = Modifier.height(54.dp))
 
             OutlinedTextField(
                 value = text_username,
@@ -95,7 +96,7 @@ fun WallLogin(
                     containerColor = Color.Transparent,
                     textColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = alphaFont),
                     disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
-                    focusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = alphaFont),
+                    focusedBorderColor = MaterialTheme.colorScheme.primary.copy(alpha = alphaFont),
                     unfocusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = alphaFont)
                 ),
                 shape = RoundedCornerShape(ROUND_CORNER.dp),
@@ -122,7 +123,7 @@ fun WallLogin(
                     containerColor = Color.Transparent,
                     textColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = alphaFont),
                     disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
-                    focusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = alphaFont),
+                    focusedBorderColor = MaterialTheme.colorScheme.primary.copy(alpha = alphaFont),
                     unfocusedBorderColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = alphaFont)
 
                 ),

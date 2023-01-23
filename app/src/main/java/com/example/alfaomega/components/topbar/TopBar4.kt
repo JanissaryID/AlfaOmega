@@ -47,6 +47,8 @@ fun TopBar4(
     userViewModel: UserViewModel = UserViewModel(),
     transactionViewModel: TransactionViewModel = TransactionViewModel(),
     bluetoothViewModel: BluetoothViewModel,
+    containerColor: Color = Color.Transparent,
+    colorFont: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     multiplePermissionState: MultiplePermissionsState
 ) {
 
@@ -58,7 +60,7 @@ fun TopBar4(
             text = tittleScreen,
             fontWeight = FontWeight.SemiBold,
             fontSize = MaterialTheme.typography.titleLarge.fontSize,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = colorFont
         ) },
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
         navigationIcon = {

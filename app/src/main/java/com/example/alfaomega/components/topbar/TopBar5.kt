@@ -37,6 +37,8 @@ fun TopBar5(
     icon: Int,
     description: String,
     transactionViewModel: TransactionViewModel = TransactionViewModel(),
+    containerColor: Color = Color.Transparent,
+    colorFont: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     excelViewModel: ExcelViewModel = ExcelViewModel()
 ) {
 
@@ -71,7 +73,7 @@ fun TopBar5(
                 text = tittleScreen,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = colorFont
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
