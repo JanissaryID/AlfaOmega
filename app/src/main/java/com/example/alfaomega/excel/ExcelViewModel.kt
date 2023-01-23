@@ -89,7 +89,7 @@ class ExcelViewModel: ViewModel() {
 
         val futureStudioIconFile = File(
             Environment
-                .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 .toString() + "/" + csvFile
         )
         val wbSettings = WorkbookSettings()

@@ -7,7 +7,7 @@
     <string name="CreateTransactionTitle">Create Transaction</string>
     <string name="WashmachineTitle">Wash Machine</string>
     <string name="DryMachineTitle">Dry Machine</string>
-    <string name="LoginTitle">Login</string>
+    <string name="LoginTitle">Sign in</string>
     <string name="ListStoreTitle">List Store</string>
     <string name="ListTransactionTitle">List Transaction</string>
     <string name="OwnerTitle">Owner</string>

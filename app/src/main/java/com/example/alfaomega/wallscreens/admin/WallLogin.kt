@@ -46,7 +46,7 @@ fun WallLogin(
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
     val alphaFont = 0.7f
-    val fontSize = MaterialTheme.typography.labelLarge.fontSize
+    val fontSize = MaterialTheme.typography.titleMedium.fontSize
 
 
     ConstraintLayout(modifier = Modifier

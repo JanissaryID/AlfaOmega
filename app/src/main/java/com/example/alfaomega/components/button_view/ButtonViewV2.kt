@@ -43,7 +43,7 @@ fun ButtonViewV2(
                     modifier = Modifier.size(24.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = title, fontWeight = FontWeight.SemiBold)
+                Text(text = title, fontWeight = FontWeight.SemiBold, fontSize = MaterialTheme.typography.titleMedium.fontSize)
             }
         }
     }
