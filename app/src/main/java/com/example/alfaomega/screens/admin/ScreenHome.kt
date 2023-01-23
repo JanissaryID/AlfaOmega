@@ -21,7 +21,7 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 @Composable
 fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
-    val tittleScreen = if(STORE_ID.isNullOrEmpty()) stringResource(R.string.HelloTItle) else if(USER_TYPE == 0) stringResource(R.string.HelloTItle) else stringResource(R.string.TransactionActiveTitle)
+    val tittleScreen = if(STORE_ID.isNullOrEmpty()) "" else if(USER_TYPE == 0) stringResource(R.string.HelloTItle) else stringResource(R.string.TransactionActiveTitle)
     val screenBack = if( USER_TYPE == 1 ) Screens.Home.route else Screens.StoreProfile.route
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_storefront_24

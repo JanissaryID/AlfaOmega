@@ -18,7 +18,8 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 @Composable
 fun ScreenLogin(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
-    val tittleScreen = stringResource(R.string.LoginTitle)
+//    stringResource(R.string.LoginTitle)
+    val tittleScreen = ""
     val screenBack = Screens.StoreProfile.route
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_storefront_24

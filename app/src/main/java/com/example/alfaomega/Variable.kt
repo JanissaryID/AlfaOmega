@@ -163,6 +163,9 @@ var STORE_NAME_EDIT: String by mutableStateOf("")
 var STORE_ADDRESS_EDIT: String by mutableStateOf("")
 var STORE_CITY_EDIT: String by mutableStateOf("")
 
+//Variable Style
+val ROUND_CORNER: Int = 24
+
 
 var STAT_GET_DATA: Boolean by mutableStateOf(false)
 

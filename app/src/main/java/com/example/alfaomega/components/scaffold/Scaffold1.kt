@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
@@ -55,6 +56,8 @@ fun Scaffold1(
                 menuViewModel = menuViewModel,
                 bluetoothViewModel = bluetoothViewModel
             )
-        }
+        },
+        containerColor = Color.Transparent,
+        contentColor = Color.Transparent
     )
 }
