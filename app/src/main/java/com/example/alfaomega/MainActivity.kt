@@ -69,7 +69,10 @@ class MainActivity : ComponentActivity() {
         })
 
         setContent {
-            AlfaOmegaTheme {
+            AlfaOmegaTheme(
+                dynamicColor = false,
+                darkTheme = false
+            ) {
 
                 // A surface container using the 'background' color from the theme
                 Surface(
