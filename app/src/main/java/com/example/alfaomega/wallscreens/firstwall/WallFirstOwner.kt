@@ -119,13 +119,13 @@ fun WallFirstOwner(
         }
         Spacer(modifier = Modifier.height(16.dp))
         Surface(color = Color.Transparent,
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
         ) {
             Text(
                 text = "Outlet",
                 fontWeight = FontWeight.Bold,
                 fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp)
             )
 
             Column(modifier = Modifier

@@ -19,9 +19,9 @@ fun StoreLazyCRow(
 ) {
     LazyRow(
         modifier = Modifier
-            .padding(top = 8.dp)
             .wrapContentHeight().fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 10.dp)
     ){
         itemsIndexed(items = storeModel) { index, store ->
             ItemStoreSquare(
