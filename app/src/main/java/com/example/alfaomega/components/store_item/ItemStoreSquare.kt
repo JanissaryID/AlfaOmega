@@ -24,15 +24,14 @@ fun ItemStoreSquare(
     protoViewModel: ProtoViewModel,
     navController: NavController
 ) {
-    val colorFont = MaterialTheme.colorScheme.secondary
+    val colorFont = MaterialTheme.colorScheme.primary
 
     Card(
-//        elevation = CardDefaults.cardElevation(6.dp),
         modifier = Modifier.padding(8.dp),
         shape = RoundedCornerShape(22.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.9f),
-            contentColor = MaterialTheme.colorScheme.background
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.primary
         )
     ) {
         Surface(
@@ -65,7 +64,7 @@ fun ItemStoreSquare(
                 Column(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)
                 ){
-                    Surface(color = MaterialTheme.colorScheme.background,
+                    Surface(color = MaterialTheme.colorScheme.primary,
                         shape = RoundedCornerShape(ROUND_CORNER.dp),
                         modifier = Modifier
                             .wrapContentWidth().wrapContentHeight()
@@ -74,7 +73,7 @@ fun ItemStoreSquare(
                             text = storeCity,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
                             modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                            color = MaterialTheme.colorScheme.primary
+                            color = MaterialTheme.colorScheme.background
                         )
                     }
                     Spacer(modifier = Modifier.height(24.dp))

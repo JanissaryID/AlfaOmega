@@ -89,7 +89,7 @@ fun StoreLoadDataOwner(
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier
                             .wrapContentHeight()
-                            .size(200.dp)
+                            .size(60.dp)
                             .constrainAs(StoreImage)
                             {
                                 top.linkTo(parent.top)

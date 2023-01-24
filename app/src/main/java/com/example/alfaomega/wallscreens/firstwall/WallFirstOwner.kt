@@ -1,32 +1,30 @@
 package com.example.alfaomega.wallscreens.firstwall
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
+import com.example.alfaomega.components.menu.ItemMenuNavOwner
+import com.example.alfaomega.components.store_item.ItemStoreSquare
 import com.example.alfaomega.`object`.owner.MenuOwner
 import com.example.alfaomega.`object`.owner.MenuOwnerModel
-import com.example.alfaomega.components.ItemStoreMenu
-import com.example.alfaomega.navigations.Screens
+import com.example.alfaomega.graph.SampleLineGraph
 import com.example.alfaomega.proto.ProtoViewModel
-import com.example.alfaomega.view.admin.store.StoreLoadData
 import com.example.alfaomega.view.owner.store.StoreLoadDataOwner
+import com.madrapps.plot.line.DataPoint
 
 @Composable
 fun WallFirstOwner(
@@ -34,9 +32,42 @@ fun WallFirstOwner(
     paddingValues: PaddingValues,
     protoViewModel: ProtoViewModel
 ) {
-    val colorFont = MaterialTheme.colorScheme.secondary
+    val colorFont = MaterialTheme.colorScheme.surface
     var list: ArrayList<MenuOwnerModel> = arrayListOf()
     list.addAll(MenuOwner.listData)
+
+    val selectionMenuTitle = listOf(
+        stringResource(R.string.RuleTitle),
+        stringResource(R.string.Menu),
+        stringResource(R.string.EmployeeTitle),
+    )
+
+    val dataList: List<DataPoint> = listOf(
+        DataPoint(0f, 0f),
+        DataPoint(1f, 0f),
+        DataPoint(2f, 25f),
+        DataPoint(3f, 75f),
+        DataPoint(4f, 100f),
+        DataPoint(5f, 80f),
+        DataPoint(6f, 75f),
+        DataPoint(7f, 50f),
+        DataPoint(8f, 80f),
+        DataPoint(9f, 70f),
+        DataPoint(10f, 0f),
+        DataPoint(11f, 0f),
+        DataPoint(12f, 45f),
+        DataPoint(13f, 20f),
+        DataPoint(14f, 40f),
+        DataPoint(15f, 75f),
+        DataPoint(16f, 50f),
+        DataPoint(17f, 75f),
+        DataPoint(18f, 40f),
+        DataPoint(19f, 20f),
+        DataPoint(20f, 0f),
+        DataPoint(21f, 0f),
+        DataPoint(22f, 50f),
+        DataPoint(23f, 25f),
+    )
 
     Column(modifier = Modifier.padding(
         top = paddingValues.calculateTopPadding(),
@@ -96,7 +127,9 @@ fun WallFirstOwner(
                             )
                         }
 
-                        Divider(modifier = Modifier.height(42.dp).width(2.dp), thickness = 2.dp, color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f))
+                        Divider(modifier = Modifier
+                            .height(42.dp)
+                            .width(2.dp), thickness = 2.dp, color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f))
 
                         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
                             Text(
@@ -117,44 +150,87 @@ fun WallFirstOwner(
                 }
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
-        Surface(color = Color.Transparent,
-        ) {
-            Text(
-                text = "Outlet",
-                fontWeight = FontWeight.Bold,
-                fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp)
-            )
-
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    top = 24.dp
-                ),
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally
+        Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+            Spacer(modifier = Modifier.height(12.dp))
+            Surface(color = Color.Transparent,
             ) {
-                StoreLoadDataOwner(
-                    storeState = STORE_STATE,
-                    store = STORE_LIST_RESPONSE,
-                    navController = navController,
-                    protoViewModel = protoViewModel
+                Text(
+                    text = "Menu",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp)
                 )
+                Spacer(modifier = Modifier.height(8.dp))
+                Surface(color = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(ROUND_CORNER.dp),
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 32.dp)
+                ) {
+                    LazyRow(
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+                    ){
+                        itemsIndexed(items = list) { index, menuNav ->
+                            ItemMenuNavOwner(
+                                iconNav = menuNav.menuIcon,
+                                nameIcon = selectionMenuTitle[menuNav.titleName],
+                                navMenu = menuNav.screensMenu)
+                        }
+                    }
+                }
             }
-        }
+            Spacer(modifier = Modifier.height(16.dp))
+            Surface(color = Color.Transparent,
+            ) {
+                Text(
+                    text = "Outlet",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+                )
 
-        Spacer(modifier = Modifier.height(8.dp))
-        Surface(color = Color.Transparent,
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
-        ) {
-            Text(
-                text = "Graph Finance",
-                fontWeight = FontWeight.Bold,
-                fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                color = MaterialTheme.colorScheme.primary
-            )
+                Column(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = 24.dp
+                    ),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    StoreLoadDataOwner(
+                        storeState = STORE_STATE,
+                        store = STORE_LIST_RESPONSE,
+                        navController = navController,
+                        protoViewModel = protoViewModel
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+            Surface(color = Color.Transparent,
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+            ) {
+                Column(modifier = Modifier
+                    .fillMaxWidth()) {
+                    Text(
+                        text = "Graph Finance",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Surface(color = MaterialTheme.colorScheme.surface,
+                        shape = RoundedCornerShape(ROUND_CORNER.dp),
+                    ){
+                        SampleLineGraph(dataList)
+                    }
+                }
+            }
         }
     }
 }
