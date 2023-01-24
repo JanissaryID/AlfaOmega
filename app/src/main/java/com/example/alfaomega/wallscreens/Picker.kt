@@ -45,7 +45,7 @@ fun WallPicker(
         11 -> WallUserOwner(paddingValues = paddingValues, navController = navController)
         12 -> WallRulesEditOwner(paddingValues = paddingValues, navController = navController, ruleViewModel = RuleViewModel())
         13 -> WallUserEditOwner(paddingValues = paddingValues, navController = navController, userViewModel = UserViewModel())
-        20 -> WallFirstOwner(navController = navController, paddingValues = paddingValues)
+        20 -> WallFirstOwner(navController = navController, paddingValues = paddingValues, protoViewModel = protoViewModel)
         21 -> WallFirstAdminLogin(paddingValues = paddingValues)
         22 -> WallTransactionOwner(paddingValues = paddingValues, navController = navController)
         23 -> WallBluetooth(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)

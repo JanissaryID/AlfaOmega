@@ -25,12 +25,16 @@ import com.example.alfaomega.`object`.owner.MenuOwnerModel
 import com.example.alfaomega.components.ItemStoreMenu
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
+import com.example.alfaomega.view.admin.store.StoreLoadData
+import com.example.alfaomega.view.owner.store.StoreLoadDataOwner
 
 @Composable
 fun WallFirstOwner(
     navController: NavController,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    protoViewModel: ProtoViewModel
 ) {
+    val colorFont = MaterialTheme.colorScheme.secondary
     var list: ArrayList<MenuOwnerModel> = arrayListOf()
     list.addAll(MenuOwner.listData)
 
@@ -40,30 +44,30 @@ fun WallFirstOwner(
     )) {
         Surface(
             color = MaterialTheme.colorScheme.primary,
-            shape = RoundedCornerShape(bottomEnd = 42.dp, bottomStart = 42.dp),
+            shape = RoundedCornerShape(bottomEnd = 40.dp, bottomStart = 40.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(204.dp)) {
+                .height(200.dp)) {
             Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
                 Text(
                     text = "Hello, Owner",
                     fontWeight = FontWeight.Bold,
                     fontSize = MaterialTheme.typography.headlineLarge.fontSize,
-                    color = MaterialTheme.colorScheme.background
+                    color = colorFont
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
                     text = "Finance in this month",
                     fontWeight = FontWeight.Bold,
                     fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                    color = MaterialTheme.colorScheme.background.copy(alpha = 0.7f)
+                    color = colorFont.copy(alpha = 0.8f)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "Net profit Rp. 7.478.000",
                     fontWeight = FontWeight.Bold,
                     fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                    color = MaterialTheme.colorScheme.background.copy(alpha = 0.7f)
+                    color = colorFont.copy(alpha = 0.7f)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Surface(
@@ -72,9 +76,11 @@ fun WallFirstOwner(
                 ) {
                     Row(modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 36.dp, end = 36.dp, top = 12.dp, bottom = 12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        .padding(start = 4.dp, end = 4.dp, top = 12.dp, bottom = 12.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
                             Text(
                                 text = "Income",
                                 fontWeight = FontWeight.SemiBold,
@@ -90,7 +96,9 @@ fun WallFirstOwner(
                             )
                         }
 
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Divider(modifier = Modifier.height(42.dp).width(2.dp), thickness = 2.dp, color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f))
+
+                        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.weight(1f)) {
                             Text(
                                 text = "Outcome",
                                 fontWeight = FontWeight.SemiBold,
@@ -119,66 +127,34 @@ fun WallFirstOwner(
                 fontSize = MaterialTheme.typography.titleLarge.fontSize,
                 color = MaterialTheme.colorScheme.primary
             )
+
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    top = 24.dp
+                ),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                StoreLoadDataOwner(
+                    storeState = STORE_STATE,
+                    store = STORE_LIST_RESPONSE,
+                    navController = navController,
+                    protoViewModel = protoViewModel
+                )
+            }
         }
 
-
-//        ConstraintLayout(
-//            modifier = Modifier
-//                .padding(start = 16.dp, end = 16.dp)
-//                .fillMaxSize()
-//        ) {
-//
-//            val (IconMenu, ExplainText) = createRefs()
-//
-//            Card(
-//                elevation = CardDefaults.cardElevation(6.dp),
-//                modifier = Modifier
-//                    .padding(8.dp)
-//                    .size(144.dp)
-//                    .constrainAs(IconMenu){
-//                        start.linkTo(parent.start)
-//                        top.linkTo(parent.top)
-//                        end.linkTo(parent.end)
-//                    }
-//                ,
-//                shape = RoundedCornerShape(100),
-//            ) {
-//                Surface(
-//                    shape = RoundedCornerShape(100),
-//                    modifier = Modifier.clickable {
-//                        navController.navigate(route = Screens.Store.route)
-//                    },
-//                    color = Color.Transparent
-//                ) {
-//                    Box(
-//                        contentAlignment = Alignment.Center,
-//                        modifier = Modifier.fillMaxSize()
-//                    ) {
-//                        Icon(
-//                            painter = painterResource(id = R.drawable.ic_twotone_storefront_24),
-//                            contentDescription = "Icon TImer",
-//                            modifier = Modifier.size(80.dp)
-//                        )
-//                    }
-//                }
-//            }
-//
-//            Text(
-//                text = stringResource(R.string.TextPickStoreFirst),
-//                lineHeight = 36.sp,
-//                textAlign = TextAlign.Center,
-//                fontWeight = FontWeight.Normal,
-//                fontSize = MaterialTheme.typography.headlineSmall.fontSize,
-//                color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                modifier = Modifier
-//                    .width(320.dp)
-//                    .constrainAs(ExplainText){
-//                    start.linkTo(parent.start)
-//                    top.linkTo(IconMenu.bottom)
-//                    bottom.linkTo(parent.bottom)
-//                    end.linkTo(parent.end)
-//                }
-//            )
-//        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Surface(color = Color.Transparent,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+        ) {
+            Text(
+                text = "Graph Finance",
+                fontWeight = FontWeight.Bold,
+                fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
     }
 }

@@ -27,7 +27,7 @@ fun ScreenHomeOwner(navController: NavController, protoViewModel: ProtoViewModel
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.Home.route
     val topBarColor = MaterialTheme.colorScheme.primary
-    val fontTopBar = MaterialTheme.colorScheme.background
+    val fontTopBar = MaterialTheme.colorScheme.secondary
 
     MENU_SCREEN_TYPE = false
     RULES_SCREEN_TYPE = false

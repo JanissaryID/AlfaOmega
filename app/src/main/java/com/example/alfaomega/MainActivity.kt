@@ -96,6 +96,8 @@ class MainActivity : ComponentActivity() {
                         problemViewModel = problemViewModel
                     )
 
+                    storeViewModel.FetchStore()
+
 //                    bluetoothViewModel.showPairedDevice(context = this, multiplePermissionState = multiplePermissionState)
                     MY_CONTEXT = this
 
