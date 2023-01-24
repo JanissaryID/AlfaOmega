@@ -71,7 +71,7 @@ fun WallLogin(
                     modifier = Modifier.size(144.dp),
                 ) {
                     Image(
-                        painter = painterResource(id = R.mipmap.ic_launcher_round),
+                        painter = painterResource(id = R.drawable.ic_launcher_foreground),
                         contentDescription = "Icon TImer",
                         modifier = Modifier.size(112.dp)
                     )

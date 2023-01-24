@@ -78,7 +78,7 @@ fun WallFirstOwner(
             shape = RoundedCornerShape(bottomEnd = 40.dp, bottomStart = 40.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)) {
+                .wrapContentHeight()) {
             Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
                 Text(
                     text = "Hello, Owner",
@@ -102,8 +102,9 @@ fun WallFirstOwner(
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Surface(
-                    color =  MaterialTheme.colorScheme.background,
+                    color =  MaterialTheme.colorScheme.surface,
                     shape = RoundedCornerShape(28.dp),
+                    modifier = Modifier.padding(bottom = 16.dp)
                 ) {
                     Row(modifier = Modifier
                         .fillMaxWidth()
@@ -150,7 +151,7 @@ fun WallFirstOwner(
                 }
             }
         }
-        Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+        Column(modifier = Modifier.verticalScroll(rememberScrollState()).padding(bottom = 16.dp)) {
             Spacer(modifier = Modifier.height(12.dp))
             Surface(color = Color.Transparent,
             ) {
