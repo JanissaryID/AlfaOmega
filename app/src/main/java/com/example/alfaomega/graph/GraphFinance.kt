@@ -13,23 +13,107 @@ import com.madrapps.plot.line.LinePlot
 
 
 @Composable
-fun SampleLineGraph(lines: List<DataPoint>) {
-    LineGraph(
-        plot = LinePlot(
-            listOf(
-                LinePlot.Line(
-                    lines,
-                    LinePlot.Connection(color = MaterialTheme.colorScheme.primary),
-                    LinePlot.Intersection(color = MaterialTheme.colorScheme.primary),
-                    LinePlot.Highlight(color = MaterialTheme.colorScheme.primary),
-                    LinePlot.AreaUnderLine(color = MaterialTheme.colorScheme.primary, 0.3f)
-                )
+fun SampleLineGraph(lines: List<List<DataPoint>>, selectGraph: Int = 0) {
+    if(selectGraph == 0){
+        LineGraph(
+            plot = LinePlot(
+                listOf(
+                    LinePlot.Line(
+                        lines[0],
+                        LinePlot.Connection(color = MaterialTheme.colorScheme.primary),
+                        LinePlot.Intersection(color = MaterialTheme.colorScheme.primary),
+                        LinePlot.Highlight(color = MaterialTheme.colorScheme.primary),
+                        LinePlot.AreaUnderLine(color = MaterialTheme.colorScheme.primary, 0.3f)
+                    ),
+                    LinePlot.Line(
+                        lines[1],
+                        LinePlot.Connection(color = MaterialTheme.colorScheme.error),
+                        LinePlot.Intersection(color = MaterialTheme.colorScheme.error),
+                        LinePlot.Highlight(color = MaterialTheme.colorScheme.error),
+                        LinePlot.AreaUnderLine(color = MaterialTheme.colorScheme.error, 0.3f)
+                    ),
+                    LinePlot.Line(
+                        lines[2],
+                        LinePlot.Connection(color = MaterialTheme.colorScheme.onPrimary),
+                        LinePlot.Intersection(color = MaterialTheme.colorScheme.onPrimary),
+                        LinePlot.Highlight(color = MaterialTheme.colorScheme.onPrimary),
+                        LinePlot.AreaUnderLine(color = MaterialTheme.colorScheme.onPrimary, 0.3f)
+                    )
+                ),
+                grid = LinePlot.Grid(Color.Transparent, steps = 1),
             ),
-            grid = LinePlot.Grid(Color.Transparent, steps = 1),
-        ),
-        modifier = Modifier.fillMaxWidth().height(200.dp),
-        onSelection = { xLine, points ->
-            // Do whatever you want here
-        }
-    )
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp),
+            onSelection = { xLine, points ->
+                // Do whatever you want here
+            }
+        )
+    }
+    else if(selectGraph == 1){
+        LineGraph(
+            plot = LinePlot(
+                listOf(
+                    LinePlot.Line(
+                        lines[0],
+                        LinePlot.Connection(color = MaterialTheme.colorScheme.primary),
+                        LinePlot.Intersection(color = MaterialTheme.colorScheme.primary),
+                        LinePlot.Highlight(color = MaterialTheme.colorScheme.primary),
+                        LinePlot.AreaUnderLine(color = MaterialTheme.colorScheme.primary, 0.3f)
+                    )
+                ),
+                grid = LinePlot.Grid(Color.Transparent, steps = 1),
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp),
+            onSelection = { xLine, points ->
+                // Do whatever you want here
+            }
+        )
+    }
+    else if(selectGraph == 2){
+        LineGraph(
+            plot = LinePlot(
+                listOf(
+                    LinePlot.Line(
+                        lines[1],
+                        LinePlot.Connection(color = MaterialTheme.colorScheme.error),
+                        LinePlot.Intersection(color = MaterialTheme.colorScheme.error),
+                        LinePlot.Highlight(color = MaterialTheme.colorScheme.error),
+                        LinePlot.AreaUnderLine(color = MaterialTheme.colorScheme.error, 0.3f)
+                    ),
+                ),
+                grid = LinePlot.Grid(Color.Transparent, steps = 1),
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp),
+            onSelection = { xLine, points ->
+                // Do whatever you want here
+            }
+        )
+    }
+    else if(selectGraph == 3){
+        LineGraph(
+            plot = LinePlot(
+                listOf(
+                    LinePlot.Line(
+                        lines[2],
+                        LinePlot.Connection(color = MaterialTheme.colorScheme.onPrimary),
+                        LinePlot.Intersection(color = MaterialTheme.colorScheme.onPrimary),
+                        LinePlot.Highlight(color = MaterialTheme.colorScheme.onPrimary),
+                        LinePlot.AreaUnderLine(color = MaterialTheme.colorScheme.onPrimary, 0.3f)
+                    )
+                ),
+                grid = LinePlot.Grid(Color.Transparent, steps = 1),
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp),
+            onSelection = { xLine, points ->
+                // Do whatever you want here
+            }
+        )
+    }
 }

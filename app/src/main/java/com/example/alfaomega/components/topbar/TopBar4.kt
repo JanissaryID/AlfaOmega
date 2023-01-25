@@ -62,7 +62,7 @@ fun TopBar4(
             fontSize = MaterialTheme.typography.titleLarge.fontSize,
             color = colorFont
         ) },
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = containerColor),
         navigationIcon = {
             Surface(color = Color.Transparent, shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
                 Icon(
@@ -75,12 +75,12 @@ fun TopBar4(
                             }
                         }
                     },
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = colorFont
                 )
             }
         },
         actions = {
-            Surface(shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize().padding(end = 8.dp)) {
+            Surface(color = Color.Transparent, shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize().padding(end = 8.dp)) {
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = description,
@@ -118,7 +118,8 @@ fun TopBar4(
                             )
 //                            Log.d("Check_Print", "Stat Connect = $STAT_BLUETOOTH_CONNECT")
                         }
-                    }
+                    },
+                    tint = colorFont
                 )
             }
         }

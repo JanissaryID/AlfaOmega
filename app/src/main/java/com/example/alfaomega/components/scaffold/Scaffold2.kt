@@ -4,12 +4,10 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -39,7 +37,9 @@ fun Scaffold2(
     icon: Int,
     description: String,
     route: String,
-    bluetoothViewModel: BluetoothViewModel
+    bluetoothViewModel: BluetoothViewModel,
+    topBarColor: Color = Color.Transparent,
+    fontTopBar: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     Scaffold(topBar = {
         TopBarPicker(
@@ -51,7 +51,9 @@ fun Scaffold2(
             description = description,
             route = route,
             protoViewModel = protoViewModel,
-            bluetoothViewModel = bluetoothViewModel
+            bluetoothViewModel = bluetoothViewModel,
+            TopBarColor = topBarColor,
+            ColorFontTopBar = fontTopBar
         )
     },
         content = {
@@ -67,6 +69,7 @@ fun Scaffold2(
         },
         floatingActionButton = {
             FloatingActionButton(
+                containerColor = MaterialTheme.colorScheme.primary,
                 onClick = {
                     EDIT_MODE = false
                     navController.navigate(route = floatingRoute)
@@ -75,9 +78,12 @@ fun Scaffold2(
                 Icon(
                     painter = painterResource(id = R.drawable.fluent_add_12_filled),
                     contentDescription = "Icon Add",
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(24.dp),
+                    tint = MaterialTheme.colorScheme.surface
                 )
             }
-        }
+        },
+        containerColor = Color.Transparent,
+        contentColor = Color.Transparent
     )
 }

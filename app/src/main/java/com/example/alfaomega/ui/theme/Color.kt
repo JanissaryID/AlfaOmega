@@ -15,4 +15,6 @@ val Background = Color(0xFFf2f2f2)
 val Primary = Color(0xFF1E6F5C)
 val Secondary = Color(0xFFf2f2f2)
 val Surface =  Color(0xFFFFFFFF)
+val onPrimary = Color(0xFF00337C)
+val onSecondary = Color(0xFF4e2915)
 //344D67

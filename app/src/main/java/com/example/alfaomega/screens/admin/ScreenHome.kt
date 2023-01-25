@@ -25,8 +25,8 @@ fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel, blu
     val screenBack = if( USER_TYPE == 1 ) Screens.Home.route else Screens.StoreProfile.route
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_storefront_24
-    val TopBar = if(STORE_ID.isNullOrEmpty()) 1 else if( USER_TYPE == 0 ) 1 else 3
-    val wallScrreen = if( USER_TYPE == 0 ) 7 else if(STORE_ID.isNullOrEmpty()) 20 else 0
+    val TopBar = if( USER_TYPE == 0 ) 1 else 3
+    val wallScrreen = if( USER_TYPE == 0 ) 7 else 0
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.StoreProfile.route
 //

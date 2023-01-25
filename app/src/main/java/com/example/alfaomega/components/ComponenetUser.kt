@@ -26,13 +26,13 @@ fun ComponentUser(
     navController: NavController
 ) {
     Card(
-        elevation = CardDefaults.cardElevation(6.dp),
         modifier = Modifier.padding(8.dp),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(ROUND_CORNER.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
     ) {
         Surface(
             color = Color.Transparent,
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(ROUND_CORNER.dp),
             modifier = Modifier.clickable {
                 if(USER_TYPE == 1) {
                     EDIT_MODE = true
@@ -53,16 +53,18 @@ fun ComponentUser(
             }) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth().padding(start = 16.dp, top = 12.dp, end = 16.dp, bottom = 12.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, top = 12.dp, end = 16.dp, bottom = 12.dp)
             ) {
                 Surface(
-                    border = BorderStroke(3.dp, MaterialTheme.colorScheme.primary),
+                    border = BorderStroke(3.dp, MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.6f)),
                     shape = RoundedCornerShape(100)
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_twotone_person_24),
                         contentDescription = "Icon User",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
                             .size(48.dp)
                             .padding(13.dp)
@@ -78,20 +80,23 @@ fun ComponentUser(
                         text = name.toString(),
                         fontWeight = FontWeight.SemiBold,
                         fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                        color = MaterialTheme.colorScheme.surface
                     )
-                    ButtonView(
-                        title = "Edit",
-                        enable = true,
-                        modifier = Modifier.width(90.dp)
-                    ) {
-                        EDIT_MODE = true
-                        USER_NAME_EDIT = name
-                        USER_PASSWORD_EDIT = password
-                        USER_SCREEN_TYPE = true
-                        ID_USER_EDIT = idUser
-                        navController.navigate(route = Screens.UserEditOwner.route){
-                            popUpTo(Screens.UserEditOwner.route) {
-                                inclusive = true
+                    if(USER_TYPE == 2){
+                        ButtonView(
+                            title = "Edit",
+                            enable = true,
+                            modifier = Modifier.width(90.dp)
+                        ) {
+                            EDIT_MODE = true
+                            USER_NAME_EDIT = name
+                            USER_PASSWORD_EDIT = password
+                            USER_SCREEN_TYPE = true
+                            ID_USER_EDIT = idUser
+                            navController.navigate(route = Screens.UserEditOwner.route){
+                                popUpTo(Screens.UserEditOwner.route) {
+                                    inclusive = true
+                                }
                             }
                         }
                     }

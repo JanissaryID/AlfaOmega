@@ -2,6 +2,7 @@ package com.example.alfaomega.screens.owner
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
@@ -26,6 +27,8 @@ fun ScreenUserEditOwner(navController: NavController, protoViewModel: ProtoViewM
     val wallScrreen = 13
     val desctiptionTopBar = "icon Delete"
     val routeAction = Screens.UserOwner.route
+    val topBarColor = MaterialTheme.colorScheme.primary
+    val fontTopBar = MaterialTheme.colorScheme.surface
 
     Scaffold1(
         tittleScreen = tittleScreen,
@@ -38,6 +41,8 @@ fun ScreenUserEditOwner(navController: NavController, protoViewModel: ProtoViewM
         icon = icon,
         description = desctiptionTopBar,
         route = routeAction,
-        bluetoothViewModel = bluetoothViewModel
+        bluetoothViewModel = bluetoothViewModel,
+        topBarColor = topBarColor,
+        fontTopBar = fontTopBar
     )
 }

@@ -42,7 +42,7 @@ fun TopBar2(
                             }
                         }
                     },
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = colorFont
                 )
             }
         }

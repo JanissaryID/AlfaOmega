@@ -21,6 +21,7 @@ import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.components.ButtonView
+import com.example.alfaomega.components.button_view.ButtonViewV2
 import com.example.alfaomega.navigations.Screens
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -46,6 +47,7 @@ fun WallUserEditOwner(
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
     Column(modifier = Modifier.padding(top = paddingValues.calculateTopPadding(), start = 16.dp, end = 16.dp)) {
+        Spacer(modifier = Modifier.height(16.dp))
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
 
             val (CardMenu, Button) = createRefs()
@@ -141,7 +143,7 @@ fun WallUserEditOwner(
                 BUTTON_MENU_EDIT = false
             }
 
-            ButtonView(
+            ButtonViewV2(
                 title = if(USER_TYPE ==  2) if(EDIT_MODE) stringResource(R.string.SaveChanges) else stringResource(
                                     R.string.CreateownerTitle) else if(EDIT_MODE) stringResource(R.string.SaveChanges) else stringResource(R.string.CreateUserTitle),
                 enable = BUTTON_MENU_EDIT,

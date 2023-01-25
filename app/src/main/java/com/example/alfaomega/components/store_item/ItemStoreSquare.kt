@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.components.ButtonView
@@ -83,37 +85,15 @@ fun ItemStoreSquare(
                         fontSize = MaterialTheme.typography.titleLarge.fontSize,
                         color = colorFont
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = storeAddress,
                         fontWeight = FontWeight.SemiBold,
-                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                        color = colorFont
+                        fontSize = MaterialTheme.typography.labelMedium.fontSize,
+                        color = colorFont.copy(alpha = 0.7f),
+//                        lineHeight = 50.sp
+//                        style = LocalTextStyle.current.copy(lineHeight = 120.sp)
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
-
-
-
-
-//                    if(USER_TYPE == 2){
-//                        Spacer(modifier = Modifier.height(16.dp))
-//                        ButtonView(
-//                            title = "Edit",
-//                            enable = true,
-////                            modifier = Modifier.width(90.dp)
-//                        ) {
-////                            EDIT_MODE = true
-////                            USER_NAME_EDIT = name
-////                            USER_PASSWORD_EDIT = password
-////                            USER_SCREEN_TYPE = true
-////                            ID_USER_EDIT = idUser
-////                            navController.navigate(route = Screens.UserEditOwner.route){
-////                                popUpTo(Screens.UserEditOwner.route) {
-////                                    inclusive = true
-////                                }
-////                            }
-//                        }
-//                    }
                 }
             }
         }

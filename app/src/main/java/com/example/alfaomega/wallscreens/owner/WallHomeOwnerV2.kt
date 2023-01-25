@@ -1,8 +1,6 @@
-package com.example.alfaomega.wallscreens.firstwall
+package com.example.alfaomega.wallscreens.owner
 
 import android.util.Log
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -11,7 +9,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,21 +22,21 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.alfaomega.*
 import com.example.alfaomega.R
+import com.example.alfaomega.ROUND_CORNER
+import com.example.alfaomega.STORE_LIST_RESPONSE
+import com.example.alfaomega.STORE_STATE
 import com.example.alfaomega.components.ItemFinance
 import com.example.alfaomega.components.menu.ItemMenuNavOwner
-import com.example.alfaomega.components.store_item.ItemStoreSquare
 import com.example.alfaomega.datapoint.DataPoints
+import com.example.alfaomega.graph.SampleLineGraph
 import com.example.alfaomega.`object`.owner.MenuOwner
 import com.example.alfaomega.`object`.owner.MenuOwnerModel
-import com.example.alfaomega.graph.SampleLineGraph
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.view.owner.store.StoreLoadDataOwner
-import com.madrapps.plot.line.DataPoint
 
 @Composable
-fun WallFirstOwner(
+fun WallHomeOwnerV2(
     navController: NavController,
     paddingValues: PaddingValues,
     protoViewModel: ProtoViewModel
@@ -45,7 +46,7 @@ fun WallFirstOwner(
     list.addAll(MenuOwner.listData)
 
     val selectionMenuTitle = listOf(
-        stringResource(R.string.RuleTitle),
+        stringResource(R.string.RulesTitle),
         stringResource(R.string.Menu),
         stringResource(R.string.EmployeeTitle),
     )

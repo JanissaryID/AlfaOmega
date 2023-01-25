@@ -89,7 +89,7 @@ fun TopBar5(
                             }
                         }
                     },
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = colorFont
                 )
             }
         },
@@ -118,7 +118,8 @@ fun TopBar5(
                                 Toast.makeText(activity, "Done", Toast.LENGTH_SHORT).show()
                             }
                         }
-                    }
+                    },
+                    tint = colorFont
                 )
             }
         }

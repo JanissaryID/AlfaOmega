@@ -156,11 +156,6 @@ fun WallLogin(
             ButtonViewV2(
                 title = stringResource(R.string.LoginTitle),
                 enable = BUTTON_LOGIN,
-//                    modifier = Modifier.constrainAs(ButtonLogin){
-//                        bottom.linkTo(parent.bottom, 16.dp)
-//                        start.linkTo(parent.start)
-//                        end.linkTo(parent.end)
-//                    }
             ) {
 
                 BUTTON_LOGIN_CLICKED = true

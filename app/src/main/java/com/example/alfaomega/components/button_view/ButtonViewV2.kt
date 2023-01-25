@@ -33,7 +33,7 @@ fun ButtonViewV2(
         enabled = enable
     ) {
         if(!typeButton){
-            Text(text = title, fontWeight = FontWeight.SemiBold, fontSize = MaterialTheme.typography.titleMedium.fontSize)
+            Text(color = MaterialTheme.colorScheme.surface, text = title, fontWeight = FontWeight.SemiBold, fontSize = MaterialTheme.typography.titleMedium.fontSize)
         }
         else{
             Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
@@ -43,7 +43,7 @@ fun ButtonViewV2(
                     modifier = Modifier.size(24.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = title, fontWeight = FontWeight.SemiBold, fontSize = MaterialTheme.typography.titleMedium.fontSize)
+                Text(color = MaterialTheme.colorScheme.surface, text = title, fontWeight = FontWeight.SemiBold, fontSize = MaterialTheme.typography.titleMedium.fontSize)
             }
         }
     }

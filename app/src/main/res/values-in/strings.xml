@@ -99,4 +99,8 @@
     <string name="CityTitle">City</string>
     <string name="AddressTitle">Address</string>
     <string name="alumaTitleApp">aluma</string>
+    <string name="IncomeTitle">Income</string>
+    <string name="ExpensexTitle">Expenses</string>
+    <string name="NetProfitTitle">Net Profit</string>
+    <string name="AllTitle">All</string>
 </resources>

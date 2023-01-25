@@ -21,6 +21,7 @@ import com.example.alfaomega.R
 import com.example.alfaomega.api.problem.ProblemViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.components.ButtonView
+import com.example.alfaomega.components.button_view.ButtonViewV2
 import com.example.alfaomega.navigations.Screens
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -40,21 +41,22 @@ fun WallRulesEditOwner(
     }
 
     Column(modifier = Modifier.padding(top = paddingValues.calculateTopPadding(), start = 16.dp, end = 16.dp)) {
+        Spacer(modifier = Modifier.height(16.dp))
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
 
             val (CardMenu, Button) = createRefs()
 
             Card(
-                elevation = CardDefaults.cardElevation(6.dp),
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(0.dp)
                     .fillMaxWidth()
                     .constrainAs(CardMenu) {
                         top.linkTo(parent.top)
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
                     },
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(ROUND_CORNER.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
                 Column(modifier = Modifier
                     .padding(16.dp)
@@ -66,6 +68,7 @@ fun WallRulesEditOwner(
                             text = if (USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.ProblemTitle) else stringResource(R.string.RuleTitle),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         TextField(
@@ -79,12 +82,14 @@ fun WallRulesEditOwner(
                                 focusedIndicatorColor = Color.Transparent,
                                 unfocusedIndicatorColor = Color.Transparent,
                                 disabledIndicatorColor = Color.Transparent,
-                                containerColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                textColor = MaterialTheme.colorScheme.surfaceVariant,
+                                containerColor = MaterialTheme.colorScheme.surface,
+                                textColor = MaterialTheme.colorScheme.primary,
                                 disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
                             ),
                             shape = RoundedCornerShape(12.dp),
-                            modifier = Modifier.fillMaxWidth().height(200.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(200.dp),
                             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
                         )
                     }
@@ -98,7 +103,7 @@ fun WallRulesEditOwner(
                 BUTTON_MENU_EDIT = false
             }
 
-            ButtonView(
+            ButtonViewV2(
                 title = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.problemClearTitle) else if(EDIT_MODE) stringResource(com.example.alfaomega.R.string.SaveChanges) else stringResource(com.example.alfaomega.R.string.CreateRuleTitle),
                 enable = BUTTON_MENU_EDIT,
                 modifier = Modifier.constrainAs(Button){

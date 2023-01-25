@@ -23,14 +23,15 @@ fun ComponentRule(
     navController: NavController
 ) {
     Card(
-        elevation = CardDefaults.cardElevation(6.dp),
-        modifier = Modifier.padding(8.dp),
-        shape = RoundedCornerShape(12.dp)
+//        elevation = CardDefaults.cardElevation(6.dp),
+        modifier = Modifier.padding(8.dp).wrapContentHeight(),
+        shape = RoundedCornerShape(ROUND_CORNER.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
     ) {
         Surface(
             color = Color.Transparent,
-            shape = RoundedCornerShape(12.dp),
-            modifier = Modifier.clickable(
+            shape = RoundedCornerShape(ROUND_CORNER.dp),
+            modifier = Modifier.wrapContentHeight().clickable(
                 enabled = !solvedMachine
             ) {
                 if(USER_TYPE == 1) {
@@ -51,12 +52,14 @@ fun ComponentRule(
                     Text(
                         text = indexNumber.toString(),
                         fontWeight = FontWeight.ExtraBold,
-                        fontSize = MaterialTheme.typography.labelLarge.fontSize,
+                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        color = MaterialTheme.colorScheme.surface
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = ruleText,
-                        fontSize = MaterialTheme.typography.labelLarge.fontSize,
+                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        color = MaterialTheme.colorScheme.surface
                     )
                 }
             }

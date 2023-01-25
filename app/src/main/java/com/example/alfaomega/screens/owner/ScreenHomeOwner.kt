@@ -23,7 +23,7 @@ fun ScreenHomeOwner(navController: NavController, protoViewModel: ProtoViewModel
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_logout_24
     val TopBar = 3
-    val wallScrreen = if(STORE_ID.isNullOrEmpty()) 20 else 8
+    val wallScrreen = 8
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.Home.route
     val topBarColor = MaterialTheme.colorScheme.primary
@@ -32,7 +32,6 @@ fun ScreenHomeOwner(navController: NavController, protoViewModel: ProtoViewModel
     MENU_SCREEN_TYPE = false
     RULES_SCREEN_TYPE = false
     USER_SCREEN_TYPE = false
-
 
     Scaffold1(
         tittleScreen = tittleScreen,
