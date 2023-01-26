@@ -53,16 +53,17 @@ fun WallUserEditOwner(
             val (CardMenu, Button) = createRefs()
 
             Card(
-                elevation = CardDefaults.cardElevation(6.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),
+//                elevation = CardDefaults.cardElevation(6.dp),
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(0.dp)
                     .fillMaxWidth()
                     .constrainAs(CardMenu) {
                         top.linkTo(parent.top)
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
                     },
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(ROUND_CORNER.dp)
             ) {
                 Column(modifier = Modifier
                     .padding(16.dp)
@@ -74,6 +75,7 @@ fun WallUserEditOwner(
                             text = stringResource(R.string.UsernameTitle),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         TextField(
@@ -86,11 +88,11 @@ fun WallUserEditOwner(
                                 focusedIndicatorColor = Color.Transparent,
                                 unfocusedIndicatorColor = Color.Transparent,
                                 disabledIndicatorColor = Color.Transparent,
-                                containerColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                textColor = MaterialTheme.colorScheme.surfaceVariant,
+                                containerColor = MaterialTheme.colorScheme.surface,
+                                textColor = MaterialTheme.colorScheme.primary,
                                 disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
                             ),
-                            shape = RoundedCornerShape(12.dp),
+                            shape = RoundedCornerShape(ROUND_CORNER.dp),
                             modifier = Modifier.fillMaxWidth(),
                             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
                         )
@@ -99,6 +101,7 @@ fun WallUserEditOwner(
                             text = stringResource(R.string.PasswordTitle),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         TextField(
@@ -111,11 +114,11 @@ fun WallUserEditOwner(
                                 focusedIndicatorColor = Color.Transparent,
                                 unfocusedIndicatorColor = Color.Transparent,
                                 disabledIndicatorColor = Color.Transparent,
-                                containerColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                textColor = MaterialTheme.colorScheme.surfaceVariant,
+                                containerColor = MaterialTheme.colorScheme.surface,
+                                textColor = MaterialTheme.colorScheme.primary,
                                 disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
                             ),
-                            shape = RoundedCornerShape(12.dp),
+                            shape = RoundedCornerShape(ROUND_CORNER.dp),
                             modifier = Modifier.fillMaxWidth(),
                             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -128,7 +131,7 @@ fun WallUserEditOwner(
                                 val description = if (passwordVisible) "Hide password" else "Show password"
 
                                 IconButton(onClick = {passwordVisible = !passwordVisible}){
-                                    Icon(painter  = visIcon, description, tint = MaterialTheme.colorScheme.surfaceVariant)
+                                    Icon(painter  = visIcon, description, tint = MaterialTheme.colorScheme.primary)
                                 }
                             }
                         )

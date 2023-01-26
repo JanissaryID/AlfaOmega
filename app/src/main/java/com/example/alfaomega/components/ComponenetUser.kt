@@ -28,7 +28,7 @@ fun ComponentUser(
     Card(
         modifier = Modifier.padding(8.dp),
         shape = RoundedCornerShape(ROUND_CORNER.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f))
     ) {
         Surface(
             color = Color.Transparent,
