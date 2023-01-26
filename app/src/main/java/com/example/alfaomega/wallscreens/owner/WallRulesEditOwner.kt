@@ -84,7 +84,7 @@ fun WallRulesEditOwner(
                                 disabledIndicatorColor = Color.Transparent,
                                 containerColor = MaterialTheme.colorScheme.surface,
                                 textColor = MaterialTheme.colorScheme.primary,
-                                disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
+                                disabledTextColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
                             ),
                             shape = RoundedCornerShape(12.dp),
                             modifier = Modifier
@@ -118,6 +118,7 @@ fun WallRulesEditOwner(
                     problemViewModel.updateProblem(idProblem = ID_RULE_EDIT) // im lazy to create a new component
                     // so i reused component rule for problem machinne. id and text same name,
                     // but have different value in passing data lazycolumn
+                    problemViewModel.fetchProblem()
 
                     navController.navigate(route = Screens.ReportMachine.route){
                         popUpTo(Screens.Home.route) {

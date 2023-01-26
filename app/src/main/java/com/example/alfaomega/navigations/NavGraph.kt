@@ -195,6 +195,7 @@ fun NavGraphSetup(
                 STAT_GET_DATA = false
                 menuViewModel.getMenu()
                 TRANSACTION_SCREEN = true
+                CLASS_MENU_EDIT_STRING = ""
             }
             ScreenMenuOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
@@ -261,11 +262,22 @@ fun NavGraphSetup(
         }
 
         composable(
+            route = Screens.OutletOwner.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                STAT_GET_DATA = false
+                PROBLEM_MACHINE_STATE_SCREEN = false
+            }
+            ScreenOutletOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+        }
+
+        composable(
             route = Screens.ReportMachine.route,
         ){
             LaunchedEffect(key1 = STORE_ID){
                 STAT_GET_DATA = false
                 problemViewModel.fetchProblem()
+                PROBLEM_MACHINE_STATE_SCREEN = true
 //                TRANSACTION_SCREEN = true
             }
             ScreenReportMachine(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)

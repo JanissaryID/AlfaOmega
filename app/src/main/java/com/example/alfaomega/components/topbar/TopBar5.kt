@@ -76,7 +76,7 @@ fun TopBar5(
                 color = colorFont
             )
         },
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = containerColor),
         navigationIcon = {
             Surface(color = Color.Transparent, shape = RoundedCornerShape(100), modifier = Modifier.wrapContentSize()) {
                 Icon(
@@ -94,7 +94,7 @@ fun TopBar5(
             }
         },
         actions = {
-            Surface(shape = RoundedCornerShape(20), modifier = Modifier.wrapContentSize()) {
+            Surface(color = containerColor, shape = RoundedCornerShape(20), modifier = Modifier.wrapContentSize()) {
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = description,
@@ -102,11 +102,12 @@ fun TopBar5(
                         if(USER_TYPE == 1){
                             mDatePickerDialog.show()
                         }
-                    }
+                    },
+                    tint = colorFont
                 )
             }
             Spacer(modifier = Modifier.width(24.dp))
-            Surface(shape = RoundedCornerShape(20), modifier = Modifier.wrapContentSize().padding(end = 8.dp)) {
+            Surface(color = containerColor, shape = RoundedCornerShape(20), modifier = Modifier.wrapContentSize().padding(end = 8.dp)) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_twotone_download_24),
                     contentDescription = description,

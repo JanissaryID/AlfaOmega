@@ -26,7 +26,7 @@ fun ComponentRule(
 //        elevation = CardDefaults.cardElevation(6.dp),
         modifier = Modifier.padding(8.dp).wrapContentHeight(),
         shape = RoundedCornerShape(ROUND_CORNER.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
+        colors = CardDefaults.cardColors(containerColor = if(solvedMachine) MaterialTheme.colorScheme.primary.copy(alpha = 0.5f) else MaterialTheme.colorScheme.primary)
     ) {
         Surface(
             color = Color.Transparent,

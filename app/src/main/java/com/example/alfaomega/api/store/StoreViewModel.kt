@@ -29,7 +29,7 @@ class StoreViewModel : ViewModel(){
                             STORE_LIST_RESPONSE = response.body()!!
 
                             STORE_STATE = 1
-                            Log.i("info_response", "Store = $STORE_LIST_RESPONSE")
+//                            Log.i("info_response", "Store = $STORE_LIST_RESPONSE")
                         }
                         if (STORE_LIST_RESPONSE.isNullOrEmpty()){
                             STORE_STATE = 3

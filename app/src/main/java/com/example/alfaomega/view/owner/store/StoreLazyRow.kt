@@ -29,6 +29,7 @@ fun StoreLazyCRow(
                 storeName = store.name!!,
                 storeCity = store.city!!,
                 storeAddress = store.address!!,
+                storeAdmin = store.admin!!,
                 protoViewModel = protoViewModel,
                 navController = navController,
             )

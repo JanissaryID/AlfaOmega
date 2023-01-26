@@ -24,17 +24,19 @@ fun WallMenu(
 //    val onItemClick = { index: Int -> selectedIndex = index}
     val selectionMenuClass = listOf(stringResource(R.string.MenuGiant), stringResource(R.string.MenuTitan))
     var selected_index_class by remember {mutableStateOf(MENU_MACHINE_CLASS)}
-    val on_click_index_class = { index: Int -> selected_index_class = index}
+    val on_click_index_class = { index: Int -> selected_index_class = index
+                                                MENU_MACHINE_CLASS = index }
 
-    Spacer(modifier = Modifier.width(8.dp))
+//    Spacer(modifier = Modifier.width(8.dp))
     Surface(color = Color.Transparent, modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
+        Spacer(modifier = Modifier.height(16.dp))
         Column(modifier = Modifier
             .fillMaxSize()
             .padding(top = paddingValues.calculateTopPadding()),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
+            Spacer(modifier = Modifier.height(32.dp))
             LazyRow(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -51,6 +53,7 @@ fun WallMenu(
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(16.dp))
             MenuLoadData(
                 navController = navController,
                 menu = if (selected_index_class == 0) MENU_LIST_GIANT_RESPONSE else MENU_LIST_TITAN_RESPONSE,

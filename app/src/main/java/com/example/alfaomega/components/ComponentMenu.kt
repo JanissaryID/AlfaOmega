@@ -35,13 +35,17 @@ fun ComponentMenu(
     val selectionMenuClass = listOf(stringResource(R.string.MenuGiant), stringResource(R.string.MenuTitan))
 
     Card(
-        elevation = CardDefaults.cardElevation(6.dp),
+//        elevation = CardDefaults.cardElevation(6.dp),
         modifier = Modifier.padding(8.dp),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(ROUND_CORNER.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.surface
+        )
     ) {
         Surface(
             color = Color.Transparent,
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(ROUND_CORNER.dp),
             modifier = Modifier.clickable {
 
                 if(USER_TYPE == 1){
@@ -70,7 +74,7 @@ fun ComponentMenu(
             }) {
             Column() {
                 Column(
-                    modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)
+                    modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)
                 ){
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,

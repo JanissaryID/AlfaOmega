@@ -35,6 +35,7 @@ var STORE_ID: String by mutableStateOf("")
 var STORE_LIST_RESPONSE: ArrayList<StoreModel> by mutableStateOf(arrayListOf())
 var STORE_STATE: Int by mutableStateOf(0)
 var STORE_ERROR_MESSAGE: String by mutableStateOf("")
+var STORE_ADMIN: String by mutableStateOf("")
 
 //Variable Menu
 var MENU_STATE: Int by mutableStateOf(0)

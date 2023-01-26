@@ -2,6 +2,7 @@ package com.example.alfaomega.screens.owner
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
@@ -17,13 +18,15 @@ import com.example.alfaomega.proto.ProtoViewModel
 fun ScreenMenuOwner(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
     val tittleScreen = stringResource(R.string.Menu)
-    val screenBack = Screens.Home.route
+    val screenBack = Screens.OutletOwner.route
     val floatingRoute = Screens.MenuEditOwner.route
     val icon = R.drawable.ic_twotone_storefront_24
     val TopBar = 2
     val wallScrreen = 1
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.Store.route
+    val topBarColor = MaterialTheme.colorScheme.primary
+    val fontTopBar = MaterialTheme.colorScheme.surface
 
     Scaffold2(
         tittleScreen = tittleScreen,
@@ -36,6 +39,8 @@ fun ScreenMenuOwner(navController: NavController, protoViewModel: ProtoViewModel
         icon = icon,
         description = desctiptionTopBar,
         route =routeAction,
-        bluetoothViewModel = bluetoothViewModel
+        bluetoothViewModel = bluetoothViewModel,
+        topBarColor = topBarColor,
+        fontTopBar = fontTopBar
     )
 }

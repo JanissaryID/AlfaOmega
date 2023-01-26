@@ -16,6 +16,9 @@ data class StoreModel(
 	@field:SerializedName("name")
 	val name: String? = null,
 
+	@field:SerializedName("admin")
+	val admin: String? = null,
+
 	@field:SerializedName("_id")
 	val id: String? = null
 )

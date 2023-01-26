@@ -2,6 +2,7 @@ package com.example.alfaomega.screens.admin
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
@@ -18,13 +19,15 @@ import com.example.alfaomega.proto.ProtoViewModel
 fun ScreenReportMachine(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
     val tittleScreen = stringResource(R.string.ReportTitle)
-    val screenBack = if(USER_TYPE == 1) Screens.Home.route else Screens.StoreProfile.route
+    val screenBack = if(USER_TYPE == 1) Screens.OutletOwner.route else Screens.StoreProfile.route
     val floatingRoute = Screens.RulesEditOwner.route
     val icon = R.drawable.ic_twotone_storefront_24
     val TopBar = 2
     val wallScrreen = 24
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.Store.route
+    val topBarColor = MaterialTheme.colorScheme.primary
+    val fontTopBar = MaterialTheme.colorScheme.surface
 
     if(USER_TYPE == 1){
         Scaffold1(
@@ -38,7 +41,9 @@ fun ScreenReportMachine(navController: NavController, protoViewModel: ProtoViewM
             icon = icon,
             description = desctiptionTopBar,
             route =routeAction,
-            bluetoothViewModel = bluetoothViewModel
+            bluetoothViewModel = bluetoothViewModel,
+            topBarColor = topBarColor,
+            fontTopBar = fontTopBar
         )
     }
     else{
@@ -53,7 +58,9 @@ fun ScreenReportMachine(navController: NavController, protoViewModel: ProtoViewM
             icon = icon,
             description = desctiptionTopBar,
             route =routeAction,
-            bluetoothViewModel = bluetoothViewModel
+            bluetoothViewModel = bluetoothViewModel,
+            topBarColor = topBarColor,
+            fontTopBar = fontTopBar
         )
     }
 }

@@ -25,6 +25,7 @@ import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.components.ButtonView
+import com.example.alfaomega.components.button_view.ButtonViewV2
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,13 +70,17 @@ fun WallMenuEditOwner(
         else mutableStateOf(false)
     }
 
-    Column(modifier = Modifier.padding(top = paddingValues.calculateTopPadding(), start = 16.dp, end = 16.dp)) {
-        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+    var selectedItem by remember {
+        mutableStateOf(0)
+    }
 
+    Column(modifier = Modifier.padding(top = paddingValues.calculateTopPadding(), start = 16.dp, end = 16.dp)) {
+        Spacer(modifier = Modifier.height(16.dp))
+        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
             val (CardMenu, Button) = createRefs()
 
             Card(
-                elevation = CardDefaults.cardElevation(6.dp),
+//                elevation = CardDefaults.cardElevation(6.dp),
                 modifier = Modifier
                     .padding(8.dp)
                     .fillMaxWidth()
@@ -84,7 +89,8 @@ fun WallMenuEditOwner(
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
                     },
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(ROUND_CORNER.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
                 Column(modifier = Modifier
                     .padding(16.dp)
@@ -96,6 +102,7 @@ fun WallMenuEditOwner(
                             text = stringResource(R.string.TitleMenuEdit),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         TextField(
@@ -108,11 +115,11 @@ fun WallMenuEditOwner(
                                 focusedIndicatorColor = Color.Transparent,
                                 unfocusedIndicatorColor = Color.Transparent,
                                 disabledIndicatorColor = Color.Transparent,
-                                containerColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                textColor = MaterialTheme.colorScheme.surfaceVariant,
+                                containerColor = MaterialTheme.colorScheme.surface,
+                                textColor = MaterialTheme.colorScheme.primary,
                                 disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
                             ),
-                            shape = RoundedCornerShape(12.dp),
+                            shape = RoundedCornerShape(ROUND_CORNER.dp),
                             modifier = Modifier.fillMaxWidth(),
                             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
                         )
@@ -121,6 +128,7 @@ fun WallMenuEditOwner(
                             text = stringResource(R.string.PriceTitle),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         TextField(
@@ -133,11 +141,11 @@ fun WallMenuEditOwner(
                                 focusedIndicatorColor = Color.Transparent,
                                 unfocusedIndicatorColor = Color.Transparent,
                                 disabledIndicatorColor = Color.Transparent,
-                                containerColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                textColor = MaterialTheme.colorScheme.surfaceVariant,
+                                containerColor = MaterialTheme.colorScheme.surface,
+                                textColor = MaterialTheme.colorScheme.primary,
                                 disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
                             ),
-                            shape = RoundedCornerShape(12.dp),
+                            shape = RoundedCornerShape(ROUND_CORNER.dp),
                             modifier = Modifier.fillMaxWidth(),
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                         )
@@ -146,6 +154,7 @@ fun WallMenuEditOwner(
                             text = stringResource(R.string.ClassMenu),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
                         )
                         classMachine.forEachIndexed { indexItem ,item ->
                             Surface(
@@ -157,8 +166,9 @@ fun WallMenuEditOwner(
                                     verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier
                                         .selectable(
-                                            selected = isSelectedItemType(item),
+                                            selected = (selectedItem == indexItem),
                                             onClick = {
+                                                selectedItem = indexItem
                                                 onChangeStateType(item)
                                                 class_value_index = indexItem
                                             },
@@ -167,14 +177,19 @@ fun WallMenuEditOwner(
                                         .padding(8.dp)
                                 ) {
                                     RadioButton(
-                                        selected = isSelectedItemType(item),
-                                        onClick = null
+                                        selected = if(CLASS_MENU_EDIT_STRING.isNullOrEmpty()) (selectedItem == indexItem) else isSelectedItemType(item),
+                                        onClick = null,
+                                        colors = RadioButtonDefaults.colors(
+                                            selectedColor = MaterialTheme.colorScheme.surface,
+                                            unselectedColor = MaterialTheme.colorScheme.surface
+                                        )
                                     )
                                     Spacer(modifier = Modifier.width(16.dp))
                                     Text(
                                         text = item,
                                         fontWeight = FontWeight.SemiBold,
                                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                        color = MaterialTheme.colorScheme.surface
                                     )
                                 }
                             }
@@ -184,40 +199,56 @@ fun WallMenuEditOwner(
                             text = stringResource(R.string.TypeMenuTitle),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
                         )
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Checkbox(
                                 checked = checkedStateWasher.value,
-                                onCheckedChange = { checkedStateWasher.value = it }
+                                onCheckedChange = { checkedStateWasher.value = it },
+                                colors = CheckboxDefaults.colors(
+                                    checkedColor = MaterialTheme.colorScheme.surface,
+                                    uncheckedColor = MaterialTheme.colorScheme.surface
+                                )
                             )
                             Text(
                                 text = stringResource(R.string.WasherTitle),
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                color = MaterialTheme.colorScheme.surface
                             )
                         }
 
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Checkbox(
                                 checked = checkedStateDryer.value,
-                                onCheckedChange = { checkedStateDryer.value = it }
+                                onCheckedChange = { checkedStateDryer.value = it },
+                                colors = CheckboxDefaults.colors(
+                                    checkedColor = MaterialTheme.colorScheme.surface,
+                                    uncheckedColor = MaterialTheme.colorScheme.surface
+                                )
                             )
                             Text(
                                 text = stringResource(R.string.DryerTitle),
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                color = MaterialTheme.colorScheme.surface
                             )
                         }
 
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Checkbox(
                                 checked = checkedStateService.value,
-                                onCheckedChange = { checkedStateService.value = it }
+                                onCheckedChange = { checkedStateService.value = it },
+                                colors = CheckboxDefaults.colors(
+                                    checkedColor = MaterialTheme.colorScheme.surface,
+                                    uncheckedColor = MaterialTheme.colorScheme.surface
+                                )
                             )
                             Text(
                                 text = stringResource(R.string.ServiceTitle),
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                color = MaterialTheme.colorScheme.surface
                             )
                         }
                     }
@@ -237,7 +268,7 @@ fun WallMenuEditOwner(
                 BUTTON_MENU_EDIT = false
             }
 
-            ButtonView(
+            ButtonViewV2(
                 title = if(EDIT_MODE) stringResource(R.string.SaveChanges) else stringResource(R.string.CreateMenu),
                 enable = BUTTON_MENU_EDIT,
                 modifier = Modifier.constrainAs(Button){

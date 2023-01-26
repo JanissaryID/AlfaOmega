@@ -23,6 +23,7 @@ fun ItemStoreSquare(
     storeName: String,
     storeCity: String,
     storeAddress: String,
+    storeAdmin: String,
     protoViewModel: ProtoViewModel,
     navController: NavController
 ) {
@@ -42,25 +43,16 @@ fun ItemStoreSquare(
             modifier = Modifier
                 .size(180.dp)
                 .clickable {
-//                if(USER_TYPE == 2){
-//                    navController.navigate(route = Screens.Machine.route){
-//                        popUpTo(Screens.Machine.route) {
-//                            inclusive = true
-//                        }
-//                    }
-//                }
-//                else{
-//                    TRANSACTION_SCREEN = true
-//                    STORE_NAME = storeName
-//                    STORE_CITY = storeCity
-//                    STORE_ADDRESS = storeAddress
-//                    protoViewModel.updateStoreID(keyStore = storeId)
-//                    navController.navigate(route = Screens.Home.route){
-//                        popUpTo(Screens.Home.route) {
-//                            inclusive = true
-//                        }
-//                    }
-//                }
+                    STORE_NAME = storeName
+                    STORE_CITY = storeCity
+                    STORE_ADDRESS = storeAddress
+                    STORE_ID = storeId
+                    STORE_ADMIN = storeAdmin
+                    navController.navigate(route = Screens.OutletOwner.route){
+                        popUpTo(Screens.OutletOwner.route) {
+                            inclusive = true
+                        }
+                    }
                 }) {
             Column() {
                 Column(
