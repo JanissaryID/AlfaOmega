@@ -36,7 +36,7 @@ fun WallPicker(
         2 -> WallDetailTransaction(paddingValues = paddingValues, navController = navController, transactionViewModel = TransactionViewModel())
         3 -> WallStore(navController = navController, paddingValues = paddingValues, protoViewModel = protoViewModel)
         4 -> WallMachine(paddingValues = paddingValues, navController = navController)
-        5 -> WallStoreList(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel)
+        5 -> WallStoreList(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel, storeViewModel = StoreViewModel())
         6 -> WallTransactionList(paddingValues = paddingValues, navController = navController)
         7 -> WallLogin(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel, userViewModel = UserViewModel())
         8 -> WallHomeOwnerV2(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel)

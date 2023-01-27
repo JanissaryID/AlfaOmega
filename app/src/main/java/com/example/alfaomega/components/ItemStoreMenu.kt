@@ -48,6 +48,12 @@ fun ItemStoreMenu(
                     }
 
                 }
+                if(screenMenuItem == Screens.MachineOwner.route){
+                    PROBLEM_MACHINE_STATE_SCREEN = true
+                }
+                else{
+                    PROBLEM_MACHINE_STATE_SCREEN = false
+                }
                 navController.navigate(route = screenMenuItem){
                     popUpTo(screenMenuItem) {
                         inclusive = true
@@ -81,7 +87,7 @@ fun ItemStoreMenu(
             val (IconMenu, Tittle, Subtittle) = createRefs()
 
             Surface(
-                border = BorderStroke(3.dp, MaterialTheme.colorScheme.primary),
+                border = BorderStroke(3.dp, MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)),
                 shape = RoundedCornerShape(100),
                 modifier = Modifier.constrainAs(IconMenu){
                     start.linkTo(parent.start)
@@ -105,8 +111,7 @@ fun ItemStoreMenu(
                 modifier = Modifier.constrainAs(Tittle){
                     start.linkTo(IconMenu.end, 16.dp)
                     top.linkTo(IconMenu.top, 5.dp)
-                },
-                color = MaterialTheme.colorScheme.primary
+                }
             )
             Text(
                 text = subTitle,
@@ -115,7 +120,8 @@ fun ItemStoreMenu(
                 modifier = Modifier.constrainAs(Subtittle){
                     start.linkTo(IconMenu.end, 16.dp)
                     bottom.linkTo(IconMenu.bottom, 5.dp)
-                }
+                },
+                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f)
             )
         }
     }

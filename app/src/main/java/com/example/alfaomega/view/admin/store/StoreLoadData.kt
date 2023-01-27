@@ -2,6 +2,7 @@ package com.example.alfaomega.view.admin.store
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -19,6 +20,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.api.store.StoreModel
+import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.proto.ProtoViewModel
 
 @Composable
@@ -26,7 +28,8 @@ fun StoreLoadData(
     storeState: Int,
     store: List<StoreModel>,
     navController: NavController,
-    protoViewModel: ProtoViewModel
+    protoViewModel: ProtoViewModel,
+    storeViewModel: StoreViewModel
 ) {
     val context = LocalContext.current
 
@@ -84,12 +87,15 @@ fun StoreLoadData(
                     val (StoreImage, TextEmpty) = createRefs()
 
                     Icon(painter = painterResource(
-                        id = R.drawable.ic_twotone_list_alt_24),
+                        id = R.drawable.ic_twotone_refresh_24),
                         contentDescription = "Store Empty",
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier
                             .wrapContentHeight()
-                            .size(200.dp)
+                            .size(120.dp)
+                            .clickable {
+                                storeViewModel.FetchStore()
+                            }
                             .constrainAs(StoreImage)
                             {
                                 top.linkTo(parent.top)

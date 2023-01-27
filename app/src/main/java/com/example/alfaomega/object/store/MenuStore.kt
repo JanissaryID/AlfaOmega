@@ -29,7 +29,7 @@ object MenuStore {
     private val screensMenu = arrayOf(
         Screens.Bluetooth.route,
         Screens.TransactionList.route,
-        Screens.ReportMachine.route,
+        Screens.MachineOwner.route,
         Screens.Login.route,
     )
 

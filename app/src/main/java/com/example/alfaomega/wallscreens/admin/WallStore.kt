@@ -49,21 +49,25 @@ fun WallStore(
 
     Surface(
         color = Color.Transparent,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = paddingValues.calculateTopPadding())) {
+        modifier = Modifier.fillMaxSize().padding(top = paddingValues.calculateTopPadding()))
+    {
         Column(
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp)
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(16.dp))
             Card(
-                elevation = CardDefaults.cardElevation(6.dp),
+//                elevation = CardDefaults.cardElevation(6.dp),
                 modifier = Modifier
                     .padding(8.dp)
                     .size(144.dp),
                 shape = RoundedCornerShape(100),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.surface
+                )
             ) {
                 Surface(
                     shape = RoundedCornerShape(100),
@@ -78,8 +82,9 @@ fun WallStore(
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_twotone_storefront_24),
-                            contentDescription = "Icon TImer",
-                            modifier = Modifier.size(80.dp)
+                            contentDescription = "Icon Store",
+                            modifier = Modifier.size(80.dp),
+                            tint = MaterialTheme.colorScheme.surface
                         )
                     }
                 }
@@ -96,22 +101,25 @@ fun WallStore(
                 text = STORE_CITY,
                 fontWeight = FontWeight.Normal,
                 fontSize = MaterialTheme.typography.headlineSmall.fontSize,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.9f)
             )
             Spacer(modifier = Modifier.height(0.dp))
             Text(
                 text = STORE_ADDRESS,
                 fontWeight = FontWeight.Normal,
                 fontSize = MaterialTheme.typography.labelLarge.fontSize,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.9f)
             )
             Spacer(modifier = Modifier.height(32.dp))
             Card(
-                elevation = CardDefaults.cardElevation(6.dp),
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(0.dp)
                     .fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(ROUND_CORNER.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.surface
+                )
             ) {
                 LazyColumn(modifier = Modifier.wrapContentSize(),
                     verticalArrangement = Arrangement.spacedBy(0.dp)

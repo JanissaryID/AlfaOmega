@@ -23,6 +23,8 @@ import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.components.ButtonView
 import com.example.alfaomega.components.button_view.ButtonViewV2
 import com.example.alfaomega.navigations.Screens
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,6 +41,11 @@ fun WallRulesEditOwner(
         if(EDIT_MODE) mutableStateOf(TextFieldValue(RULE_TEXT_EDIT))
         else mutableStateOf(TextFieldValue(""))
     }
+
+    val current = LocalDateTime.now()
+
+    val formatDay = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+    val date = current.format(formatDay)
 
     Column(modifier = Modifier.padding(top = paddingValues.calculateTopPadding(), start = 16.dp, end = 16.dp)) {
         Spacer(modifier = Modifier.height(16.dp))
@@ -64,8 +71,89 @@ fun WallRulesEditOwner(
                     Column(
                         modifier = Modifier.fillMaxWidth(),
                     ){
+                        if(USER_TYPE == 3 && PROBLEM_MACHINE_STATE_SCREEN){
+                            Row(){
+                                Column() {
+                                    Text(
+                                        text = "${stringResource(R.string.OutletTitle)}",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                        color = MaterialTheme.colorScheme.surface
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                    Text(
+                                        text = "${stringResource(R.string.MachineNumber)}",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                        color = MaterialTheme.colorScheme.surface
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                    Text(
+                                        text = "Type Machine",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                        color = MaterialTheme.colorScheme.surface
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                    Text(
+                                        text = stringResource(R.string.DateTitle),
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                        color = MaterialTheme.colorScheme.surface
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                    Text(
+                                        text = stringResource(R.string.Admin),
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                        color = MaterialTheme.colorScheme.surface
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                }
+                                Column() {
+                                    Text(
+                                        text = "   : $STORE_NAME",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                        color = MaterialTheme.colorScheme.surface
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                    Text(
+                                        text = "   : $MACHINE_NUMBER",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                        color = MaterialTheme.colorScheme.surface
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                    Text(
+                                        text = "   : ${if(MACHINE_TYPE) "${stringResource(R.string.DryMachineTitle)}" else "${stringResource(R.string.WashmachineTitle)}"}, " +
+                                                "${if(MACHINE_CLASS) "${stringResource(R.string.MenuTitan)}" else "${stringResource(R.string.MenuGiant)}"}",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                        color = MaterialTheme.colorScheme.surface
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                    Text(
+                                        text = "   : $date",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                        color = MaterialTheme.colorScheme.surface
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                    Text(
+                                        text = "   : $USER_NAME",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                        color = MaterialTheme.colorScheme.surface
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                }
+                            }
+                        }
                         Text(
-                            text = if (USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.ProblemTitle) else stringResource(R.string.RuleTitle),
+                            text = if (USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.ProblemTitle)
+                            else if(USER_TYPE == 3 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.ProblemTitle)
+                            else stringResource(R.string.RuleTitle),
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
                             color = MaterialTheme.colorScheme.surface
@@ -104,7 +192,10 @@ fun WallRulesEditOwner(
             }
 
             ButtonViewV2(
-                title = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.problemClearTitle) else if(EDIT_MODE) stringResource(com.example.alfaomega.R.string.SaveChanges) else stringResource(com.example.alfaomega.R.string.CreateRuleTitle),
+                title = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.problemClearTitle)
+                else if(USER_TYPE == 3 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.CreateProblem)
+                else if(EDIT_MODE) stringResource(com.example.alfaomega.R.string.SaveChanges)
+                else stringResource(com.example.alfaomega.R.string.CreateRuleTitle),
                 enable = BUTTON_MENU_EDIT,
                 modifier = Modifier.constrainAs(Button){
                     bottom.linkTo(parent.bottom, 16.dp)
@@ -121,7 +212,26 @@ fun WallRulesEditOwner(
                     problemViewModel.fetchProblem()
 
                     navController.navigate(route = Screens.ReportMachine.route){
-                        popUpTo(Screens.Home.route) {
+                        popUpTo(Screens.ReportMachine.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+                else if(USER_TYPE == 3 && PROBLEM_MACHINE_STATE_SCREEN){
+                    problemViewModel.insertProblem(
+                        idMachine = MACHINE_ID,
+                        storeName = STORE_NAME,
+                        date = date,
+                        admin = USER_NAME,
+                        store = STORE_ID,
+                        numberMachine = MACHINE_NUMBER,
+                        problem = text_rule.text,
+                        navController = navController
+                    )
+                    problemViewModel.fetchProblem()
+
+                    navController.navigate(route = Screens.ReportMachine.route){
+                        popUpTo(Screens.ReportMachine.route) {
                             inclusive = true
                         }
                     }

@@ -20,7 +20,7 @@ import com.example.alfaomega.proto.ProtoViewModel
 fun ScreenMachineOwner(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
     val tittleScreen = "${stringResource(R.string.MachineTitle)} $STORE_NAME"
-    val screenBack = Screens.OutletOwner.route
+    val screenBack = if(USER_TYPE == 3) Screens.StoreProfile.route else Screens.OutletOwner.route
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_storefront_24
     val TopBar = 2

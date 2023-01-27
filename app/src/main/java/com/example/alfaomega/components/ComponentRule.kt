@@ -24,12 +24,13 @@ fun ComponentRule(
     solvedMachine: Boolean = false,
     machineNumber: String = "0",
     storeName: String = "Laundry",
+    date: String = "",
     navController: NavController
 ) {
     Card(
 //        elevation = CardDefaults.cardElevation(6.dp),
         modifier = Modifier
-            .padding(8.dp)
+            .padding(0.dp)
             .wrapContentHeight(),
         shape = RoundedCornerShape(ROUND_CORNER.dp),
         colors = CardDefaults.cardColors(containerColor = if(solvedMachine) MaterialTheme.colorScheme.primary.copy(alpha = 0.5f) else MaterialTheme.colorScheme.primary)
@@ -56,19 +57,192 @@ fun ComponentRule(
             ){
                 Column(modifier = Modifier.fillMaxSize()) {
                     if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN){
-                        Text(
-                            text = "${stringResource(R.string.StoreTitle)} : $storeName",
-                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                            color = MaterialTheme.colorScheme.surface
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = "${stringResource(R.string.MachineNumber)} : $machineNumber",
-                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                            color = MaterialTheme.colorScheme.surface
-                        )
+                        Row(){
+                            Column() {
+                                Text(
+                                    text = "${stringResource(R.string.OutletTitle)}",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = "${stringResource(R.string.MachineNumber)}",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = "Type Machine",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = stringResource(R.string.DateTitle),
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = stringResource(R.string.Admin),
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = stringResource(R.string.ProblemTitle),
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(0.dp))
+                            }
+                            Column(modifier = Modifier.padding(start = 8.dp)) {
+                                Text(
+                                    text = ": $STORE_NAME",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = ": $MACHINE_NUMBER",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = ": ${if(MACHINE_TYPE) "${stringResource(R.string.DryMachineTitle)}" else "${stringResource(R.string.WashmachineTitle)}"}, " +
+                                            "${if(MACHINE_CLASS) "${stringResource(R.string.MenuTitan)}" else "${stringResource(R.string.MenuGiant)}"}",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = ": $date",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = ": $USER_NAME",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = ": $ruleText",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(0.dp))
+                            }
+                        }
                     }
-                    Spacer(modifier = Modifier.height(8.dp))
+                    else if(USER_TYPE == 3 && PROBLEM_MACHINE_STATE_SCREEN){
+                        Row(){
+                            Column() {
+                                Text(
+                                    text = "${stringResource(R.string.OutletTitle)}",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = "${stringResource(R.string.MachineNumber)}",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = "Type Machine",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = stringResource(R.string.DateTitle),
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = stringResource(R.string.Admin),
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = stringResource(R.string.ProblemTitle),
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(0.dp))
+                            }
+                            Column(modifier = Modifier.padding(start = 8.dp)) {
+                                Text(
+                                    text = ": $STORE_NAME",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = ": $MACHINE_NUMBER",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = ": ${if(MACHINE_TYPE) "${stringResource(R.string.DryMachineTitle)}" else "${stringResource(R.string.WashmachineTitle)}"}, " +
+                                            "${if(MACHINE_CLASS) "${stringResource(R.string.MenuTitan)}" else "${stringResource(R.string.MenuGiant)}"}",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = ": $date",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = ": $USER_NAME",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = ": $ruleText",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    color = MaterialTheme.colorScheme.surface
+                                )
+                                Spacer(modifier = Modifier.height(0.dp))
+                            }
+                        }
+                    }
+//                    Spacer(modifier = Modifier.height(8.dp))
                     Row(
                         verticalAlignment = Alignment.Top,
                         modifier = Modifier.fillMaxWidth()
@@ -81,21 +255,12 @@ fun ComponentRule(
                                 color = MaterialTheme.colorScheme.surface
                             )
                             Spacer(modifier = Modifier.width(8.dp))
-                        }
-                        else{
                             Text(
-                                text = "${stringResource(R.string.ProblemTitle)} : ",
-//                            fontWeight = FontWeight.ExtraBold,
+                                text = ruleText,
                                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
                                 color = MaterialTheme.colorScheme.surface
                             )
-                            Spacer(modifier = Modifier.width(8.dp))
                         }
-                        Text(
-                            text = ruleText,
-                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                            color = MaterialTheme.colorScheme.surface
-                        )
                     }
                 }
             }

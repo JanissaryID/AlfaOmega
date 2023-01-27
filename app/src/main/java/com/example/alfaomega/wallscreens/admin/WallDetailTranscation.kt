@@ -2,9 +2,7 @@ package com.example.alfaomega.wallscreens
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,6 +25,7 @@ fun WallDetailTransaction(
 
     Surface(color = Color.Transparent, modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         Column(modifier = Modifier.padding(top = paddingValues.calculateTopPadding())) {
+            Spacer(modifier = Modifier.height(16.dp))
             DetailTransaction(
                 transactionViewModel = transactionViewModel,
                 navController = navController

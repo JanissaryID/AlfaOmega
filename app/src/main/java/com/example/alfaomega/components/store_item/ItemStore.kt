@@ -25,9 +25,13 @@ fun ItemStore(
     navController: NavController
 ) {
     Card(
-        elevation = CardDefaults.cardElevation(6.dp),
+//        elevation = CardDefaults.cardElevation(6.dp),
         modifier = Modifier.padding(8.dp),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.primary
+        )
     ) {
         Surface(
             color = Color.Transparent,

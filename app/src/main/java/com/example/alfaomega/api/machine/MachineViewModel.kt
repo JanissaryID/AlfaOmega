@@ -63,6 +63,7 @@ class MachineViewModel: ViewModel() {
             ).enqueue(object :
                 Callback<ArrayList<MachineModel>> {
                 override fun onResponse(call: Call<ArrayList<MachineModel>>, response: Response<ArrayList<MachineModel>>) {
+                    Log.d("debug_machine", "Machine ${response}")
                     MENU_STATE = 0
                     if(response.code() == 200){
                         response.body()?.let {

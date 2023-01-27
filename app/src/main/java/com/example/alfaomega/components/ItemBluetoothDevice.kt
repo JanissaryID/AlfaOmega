@@ -23,15 +23,19 @@ fun ItemBluetoothDevice(
     protoViewModel: ProtoViewModel,
 ) {
     Card(
-        elevation = CardDefaults.cardElevation(6.dp),
-        modifier = Modifier.padding(8.dp),
-        shape = RoundedCornerShape(12.dp),
-        colors = if(addressDevice == ADDRESS_DEVICE) CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceTint)
-                else CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+//        elevation = CardDefaults.cardElevation(6.dp),
+        modifier = Modifier.padding(0.dp),
+        shape = RoundedCornerShape(ROUND_CORNER.dp),
+        colors = if(addressDevice == ADDRESS_DEVICE) CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.surface)
+                else CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
+            contentColor = MaterialTheme.colorScheme.surface)
     ) {
         Surface(
             color = Color.Transparent,
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(ROUND_CORNER.dp),
             modifier = Modifier.clickable {
 
                 protoViewModel.updateAddressDevice(AddressDevice = addressDevice)
@@ -40,7 +44,7 @@ fun ItemBluetoothDevice(
             }) {
             Column() {
                 Column(
-                    modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)
+                    modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)
                 ){
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,

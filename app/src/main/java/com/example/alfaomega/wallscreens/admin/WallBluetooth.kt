@@ -28,6 +28,7 @@ fun WallBluetooth(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(8.dp))
             if (!bluetoothViewModel.devices.isNullOrEmpty()){
                 BluetoothLoadData(
                     navController = navController,

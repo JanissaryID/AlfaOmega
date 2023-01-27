@@ -26,6 +26,7 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.api.transaction.TransactionViewModel
+import com.example.alfaomega.components.button_view.ButtonViewV2
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.whatsapp.WhatsappViewModel
 import java.text.NumberFormat
@@ -97,16 +98,20 @@ fun DetailTransaction(
         val (CardMenu, Button) = createRefs()
 
         Card(
-            elevation = CardDefaults.cardElevation(6.dp),
+//            elevation = CardDefaults.cardElevation(6.dp),
             modifier = Modifier
-                .padding(8.dp)
+                .padding(0.dp)
                 .fillMaxWidth()
                 .constrainAs(CardMenu) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 },
-            shape = RoundedCornerShape(12.dp)
+            shape = RoundedCornerShape(ROUND_CORNER.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.surface
+            )
         ) {
             Column(modifier = Modifier
                 .padding(16.dp)
@@ -497,8 +502,8 @@ fun DetailTransaction(
             },
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Surface(modifier = Modifier.weight(1f)) {
-                ButtonView(
+            Surface(modifier = Modifier.weight(1f), color = Color.Transparent) {
+                ButtonViewV2(
                     title = if(!TRANSACTION_SCREEN) titleButton else stringResource(R.string.CreateTransactionTitle),
                     enable = NEW_TRANSACATION_BUTTON,
                 ) {
@@ -537,8 +542,8 @@ fun DetailTransaction(
             }
             if(!TRANSACTION_SCREEN){
                 Spacer(modifier = Modifier.width(16.dp))
-                Surface(modifier = Modifier.weight(1f)) {
-                    ButtonView(
+                Surface(modifier = Modifier.weight(1f), color = Color.Transparent) {
+                    ButtonViewV2(
                         title = stringResource(R.string.Whatsapp),
                         enable = if(TRANSACTION_NUMBER.isNullOrEmpty()) false else true,
                         colorButton = Color("#25d366".toColorInt()),

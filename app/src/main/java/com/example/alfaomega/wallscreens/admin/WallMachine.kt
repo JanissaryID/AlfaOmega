@@ -40,6 +40,9 @@ fun WallMachine(
     if(USER_TYPE == 1){
         machine = LIST_MACHINE
     }
+    else if(USER_TYPE == 3 && PROBLEM_MACHINE_STATE_SCREEN){
+        machine = LIST_MACHINE
+    }
     else{
         if(TRANSACATION_CLASS == false && TRANSACATION_STATUS_MACHINE == 0){
             machine = LIST_MACHINE_WASHER_GIANT
@@ -82,7 +85,7 @@ fun WallMachine(
             )
         }
 
-        if (USER_TYPE == 3){
+        if (USER_TYPE == 3 && !PROBLEM_MACHINE_STATE_SCREEN){
             ButtonViewV2(
                 title = stringResource(R.string.ActiveMachine),
                 enable = MACHINE_BUTTON_UPDATE,
@@ -100,8 +103,6 @@ fun WallMachine(
                     timeMachine = 0,
                     navController = navController
                 )
-
-
             }
         }
     }

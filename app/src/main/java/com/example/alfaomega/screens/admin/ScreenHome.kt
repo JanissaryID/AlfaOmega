@@ -2,6 +2,7 @@ package com.example.alfaomega.screens
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,18 +22,20 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 @Composable
 fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
-    val tittleScreen = if(STORE_ID.isNullOrEmpty()) "" else if(USER_TYPE == 0) stringResource(R.string.HelloTItle) else stringResource(R.string.TransactionActiveTitle)
+    val tittleScreen =if(USER_TYPE == 0) "" else if(STORE_ID.isNullOrEmpty()) stringResource(R.string.HelloTItle) else  stringResource(R.string.TransactionActiveTitle)
     val screenBack = if( USER_TYPE == 1 ) Screens.Home.route else Screens.StoreProfile.route
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_storefront_24
-    val TopBar = if( USER_TYPE == 0 ) 1 else 3
-    val wallScrreen = if( USER_TYPE == 0 ) 7 else 0
+    val TopBar = if( STORE_ID.isNullOrEmpty() ) 1 else 3
+    val wallScrreen = if(USER_TYPE == 0) 7 else if(STORE_ID.isNullOrEmpty()) 5 else 0
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.StoreProfile.route
+    val topBarColor = MaterialTheme.colorScheme.primary
+    val fontTopBar = MaterialTheme.colorScheme.surface
 //
-    if(!STORE_ID.isNullOrEmpty())
+    if(USER_TYPE != 0)
     {
-        if(USER_TYPE == 0){
+        if(STORE_ID.isNullOrEmpty()){
             Scaffold1(
                 tittleScreen = tittleScreen,
                 wallScreen = wallScrreen,
@@ -44,7 +47,9 @@ fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel, blu
                 icon = icon,
                 description = desctiptionTopBar,
                 route =routeAction,
-                bluetoothViewModel = bluetoothViewModel
+                bluetoothViewModel = bluetoothViewModel,
+                topBarColor = topBarColor,
+                fontTopBar = fontTopBar
             )
         }
         else{
@@ -59,9 +64,26 @@ fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel, blu
                 icon = icon,
                 description = desctiptionTopBar,
                 route =routeAction,
-                bluetoothViewModel = bluetoothViewModel
+                bluetoothViewModel = bluetoothViewModel,
+                topBarColor = topBarColor,
+                fontTopBar = fontTopBar
             )
         }
+//        Scaffold2(
+//            tittleScreen = tittleScreen,
+//            wallScreen = wallScrreen,
+//            navController = navController,
+//            screenBack = screenBack,
+//            protoViewModel = protoViewModel,
+//            floatingRoute = floatingRoute,
+//            TopBar = TopBar,
+//            icon = icon,
+//            description = desctiptionTopBar,
+//            route =routeAction,
+//            bluetoothViewModel = bluetoothViewModel,
+//            topBarColor = topBarColor,
+//            fontTopBar = fontTopBar
+//        )
     }
     else
     {
@@ -76,7 +98,7 @@ fun ScreenHome(navController: NavController, protoViewModel: ProtoViewModel, blu
             icon = icon,
             description = desctiptionTopBar,
             route =routeAction,
-            bluetoothViewModel = bluetoothViewModel
+            bluetoothViewModel = bluetoothViewModel,
         )
     }
 }

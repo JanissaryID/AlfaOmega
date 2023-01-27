@@ -72,7 +72,6 @@ fun NavGraphSetup(
                 if (!STORE_ID.isNullOrEmpty()){
                     STAT_GET_DATA = true
                     transactionViewModel.getTransactionActive()
-//                    menuViewModel.getTime()
                     storeViewModel.GetStore()
 
                     TRANSACTION_SCREEN = true
@@ -87,6 +86,7 @@ fun NavGraphSetup(
                     TRANSACTION_STATE = 0
                     TRANSACTION_ACTIVE_STATE = 0
                     MENU_STATE = 0
+                    MENU_MACHINE_CLASS = 0
                     TRANSACTION_RESPONSE.clear()
                     TRANSACTION_ACTIVE_RESPONSE.clear()
                     MENU_LIST_GIANT_RESPONSE.clear()

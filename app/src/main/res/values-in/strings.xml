@@ -104,4 +104,7 @@
     <string name="NetProfitTitle">Net Profit</string>
     <string name="AllTitle">All</string>
     <string name="MachineNumber">Machine Number</string>
+    <string name="CreateProblem">Create Problem</string>
+    <string name="OutletTitle">Outlet</string>
+    <string name="DateTitle">Date</string>
 </resources>

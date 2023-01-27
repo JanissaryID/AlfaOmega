@@ -69,11 +69,12 @@ fun Scaffold2(
         },
         floatingActionButton = {
             FloatingActionButton(
-                containerColor = MaterialTheme.colorScheme.primary,
+                containerColor = MaterialTheme.colorScheme.onSecondary,
                 onClick = {
                     EDIT_MODE = false
                     navController.navigate(route = floatingRoute)
-                }
+                },
+                elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 0.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.fluent_add_12_filled),

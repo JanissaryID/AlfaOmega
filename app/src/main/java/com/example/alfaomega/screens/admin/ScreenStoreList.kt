@@ -2,6 +2,7 @@ package com.example.alfaomega.screens
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,6 +28,8 @@ fun ScreenStoreList(navController: NavController, protoViewModel: ProtoViewModel
     val wallScrreen = 5
     val desctiptionTopBar = "icon Store"
     val routeAction = if( USER_TYPE != 3 ) Screens.Home.route else Screens.Store.route
+    val topBarColor = MaterialTheme.colorScheme.primary
+    val fontTopBar = MaterialTheme.colorScheme.surface
 
     if(USER_TYPE == 2){
         Scaffold2(
@@ -40,7 +43,9 @@ fun ScreenStoreList(navController: NavController, protoViewModel: ProtoViewModel
             icon = icon,
             description = desctiptionTopBar,
             route =routeAction,
-            bluetoothViewModel = bluetoothViewModel
+            bluetoothViewModel = bluetoothViewModel,
+            topBarColor = topBarColor,
+            fontTopBar = fontTopBar
         )
     }
     else{
@@ -55,7 +60,9 @@ fun ScreenStoreList(navController: NavController, protoViewModel: ProtoViewModel
             icon = icon,
             description = desctiptionTopBar,
             route =routeAction,
-            bluetoothViewModel = bluetoothViewModel
+            bluetoothViewModel = bluetoothViewModel,
+            topBarColor = topBarColor,
+            fontTopBar = fontTopBar
         )
     }
 }

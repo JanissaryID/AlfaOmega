@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.view.admin.store.StoreLoadData
 
@@ -16,7 +17,8 @@ import com.example.alfaomega.view.admin.store.StoreLoadData
 fun WallStoreList(
     paddingValues: PaddingValues,
     navController: NavController,
-    protoViewModel: ProtoViewModel
+    protoViewModel: ProtoViewModel,
+    storeViewModel: StoreViewModel
 ) {
     Surface(color = Color.Transparent, modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         Column(modifier = Modifier
@@ -29,7 +31,8 @@ fun WallStoreList(
                 storeState = STORE_STATE,
                 store = STORE_LIST_RESPONSE,
                 navController = navController,
-                protoViewModel = protoViewModel
+                protoViewModel = protoViewModel,
+                storeViewModel = storeViewModel
             )
         }
     }

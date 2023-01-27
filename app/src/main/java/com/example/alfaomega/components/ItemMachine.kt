@@ -42,9 +42,20 @@ fun ItemMachine(
                 .padding(7.dp)
                 .clickable {
                     if (!usedMachine) {
+                        MACHINE_ID = machineModel.id!!
+                        MACHINE_CLASS = machineModel.machineClass!!
+                        MACHINE_TYPE = machineModel.machineType!!
+                        MACHINE_NUMBER = machineModel.machineNumber!!
                         if(USER_TYPE == 1){
                             PROBLEM_MACHINE_STATE_SCREEN = true
-                            MACHINE_ID = machineModel.id!!
+                            navController.navigate(route = Screens.ReportMachine.route){
+                                popUpTo(Screens.ReportMachine.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                        else if(PROBLEM_MACHINE_STATE_SCREEN){
+                            PROBLEM_MACHINE_STATE_SCREEN = true
                             navController.navigate(route = Screens.ReportMachine.route){
                                 popUpTo(Screens.ReportMachine.route) {
                                     inclusive = true
@@ -52,11 +63,6 @@ fun ItemMachine(
                             }
                         }
                         else{
-                            MACHINE_ID = machineModel.id!!
-                            MACHINE_CLASS = machineModel.machineClass!!
-                            MACHINE_TYPE = machineModel.machineType!!
-                            MACHINE_NUMBER = machineModel.machineNumber!!
-
                             MACHINE_BUTTON_UPDATE = selected
 
                             onClick.invoke(index)

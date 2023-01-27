@@ -82,7 +82,7 @@ fun WallMenuEditOwner(
             Card(
 //                elevation = CardDefaults.cardElevation(6.dp),
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(0.dp)
                     .fillMaxWidth()
                     .constrainAs(CardMenu) {
                         top.linkTo(parent.top)

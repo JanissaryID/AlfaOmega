@@ -1,6 +1,7 @@
 package com.example.alfaomega.view.admin.report
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,8 +20,9 @@ fun ReportLazyColumn(
     navController: NavController,
 ) {
     LazyColumn(
-        modifier = Modifier.padding(top = 8.dp).fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = Modifier.padding(top = 0.dp).fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(vertical = 16.dp)
     ){
         itemsIndexed(items = reportModel) { index, problem ->
             ComponentRule(
@@ -30,6 +32,7 @@ fun ReportLazyColumn(
                 solvedMachine = problem.isSolved!!,
                 machineNumber = problem.machineNumber.toString(),
                 storeName = problem.problemStore!!,
+                date = problem.date!!,
                 navController = navController
             )
         }

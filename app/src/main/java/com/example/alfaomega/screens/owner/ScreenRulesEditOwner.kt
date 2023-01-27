@@ -19,7 +19,10 @@ import com.example.alfaomega.proto.ProtoViewModel
 @Composable
 fun ScreenRulesEditOwner(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
-    val tittleScreen = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.DetailReportTitle) else if(EDIT_MODE) stringResource(R.string.EditRuleTitle) else stringResource(R.string.CreateRuleTitle)
+    val tittleScreen = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.DetailReportTitle)
+                        else if(USER_TYPE == 3 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.CreateProblem)
+                        else if(EDIT_MODE) stringResource(R.string.EditRuleTitle)
+                        else stringResource(R.string.CreateRuleTitle)
     val screenBack = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) Screens.ReportMachine.route else Screens.RulesOwner.route
     val floatingRoute = Screens.Home.route
     val icon = R.drawable.ic_twotone_delete_24

@@ -52,13 +52,17 @@ fun ComponentTransaction(
     }
 
     Card(
-        elevation = CardDefaults.cardElevation(6.dp),
-        modifier = Modifier.padding(8.dp),
-        shape = RoundedCornerShape(12.dp)
+//        elevation = CardDefaults.cardElevation(6.dp),
+        modifier = Modifier.padding(0.dp),
+        shape = RoundedCornerShape(ROUND_CORNER.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.surface
+        )
     ) {
         Surface(
             color = Color.Transparent,
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(ROUND_CORNER.dp),
             modifier = Modifier.clickable {
                 TRANSACTION_SCREEN = false
                 TRANSACATION_CUSTOMER = TransactionCustomer
@@ -107,7 +111,7 @@ fun ComponentTransaction(
                         fontSize = MaterialTheme.typography.labelSmall.fontSize,
                     )
                 }
-                Divider(color = MaterialTheme.colorScheme.primary, thickness = 1.dp)
+                Divider(color = MaterialTheme.colorScheme.surface, thickness = 1.dp)
                 Column(
                     modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 16.dp)
                 ) {
@@ -159,7 +163,7 @@ fun ComponentTransaction(
                                     fontWeight = FontWeight.SemiBold,
                                     fontSize = MaterialTheme.typography.titleMedium.fontSize,
                                     modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    color = MaterialTheme.colorScheme.primary
                                 )
                             }
                         }
@@ -167,7 +171,7 @@ fun ComponentTransaction(
                             text = TransactionCustomer,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = MaterialTheme.colorScheme.surface
                         )
                     }
                 }

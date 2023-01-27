@@ -60,20 +60,20 @@ class ProblemViewModel: ViewModel() {
         store: String,
         numberMachine: Int,
         problem: String,
+        date: String,
+        idMachine: String,
+        storeName: String,
         navController: NavController
     ){
-        val current = LocalDateTime.now()
-
-        val formatDay = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val date = current.format(formatDay)
-
         val bodyUpdate = ProblemModel(
             admin = admin,
             machineNumber = numberMachine,
             idStore = store,
             isSolved = false,
             date = date,
-            problem = problem
+            problem = problem,
+            idMachine = idMachine,
+            problemStore = storeName
         )
 
         ProblemApp.CreateInstance().insertProblemMachine(

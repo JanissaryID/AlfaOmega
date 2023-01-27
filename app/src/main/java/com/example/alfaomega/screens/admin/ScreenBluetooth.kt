@@ -2,6 +2,7 @@ package com.example.alfaomega.screens.admin
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +26,8 @@ fun ScreenBluetooth(navController: NavController, protoViewModel: ProtoViewModel
     val wallScrreen = 23
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.Store.route
+    val topBarColor = MaterialTheme.colorScheme.primary
+    val fontTopBar = MaterialTheme.colorScheme.surface
 
     Scaffold1(
         tittleScreen = tittleScreen,
@@ -37,7 +40,9 @@ fun ScreenBluetooth(navController: NavController, protoViewModel: ProtoViewModel
         icon = icon,
         description = desctiptionTopBar,
         route =routeAction,
-        bluetoothViewModel = bluetoothViewModel
+        bluetoothViewModel = bluetoothViewModel,
+        topBarColor = topBarColor,
+        fontTopBar = fontTopBar
     )
 }
 

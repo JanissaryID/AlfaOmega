@@ -15,6 +15,7 @@ fun ItemListTransaction(
     transactionDate: String,
     transactionPrice: String
 ) {
+    val colorFont = MaterialTheme.colorScheme.primary
     Column() {
         Column(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)
@@ -27,12 +28,12 @@ fun ItemListTransaction(
                     text = transactionName,
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = MaterialTheme.typography.labelLarge.fontSize,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = colorFont
                 )
                 Text(
                     text = transactionDate,
                     fontSize = MaterialTheme.typography.labelMedium.fontSize,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = colorFont
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
@@ -44,13 +45,13 @@ fun ItemListTransaction(
                     text = transactionType,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = MaterialTheme.typography.labelSmall.fontSize,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = colorFont
                 )
                 Text(
                     text = "IDR ${transactionPrice}",
                     fontWeight = FontWeight.SemiBold,
                     fontSize = MaterialTheme.typography.labelMedium.fontSize,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = colorFont
                 )
             }
         }
