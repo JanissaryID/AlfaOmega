@@ -258,7 +258,7 @@ fun WallMenuEditOwner(
             if(
                 !text_price_menu.text.isNullOrEmpty() &&
                 !text_name_menu.text.isNullOrEmpty() &&
-                !selectedValueType.value.isNullOrEmpty() &&
+                class_value_index != -1 &&
                 (checkedStateWasher.value || checkedStateDryer.value || checkedStateService.value) &&
                 !button_clicked
             ) {

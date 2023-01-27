@@ -81,6 +81,16 @@ fun NavGraphSetup(
                     TRANSACATION_IS_DRYER = false
                     NEW_TRANSACATION_CUSTOMER = ""
                     TRANSACATION_PAYMENT = ""
+
+                    LIST_MACHINE.clear()
+                    MACHINE_STATE = 0
+                    TRANSACTION_STATE = 0
+                    TRANSACTION_ACTIVE_STATE = 0
+                    MENU_STATE = 0
+                    TRANSACTION_RESPONSE.clear()
+                    TRANSACTION_ACTIVE_RESPONSE.clear()
+                    MENU_LIST_GIANT_RESPONSE.clear()
+                    MENU_LIST_TITAN_RESPONSE.clear()
                 }
                 BUTTON_LOGIN_CLICKED = false
             }

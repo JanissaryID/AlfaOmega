@@ -8,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.example.alfaomega.EDIT_MODE
 import com.example.alfaomega.R
+import com.example.alfaomega.STORE_NAME
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.scaffold.Scaffold2
 import com.example.alfaomega.navigations.Screens
@@ -17,7 +18,7 @@ import com.example.alfaomega.proto.ProtoViewModel
 @Composable
 fun ScreenMenuOwner(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
-    val tittleScreen = stringResource(R.string.Menu)
+    val tittleScreen = "${stringResource(R.string.Menu)} $STORE_NAME"
     val screenBack = Screens.OutletOwner.route
     val floatingRoute = Screens.MenuEditOwner.route
     val icon = R.drawable.ic_twotone_storefront_24
