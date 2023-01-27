@@ -272,6 +272,17 @@ fun NavGraphSetup(
         }
 
         composable(
+            route = Screens.MachineOwner.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                STAT_GET_DATA = false
+                machineViewModel.getMachineList()
+                LIST_PROBLEM_MACHINE.clear()
+            }
+            ScreenMachineOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+        }
+
+        composable(
             route = Screens.ReportMachine.route,
         ){
             LaunchedEffect(key1 = STORE_ID){

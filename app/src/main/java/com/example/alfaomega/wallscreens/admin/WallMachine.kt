@@ -17,6 +17,7 @@ import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.components.ButtonView
+import com.example.alfaomega.components.button_view.ButtonViewV2
 import com.example.alfaomega.view.admin.machine.MachineLoadData
 
 @Composable
@@ -36,17 +37,22 @@ fun WallMachine(
         TRANSACTION_SCREEN = false
     }
 
-    if(TRANSACATION_CLASS == false && TRANSACATION_STATUS_MACHINE == 0){
-        machine = LIST_MACHINE_WASHER_GIANT
+    if(USER_TYPE == 1){
+        machine = LIST_MACHINE
     }
-    else if(TRANSACATION_CLASS == true && TRANSACATION_STATUS_MACHINE == 0){
-        machine = LIST_MACHINE_WASHER_TITAN
-    }
-    else if(TRANSACATION_CLASS == false && TRANSACATION_STATUS_MACHINE == 3){
-        machine = LIST_MACHINE_DRYER_GIANT
-    }
-    else if(TRANSACATION_CLASS == true && TRANSACATION_STATUS_MACHINE == 3){
-        machine = LIST_MACHINE_DRYER_TITAN
+    else{
+        if(TRANSACATION_CLASS == false && TRANSACATION_STATUS_MACHINE == 0){
+            machine = LIST_MACHINE_WASHER_GIANT
+        }
+        else if(TRANSACATION_CLASS == true && TRANSACATION_STATUS_MACHINE == 0){
+            machine = LIST_MACHINE_WASHER_TITAN
+        }
+        else if(TRANSACATION_CLASS == false && TRANSACATION_STATUS_MACHINE == 3){
+            machine = LIST_MACHINE_DRYER_GIANT
+        }
+        else if(TRANSACATION_CLASS == true && TRANSACATION_STATUS_MACHINE == 3){
+            machine = LIST_MACHINE_DRYER_TITAN
+        }
     }
 
     ConstraintLayout(modifier = Modifier.padding(
@@ -76,25 +82,27 @@ fun WallMachine(
             )
         }
 
-        ButtonView(
-            title = stringResource(R.string.ActiveMachine),
-            enable = MACHINE_BUTTON_UPDATE,
-            modifier = Modifier.constrainAs(ButtonActive){
-                bottom.linkTo(parent.bottom, 16.dp)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
+        if (USER_TYPE == 3){
+            ButtonViewV2(
+                title = stringResource(R.string.ActiveMachine),
+                enable = MACHINE_BUTTON_UPDATE,
+                modifier = Modifier.constrainAs(ButtonActive){
+                    bottom.linkTo(parent.bottom, 16.dp)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+            ) {
+                MACHINE_BUTTON_UPDATE = false
+
+                machineViewModel.updateMachine(
+                    idMachine = MACHINE_ID,
+                    idTransaction = TRANSACATION_ID,
+                    timeMachine = 0,
+                    navController = navController
+                )
+
+
             }
-        ) {
-            MACHINE_BUTTON_UPDATE = false
-
-            machineViewModel.updateMachine(
-                idMachine = MACHINE_ID,
-                idTransaction = TRANSACATION_ID,
-                timeMachine = 0,
-                navController = navController
-            )
-
-
         }
     }
 }

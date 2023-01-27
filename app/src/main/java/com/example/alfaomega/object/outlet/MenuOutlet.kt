@@ -28,7 +28,7 @@ object MenuOutlet {
     private val screensMenu = arrayOf(
         Screens.MenuOwner.route,
         Screens.TransactionOwner.route,
-        Screens.ReportMachine.route,
+        Screens.MachineOwner.route,
     )
 
     private val typeMenu = booleanArrayOf(

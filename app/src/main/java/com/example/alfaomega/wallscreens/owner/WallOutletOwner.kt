@@ -165,7 +165,7 @@ fun WallOutletOwner(
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             Surface(color = Color.Transparent,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp)
             ) {

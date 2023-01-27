@@ -19,6 +19,7 @@ class ProblemViewModel: ViewModel() {
             ProblemApp.CreateInstance().fetchProblemMachine(
                 BearerToken = "Bearer " + TOKEN_API,
                 store = STORE_ID,
+                idMachine = MACHINE_ID
             ).enqueue(object :
                 Callback<ArrayList<ProblemModel>> {
                 override fun onResponse(call: Call<ArrayList<ProblemModel>>, response: Response<ArrayList<ProblemModel>>) {

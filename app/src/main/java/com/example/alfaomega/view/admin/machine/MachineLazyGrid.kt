@@ -30,7 +30,8 @@ fun MachineLazyGrid(
                 usedMachine = machine.machineStatus!!,
                 index = if(selectedIndex != index) index else -1,
                 selected = if(selectedIndex == index) false else true,
-                onClick = onItemClick
+                onClick = onItemClick,
+                navController = navController
             )
         }
     }

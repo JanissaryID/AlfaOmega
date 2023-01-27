@@ -8,6 +8,7 @@ interface ProblemService {
     fun fetchProblemMachine(
         @Header("Authorization") BearerToken: String,
         @Query(value="id_store", encoded=true) store: String?,
+        @Query(value="id_machine", encoded=true) idMachine: String?,
     ): Call<ArrayList<ProblemModel>>
 
     @POST("NewMachineProblem")

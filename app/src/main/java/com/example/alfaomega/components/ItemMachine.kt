@@ -13,8 +13,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.machine.MachineModel
+import com.example.alfaomega.navigations.Screens
 
 @Composable
 fun ItemMachine(
@@ -23,13 +25,14 @@ fun ItemMachine(
     color: Color = MaterialTheme.colorScheme.surface,
     index: Int,
     selected: Boolean,
-    onClick: (Int) -> Unit
+    onClick: (Int) -> Unit,
+    navController: NavController
 ) {
 //    val context = LocalContext.current
 
     Card(
         modifier = Modifier.padding(top = 10.dp, bottom = 10.dp, start = 4.dp, end = 4.dp),
-        elevation = CardDefaults.cardElevation(6.dp),
+//        elevation = CardDefaults.cardElevation(6.dp),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
         border = if (usedMachine) BorderStroke(6.dp, MaterialTheme.colorScheme.secondary) else BorderStroke(6.dp, MaterialTheme.colorScheme.primary)
@@ -39,27 +42,25 @@ fun ItemMachine(
                 .padding(7.dp)
                 .clickable {
                     if (!usedMachine) {
-                        MACHINE_ID = machineModel.id!!
-                        MACHINE_CLASS = machineModel.machineClass!!
-                        MACHINE_TYPE = machineModel.machineType!!
-                        MACHINE_NUMBER = machineModel.machineNumber!!
+                        if(USER_TYPE == 1){
+                            PROBLEM_MACHINE_STATE_SCREEN = true
+                            MACHINE_ID = machineModel.id!!
+                            navController.navigate(route = Screens.ReportMachine.route){
+                                popUpTo(Screens.ReportMachine.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                        else{
+                            MACHINE_ID = machineModel.id!!
+                            MACHINE_CLASS = machineModel.machineClass!!
+                            MACHINE_TYPE = machineModel.machineType!!
+                            MACHINE_NUMBER = machineModel.machineNumber!!
 
-                        MACHINE_BUTTON_UPDATE = selected
+                            MACHINE_BUTTON_UPDATE = selected
 
-//                        if(!machineModel.machineClass!! && !machineModel.machineType!!){
-//                            MACHINE_TIME = TIME_WASHER_GIANT
-//                        }
-//                        else if(machineModel.machineClass!! && !machineModel.machineType!!){
-//                            MACHINE_TIME = TIME_WASHER_TITAN
-//                        }
-//                        else if(!machineModel.machineClass!! && machineModel.machineType!!){
-//                            MACHINE_TIME = TIME_DRYER_GIANT
-//                        }
-//                        else if(machineModel.machineClass!! && machineModel.machineType!!){
-//                            MACHINE_TIME = TIME_DRYER_TITAN
-//                        }
-
-                        onClick.invoke(index)
+                            onClick.invoke(index)
+                        }
                     }
                 },
             color = if (usedMachine){ MaterialTheme.colorScheme.secondary }

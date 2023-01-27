@@ -13,6 +13,12 @@ data class ProblemModel(
 	@field:SerializedName("machine_number")
 	val machineNumber: Int? = null,
 
+	@field:SerializedName("id_machine")
+	val idMachine: String? = null,
+
+	@field:SerializedName("problem_store")
+	val problemStore: String? = null,
+
 	@field:SerializedName("admin")
 	val admin: String? = null,
 

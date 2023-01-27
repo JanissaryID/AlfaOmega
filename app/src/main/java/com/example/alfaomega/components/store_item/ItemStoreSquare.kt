@@ -48,9 +48,11 @@ fun ItemStoreSquare(
                     STORE_ADDRESS = storeAddress
                     STORE_ID = storeId
                     STORE_ADMIN = storeAdmin
-                    navController.navigate(route = Screens.OutletOwner.route){
-                        popUpTo(Screens.OutletOwner.route) {
-                            inclusive = true
+                    if(!STORE_LIST_RESPONSE.isNullOrEmpty() && !STORE_ID.isNullOrEmpty()){
+                        navController.navigate(route = Screens.OutletOwner.route){
+                            popUpTo(Screens.OutletOwner.route) {
+                                inclusive = true
+                            }
                         }
                     }
                 }) {
