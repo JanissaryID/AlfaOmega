@@ -106,4 +106,6 @@
     <string name="CreateProblem">Create Problem</string>
     <string name="OutletTitle">Outlet</string>
     <string name="DateTitle">Date</string>
+    <string name="SetviceTitle">Service</string>
+    <string name="Customer">Customer</string>
 </resources>

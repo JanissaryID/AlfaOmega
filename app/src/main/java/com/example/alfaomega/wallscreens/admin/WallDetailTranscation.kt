@@ -11,8 +11,10 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.MACHINE_SCREEN
+import com.example.alfaomega.TRANSACTION_SCREEN
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.components.DetailTransaction
+import com.example.alfaomega.components.DetailTransactionV2
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
@@ -26,10 +28,18 @@ fun WallDetailTransaction(
     Surface(color = Color.Transparent, modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         Column(modifier = Modifier.padding(top = paddingValues.calculateTopPadding())) {
             Spacer(modifier = Modifier.height(16.dp))
-            DetailTransaction(
-                transactionViewModel = transactionViewModel,
-                navController = navController
-            )
+            if(!TRANSACTION_SCREEN){
+                DetailTransactionV2(
+                    transactionViewModel = transactionViewModel,
+                    navController = navController
+                )
+            }
+            else{
+                DetailTransaction(
+                    transactionViewModel = transactionViewModel,
+                    navController = navController
+                )
+            }
         }
     }
 }
