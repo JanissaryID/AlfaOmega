@@ -9,10 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -182,7 +179,17 @@ fun WallOutletOwner(
                         shape = RoundedCornerShape(ROUND_CORNER.dp),
                     ){
                         Column(modifier = Modifier.padding(vertical = 16.dp)) {
-                            SampleLineGraph(listOf(DataPoints.dataPoints1, DataPoints.dataPoints2, DataPoints.dataPoints3), selectGraph = selectedItem)
+                            if(INCOME_STATE_STORE == 1){
+                                SampleLineGraph(listOf(LIST_INCOME_FLOAT_STORE, LIST_EXPENSES_FLOAT_STORE, LIST_PROFIT_FLOAT_STORE), selectGraph = selectedItem)
+                            }
+                            else{
+                                Box(
+                                    modifier = Modifier.fillMaxWidth().height(200.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    CircularProgressIndicator()
+                                }
+                            }
                             Spacer(modifier = Modifier.height(16.dp))
                             Row(verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween,

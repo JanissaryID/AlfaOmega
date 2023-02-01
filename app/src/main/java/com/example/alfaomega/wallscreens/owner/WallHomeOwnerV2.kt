@@ -9,10 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,10 +19,8 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.alfaomega.*
 import com.example.alfaomega.R
-import com.example.alfaomega.ROUND_CORNER
-import com.example.alfaomega.STORE_LIST_RESPONSE
-import com.example.alfaomega.STORE_STATE
 import com.example.alfaomega.components.ItemFinance
 import com.example.alfaomega.components.menu.ItemMenuNavOwner
 import com.example.alfaomega.datapoint.DataPoints
@@ -211,7 +206,17 @@ fun WallHomeOwnerV2(
                         shape = RoundedCornerShape(ROUND_CORNER.dp),
                     ){
                         Column(modifier = Modifier.padding(vertical = 16.dp)) {
-                            SampleLineGraph(listOf(DataPoints.dataPoints1, DataPoints.dataPoints2, DataPoints.dataPoints3), selectGraph = selectedItem)
+                            if(INCOME_STATE == 1){
+                                SampleLineGraph(listOf(LIST_INCOME_FLOAT, LIST_EXPENSES_FLOAT, LIST_PROFIT_FLOAT), selectGraph = selectedItem)
+                            }
+                            else{
+                                Box(
+                                    modifier = Modifier.fillMaxWidth().height(200.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    CircularProgressIndicator()
+                                }
+                            }
                             Spacer(modifier = Modifier.height(16.dp))
                             Row(verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween,

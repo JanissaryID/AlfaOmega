@@ -4,6 +4,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.example.alfaomega.api.income.IncomeModel
 import com.example.alfaomega.api.log.LogModel
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.menu.MenuModel
@@ -12,6 +13,7 @@ import com.example.alfaomega.api.rules.RuleModel
 import com.example.alfaomega.api.store.StoreModel
 import com.example.alfaomega.api.transaction.TransactionModel
 import com.example.alfaomega.api.user.UserModel
+import com.madrapps.plot.line.DataPoint
 
 //Variable New Transaction
 var NEW_TRANSACATION_CUSTOMER: String by mutableStateOf("")
@@ -167,6 +169,18 @@ var STORE_CITY_EDIT: String by mutableStateOf("")
 //Variable Style
 val ROUND_CORNER: Int = 24
 
+//Variable Graph Income
+var LIST_INCOME: ArrayList<IncomeModel> by mutableStateOf(arrayListOf())
+var LIST_INCOME_FLOAT: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
+var LIST_EXPENSES_FLOAT: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
+var LIST_PROFIT_FLOAT: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
+var INCOME_STATE: Int by mutableStateOf(0)
+var LIST_INCOME_STORE: ArrayList<IncomeModel> by mutableStateOf(arrayListOf())
+var LIST_INCOME_FLOAT_STORE: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
+var LIST_EXPENSES_FLOAT_STORE: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
+var LIST_PROFIT_FLOAT_STORE: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
+var INCOME_STATE_STORE: Int by mutableStateOf(0)
+var INCOME_ERROR_MESSAGE: String by mutableStateOf("")
 
 var STAT_GET_DATA: Boolean by mutableStateOf(false)
 

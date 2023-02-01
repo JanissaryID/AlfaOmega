@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.income.IncomeViewModel
 import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
@@ -47,7 +48,8 @@ fun NavGraphSetup(
     userViewModel: UserViewModel,
     logViewModel: LogViewModel,
     bluetoothViewModel: BluetoothViewModel,
-    problemViewModel: ProblemViewModel
+    problemViewModel: ProblemViewModel,
+    incomeViewModel: IncomeViewModel
     ) {
 
     val context = LocalContext.current
@@ -87,10 +89,16 @@ fun NavGraphSetup(
                     TRANSACTION_ACTIVE_STATE = 0
                     MENU_STATE = 0
                     MENU_MACHINE_CLASS = 0
+                    INCOME_STATE = 0
+
                     TRANSACTION_RESPONSE.clear()
                     TRANSACTION_ACTIVE_RESPONSE.clear()
                     MENU_LIST_GIANT_RESPONSE.clear()
                     MENU_LIST_TITAN_RESPONSE.clear()
+                    LIST_INCOME.clear()
+                    LIST_INCOME_FLOAT.clear()
+                    LIST_EXPENSES_FLOAT.clear()
+                    LIST_PROFIT_FLOAT.clear()
                 }
                 BUTTON_LOGIN_CLICKED = false
             }
@@ -102,6 +110,16 @@ fun NavGraphSetup(
             }
             else if(USER_TYPE == 1){
                 PROBLEM_MACHINE_STATE_SCREEN = false
+
+                LaunchedEffect(key1 = STORE_ID){
+                    INCOME_STATE = 0
+                    LIST_INCOME.clear()
+                    LIST_INCOME_FLOAT.clear()
+                    LIST_EXPENSES_FLOAT.clear()
+                    LIST_PROFIT_FLOAT.clear()
+                }
+
+                incomeViewModel.fetchByOwner()
                 ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
             else{
@@ -277,6 +295,21 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
                 STAT_GET_DATA = false
                 PROBLEM_MACHINE_STATE_SCREEN = false
+
+                INCOME_STATE_STORE = 0
+                INCOME_STATE = 0
+
+                LIST_INCOME_STORE.clear()
+                LIST_INCOME_FLOAT_STORE.clear()
+                LIST_EXPENSES_FLOAT_STORE.clear()
+                LIST_PROFIT_FLOAT_STORE.clear()
+
+                LIST_INCOME.clear()
+                LIST_INCOME_FLOAT.clear()
+                LIST_EXPENSES_FLOAT.clear()
+                LIST_PROFIT_FLOAT.clear()
+
+                incomeViewModel.fetchByStore()
             }
             ScreenOutletOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }

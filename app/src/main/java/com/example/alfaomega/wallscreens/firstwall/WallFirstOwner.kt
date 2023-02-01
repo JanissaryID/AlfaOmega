@@ -210,7 +210,7 @@ fun WallFirstOwner(
                         shape = RoundedCornerShape(ROUND_CORNER.dp),
                     ){
                         Column(modifier = Modifier.padding(vertical = 16.dp)) {
-                            SampleLineGraph(listOf(DataPoints.dataPoints1, DataPoints.dataPoints2, DataPoints.dataPoints3), selectGraph = selectedItem)
+//                            SampleLineGraph(listOf(LIST_INCOME_FLOAT, LIST_EXPENSES_FLOAT, LIST_PROFIT_FLOAT), selectGraph = selectedItem)
                             Spacer(modifier = Modifier.height(16.dp))
                             Row(verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween,
