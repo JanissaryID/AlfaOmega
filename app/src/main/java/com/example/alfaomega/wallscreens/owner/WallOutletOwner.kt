@@ -31,6 +31,9 @@ import com.example.alfaomega.`object`.owner.MenuOwner
 import com.example.alfaomega.`object`.owner.MenuOwnerModel
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.view.owner.store.StoreLoadDataOwner
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 @Composable
 fun WallOutletOwner(
@@ -64,6 +67,12 @@ fun WallOutletOwner(
     var selectedItem by remember {
         mutableStateOf(0)
     }
+
+    ONE_RENDER_GRAPH = true
+
+    val localeID = Locale("in", "ID")
+    val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+    numberFormat.setMaximumFractionDigits(0)
 
     Column(modifier = Modifier.padding(
         top = paddingValues.calculateTopPadding(),
@@ -105,13 +114,19 @@ fun WallOutletOwner(
                     ){
                         itemsIndexed(items = selectionFinanceTitle) { index, item ->
                             if(index == 0){
-                                ItemFinance(title = item, price = "Rp. 7.564.000", colorFont = MaterialTheme.colorScheme.primary)
+                                ItemFinance(title = item, price = "Rp. ${numberFormat.format(
+                                    INCOME_SUM_STORE).substring(2, numberFormat.format(
+                                    INCOME_SUM_STORE).length)}", colorFont = MaterialTheme.colorScheme.primary)
                             }
                             else if(index == 1){
-                                ItemFinance(title = item, price = "Rp. 564.000", colorFont = MaterialTheme.colorScheme.error)
+                                ItemFinance(title = item, price = "Rp. ${numberFormat.format(
+                                    EXPENSES_SUM_STORE).substring(2, numberFormat.format(
+                                    EXPENSES_SUM_STORE).length)}", colorFont = MaterialTheme.colorScheme.error)
                             }
                             else{
-                                ItemFinance(title = item, price = "Rp. 7.000.000", colorFont = MaterialTheme.colorScheme.onPrimary)
+                                ItemFinance(title = item, price = "Rp. ${numberFormat.format(
+                                    PROFIT_SUM_STORE).substring(2, numberFormat.format(
+                                    PROFIT_SUM_STORE).length)}", colorFont = MaterialTheme.colorScheme.onPrimary)
                             }
                             if (index < selectionFinanceTitle.lastIndex){
                                 Spacer(modifier = Modifier.width(16.dp))

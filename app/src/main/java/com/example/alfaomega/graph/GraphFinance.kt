@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.alfaomega.ONE_RENDER_GRAPH
 import com.madrapps.plot.line.DataPoint
 import com.madrapps.plot.line.LineGraph
 import com.madrapps.plot.line.LinePlot
@@ -116,4 +117,7 @@ fun SampleLineGraph(lines: List<List<DataPoint>>, selectGraph: Int = 0) {
             }
         )
     }
+
+//    ONE_RENDER_GRAPH = true
+
 }

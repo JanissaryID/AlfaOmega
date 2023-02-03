@@ -35,12 +35,22 @@ class IncomeViewModel: ViewModel() {
 
             IncomeApp.CreateInstance().fetchIncomeByOwner(
                 BearerToken = "Bearer " + TOKEN_API,
-                date = "01-2023",
+                date = date,
                 owner = OWNER_ID
             ).enqueue(object :
                 Callback<ArrayList<IncomeModel>> {
                 override fun onResponse(call: Call<ArrayList<IncomeModel>>, response: Response<ArrayList<IncomeModel>>) {
                     INCOME_STATE = 0
+
+                    LIST_INCOME.clear()
+                    LIST_INCOME_FLOAT.clear()
+                    LIST_EXPENSES_FLOAT.clear()
+                    LIST_PROFIT_FLOAT.clear()
+
+                    INCOME_SUM = 0
+                    EXPENSES_SUM = 0
+                    PROFIT_SUM = 0
+
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_INCOME = response.body()!!
@@ -48,15 +58,18 @@ class IncomeViewModel: ViewModel() {
                                 LIST_INCOME_FLOAT.add(DataPoint(index.toFloat(),income.income!!.toFloat()))
                                 LIST_EXPENSES_FLOAT.add(DataPoint(index.toFloat(), income.outcome!!.toFloat()))
                                 LIST_PROFIT_FLOAT.add(DataPoint(index.toFloat(), (income.income!!.toFloat() - income.outcome!!.toFloat())))
+                                INCOME_SUM += income.income.toInt()
+                                EXPENSES_SUM += income.outcome.toInt()
+                                PROFIT_SUM += income.income.toInt() - income.outcome.toInt()
                             }
 //                            LIST_INCOME_INT.add(response.body()!!.get(index = 2).income!!.toInt())
 
-                            if(!LIST_INCOME_FLOAT.isNullOrEmpty() && !LIST_PROFIT_FLOAT.isNullOrEmpty()){
+                            if(!LIST_INCOME_FLOAT.isNullOrEmpty() &&
+                                !LIST_PROFIT_FLOAT.isNullOrEmpty() &&
+                                !LIST_EXPENSES_FLOAT.isNullOrEmpty() &&
+                                !LIST_INCOME.isNullOrEmpty()
+                            ){
                                 INCOME_STATE = 1
-//                                Log.d("get_log", "data Int = ${LIST_INCOME}")
-//                                Log.d("get_log", "data Int = ${LIST_INCOME_FLOAT}")
-//                                Log.d("get_log", "data Int = ${LIST_EXPENSES_FLOAT}")
-//                                Log.d("get_log", "data Int = ${LIST_PROFIT_FLOAT}")
                             }
                         }
                         if (LIST_INCOME_FLOAT.isNullOrEmpty()){
@@ -93,12 +106,22 @@ class IncomeViewModel: ViewModel() {
 
             IncomeApp.CreateInstance().fetchIncomeByStore(
                 BearerToken = "Bearer " + TOKEN_API,
-                date = "01-2023",
+                date = date,
                 store = STORE_ID
             ).enqueue(object :
                 Callback<ArrayList<IncomeModel>> {
                 override fun onResponse(call: Call<ArrayList<IncomeModel>>, response: Response<ArrayList<IncomeModel>>) {
                     INCOME_STATE_STORE = 0
+
+                    LIST_INCOME_STORE.clear()
+                    LIST_INCOME_FLOAT_STORE.clear()
+                    LIST_EXPENSES_FLOAT_STORE.clear()
+                    LIST_PROFIT_FLOAT_STORE.clear()
+
+                    INCOME_SUM_STORE = 0
+                    EXPENSES_SUM_STORE = 0
+                    PROFIT_SUM_STORE = 0
+
                     if(response.code() == 200){
                         response.body()?.let {
 //                            Log.d("get_log", "data Int = ${response}")
@@ -107,20 +130,19 @@ class IncomeViewModel: ViewModel() {
                                 LIST_INCOME_FLOAT_STORE.add(DataPoint(index.toFloat(),income.income!!.toFloat()))
                                 LIST_EXPENSES_FLOAT_STORE.add(DataPoint(index.toFloat(), income.outcome!!.toFloat()))
                                 LIST_PROFIT_FLOAT_STORE.add(DataPoint(index.toFloat(), (income.income!!.toFloat() - income.outcome!!.toFloat())))
+                                INCOME_SUM_STORE += income.income.toInt()
+                                EXPENSES_SUM_STORE += income.outcome.toInt()
+                                PROFIT_SUM_STORE += income.income.toInt() - income.outcome.toInt()
                             }
 
                             if(!LIST_INCOME_FLOAT_STORE.isNullOrEmpty() && !LIST_PROFIT_FLOAT_STORE.isNullOrEmpty()){
                                 INCOME_STATE_STORE = 1
-//                                Log.d("get_log", "data Int = ${LIST_INCOME_STORE}")
-//                                Log.d("get_log", "data Int = ${LIST_INCOME_FLOAT_STORE}")
-//                                Log.d("get_log", "data Int = ${LIST_EXPENSES_FLOAT_STORE}")
-//                                Log.d("get_log", "data Int = ${LIST_PROFIT_FLOAT_STORE}")
                             }
 //                            Log.d("get_log", "$LIST_LOG")
                         }
                         if (LIST_INCOME_FLOAT_STORE.isNullOrEmpty()){
                             INCOME_STATE_STORE = 3
-                            fetchByOwner()
+//                            fetchByOwner()
                         }
                     }
                 }

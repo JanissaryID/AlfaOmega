@@ -175,12 +175,21 @@ var LIST_INCOME_FLOAT: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
 var LIST_EXPENSES_FLOAT: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
 var LIST_PROFIT_FLOAT: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
 var INCOME_STATE: Int by mutableStateOf(0)
+var INCOME_SUM: Int by mutableStateOf(0)
+var EXPENSES_SUM: Int by mutableStateOf(0)
+var PROFIT_SUM: Int by mutableStateOf(0)
+
 var LIST_INCOME_STORE: ArrayList<IncomeModel> by mutableStateOf(arrayListOf())
 var LIST_INCOME_FLOAT_STORE: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
 var LIST_EXPENSES_FLOAT_STORE: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
 var LIST_PROFIT_FLOAT_STORE: ArrayList<DataPoint> by mutableStateOf(arrayListOf())
 var INCOME_STATE_STORE: Int by mutableStateOf(0)
+var INCOME_SUM_STORE: Int by mutableStateOf(0)
+var EXPENSES_SUM_STORE: Int by mutableStateOf(0)
+var PROFIT_SUM_STORE: Int by mutableStateOf(0)
+
 var INCOME_ERROR_MESSAGE: String by mutableStateOf("")
 
 var STAT_GET_DATA: Boolean by mutableStateOf(false)
+var ONE_RENDER_GRAPH: Boolean by mutableStateOf(false)
 
