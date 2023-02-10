@@ -219,14 +219,6 @@ class IncomeViewModel: ViewModel() {
         }
     }
 
-    fun getDaysInMonth(month: Int, year: Int): Int {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.YEAR, year)
-        calendar.set(Calendar.MONTH, month - 1)
-        calendar.set(Calendar.DAY_OF_MONTH, 1)
-        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
-    }
-
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun fetchByStoreGetNull(
         incomeStat: Boolean,
