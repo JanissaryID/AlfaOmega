@@ -12,6 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.alfaomega.*
 import com.example.alfaomega.navigations.Screens
 
 @Composable
@@ -42,6 +43,18 @@ fun ItemMenuNavOwner(
                     modifier = Modifier
                         .size(42.dp)
                         .clickable {
+                            MENU_STATE = 0
+                            TRANSACTION_STATE = 0
+                            MACHINE_STATE = 0
+
+                            MENU_LIST_TITAN_RESPONSE.clear()
+                            MENU_LIST_GIANT_RESPONSE.clear()
+                            TRANSACTION_RESPONSE.clear()
+                            LIST_MACHINE_DRYER_GIANT.clear()
+                            LIST_MACHINE_DRYER_TITAN.clear()
+                            LIST_MACHINE_WASHER_GIANT.clear()
+                            LIST_MACHINE_WASHER_TITAN.clear()
+
                             navController.navigate(route = navMenu){
                                 popUpTo(navMenu) {
                                     inclusive = true

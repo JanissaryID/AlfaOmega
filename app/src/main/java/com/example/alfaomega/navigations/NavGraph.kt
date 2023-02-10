@@ -83,22 +83,7 @@ fun NavGraphSetup(
                     NEW_TRANSACATION_CUSTOMER = ""
                     TRANSACATION_PAYMENT = ""
 
-                    LIST_MACHINE.clear()
-                    MACHINE_STATE = 0
-                    TRANSACTION_STATE = 0
-                    TRANSACTION_ACTIVE_STATE = 0
-                    MENU_STATE = 0
                     MENU_MACHINE_CLASS = 0
-                    INCOME_STATE = 0
-
-                    TRANSACTION_RESPONSE.clear()
-                    TRANSACTION_ACTIVE_RESPONSE.clear()
-                    MENU_LIST_GIANT_RESPONSE.clear()
-                    MENU_LIST_TITAN_RESPONSE.clear()
-                    LIST_INCOME.clear()
-                    LIST_INCOME_FLOAT.clear()
-                    LIST_EXPENSES_FLOAT.clear()
-                    LIST_PROFIT_FLOAT.clear()
                 }
                 BUTTON_LOGIN_CLICKED = false
             }
@@ -110,14 +95,6 @@ fun NavGraphSetup(
             }
             else if(USER_TYPE == 1){
                 PROBLEM_MACHINE_STATE_SCREEN = false
-
-                LaunchedEffect(key1 = STORE_ID){
-                    INCOME_STATE = 0
-                    LIST_INCOME.clear()
-                    LIST_INCOME_FLOAT.clear()
-                    LIST_EXPENSES_FLOAT.clear()
-                    LIST_PROFIT_FLOAT.clear()
-                }
 
                 incomeViewModel.fetchByOwner()
                 ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
@@ -296,19 +273,6 @@ fun NavGraphSetup(
                 STAT_GET_DATA = false
                 PROBLEM_MACHINE_STATE_SCREEN = false
 
-                INCOME_STATE_STORE = 0
-                INCOME_STATE = 0
-
-                LIST_INCOME_STORE.clear()
-                LIST_INCOME_FLOAT_STORE.clear()
-                LIST_EXPENSES_FLOAT_STORE.clear()
-                LIST_PROFIT_FLOAT_STORE.clear()
-
-                LIST_INCOME.clear()
-                LIST_INCOME_FLOAT.clear()
-                LIST_EXPENSES_FLOAT.clear()
-                LIST_PROFIT_FLOAT.clear()
-
                 incomeViewModel.fetchByStore()
             }
             ScreenOutletOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
@@ -320,7 +284,6 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
                 STAT_GET_DATA = false
                 machineViewModel.getMachineList()
-                LIST_PROBLEM_MACHINE.clear()
             }
             ScreenMachineOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
@@ -343,7 +306,6 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
                 STAT_GET_DATA = false
                 userViewModel.fetchOwner()
-//                menuViewModel.getMenu()
 //                TRANSACTION_SCREEN = true
             }
             ScreenOwnerDeveloper(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
@@ -354,8 +316,6 @@ fun NavGraphSetup(
         ){
             LaunchedEffect(key1 = STORE_ID){
                 STAT_GET_DATA = false
-//                userViewModel.fetchOwner()
-//                menuViewModel.getMenu()
 //                TRANSACTION_SCREEN = true
             }
             ScreenStoreEditDeveloper(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)

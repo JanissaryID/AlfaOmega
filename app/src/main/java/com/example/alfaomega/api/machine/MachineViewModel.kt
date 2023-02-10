@@ -24,6 +24,12 @@ class MachineViewModel: ViewModel() {
                 Callback<ArrayList<MachineModel>> {
                 override fun onResponse(call: Call<ArrayList<MachineModel>>, response: Response<ArrayList<MachineModel>>) {
                     MENU_STATE = 0
+
+                    LIST_MACHINE_WASHER_GIANT.clear()
+                    LIST_MACHINE_DRYER_GIANT.clear()
+                    LIST_MACHINE_WASHER_TITAN.clear()
+                    LIST_MACHINE_DRYER_TITAN.clear()
+
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_MACHINE_WASHER_GIANT = response.body()!!.filter { menu -> menu.machineType == false && menu.machineClass == false} as ArrayList<MachineModel>
@@ -65,6 +71,8 @@ class MachineViewModel: ViewModel() {
                 override fun onResponse(call: Call<ArrayList<MachineModel>>, response: Response<ArrayList<MachineModel>>) {
                     Log.d("debug_machine", "Machine ${response}")
                     MENU_STATE = 0
+
+                    LIST_MACHINE.clear()
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_MACHINE = response.body()!!

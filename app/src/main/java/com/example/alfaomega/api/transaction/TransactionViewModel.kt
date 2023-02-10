@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.income.IncomeViewModel
 import com.example.alfaomega.api.machine.MachineApp
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.navigations.Screens
@@ -39,6 +40,9 @@ class TransactionViewModel: ViewModel() {
                             response: Response<ArrayList<TransactionModel>>
                         ) {
                             TRANSACTION_ACTIVE_STATE = 0
+
+                            TRANSACTION_ACTIVE_RESPONSE.clear()
+
                             if (response.code() == 200) {
                                 response.body()?.let {
                                     TRANSACTION_ACTIVE_RESPONSE = response.body()!!.filter { data -> data.transactionStateMachine != 6 } as ArrayList<TransactionModel>
@@ -81,6 +85,9 @@ class TransactionViewModel: ViewModel() {
                     response: Response<ArrayList<TransactionModel>>
                 ) {
                     TRANSACTION_ACTIVE_STATE = 0
+
+                    TRANSACTION_ACTIVE_RESPONSE.clear()
+
                     if (response.code() == 200) {
                         response.body()?.let {
                             TRANSACTION_ACTIVE_RESPONSE = response.body()!!.filter { data -> data.transactionStateMachine != 6 } as ArrayList<TransactionModel>
@@ -119,7 +126,8 @@ class TransactionViewModel: ViewModel() {
         isWasher: Boolean,
         isDryer: Boolean,
         phoneCustomer: String,
-        navController: NavController
+        navController: NavController,
+        incomeViewModel: IncomeViewModel = IncomeViewModel()
     ){
         val current = LocalDateTime.now()
 
@@ -151,6 +159,9 @@ class TransactionViewModel: ViewModel() {
 //                Log.d("debug", "Code Insert Transaction ${response}")
                 Log.i("info_response", "Response Insert Transaction : ${response}")
                 if(response.code() == 201){
+
+                    incomeViewModel.fetchByStoreGetNull(incomeStat = true, income = transactionPrice)
+
                     navController.navigate(route = Screens.Home.route){
                         popUpTo(Screens.Home.route) {
                             inclusive = true
@@ -243,6 +254,9 @@ class TransactionViewModel: ViewModel() {
                     response: Response<ArrayList<TransactionModel>>
                 ) {
                     TRANSACTION_STATE = 0
+
+                    TRANSACTION_RESPONSE.clear()
+
                     if (response.code() == 200) {
                         response.body()?.let {
                             TRANSACTION_RESPONSE = response.body()!!
@@ -287,6 +301,8 @@ class TransactionViewModel: ViewModel() {
                     response: Response<ArrayList<TransactionModel>>
                 ) {
                     TRANSACTION_STATE = 0
+
+                    TRANSACTION_RESPONSE.clear()
 //                    Log.d("debug_transaction", "Success get data transcaction 1 $response")
                     if (response.code() == 200) {
                         response.body()?.let {

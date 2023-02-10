@@ -18,9 +18,22 @@ interface IncomeService {
         @Query(value="store_id", encoded=true) store: String?
     ): Call<ArrayList<IncomeModel>>
 
-//    @POST("NewIncomeGraph")
-//    fun fetchIncomeByOwner(
-//        @Header("Authorization") BearerToken: String,
-//        @Body statusData: LogModel
-//    ) : Call<LogModel>
+    @GET("NewIncomeGraph")
+    fun fetchIncomeByStoreNotNUll(
+        @Header("Authorization") BearerToken: String,
+        @Query(value="date", encoded=true) date: String?,
+        @Query(value="store_id", encoded=true) store: String?
+    ): Call<ArrayList<IncomeModel>>
+
+    @POST("NewIncomeGraph")
+    fun insertIncome(
+        @Header("Authorization") BearerToken: String,
+        @Body Data: IncomeModel
+    ) : Call<IncomeModel>
+
+    @PATCH("NewIncomeGraph/{id}")
+    fun updateIncome(
+        @Header("Authorization") BearerToken: String,
+        @Path("id") id: String?, @Body eData : IncomeModel
+    ): Call<IncomeModel>
 }

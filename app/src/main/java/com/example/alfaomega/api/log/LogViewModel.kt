@@ -33,6 +33,9 @@ class LogViewModel: ViewModel() {
                 Callback<ArrayList<LogModel>> {
                 override fun onResponse(call: Call<ArrayList<LogModel>>, response: Response<ArrayList<LogModel>>) {
                     LOG_STATE = 0
+
+                    LIST_LOG.clear()
+
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_LOG = response.body()!!

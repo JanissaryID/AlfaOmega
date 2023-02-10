@@ -48,6 +48,8 @@ fun ItemMachine(
                         MACHINE_NUMBER = machineModel.machineNumber!!
                         if(USER_TYPE == 1){
                             PROBLEM_MACHINE_STATE_SCREEN = true
+                            PROBLEM_MACHINE_STATE = 0
+                            LIST_PROBLEM_MACHINE.clear()
                             navController.navigate(route = Screens.ReportMachine.route){
                                 popUpTo(Screens.ReportMachine.route) {
                                     inclusive = true
@@ -56,6 +58,8 @@ fun ItemMachine(
                         }
                         else if(PROBLEM_MACHINE_STATE_SCREEN){
                             PROBLEM_MACHINE_STATE_SCREEN = true
+                            PROBLEM_MACHINE_STATE = 0
+                            LIST_PROBLEM_MACHINE.clear()
                             navController.navigate(route = Screens.ReportMachine.route){
                                 popUpTo(Screens.ReportMachine.route) {
                                     inclusive = true

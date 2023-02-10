@@ -122,6 +122,9 @@ class UserViewModel : ViewModel() {
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
                     USER_STATE = 0
+
+                    LIST_USER.clear()
+
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_USER = response.body()!!.filter { user -> user.typeUser == 3} as ArrayList<UserModel>

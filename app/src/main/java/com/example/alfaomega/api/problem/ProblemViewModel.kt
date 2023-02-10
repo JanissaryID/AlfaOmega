@@ -24,6 +24,8 @@ class ProblemViewModel: ViewModel() {
                 Callback<ArrayList<ProblemModel>> {
                 override fun onResponse(call: Call<ArrayList<ProblemModel>>, response: Response<ArrayList<ProblemModel>>) {
                     PROBLEM_MACHINE_STATE = 0
+
+                    LIST_PROBLEM_MACHINE.clear()
 //                    Log.d("get_log", "$response")
                     if(response.code() == 200){
                         response.body()?.let {

@@ -43,6 +43,11 @@ fun ItemStoreSquare(
             modifier = Modifier
                 .size(180.dp)
                 .clickable {
+                    INCOME_SUM_STORE = 0
+                    EXPENSES_SUM_STORE = 0
+                    PROFIT_SUM_STORE = 0
+                    INCOME_STATE_STORE = 0
+
                     STORE_NAME = storeName
                     STORE_CITY = storeCity
                     STORE_ADDRESS = storeAddress

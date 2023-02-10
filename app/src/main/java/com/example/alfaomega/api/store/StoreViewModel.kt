@@ -24,6 +24,8 @@ class StoreViewModel : ViewModel(){
 
                     STORE_STATE = 0
 
+                    STORE_LIST_RESPONSE.clear()
+
                     if(response.code() == 200){
                         response.body()?.let {
                             STORE_LIST_RESPONSE = response.body()!!

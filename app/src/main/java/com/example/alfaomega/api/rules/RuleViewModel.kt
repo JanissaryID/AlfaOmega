@@ -22,6 +22,9 @@ class RuleViewModel : ViewModel() {
                 Callback<ArrayList<RuleModel>> {
                 override fun onResponse(call: Call<ArrayList<RuleModel>>, response: Response<ArrayList<RuleModel>>) {
                     RULE_STATE = 0
+
+                    LIST_RULE.clear()
+
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_RULE = response.body()!!
