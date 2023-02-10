@@ -82,7 +82,7 @@ class IncomeViewModel: ViewModel() {
                                     LIST_EXPENSES_FLOAT.add(DataPoint(myDate.toFloat(), tempExpenses.toFloat()))
                                     LIST_PROFIT_FLOAT.add(DataPoint(myDate.toFloat(), tempNetProfit.toFloat()))
 
-                                    Log.d("get_log", "first = $tempIndex $tempIncome - $tempExpenses - $tempNetProfit")
+//                                    Log.d("get_log", "first = $tempIndex $tempIncome - $tempExpenses - $tempNetProfit")
 
                                     tempIndex++
 
@@ -105,7 +105,7 @@ class IncomeViewModel: ViewModel() {
                                     LIST_EXPENSES_FLOAT.add(DataPoint(myDate.toFloat(), tempExpenses.toFloat()))
                                     LIST_PROFIT_FLOAT.add(DataPoint(myDate.toFloat(), tempNetProfit.toFloat()))
 //
-                                    Log.d("get_log", "two = $tempIndex  $tempIncome - $tempExpenses - $tempNetProfit")
+//                                    Log.d("get_log", "two = $tempIndex  $tempIncome - $tempExpenses - $tempNetProfit")
 
                                     tempIndex++
                                 }
@@ -115,8 +115,7 @@ class IncomeViewModel: ViewModel() {
                                 PROFIT_SUM += income.income.toInt() - income.outcome.toInt()
                             }
 
-                            Log.d("get_log", "$LIST_INCOME_FLOAT")
-//                            LIST_INCOME_INT.add(response.body()!!.get(index = 2).income!!.toInt())
+//                            Log.d("get_log", "$LIST_INCOME_FLOAT")
 
                             if(!LIST_INCOME_FLOAT.isNullOrEmpty() &&
                                 !LIST_PROFIT_FLOAT.isNullOrEmpty() &&
@@ -128,7 +127,6 @@ class IncomeViewModel: ViewModel() {
                         }
                         if (LIST_INCOME_FLOAT.isNullOrEmpty()){
                             INCOME_STATE = 3
-//                            fetchByOwner()
                         }
                     }
                 }
@@ -197,11 +195,9 @@ class IncomeViewModel: ViewModel() {
                             if(!LIST_INCOME_FLOAT_STORE.isNullOrEmpty() && !LIST_PROFIT_FLOAT_STORE.isNullOrEmpty()){
                                 INCOME_STATE_STORE = 1
                             }
-//                            Log.d("get_log", "$LIST_LOG")
                         }
                         if (LIST_INCOME_FLOAT_STORE.isNullOrEmpty()){
                             INCOME_STATE_STORE = 3
-//                            fetchByOwner()
                         }
                     }
                 }
