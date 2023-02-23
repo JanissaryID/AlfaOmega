@@ -36,6 +36,7 @@ fun ComponentTransaction(
     transactionIsWasher: Boolean,
     transactionIsDryer: Boolean,
     transactionNumber: String,
+    transactionMoney: String,
     navController: NavController
 ) {
     val selectionProgressMachine = listOf(
@@ -78,6 +79,7 @@ fun ComponentTransaction(
                 TRANSACATION_IS_WASHER = transactionIsWasher
                 TRANSACATION_IS_DRYER = transactionIsDryer
                 TRANSACTION_NUMBER = transactionNumber
+                TRANSACTION_MONEY = transactionMoney
                 navController.navigate(route = Screens.DetailTransaction.route)
             }
         ) {

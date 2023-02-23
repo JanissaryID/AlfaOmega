@@ -176,6 +176,7 @@ fun WallStoreEditDeveloper(
                         cityStore = text_city.text,
                         ownerID = OWNER_ID,
                         ScreenDestination = Screens.Store.route,
+                        admin = "",
                         navController = navController
                     )
                 }

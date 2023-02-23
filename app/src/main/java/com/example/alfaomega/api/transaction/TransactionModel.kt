@@ -13,6 +13,9 @@ data class TransactionModel(
 	@field:SerializedName("transaction_store")
 	val transactionStore: String? = null,
 
+	@field:SerializedName("usermoney")
+	val usermoney: String? = null,
+
 	@field:SerializedName("transaction_admin")
 	val transactionAdmin: String? = null,
 

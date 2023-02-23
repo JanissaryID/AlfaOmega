@@ -86,7 +86,7 @@ fun WallOutletOwner(
                 .wrapContentHeight()) {
             Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
                 Text(
-                    text = "$STORE_ADMIN",
+                    text = if(STORE_ADMIN.isNullOrEmpty()) stringResource(R.string.ClosedTitle) else "$STORE_ADMIN",
                     fontWeight = FontWeight.Bold,
                     fontSize = MaterialTheme.typography.headlineLarge.fontSize,
                     color = colorFont

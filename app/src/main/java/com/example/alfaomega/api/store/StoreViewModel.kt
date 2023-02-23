@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.user.UserApp
 import com.example.alfaomega.api.user.UserModel
+import com.example.alfaomega.navigations.Screens
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,7 +32,7 @@ class StoreViewModel : ViewModel(){
                             STORE_LIST_RESPONSE = response.body()!!
 
                             STORE_STATE = 1
-//                            Log.i("info_response", "Store = $STORE_LIST_RESPONSE")
+                            Log.i("info_response", "Store = $STORE_LIST_RESPONSE")
                         }
                         if (STORE_LIST_RESPONSE.isNullOrEmpty()){
                             STORE_STATE = 3
@@ -146,13 +147,15 @@ class StoreViewModel : ViewModel(){
         cityStore: String,
         ownerID: String,
         ScreenDestination: String,
+        admin: String,
         navController: NavController
     ){
         val bodyUpdate = StoreModel(
             name = nameStore,
             address = addressStore,
             city = cityStore,
-            ownerId = ownerID
+            ownerId = ownerID,
+            admin = admin
         )
 
         try {
@@ -181,6 +184,60 @@ class StoreViewModel : ViewModel(){
                                 cityStore = cityStore,
                                 ownerID = ownerID,
                                 ScreenDestination = ScreenDestination,
+                                admin = admin,
+                                navController = navController
+                            )
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<StoreModel>, t: Throwable) {
+//                    Log.d("error", t.message.toString())
+                    if (t.message == t.message){
+//                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            USER_ERROR_MESSAGE = e.message.toString()
+//            Log.d("debug", "ERROR $USER_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun updateStoreAdmin(
+        admin: String,
+        storeID: String,
+        navController: NavController
+    ){
+        val bodyUpdate = StoreModel(
+            admin = admin
+        )
+
+        try {
+            StoreApp.CreateInstance().updateStore(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = storeID,
+                bodyUpdate).enqueue(object :
+                Callback<StoreModel> {
+                override fun onResponse(call: Call<StoreModel>, response: Response<StoreModel>) {
+                    Log.d("debug_user", "get error = $response")
+                    if(response.code() == 200){
+                        val responseBodyData = response.body()
+
+//                        Log.d("debug_user", "get error 1 = $responseBodyData")
+                        if (!responseBodyData!!.id.isNullOrEmpty()){
+                            navController.navigate(route = Screens.Home.route){
+                                popUpTo(Screens.Home.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                        else{
+                            updateStoreAdmin(
+                                storeID = storeID,
+                                admin = admin,
                                 navController = navController
                             )
                         }

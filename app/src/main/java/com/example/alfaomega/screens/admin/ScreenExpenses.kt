@@ -1,4 +1,4 @@
-package com.example.alfaomega.screens
+package com.example.alfaomega.screens.admin
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -8,6 +8,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.alfaomega.R
+import com.example.alfaomega.TRANSACATION_STATUS_MACHINE
+import com.example.alfaomega.USER_TYPE
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
 import com.example.alfaomega.navigations.Screens
@@ -16,14 +18,14 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
-fun ScreenStore(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
+fun ScreenExpenses(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
-    val tittleScreen = stringResource(R.string.StoreTitle)
-    val screenBack = Screens.Home.route
+    val tittleScreen = stringResource(R.string.ExpensesTitle)
+    val screenBack = Screens.Store.route
     val floatingRoute = Screens.Menu.route
-    val icon = R.drawable.twotone_receipt_24
-    val TopBar = 4
-    val wallScrreen = 3
+    val icon = R.drawable.ic_twotone_storefront_24
+    val TopBar = 2
+    val wallScrreen = 4
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.Store.route
     val topBarColor = MaterialTheme.colorScheme.primary
@@ -39,17 +41,9 @@ fun ScreenStore(navController: NavController, protoViewModel: ProtoViewModel, bl
         TopBar = TopBar,
         icon = icon,
         description = desctiptionTopBar,
-        route =routeAction,
+        route = routeAction,
         bluetoothViewModel = bluetoothViewModel,
         topBarColor = topBarColor,
         fontTopBar = fontTopBar
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ViewStore() {
-    AlfaOmegaTheme {
-//        ScreenStore(navController = rememberNavController())
-    }
 }

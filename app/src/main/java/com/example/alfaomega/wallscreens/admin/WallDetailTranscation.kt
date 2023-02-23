@@ -15,6 +15,7 @@ import com.example.alfaomega.TRANSACTION_SCREEN
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.components.DetailTransaction
 import com.example.alfaomega.components.DetailTransactionV2
+import com.example.alfaomega.components.DetailTransactionV3
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable

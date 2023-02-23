@@ -127,6 +127,7 @@ class TransactionViewModel: ViewModel() {
         isDryer: Boolean,
         phoneCustomer: String,
         navController: NavController,
+        userMoney: String,
         incomeViewModel: IncomeViewModel = IncomeViewModel()
     ){
         val current = LocalDateTime.now()
@@ -147,7 +148,8 @@ class TransactionViewModel: ViewModel() {
             isWasher = isWasher,
             isDryer = isDryer,
             transactionAdmin = USER_NAME,
-            userPhone = phoneCustomer
+            userPhone = phoneCustomer,
+            usermoney = userMoney
         )
 
         TransactionApp.CreateInstance().insertTransactions(

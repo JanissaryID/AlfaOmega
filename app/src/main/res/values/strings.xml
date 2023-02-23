@@ -108,4 +108,7 @@
     <string name="DateTitle">Date</string>
     <string name="SetviceTitle">Service</string>
     <string name="Customer">Customer</string>
+    <string name="ClosedTitle">Closed</string>
+    <string name="ExpensesTitle">Expenses</string>
+    <string name="Money">Money</string>
 </resources>

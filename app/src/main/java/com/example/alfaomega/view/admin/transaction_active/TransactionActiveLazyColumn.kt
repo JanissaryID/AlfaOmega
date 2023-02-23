@@ -46,6 +46,7 @@ fun TransactionActiveLazyColumn(
                 transactionIsWasher = transactionActive.isWasher!!,
                 transactionIsDryer = transactionActive.isDryer!!,
                 transactionNumber = transactionActive.userPhone.toString(),
+                transactionMoney = transactionActive.usermoney.toString(),
                 navController = navController
             )
         }

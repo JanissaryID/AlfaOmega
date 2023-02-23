@@ -12,6 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
 
@@ -21,7 +22,9 @@ fun ItemStore(
     storeName: String,
     storeCity: String,
     storeAddress: String,
+    storeAdmin: String,
     protoViewModel: ProtoViewModel,
+    storeViewModel: StoreViewModel = StoreViewModel(),
     navController: NavController
 ) {
     Card(
@@ -29,7 +32,7 @@ fun ItemStore(
         modifier = Modifier.padding(8.dp),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
+            containerColor = if(storeAdmin.isNullOrEmpty()) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.primary.copy(alpha = 0.4f),
             contentColor = MaterialTheme.colorScheme.primary
         )
     ) {
@@ -37,23 +40,39 @@ fun ItemStore(
             color = Color.Transparent,
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier.clickable {
-                if(USER_TYPE == 2){
-                    navController.navigate(route = Screens.Machine.route){
-                        popUpTo(Screens.Machine.route) {
-                            inclusive = true
+                if(storeAdmin.isNullOrEmpty()){
+                    if(USER_TYPE == 2){
+                        navController.navigate(route = Screens.Machine.route){
+                            popUpTo(Screens.Machine.route) {
+                                inclusive = true
+                            }
                         }
                     }
-                }
-                else{
-                    TRANSACTION_SCREEN = true
-                    STORE_NAME = storeName
-                    STORE_CITY = storeCity
-                    STORE_ADDRESS = storeAddress
-                    protoViewModel.updateStoreID(keyStore = storeId)
-                    navController.navigate(route = Screens.Home.route){
-                        popUpTo(Screens.Home.route) {
-                            inclusive = true
+                    else{
+                        TRANSACTION_SCREEN = true
+
+                        if(!STORE_ID.isNullOrEmpty()){
+                            storeViewModel.updateStoreAdmin(
+                                admin = "",
+                                storeID = STORE_ID,
+                                navController = navController
+                            )
                         }
+
+                        STORE_NAME = storeName
+                        STORE_CITY = storeCity
+                        STORE_ADDRESS = storeAddress
+                        protoViewModel.updateStoreID(keyStore = storeId)
+                        storeViewModel.updateStoreAdmin(
+                            admin = USER_NAME,
+                            storeID = storeId,
+                            navController = navController
+                        )
+//                    navController.navigate(route = Screens.Home.route){
+//                        popUpTo(Screens.Home.route) {
+//                            inclusive = true
+//                        }
+//                    }
                     }
                 }
             }) {

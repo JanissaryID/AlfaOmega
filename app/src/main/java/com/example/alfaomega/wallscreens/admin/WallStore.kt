@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
+import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.`object`.store.MenuStore
 import com.example.alfaomega.`object`.store.MenuStoreModel
 import com.example.alfaomega.components.ItemStoreMenu
@@ -28,7 +29,8 @@ import com.example.alfaomega.proto.ProtoViewModel
 fun WallStore(
     navController: NavController,
     paddingValues: PaddingValues,
-    protoViewModel: ProtoViewModel
+    protoViewModel: ProtoViewModel,
+    storeViewModel: StoreViewModel = StoreViewModel()
 ) {
     var list: ArrayList<MenuStoreModel> = arrayListOf()
     list.addAll(MenuStore.listData)
@@ -72,7 +74,15 @@ fun WallStore(
                 Surface(
                     shape = RoundedCornerShape(100),
                     modifier = Modifier.clickable {
-                        navController.navigate(route = Screens.Store.route)
+                        STORE_STATE = 0
+
+                        STORE_LIST_RESPONSE.clear()
+
+                        navController.navigate(route = Screens.Store.route){
+                            popUpTo(Screens.Store.route) {
+                                inclusive = true
+                            }
+                        }
                     },
                     color = Color.Transparent
                 ) {

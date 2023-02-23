@@ -41,7 +41,7 @@ class UserViewModel : ViewModel() {
                 password = password).enqueue(object :
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
-                    Log.d("debug_user", "get error = $response")
+//                    Log.d("debug_user", "get error = $response")
                     USER_STATE = 0
 
                     if(response.code() == 200){
@@ -162,7 +162,7 @@ class UserViewModel : ViewModel() {
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_OWNER = response.body()!!.filter { user -> user.typeUser == 1} as ArrayList<UserModel>
-                            Log.i("info_response", "User : ${LIST_OWNER}")
+//                            Log.i("info_response", "User : ${LIST_OWNER}")
                             USER_STATE = 1
                         }
                         if (LIST_OWNER.isNullOrEmpty()){

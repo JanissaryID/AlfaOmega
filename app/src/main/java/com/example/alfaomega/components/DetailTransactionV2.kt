@@ -265,7 +265,8 @@ fun DetailTransactionV2(
                                         isWasher = NEW_TRANSACATION_IS_WASHER,
                                         isDryer = NEW_TRANSACATION_IS_DRYER,
                                         phoneCustomer = text_phone.text,
-                                        navController = navController
+                                        navController = navController,
+                                        userMoney = TRANSACTION_MONEY
                                     )
                                 }
                             }

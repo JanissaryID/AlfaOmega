@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
 
@@ -31,7 +32,8 @@ fun ItemStoreMenu(
     screenMenuItem: String,
     typeMenu: Boolean,
     navController: NavController,
-    protoViewModel: ProtoViewModel
+    protoViewModel: ProtoViewModel,
+    storeViewModel: StoreViewModel = StoreViewModel()
 ) {
     Surface(
         color = Color.Transparent,
@@ -41,11 +43,18 @@ fun ItemStoreMenu(
                     protoViewModel.updateTypeUser(0)
                     protoViewModel.updateNameUser("")
                     protoViewModel.updateStoreID("")
-                    navController.navigate(route = Screens.Home.route){
-                        popUpTo(Screens.Home.route) {
-                            inclusive = true
-                        }
-                    }
+
+                    storeViewModel.updateStoreAdmin(
+                        admin = "",
+                        storeID = STORE_ID,
+                        navController = navController
+                    )
+
+//                    navController.navigate(route = Screens.Home.route){
+//                        popUpTo(Screens.Home.route) {
+//                            inclusive = true
+//                        }
+//                    }
 
                 }
                 if(screenMenuItem == Screens.MachineOwner.route){

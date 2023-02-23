@@ -34,6 +34,7 @@ fun StoreLazyColumn(
                 storeCity = store.city!!,
                 storeAddress = store.address!!,
                 protoViewModel = protoViewModel,
+                storeAdmin = store.admin!!,
                 navController = navController,
             )
         }

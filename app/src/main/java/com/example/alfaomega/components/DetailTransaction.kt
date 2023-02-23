@@ -68,6 +68,9 @@ fun DetailTransaction(
     var payment_value_index by remember {
         mutableStateOf(2)
     }
+    var text_money by remember {
+        mutableStateOf(TextFieldValue(""))
+    }
 
     val selectedValueMenu = remember { mutableStateOf("") }
     val isSelectedItemMenu: (String) -> Boolean = { selectedValueMenu.value == it }
@@ -81,9 +84,9 @@ fun DetailTransaction(
     val isSelectedItemPrice: (String) -> Boolean = { selectedValuePrice.value == it }
     val onChangeStatePrice: (String) -> Unit = { selectedValuePrice.value = it }
 
-    val selectedValuePayment = remember { mutableStateOf("") }
-    val isSelectedItemPayment: (String) -> Boolean = { selectedValuePayment.value == it }
-    val onChangeStatePayment: (String) -> Unit = { selectedValuePayment.value = it }
+    val selectedValuePayment = remember { mutableStateOf(0) }
+    val isSelectedItemPayment: (Int) -> Boolean = { selectedValuePayment.value == it }
+    val onChangeStatePayment: (Int) -> Unit = { selectedValuePayment.value = it }
 
     val paymentMethode = listOf(stringResource(R.string.CashTitle), stringResource(R.string.QrisTitle))
 
@@ -326,7 +329,7 @@ fun DetailTransaction(
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleMedium.fontSize,
                     )
-                    if(!TRANSACTION_SCREEN){
+                    paymentMethode.forEachIndexed { indexItem ,item ->
                         Surface(
                             shape = RoundedCornerShape(12.dp),
                             modifier = Modifier.wrapContentSize(),
@@ -336,61 +339,58 @@ fun DetailTransaction(
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier
                                     .selectable(
-                                        selected = isSelectedItemPayment(TRANSACATION_PAYMENT),
+                                        selected = isSelectedItemPayment(indexItem),
                                         onClick = {
-                                            onChangeStatePayment(TRANSACATION_PAYMENT)
+                                            onChangeStatePayment(indexItem)
+                                            payment_value_index = indexItem
                                         },
                                         role = Role.RadioButton
                                     )
                                     .padding(8.dp)
                             ) {
                                 RadioButton(
-                                    selected = true,
+                                    selected = isSelectedItemPayment(indexItem),
                                     onClick = null,
-                                    enabled = false
+                                    colors = RadioButtonDefaults.colors(
+                                        selectedColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    )
                                 )
                                 Spacer(modifier = Modifier.width(16.dp))
                                 Text(
-                                    text = TRANSACATION_PAYMENT,
+                                    text = item,
                                     fontWeight = FontWeight.SemiBold,
                                     fontSize = MaterialTheme.typography.titleMedium.fontSize,
                                 )
                             }
                         }
                     }
-                    else{
-                        paymentMethode.forEachIndexed { indexItem ,item ->
-                            Surface(
-                                shape = RoundedCornerShape(12.dp),
-                                modifier = Modifier.wrapContentSize(),
-                                color = Color.Transparent
-                            ) {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier
-                                        .selectable(
-                                            selected = isSelectedItemPayment(item),
-                                            onClick = {
-                                                onChangeStatePayment(item)
-                                                payment_value_index = indexItem
-                                            },
-                                            role = Role.RadioButton
-                                        )
-                                        .padding(8.dp)
-                                ) {
-                                    RadioButton(
-                                        selected = isSelectedItemPayment(item),
-                                        onClick = null
-                                    )
-                                    Spacer(modifier = Modifier.width(16.dp))
-                                    Text(
-                                        text = item,
-                                        fontWeight = FontWeight.SemiBold,
-                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                    )
-                                }
-                            }
-                        }
+                    if(selectedValuePayment.value == 0){
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = stringResource(R.string.Money),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        TextField(
+                            value = text_money,
+                            onValueChange ={
+                                text_money = it
+                            },
+                            singleLine = true,
+                            colors = TextFieldDefaults.textFieldColors(
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent,
+                                disabledIndicatorColor = Color.Transparent,
+                                containerColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                textColor = MaterialTheme.colorScheme.surfaceVariant,
+                                disabledTextColor = MaterialTheme.colorScheme.surfaceVariant,
+                            ),
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier.fillMaxWidth(),
+                            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+                            readOnly = false
+                        )
                     }
 
                     if(!TRANSACTION_SCREEN){
@@ -484,7 +484,7 @@ fun DetailTransaction(
             }
         }
         else{
-            if(!text_name.text.isNullOrEmpty() && payment_value_index != 2){
+            if(!text_name.text.isNullOrEmpty() && if(selectedValuePayment.value == 0) !text_money.text.isNullOrEmpty() else true){
                 NEW_TRANSACATION_BUTTON = true
             }
             else{
@@ -535,6 +535,7 @@ fun DetailTransaction(
                             isWasher = NEW_TRANSACATION_IS_WASHER,
                             isDryer = NEW_TRANSACATION_IS_DRYER,
                             phoneCustomer = text_phone.text,
+                            userMoney = if(selectedValuePayment.value == 0) text_money.text else NEW_TRANSACATION_PRICE,
                             navController = navController
                         )
                     }
