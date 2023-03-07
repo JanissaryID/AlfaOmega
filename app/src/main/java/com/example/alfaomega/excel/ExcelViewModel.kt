@@ -130,9 +130,11 @@ class ExcelViewModel: ViewModel() {
 
         sheet.setColumnView(0,4)
         sheet.setColumnView(1,35)
-        sheet.setColumnView(2,20)
+        sheet.setColumnView(2,25)
         sheet.setColumnView(3,20)
         sheet.setColumnView(4,20)
+        sheet.setColumnView(5,20)
+
 
         sheet.mergeCells(0,0,1,0)
         sheet.mergeCells(2,0,3,0)
@@ -141,6 +143,7 @@ class ExcelViewModel: ViewModel() {
 
         sheet.mergeCells(0,3,1,3)
         sheet.mergeCells(2,3,3,3)
+//        sheet.mergeCells(5,5,6,5)
 
         sheet.addCell(Label(0, 0, "Toko", FormatExcelColumn(format = 5)))
         sheet.addCell(Label(2, 0, ": ${STORE_NAME}", FormatExcelColumn(format = 5)))
@@ -153,17 +156,19 @@ class ExcelViewModel: ViewModel() {
 //            // column and row title
         sheet.addCell(Label(0, 5, "NO", FormatExcelColumn(format = 1)))
         sheet.addCell(Label(1, 5, "NAMA MENU", FormatExcelColumn(format = 1)))
-        sheet.addCell(Label(2, 5, "TYPE MENU", FormatExcelColumn(format = 1)))
-        sheet.addCell(Label(3, 5, "PEMBAYARAN", FormatExcelColumn(format = 1)))
-        sheet.addCell(Label(4, 5, "HARGA", FormatExcelColumn(format = 1)))
+        sheet.addCell(Label(2, 5, "PELANGGAN", FormatExcelColumn(format = 1)))
+        sheet.addCell(Label(3, 5, "TYPE MENU", FormatExcelColumn(format = 1)))
+        sheet.addCell(Label(4, 5, "PEMBAYARAN", FormatExcelColumn(format = 1)))
+        sheet.addCell(Label(5, 5, "HARGA", FormatExcelColumn(format = 1)))
 
         for ((index, value) in TRANSACTION_RESPONSE.withIndex()) {
 //                rowExcel
             sheet.addCell(Label(0, index + 6, (index + 1).toString(), FormatExcelColumn(format = 2)))
             sheet.addCell(Label(1, index + 6, TRANSACTION_RESPONSE[index].transactionMenu, FormatExcelColumn(format = 6)))
-            sheet.addCell(Label(2, index + 6, if(TRANSACTION_RESPONSE[index].transactionClass!!) "Besar" else "Kecil", FormatExcelColumn(format = 2)))
-            sheet.addCell(Label(3, index + 6, if(TRANSACTION_RESPONSE[index].transactionPayment!!) "Qris" else "Cash", FormatExcelColumn(format = 2)))
-            sheet.addCell(Label(4, index + 6, numberFormat.format(TRANSACTION_RESPONSE[index].transactionPrice!!.toInt()), FormatExcelColumn(format = 8)))
+            sheet.addCell(Label(2, index + 6, TRANSACTION_RESPONSE[index].transactionCustomer!!, FormatExcelColumn(format = 2)))
+            sheet.addCell(Label(3, index + 6, if(TRANSACTION_RESPONSE[index].transactionClass!!) "Besar" else "Kecil", FormatExcelColumn(format = 2)))
+            sheet.addCell(Label(4, index + 6, if(TRANSACTION_RESPONSE[index].transactionPayment!!) "Qris" else "Cash", FormatExcelColumn(format = 2)))
+            sheet.addCell(Label(5, index + 6, numberFormat.format(TRANSACTION_RESPONSE[index].transactionPrice!!.toInt()), FormatExcelColumn(format = 8)))
 
             rowExcel = index
             if(TRANSACTION_RESPONSE[index].transactionPayment!!){
@@ -174,10 +179,10 @@ class ExcelViewModel: ViewModel() {
             }
         }
 
-        sheet.mergeCells(0, rowExcel + 7, 3, rowExcel + 7)
+        sheet.mergeCells(0, rowExcel + 7, 4, rowExcel + 7)
         sheet.addCell(Label(0, rowExcel + 7, "Jumlah", FormatExcelColumn(format = 3)))
 
-        sheet.addCell(Label(4, rowExcel + 7, numberFormat.format((totalPriceQris + totalPriceCash)), FormatExcelColumn(format = 9)))
+        sheet.addCell(Label(5, rowExcel + 7, numberFormat.format((totalPriceQris + totalPriceCash)), FormatExcelColumn(format = 9)))
 
         sheet.addCell(Label(1, rowExcel + 9, "Jumlah Pembayaran Tunai", FormatExcelColumn(format = 7)))
         sheet.addCell(Label(1, rowExcel + 10, "Jumlah Pembayaran Qris", FormatExcelColumn(format = 7)))
