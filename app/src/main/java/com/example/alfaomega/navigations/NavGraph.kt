@@ -25,6 +25,7 @@ import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.screens.*
 import com.example.alfaomega.screens.admin.ScreenBluetooth
+import com.example.alfaomega.screens.admin.ScreenExpenses
 import com.example.alfaomega.screens.admin.ScreenReportMachine
 import com.example.alfaomega.screens.developer.ScreenHomeDeveloper
 import com.example.alfaomega.screens.developer.ScreenOwnerDeveloper
@@ -191,6 +192,16 @@ fun NavGraphSetup(
                 bluetoothViewModel.showPairedDevice(context = MY_CONTEXT!!, multiplePermissionState = multiplePermissionState)
             }
             ScreenBluetooth(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+        }
+
+        composable(
+            route = Screens.ExpensesStore.route,
+        ){
+//            LaunchedEffect(key1 = STORE_ID){
+//                STAT_GET_DATA = false
+//                bluetoothViewModel.showPairedDevice(context = MY_CONTEXT!!, multiplePermissionState = multiplePermissionState)
+//            }
+            ScreenExpenses(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(

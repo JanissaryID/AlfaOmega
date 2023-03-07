@@ -11,6 +11,7 @@ sealed class Screens(val route: String){
     object Login: Screens(route = "login_screen")
     object Bluetooth: Screens(route = "bluetooth_screen")
     object ReportMachine: Screens(route = "report_machine_screen")
+    object ExpensesStore: Screens(route = "expenses_store_screen")
 
     object MenuOwner: Screens(route = "menu_owner_screen")
     object MenuEditOwner: Screens(route = "menu_edit_owner_screen")

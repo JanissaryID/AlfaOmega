@@ -21,11 +21,11 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 fun ScreenExpenses(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
     val tittleScreen = stringResource(R.string.ExpensesTitle)
-    val screenBack = Screens.Store.route
+    val screenBack = Screens.StoreProfile.route
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_storefront_24
     val TopBar = 2
-    val wallScrreen = 4
+    val wallScrreen = 26
     val desctiptionTopBar = "icon Store"
     val routeAction = Screens.Store.route
     val topBarColor = MaterialTheme.colorScheme.primary

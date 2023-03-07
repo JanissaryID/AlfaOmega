@@ -106,6 +106,13 @@ fun TopBar4(
                                 userViewModel.deleteUser(navController = navController, iduser = ID_USER_EDIT)
                             }
                         }
+                        else if(USER_TYPE == 3){
+                            navController.navigate(route = actionNav) {
+                                popUpTo(actionNav) {
+                                    inclusive = true
+                                }
+                            }
+                        }
                         else{
 //                            Log.d("Check_Print", "Check_Print")
                             bluetoothViewModel.requestBluetoothPermission()

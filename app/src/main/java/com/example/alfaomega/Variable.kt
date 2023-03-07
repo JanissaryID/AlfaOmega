@@ -4,6 +4,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.example.alfaomega.api.expenses.ExpensesModel
 import com.example.alfaomega.api.income.IncomeModel
 import com.example.alfaomega.api.log.LogModel
 import com.example.alfaomega.api.machine.MachineModel
@@ -193,4 +194,11 @@ var INCOME_ERROR_MESSAGE: String by mutableStateOf("")
 
 var STAT_GET_DATA: Boolean by mutableStateOf(false)
 var ONE_RENDER_GRAPH: Boolean by mutableStateOf(false)
+
+//Variable Expenses
+var LIST_EXPENSES: ArrayList<ExpensesModel> by mutableStateOf(arrayListOf())
+var EXPENSES_STATE: Int by mutableStateOf(0)
+var LIST_EXPENSES_STORE: ArrayList<ExpensesModel> by mutableStateOf(arrayListOf())
+var EXPENSES_STATE_STORE: Int by mutableStateOf(0)
+var EXPENSES_ERROR_MESSAGE: String by mutableStateOf("")
 

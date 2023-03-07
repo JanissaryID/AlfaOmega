@@ -39,9 +39,9 @@ class TransactionViewModel: ViewModel() {
                             call: Call<ArrayList<TransactionModel>>,
                             response: Response<ArrayList<TransactionModel>>
                         ) {
-                            TRANSACTION_ACTIVE_STATE = 0
-
-                            TRANSACTION_ACTIVE_RESPONSE.clear()
+//                            TRANSACTION_ACTIVE_STATE = 0
+//
+//                            TRANSACTION_ACTIVE_RESPONSE.clear()
 
                             if (response.code() == 200) {
                                 response.body()?.let {

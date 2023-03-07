@@ -257,7 +257,7 @@ class IncomeViewModel: ViewModel() {
                                 insertIncome(income = income, expenses = expenses)
                             }
                             else{
-                                insertIncome(income = income, expenses = expenses)
+                                insertExpenses(income = income, expenses = expenses)
                             }
                         }
                         else{
@@ -293,6 +293,45 @@ class IncomeViewModel: ViewModel() {
 //            Log.d("debug menu", "ERROR $LOG_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    fun insertExpenses(
+        expenses: String,
+        income: String
+    ){
+        val current = LocalDateTime.now()
+
+        val formatDay = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val date = current.format(formatDay)
+
+
+        val bodyUpdate = IncomeModel(
+            date = date,
+            ownerId = OWNER_ID,
+            storeId = STORE_ID,
+            outcome = expenses,
+            income = income
+        )
+
+        IncomeApp.CreateInstance().insertIncome(
+            BearerToken = "Bearer " + TOKEN_API,
+            bodyUpdate
+        ).enqueue(object :
+            Callback<IncomeModel> {
+            override fun onResponse(call: Call<IncomeModel>, response: Response<IncomeModel>) {
+//                Log.d("debug", "Code Insert Transaction ${response}")
+                Log.i("info_response", "Response Insert Income : ${response}")
+            }
+
+            override fun onFailure(call: Call<IncomeModel>, t: Throwable) {
+//                Log.d("debug_transaction", t.message.toString())
+                if (t.message == t.message){
+                    TRANSACTION_ERROR = t.message.toString()
+                    NEW_TRANSACATION_BUTTON = true
+                }
+            }
+        })
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)

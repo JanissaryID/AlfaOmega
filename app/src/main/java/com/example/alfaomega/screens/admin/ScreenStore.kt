@@ -25,7 +25,7 @@ fun ScreenStore(navController: NavController, protoViewModel: ProtoViewModel, bl
     val TopBar = 4
     val wallScrreen = 3
     val desctiptionTopBar = "icon Store"
-    val routeAction = Screens.Store.route
+    val routeAction = Screens.ExpensesStore.route
     val topBarColor = MaterialTheme.colorScheme.primary
     val fontTopBar = MaterialTheme.colorScheme.surface
 
