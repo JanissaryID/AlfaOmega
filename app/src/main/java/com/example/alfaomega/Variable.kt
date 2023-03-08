@@ -163,6 +163,7 @@ var INDEX_MENU_DEV: Int by mutableStateOf(0)
 
 //Variable Owner Mode
 var OWNER_ID: String by mutableStateOf("")
+var USER_ID: String by mutableStateOf("")
 
 //Variable Store Edit
 var STORE_NAME_EDIT: String by mutableStateOf("")

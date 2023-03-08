@@ -38,7 +38,9 @@ class UserViewModel : ViewModel() {
             UserApp.CreateInstance().getUser(
                 BearerToken = "Bearer " + TOKEN_API,
                 username = username,
-                password = password).enqueue(object :
+                password = password,
+                status = false
+            ).enqueue(object :
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
 //                    Log.d("debug_user", "get error = $response")
@@ -55,29 +57,34 @@ class UserViewModel : ViewModel() {
                                 FAILED_LOGIN = true
                             }
                             else{
-                                if(userListResponse[0].typeUser == 1){
+                                if(userListResponse[0].typeUser == 1 && !userListResponse[0].statususer!!){
                                     USER_NAME = selectionUser[0]
                                     USER_TYPE = userListResponse[0].typeUser!!
                                     OWNER_ID = userListResponse[0].id!!
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
                                     protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
+                                    updateStatUser(OWNER_ID, true)
                                 }
-                                else if(userListResponse[0].typeUser == 3){
+                                else if(userListResponse[0].typeUser == 3 && !userListResponse[0].statususer!!){
                                     USER_NAME = userListResponse[0].username!!
                                     USER_TYPE = userListResponse[0].typeUser!!
                                     OWNER_ID = userListResponse[0].idOwner!!
+                                    USER_ID = userListResponse[0].id!!
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
                                     protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
+                                    updateStatUser(USER_ID, true)
                                 }
                                 else{
                                     USER_NAME = selectionUser[1]
                                     USER_TYPE = userListResponse[0].typeUser!!
                                     OWNER_ID = userListResponse[0].idOwner!!
+                                    USER_ID = userListResponse[0].id!!
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
                                     protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
+                                    updateStatUser(USER_ID, true)
                                 }
                                 FAILED_LOGIN = false
                                 navController.navigate(route = screenBack) {
@@ -181,6 +188,47 @@ class UserViewModel : ViewModel() {
         catch (e : Exception){
             USER_ERROR_MESSAGE = e.message.toString()
             Log.d("debug menu", "ERROR $USER_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun updateStatUser(
+        idUser: String,
+        statUser: Boolean
+    ){
+        val bodyDataUpdate = UserModel(
+            statususer = statUser,
+        )
+
+        try {
+            UserApp.CreateInstance().updateUser(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = idUser,
+                bodyDataUpdate).enqueue(object :
+                Callback<UserModel> {
+                override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+                    if(response.code() == 200){
+                        val responseBodyData = response.body()
+                        if (responseBodyData!!.id.isNullOrEmpty()){
+                            updateStatUser(
+                                idUser = idUser,
+                                statUser = statUser
+                            )
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<UserModel>, t: Throwable) {
+                    Log.d("error", t.message.toString())
+                    if (t.message == t.message){
+//                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            USER_ERROR_MESSAGE = e.message.toString()
+            Log.d("debug", "ERROR $USER_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }

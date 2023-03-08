@@ -14,9 +14,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.alfaomega.BLUETOOTH_STATE_ON
+import com.example.alfaomega.*
 import com.example.alfaomega.R
-import com.example.alfaomega.USER_TYPE
+import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
@@ -36,7 +36,8 @@ fun TopBar3(
     multiplePermissionState: MultiplePermissionsState,
     context: Context,
     containerColor: Color = Color.Transparent,
-    colorFont: Color = MaterialTheme.colorScheme.onSurfaceVariant
+    colorFont: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    userViewModel: UserViewModel = UserViewModel()
 ) {
     SmallTopAppBar(
         title = {
@@ -74,6 +75,7 @@ fun TopBar3(
                             }
                         }
                         else{
+                            userViewModel.updateStatUser(USER_ID, false)
                             Log.i("info_response", "Check Bluetooth")
                             Log.i("info_response", "${route}")
                             multiplePermissionState.launchMultiplePermissionRequest()

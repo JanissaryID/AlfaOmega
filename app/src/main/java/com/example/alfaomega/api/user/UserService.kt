@@ -11,7 +11,8 @@ interface UserService {
     fun getUser(
         @Header("Authorization") BearerToken: String,
         @Query(value="username", encoded=true) username: String?,
-        @Query(value="password_user", encoded=true) password: String?
+        @Query(value="password_user", encoded=true) password: String?,
+        @Query(value="statususer", encoded=true) status: Boolean?
     ): Call<ArrayList<UserModel>>
 
     @GET("NewUser")

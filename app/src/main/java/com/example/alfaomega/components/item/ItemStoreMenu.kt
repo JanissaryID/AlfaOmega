@@ -21,6 +21,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.store.StoreViewModel
+import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
 
@@ -33,13 +34,15 @@ fun ItemStoreMenu(
     typeMenu: Boolean,
     navController: NavController,
     protoViewModel: ProtoViewModel,
-    storeViewModel: StoreViewModel = StoreViewModel()
+    storeViewModel: StoreViewModel = StoreViewModel(),
+    userViewModel: UserViewModel = UserViewModel()
 ) {
     Surface(
         color = Color.Transparent,
         modifier = Modifier.clickable {
             if(USER_TYPE == 3){
                 if(typeMenu){
+                    userViewModel.updateStatUser(OWNER_ID, false)
                     protoViewModel.updateTypeUser(0)
                     protoViewModel.updateNameUser("")
                     protoViewModel.updateStoreID("")
