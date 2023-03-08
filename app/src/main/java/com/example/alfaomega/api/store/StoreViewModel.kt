@@ -73,6 +73,7 @@ class StoreViewModel : ViewModel(){
                             STORE_NAME = response.body()!![0].name!!
                             STORE_CITY = response.body()!![0].city!!
                             STORE_ADDRESS = response.body()!![0].address!!
+                            STORE_PHONE = response.body()!![0].phone!!
 
                             STORE_STATE = 1
 //                            Log.i("info_response", "Data Store : ${response.body()!!}")

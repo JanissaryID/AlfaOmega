@@ -53,6 +53,8 @@ fun WallPicker(
         24 -> WallReportMachine(paddingValues = paddingValues, navController = navController)
         25 -> WallOutletOwner(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel)
         26 -> WallExpenses(paddingValues = paddingValues, navController = navController)
+        27 -> WallExpensesOwner(paddingValues = paddingValues, navController = navController)
+        28 -> WallQrOwner(paddingValues = paddingValues, navController = navController)
         29 -> WallHomeDeveloper(paddingValues = paddingValues, navController = navController, protoViewModel = protoViewModel)
         30 -> WallStoreEditDeveloper(paddingValues = paddingValues, navController = navController, storeViewModel = StoreViewModel())
         else -> print("Opps tidak ada")

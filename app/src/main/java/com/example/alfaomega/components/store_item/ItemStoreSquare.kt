@@ -24,6 +24,7 @@ fun ItemStoreSquare(
     storeCity: String,
     storeAddress: String,
     storeAdmin: String,
+    storePhone: String,
     protoViewModel: ProtoViewModel,
     navController: NavController
 ) {
@@ -52,6 +53,7 @@ fun ItemStoreSquare(
                     STORE_CITY = storeCity
                     STORE_ADDRESS = storeAddress
                     STORE_ID = storeId
+                    STORE_PHONE = storePhone
                     STORE_ADMIN = storeAdmin
                     if(!STORE_LIST_RESPONSE.isNullOrEmpty() && !STORE_ID.isNullOrEmpty()){
                         navController.navigate(route = Screens.OutletOwner.route){

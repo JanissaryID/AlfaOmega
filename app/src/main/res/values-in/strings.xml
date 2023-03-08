@@ -110,6 +110,12 @@
     <string name="SetviceTitle">Layanan</string>
     <string name="Customer">Pelanggan</string>
     <string name="ClosedTitle">Tutup</string>
-    <string name="ExpensesTitle">Expenses</string>
-    <string name="Money">Money</string>
+    <string name="ExpensesTitle">Pengeluaran</string>
+    <string name="Money">Uang</string>
+    <string name="Nominal">Nominal</string>
+    <string name="Change">Kembalian</string>
+    <string name="ExpensesEmpty">Pengeluaran Kosong</string>
+    <string name="QrPayment">Pembayaran QR</string>
+    <string name="ListExpenses">List Expenses</string>
+    <string name="TransactionEmpty">Transaction Empty</string>
 </resources>

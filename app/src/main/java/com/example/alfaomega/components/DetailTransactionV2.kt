@@ -137,6 +137,20 @@ fun DetailTransactionV2(
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
+                                text = stringResource(R.string.Nominal),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                color = MaterialTheme.colorScheme.surface
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text(
+                                text = stringResource(R.string.Change),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                color = MaterialTheme.colorScheme.surface
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text(
                                 text = stringResource(R.string.PaymentTitle),
                                 fontWeight = FontWeight.Bold,
                                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
@@ -191,6 +205,20 @@ fun DetailTransactionV2(
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
                                 text = ": Rp. ${numberFormat.format(TRANSACATION_PRICE.toInt()).substring(2, numberFormat.format(TRANSACATION_PRICE.toInt()).length)}",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                color = MaterialTheme.colorScheme.surface
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text(
+                                text = ": Rp. ${numberFormat.format(TRANSACTION_MONEY.toInt()).substring(2, numberFormat.format(TRANSACTION_MONEY.toInt()).length)}",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                color = MaterialTheme.colorScheme.surface
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text(
+                                text = ": Rp. ${numberFormat.format((TRANSACTION_MONEY.toInt() - TRANSACATION_PRICE.toInt())).substring(2, numberFormat.format((TRANSACTION_MONEY.toInt() - TRANSACATION_PRICE.toInt())).length)}",
                                 fontWeight = FontWeight.Bold,
                                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
                                 color = MaterialTheme.colorScheme.surface
@@ -368,7 +396,6 @@ fun DetailTransactionV2(
             else{
                 NEW_TRANSACATION_BUTTON = false
             }
-
         }
     }
 }

@@ -9,6 +9,7 @@ object MenuOutlet {
         0,
         1,
         2,
+        3,
 
     )
 
@@ -16,22 +17,25 @@ object MenuOutlet {
         0,
         1,
         2,
-
+        3,
     )
 
     private val menuIcon = intArrayOf(
         R.drawable.ic_twotone_menu_book_24,
         R.drawable.ic_twotone_list_alt_24,
         R.drawable.ic_twotone_report_24,
+        R.drawable.twotone_receipt_24,
     )
 
     private val screensMenu = arrayOf(
         Screens.MenuOwner.route,
         Screens.TransactionOwner.route,
         Screens.MachineOwner.route,
+        Screens.ExpensesOwner.route,
     )
 
     private val typeMenu = booleanArrayOf(
+        false,
         false,
         false,
         false,

@@ -15,7 +15,7 @@ interface ExpensesService {
     fun fetchExpensesByStore(
         @Header("Authorization") BearerToken: String,
         @Query(value="date[\$contains]", encoded=true) date: String?,
-        @Query(value="store_id", encoded=true) store: String?
+        @Query(value="storeid", encoded=true) store: String?
     ): Call<ArrayList<ExpensesModel>>
 
     @GET("NewExpenses")

@@ -25,7 +25,7 @@ fun ItemMenuNavOwner(
     val colorFont = MaterialTheme.colorScheme.primary
 
     Card(
-        modifier = Modifier.padding(8.dp),
+        modifier = Modifier.padding(0.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,
             contentColor = MaterialTheme.colorScheme.primary
@@ -33,7 +33,7 @@ fun ItemMenuNavOwner(
     ) {
         Column(modifier = Modifier
             .wrapContentHeight()
-            .width(92.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+            .width(84.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
             Surface(color = colorFont,
                     shape = RoundedCornerShape(14.dp),
                     modifier = Modifier.wrapContentSize()) {

@@ -13,6 +13,9 @@ data class UserModel(
 	@field:SerializedName("type_user")
 	val typeUser: Int? = null,
 
+	@field:SerializedName("statususer")
+	val statususer: Boolean? = null,
+
 	@field:SerializedName("_id")
 	val id: String? = null,
 

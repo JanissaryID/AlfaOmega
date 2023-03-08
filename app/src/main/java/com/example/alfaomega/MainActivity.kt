@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.alfaomega.api.expenses.ExpensesViewModel
 import com.example.alfaomega.api.income.IncomeViewModel
 import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.machine.MachineViewModel
@@ -46,6 +47,7 @@ class MainActivity : ComponentActivity() {
     val logViewModel by viewModels<LogViewModel>()
     val problemViewModel by viewModels<ProblemViewModel>()
     val incomeViewModel by viewModels<IncomeViewModel>()
+    val expensesViewModel by viewModels<ExpensesViewModel>()
 
     val bluetoothViewModel by viewModels<BluetoothViewModel>()
 
@@ -96,7 +98,8 @@ class MainActivity : ComponentActivity() {
                         logViewModel = logViewModel,
                         bluetoothViewModel = bluetoothViewModel,
                         problemViewModel = problemViewModel,
-                        incomeViewModel = incomeViewModel
+                        incomeViewModel = incomeViewModel,
+                        expensesViewModel = expensesViewModel
                     )
 
                     storeViewModel.FetchStore()

@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
@@ -103,22 +104,28 @@ fun WallStore(
             Text(
                 text = STORE_NAME,
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = MaterialTheme.typography.headlineLarge.fontSize,
-                color = MaterialTheme.colorScheme.primary
+                fontSize = MaterialTheme.typography.headlineMedium.fontSize,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.width(320.dp),
+                textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = STORE_CITY,
                 fontWeight = FontWeight.Normal,
                 fontSize = MaterialTheme.typography.headlineSmall.fontSize,
-                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.9f)
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.9f),
+                modifier = Modifier.width(320.dp),
+                textAlign = TextAlign.Center
             )
-            Spacer(modifier = Modifier.height(0.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = STORE_ADDRESS,
                 fontWeight = FontWeight.Normal,
                 fontSize = MaterialTheme.typography.labelLarge.fontSize,
-                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.9f)
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.9f),
+                modifier = Modifier.width(320.dp),
+                textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(32.dp))
             Card(

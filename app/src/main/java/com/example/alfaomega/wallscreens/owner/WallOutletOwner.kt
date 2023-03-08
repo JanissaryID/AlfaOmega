@@ -49,6 +49,7 @@ fun WallOutletOwner(
         stringResource(R.string.Menu),
         stringResource(R.string.TransactionTitle),
         stringResource(R.string.ReportTitle),
+        stringResource(R.string.ExpensesTitle)
     )
 
     val selectionFinanceTitle = listOf(
@@ -164,7 +165,7 @@ fun WallOutletOwner(
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 8.dp, horizontal = 8.dp)
+                            .padding(vertical = 24.dp, horizontal = 8.dp)
                     ) {
                         list.forEachIndexed{ index, menuOwnerModel ->
                             ItemMenuNavOwner(
@@ -199,7 +200,9 @@ fun WallOutletOwner(
                             }
                             else{
                                 Box(
-                                    modifier = Modifier.fillMaxWidth().height(200.dp),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(200.dp),
                                     contentAlignment = Alignment.Center
                                 ) {
                                     CircularProgressIndicator()
@@ -227,7 +230,11 @@ fun WallOutletOwner(
                                                     selected = (selectedItem == index),
                                                     onClick = {
                                                         selectedItem = index
-                                                        Log.d("debug_graph", "index = $selectedItem")},
+                                                        Log.d(
+                                                            "debug_graph",
+                                                            "index = $selectedItem"
+                                                        )
+                                                    },
                                                     role = Role.RadioButton
                                                 )
                                         ) {

@@ -22,6 +22,8 @@ sealed class Screens(val route: String){
     object UserEditOwner: Screens(route = "user_edit_owner_screen")
     object OutletOwner: Screens(route = "outlet_owner_screen")
     object MachineOwner: Screens(route = "machine_owner_screen")
+    object ExpensesOwner: Screens(route = "expenses_owner_screen")
+    object QrOwner: Screens(route = "qr_owner_screen")
 
     object HomeDeveloper: Screens(route = "developer_screen")
     object OwnerListDeveloper: Screens(route = "owner_list_developer_screen")

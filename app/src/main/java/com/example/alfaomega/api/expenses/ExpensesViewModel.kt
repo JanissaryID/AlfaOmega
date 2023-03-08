@@ -5,16 +5,13 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import com.example.alfaomega.*
-import com.example.alfaomega.api.income.IncomeApp
-import com.example.alfaomega.api.income.IncomeModel
-import com.madrapps.plot.line.DataPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class ExpesnsesViewModel: ViewModel() {
+class ExpensesViewModel: ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun fetchByOwner(){
@@ -73,11 +70,14 @@ class ExpesnsesViewModel: ViewModel() {
             val current = LocalDateTime.now()
 
             val formatDay = DateTimeFormatter.ofPattern("MM-yyyy")
-            val date = current.format(formatDay)
+            val dayNow = current.format(formatDay)
+            val date = if(!DATE_PICK.isNullOrEmpty()) DATE_PICK.substring(startIndex = 3) else dayNow
+
+//            Log.d("get_log", "${date} -- ${dayNow}")
 
             ExpensesApp.CreateInstance().fetchExpensesByStore(
                 BearerToken = "Bearer " + TOKEN_API,
-                date = date,
+                date =  date,
                 store = STORE_ID
             ).enqueue(object :
                 Callback<ArrayList<ExpensesModel>> {
@@ -85,12 +85,13 @@ class ExpesnsesViewModel: ViewModel() {
                     EXPENSES_STATE_STORE = 0
 
                     LIST_EXPENSES_STORE.clear()
+//                    Log.d("get_log", "${response}")
 
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_EXPENSES_STORE = response.body()!!
 
-                            Log.d("get_log", "${response.body()!!}")
+//                            Log.d("get_log", "${response.body()!!}")
 
                             if(!LIST_EXPENSES_STORE.isNullOrEmpty()){
                                 EXPENSES_STATE_STORE = 1
@@ -130,7 +131,8 @@ class ExpesnsesViewModel: ViewModel() {
             ownerid = OWNER_ID,
             storeid = STORE_ID,
             expenses = expenses,
-            notes = note
+            notes = note,
+            admin = USER_NAME
         )
 
         ExpensesApp.CreateInstance().insertExpenses(

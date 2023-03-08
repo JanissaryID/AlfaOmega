@@ -45,7 +45,7 @@ fun WallHomeOwnerV2(
 
     val selectionMenuTitle = listOf(
         stringResource(R.string.RulesTitle),
-//        stringResource(R.string.Menu),
+        stringResource(R.string.QrPayment),
         stringResource(R.string.EmployeeTitle),
     )
 
@@ -157,7 +157,7 @@ fun WallHomeOwnerV2(
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 8.dp, horizontal = 8.dp)
+                            .padding(vertical = 24.dp, horizontal = 8.dp)
                     ) {
                         list.forEachIndexed{ index, menuOwnerModel ->
                             ItemMenuNavOwner(

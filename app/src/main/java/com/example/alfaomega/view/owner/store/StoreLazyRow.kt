@@ -30,6 +30,7 @@ fun StoreLazyCRow(
                 storeCity = store.city!!,
                 storeAddress = store.address!!,
                 storeAdmin = store.admin!!,
+                storePhone = store.phone!!,
                 protoViewModel = protoViewModel,
                 navController = navController,
             )

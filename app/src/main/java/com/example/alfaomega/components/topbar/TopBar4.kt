@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
+import com.example.alfaomega.api.expenses.ExpensesViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
@@ -49,10 +50,35 @@ fun TopBar4(
     bluetoothViewModel: BluetoothViewModel,
     containerColor: Color = Color.Transparent,
     colorFont: Color = MaterialTheme.colorScheme.onSurfaceVariant,
-    multiplePermissionState: MultiplePermissionsState
+    multiplePermissionState: MultiplePermissionsState,
+    expensesViewModel: ExpensesViewModel = ExpensesViewModel()
 ) {
 
     val activity = LocalContext.current
+
+    val mYear: Int
+    val mMonth: Int
+    val mDay: Int
+
+    val mCalendar = Calendar.getInstance()
+
+    mYear = mCalendar.get(Calendar.YEAR)
+    mMonth = mCalendar.get(Calendar.MONTH)
+    mDay = mCalendar.get(Calendar.DAY_OF_MONTH)
+
+    mCalendar.time = Date()
+
+//    val mDate = remember { mutableStateOf("") }
+
+    val mDatePickerDialog = DatePickerDialog(
+        activity,
+        { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
+            DATE_PICK = "${(mDayOfMonth).toString().padStart(2, '0')}-${(mMonth+1).toString().padStart(2, '0')}-${(mYear).toString().padStart(4, '0')}"
+//            Log.d("debug_transaction", "Date ${DATE_PICK}")
+            transactionViewModel.getTransactionNowDate()
+            expensesViewModel.fetchByStore()
+        }, mYear, mMonth, mDay
+    )
 
     SmallTopAppBar(
         title = {
@@ -99,6 +125,9 @@ fun TopBar4(
                             }
                             if(USER_SCREEN_TYPE && EDIT_MODE){
                                 userViewModel.deleteUser(navController = navController, iduser = ID_USER_EDIT)
+                            }
+                            else{
+                                mDatePickerDialog.show()
                             }
                         }
                         else if(USER_TYPE == 2){

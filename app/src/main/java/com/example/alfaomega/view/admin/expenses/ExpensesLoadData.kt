@@ -1,7 +1,9 @@
-package com.example.alfaomega.view.admin.transaction_list
+package com.example.alfaomega.view.admin.expenses
 
+import android.bluetooth.BluetoothDevice
+import android.os.Build
 import android.widget.Toast
-import androidx.compose.foundation.Image
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -19,18 +21,28 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.DATE_PICK
 import com.example.alfaomega.R
-import com.example.alfaomega.api.transaction.TransactionModel
-import com.example.alfaomega.view.admin.transaction_active.TransactionActiveLazyColumn
+import com.example.alfaomega.api.expenses.ExpensesModel
+import com.example.alfaomega.proto.ProtoViewModel
+import com.example.alfaomega.view.admin.bluetooth.BluetoothLazyColumn
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun TransactionListLoadData(
-    transactionState: Int,
-    transactionList: List<TransactionModel>,
+fun ExpensesLoadData(
+    expensesState: Int,
+    expenses: List<ExpensesModel>,
     navController: NavController,
+//    protoViewModel: ProtoViewModel
 ) {
     val context = LocalContext.current
+    val current = LocalDateTime.now()
 
-    when (transactionState) {
+    val formatDay = DateTimeFormatter.ofPattern("MM-yyyy")
+    val dayNow = current.format(formatDay)
+    val date = if(!DATE_PICK.isNullOrEmpty()) DATE_PICK.substring(startIndex = 3) else dayNow
+
+    when (expensesState) {
         0 -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -40,15 +52,17 @@ fun TransactionListLoadData(
             }
         }
         1 -> {
-//            Log.d("debug", "Success")
-            if (!transactionList.isNullOrEmpty()){
+            if (!expenses.isNullOrEmpty()){
                 Box(
                     modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.TopCenter
+                    contentAlignment = Alignment.Center
                 ) {
-                    TransactionListLazyColumn(transactionListModel = transactionList, navController = navController)
+                    ExpensesLazyColumn(
+                        expenses = expenses,
+//                        protoViewModel = protoViewModel,
+                        navController = navController
+                    )
                 }
-
             }
         }
         2 -> {
@@ -80,7 +94,7 @@ fun TransactionListLoadData(
 
                     Icon(painter = painterResource(
                         id = R.drawable.ic_twotone_list_alt_24),
-                        contentDescription = stringResource(R.string.TransactionEmpty),
+                        contentDescription = stringResource(R.string.ExpensesEmpty),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier
                             .wrapContentHeight()
@@ -95,7 +109,7 @@ fun TransactionListLoadData(
                     )
 
                     Text(
-                        text = "$DATE_PICK " + stringResource(R.string.TransactionEmpty),
+                        text = "$date, " + stringResource(R.string.ExpensesEmpty),
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleLarge.fontSize,
                         color = MaterialTheme.colorScheme.primary,

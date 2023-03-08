@@ -10,6 +10,9 @@ data class ExpensesModel(
 	@field:SerializedName("notes")
 	val notes: String? = null,
 
+	@field:SerializedName("admin")
+	val admin: String? = null,
+
 	@field:SerializedName("_id")
 	val id: String? = null,
 

@@ -19,7 +19,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
-import com.example.alfaomega.api.expenses.ExpesnsesViewModel
+import com.example.alfaomega.api.expenses.ExpensesViewModel
 import com.example.alfaomega.api.income.IncomeViewModel
 import com.example.alfaomega.components.button_view.ButtonViewV2
 import com.example.alfaomega.navigations.Screens
@@ -33,7 +33,7 @@ fun WallExpenses(
     paddingValues: PaddingValues,
     navController: NavController,
     incomeViewModel: IncomeViewModel = IncomeViewModel(),
-    expensesViewModel: ExpesnsesViewModel = ExpesnsesViewModel()
+    expensesViewModel: ExpensesViewModel = ExpensesViewModel()
 ) {
     var button_clicked by remember { mutableStateOf(false) }
     var text_rule by remember {

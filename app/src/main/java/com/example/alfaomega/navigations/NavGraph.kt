@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.expenses.ExpensesViewModel
 import com.example.alfaomega.api.income.IncomeViewModel
 import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.machine.MachineViewModel
@@ -50,7 +51,8 @@ fun NavGraphSetup(
     logViewModel: LogViewModel,
     bluetoothViewModel: BluetoothViewModel,
     problemViewModel: ProblemViewModel,
-    incomeViewModel: IncomeViewModel
+    incomeViewModel: IncomeViewModel,
+    expensesViewModel: ExpensesViewModel
     ) {
 
     val context = LocalContext.current
@@ -297,6 +299,26 @@ fun NavGraphSetup(
                 machineViewModel.getMachineList()
             }
             ScreenMachineOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+        }
+
+        composable(
+            route = Screens.ExpensesOwner.route,
+        ){
+            LaunchedEffect(key1 = STORE_ID){
+                STAT_GET_DATA = false
+                expensesViewModel.fetchByStore()
+            }
+            ScreenExpensesOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+        }
+
+        composable(
+            route = Screens.QrOwner.route,
+        ){
+//            LaunchedEffect(key1 = STORE_ID){
+//                STAT_GET_DATA = false
+//                machineViewModel.getMachineList()
+//            }
+            ScreenQrOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
 
         composable(
