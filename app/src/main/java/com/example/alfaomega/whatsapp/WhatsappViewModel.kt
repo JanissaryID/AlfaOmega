@@ -15,7 +15,7 @@ class WhatsappViewModel: ViewModel() {
             "%0a" +
             "Pada tanggal : $TRANSACATION_DATE %0a" +
             "%0a" +
-            "Sudah selesai, silahkan di ambil di $STORE_NAME, jalan " +
+            "Sudah selesai, silahkan di ambil di $STORE_NAME, " +
             "$STORE_ADDRESS ${STORE_CITY}." +
             "%0a" +
             "%0a" +

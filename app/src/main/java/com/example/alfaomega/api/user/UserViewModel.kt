@@ -39,11 +39,11 @@ class UserViewModel : ViewModel() {
                 BearerToken = "Bearer " + TOKEN_API,
                 username = username,
                 password = password,
-                status = false
+//                status = false
             ).enqueue(object :
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
-//                    Log.d("debug_user", "get error = $response")
+                    Log.d("debug_user", "get error = ${response.body()}")
                     USER_STATE = 0
 
                     if(response.code() == 200){
@@ -54,9 +54,9 @@ class UserViewModel : ViewModel() {
                             if (userListResponse.isNullOrEmpty()){
                                 USER_STATE = 3
                                 BUTTON_LOGIN_CLICKED = false
-                                FAILED_LOGIN = true
+                                FAILED_LOGIN_EMPTY = true
                             }
-                            else{
+                            else if(!userListResponse[0].statususer!!){
                                 if(userListResponse[0].typeUser == 1 && !userListResponse[0].statususer!!){
                                     USER_NAME = selectionUser[0]
                                     USER_TYPE = userListResponse[0].typeUser!!
@@ -87,20 +87,25 @@ class UserViewModel : ViewModel() {
                                     updateStatUser(USER_ID, true)
                                 }
                                 FAILED_LOGIN = false
+                                FAILED_LOGIN_EMPTY = false
+                                FAILED_LOGIN_ALREADY = false
                                 navController.navigate(route = screenBack) {
                                     popUpTo(screenBack) {
                                         inclusive = true
                                     }
                                 }
                             }
+                            else{
+                                BUTTON_LOGIN_CLICKED = false
+                                FAILED_LOGIN_ALREADY = true
+                            }
                         }
                     }
                     else{
                         BUTTON_LOGIN_CLICKED = false
-                        FAILED_LOGIN = true
+                        FAILED_LOGIN_ALREADY = true
                     }
                 }
-
                 override fun onFailure(call: Call<ArrayList<UserModel>>, t: Throwable) {
                     Log.d("debug_user", "Fail get Data ${t.message.toString()}")
                     if (t.message == t.message){

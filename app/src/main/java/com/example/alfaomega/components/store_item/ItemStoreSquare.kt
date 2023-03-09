@@ -83,7 +83,7 @@ fun ItemStoreSquare(
                     Text(
                         text = storeName,
                         fontWeight = FontWeight.ExtraBold,
-                        fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
                         color = colorFont
                     )
                     Spacer(modifier = Modifier.height(8.dp))
@@ -92,6 +92,7 @@ fun ItemStoreSquare(
                         fontWeight = FontWeight.SemiBold,
                         fontSize = MaterialTheme.typography.labelMedium.fontSize,
                         color = colorFont.copy(alpha = 0.7f),
+                        maxLines = 1
 //                        lineHeight = 50.sp
 //                        style = LocalTextStyle.current.copy(lineHeight = 120.sp)
                     )

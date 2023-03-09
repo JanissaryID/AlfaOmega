@@ -57,6 +57,8 @@ fun TopBar3(
                     contentDescription = description,
                     modifier = Modifier.clickable {
                         if(USER_TYPE != 3){
+                            Log.i("info_response", "Owner ID = $OWNER_ID")
+                            userViewModel.updateStatUser(OWNER_ID, false)
                             protoViewModel.updateNameUser(Nameuser = "")
                             protoViewModel.updateTypeUser(TypeUser = 0)
                             protoViewModel.updateStoreID(keyStore = "")
@@ -75,7 +77,6 @@ fun TopBar3(
                             }
                         }
                         else{
-                            userViewModel.updateStatUser(USER_ID, false)
                             Log.i("info_response", "Check Bluetooth")
                             Log.i("info_response", "${route}")
                             multiplePermissionState.launchMultiplePermissionRequest()
@@ -83,6 +84,7 @@ fun TopBar3(
                             if(BLUETOOTH_STATE_ON){
                                 navController.navigate(route = route)
                                 {
+                                    SCREEN_NOW = route
                                     popUpTo(route) {
                                         inclusive = true
                                     }

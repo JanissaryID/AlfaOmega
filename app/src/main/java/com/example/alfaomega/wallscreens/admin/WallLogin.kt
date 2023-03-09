@@ -180,6 +180,14 @@ fun WallLogin(
             Toast.makeText(context, "Failed To Login" , Toast.LENGTH_SHORT).show()
             FAILED_LOGIN = false
         }
+        else if(FAILED_LOGIN_EMPTY){
+            Toast.makeText(context, "Wrong username or password" , Toast.LENGTH_SHORT).show()
+            FAILED_LOGIN_EMPTY = false
+        }
+        else if(FAILED_LOGIN_ALREADY){
+            Toast.makeText(context, "User Already Login" , Toast.LENGTH_SHORT).show()
+            FAILED_LOGIN_ALREADY = false
+        }
 
         Text(
             text = "made by love ♥",

@@ -74,6 +74,7 @@ var TRANSACTION_MONEY: String by mutableStateOf("")
 //Variable Screen
 var TRANSACTION_SCREEN: Boolean by mutableStateOf(false)
 var MACHINE_SCREEN: Boolean by mutableStateOf(false)
+var SCREEN_NOW: String by mutableStateOf("")
 
 //Variable Machine
 var LIST_MACHINE_DRYER_GIANT: ArrayList<MachineModel> by mutableStateOf(arrayListOf())
@@ -97,6 +98,8 @@ var USER_ERROR_MESSAGE: String by mutableStateOf("")
 var BUTTON_LOGIN: Boolean by mutableStateOf(true)
 var BUTTON_LOGIN_CLICKED: Boolean by mutableStateOf(false)
 var FAILED_LOGIN: Boolean by mutableStateOf(false)
+var FAILED_LOGIN_EMPTY: Boolean by mutableStateOf(false)
+var FAILED_LOGIN_ALREADY: Boolean by mutableStateOf(false)
 var LIST_USER: ArrayList<UserModel> by mutableStateOf(arrayListOf())
 
 //Variable ownerMenu

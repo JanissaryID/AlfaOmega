@@ -115,7 +115,7 @@
     <string name="Nominal">Nominal</string>
     <string name="Change">Kembalian</string>
     <string name="ExpensesEmpty">Pengeluaran Kosong</string>
-    <string name="QrPayment">Pembayaran QR</string>
+    <string name="QrPayment">QR Code</string>
     <string name="ListExpenses">List Expenses</string>
     <string name="TransactionEmpty">Transaction Empty</string>
 </resources>

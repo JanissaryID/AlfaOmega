@@ -96,6 +96,7 @@ fun TopBar4(
                     contentDescription = "Back",
                     modifier = Modifier.clickable {
                         navController.navigate(route = screenBack) {
+                            SCREEN_NOW = screenBack
                             popUpTo(screenBack) {
                                 inclusive = true
                             }
@@ -135,7 +136,7 @@ fun TopBar4(
                                 userViewModel.deleteUser(navController = navController, iduser = ID_USER_EDIT)
                             }
                         }
-                        else if(USER_TYPE == 3){
+                        else if(USER_TYPE == 3 && SCREEN_NOW == Screens.StoreProfile.route){
                             navController.navigate(route = actionNav) {
                                 popUpTo(actionNav) {
                                     inclusive = true

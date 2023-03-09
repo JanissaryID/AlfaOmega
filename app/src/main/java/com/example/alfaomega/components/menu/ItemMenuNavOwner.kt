@@ -80,7 +80,7 @@ fun ItemMenuNavOwner(
             Text(
                 text = nameIcon,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = MaterialTheme.typography.titleSmall.fontSize,
+                fontSize = MaterialTheme.typography.labelMedium.fontSize,
                 color = MaterialTheme.colorScheme.primary
             )
         }

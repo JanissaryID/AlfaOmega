@@ -42,7 +42,7 @@ fun ItemStoreMenu(
         modifier = Modifier.clickable {
             if(USER_TYPE == 3){
                 if(typeMenu){
-                    userViewModel.updateStatUser(OWNER_ID, false)
+                    userViewModel.updateStatUser(USER_ID, false)
                     protoViewModel.updateTypeUser(0)
                     protoViewModel.updateNameUser("")
                     protoViewModel.updateStoreID("")
