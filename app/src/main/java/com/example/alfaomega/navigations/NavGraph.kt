@@ -18,6 +18,7 @@ import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.problem.ProblemViewModel
+import com.example.alfaomega.api.qr.QrViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
@@ -52,7 +53,8 @@ fun NavGraphSetup(
     bluetoothViewModel: BluetoothViewModel,
     problemViewModel: ProblemViewModel,
     incomeViewModel: IncomeViewModel,
-    expensesViewModel: ExpensesViewModel
+    expensesViewModel: ExpensesViewModel,
+    qrViewModel: QrViewModel
     ) {
 
     val context = LocalContext.current
@@ -98,7 +100,7 @@ fun NavGraphSetup(
             }
             else if(USER_TYPE == 1){
                 PROBLEM_MACHINE_STATE_SCREEN = false
-
+                qrViewModel.fetchQrOwner()
                 incomeViewModel.fetchByOwner()
                 ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }

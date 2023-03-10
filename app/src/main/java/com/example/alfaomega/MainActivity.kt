@@ -24,6 +24,7 @@ import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.problem.ProblemViewModel
+import com.example.alfaomega.api.qr.QrViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.store.StoreViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
@@ -50,6 +51,7 @@ class MainActivity : ComponentActivity() {
     val expensesViewModel by viewModels<ExpensesViewModel>()
 
     val bluetoothViewModel by viewModels<BluetoothViewModel>()
+    val qrViewModel by viewModels<QrViewModel>()
 
     private lateinit var protoViewModel: ProtoViewModel
 
@@ -99,7 +101,8 @@ class MainActivity : ComponentActivity() {
                         bluetoothViewModel = bluetoothViewModel,
                         problemViewModel = problemViewModel,
                         incomeViewModel = incomeViewModel,
-                        expensesViewModel = expensesViewModel
+                        expensesViewModel = expensesViewModel,
+                        qrViewModel = qrViewModel
                     )
 
                     storeViewModel.FetchStore()

@@ -24,67 +24,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import java.io.IOException
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class BluetoothViewModel: ViewModel() {
-
-    val LF: Byte = 0x0A
-
-    val RESET_PRINTER = byteArrayOf(0x1B, 0x40)
-
-    val TEXT_ALIGN_LEFT = byteArrayOf(0x1B, 0x61, 0x00)
-    val TEXT_ALIGN_CENTER = byteArrayOf(0x1B, 0x61, 0x01)
-    val TEXT_ALIGN_RIGHT = byteArrayOf(0x1B, 0x61, 0x02)
-
-    val TEXT_WEIGHT_NORMAL = byteArrayOf(0x1B, 0x45, 0x00)
-    val TEXT_WEIGHT_BOLD = byteArrayOf(0x1B, 0x45, 0x01)
-
-    val LINE_SPACING_24 = byteArrayOf(0x1b, 0x33, 0x18)
-    val LINE_SPACING_30 = byteArrayOf(0x1b, 0x33, 0x1e)
-
-    val TEXT_FONT_A = byteArrayOf(0x1B, 0x4D, 0x00)
-    val TEXT_FONT_B = byteArrayOf(0x1B, 0x4D, 0x01)
-    val TEXT_FONT_C = byteArrayOf(0x1B, 0x4D, 0x02)
-    val TEXT_FONT_D = byteArrayOf(0x1B, 0x4D, 0x03)
-    val TEXT_FONT_E = byteArrayOf(0x1B, 0x4D, 0x04)
-
-    val TEXT_SIZE_NORMAL = byteArrayOf(0x1D, 0x21, 0x00)
-    val TEXT_SIZE_DOUBLE_HEIGHT = byteArrayOf(0x1D, 0x21, 0x01)
-    val TEXT_SIZE_DOUBLE_WIDTH = byteArrayOf(0x1D, 0x21, 0x10)
-    val TEXT_SIZE_BIG = byteArrayOf(0x1D, 0x21, 0x11)
-    val TEXT_SIZE_BIG_2 = byteArrayOf(0x1D, 0x21, 0x22)
-    val TEXT_SIZE_BIG_3 = byteArrayOf(0x1D, 0x21, 0x33)
-    val TEXT_SIZE_BIG_4 = byteArrayOf(0x1D, 0x21, 0x44)
-    val TEXT_SIZE_BIG_5 = byteArrayOf(0x1D, 0x21, 0x55)
-    val TEXT_SIZE_BIG_6 = byteArrayOf(0x1D, 0x21, 0x66)
-
-    val TEXT_UNDERLINE_OFF = byteArrayOf(0x1B, 0x2D, 0x00)
-    val TEXT_UNDERLINE_ON = byteArrayOf(0x1B, 0x2D, 0x01)
-    val TEXT_UNDERLINE_LARGE = byteArrayOf(0x1B, 0x2D, 0x02)
-
-    val TEXT_DOUBLE_STRIKE_OFF = byteArrayOf(0x1B, 0x47, 0x00)
-    val TEXT_DOUBLE_STRIKE_ON = byteArrayOf(0x1B, 0x47, 0x01)
-
-    val TEXT_COLOR_BLACK = byteArrayOf(0x1B, 0x72, 0x00)
-    val TEXT_COLOR_RED = byteArrayOf(0x1B, 0x72, 0x01)
-
-    val TEXT_COLOR_REVERSE_OFF = byteArrayOf(0x1D, 0x42, 0x00)
-    val TEXT_COLOR_REVERSE_ON = byteArrayOf(0x1D, 0x42, 0x01)
-
-
-    val BARCODE_TYPE_UPCA = 65
-    val BARCODE_TYPE_UPCE = 66
-    val BARCODE_TYPE_EAN13 = 67
-    val BARCODE_TYPE_EAN8 = 68
-    val BARCODE_TYPE_ITF = 70
-    val BARCODE_TYPE_128 = 73
-
-    val BARCODE_TEXT_POSITION_NONE = 0
-    val BARCODE_TEXT_POSITION_ABOVE = 1
-    val BARCODE_TEXT_POSITION_BELOW = 2
-
-    val QRCODE_1 = 49
-    val QRCODE_2 = 50
 
     lateinit var bluetoothManager: BluetoothManager
     lateinit var bluetoothAdapter: BluetoothAdapter
@@ -161,6 +105,37 @@ class BluetoothViewModel: ViewModel() {
         }
     }
     @ExperimentalCoroutinesApi
+    fun sendCommandDivider(input: String){
+        if(bluetoothSocket != null){
+            try{
+                for(i in 0..31){
+                    bluetoothSocket!!.outputStream.write(input.toByteArray())
+                }
+                bluetoothSocket!!.outputStream.write(10)
+            }catch(e: IOException){
+                e.printStackTrace()
+            }
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    fun sendCommandAbsolutePosition(leftString: String, rightString: String){
+        //31
+        var spacingLength = 31 - (leftString.length + rightString.length)
+
+        var finalString = "${leftString.padEnd(spacingLength + leftString.length + 1, ' ')}${rightString}"
+//        Log.d("log_print", "$finalString - ${finalString.length}")
+        if(bluetoothSocket != null){
+            try{
+                bluetoothSocket!!.outputStream.write(finalString.toByteArray())
+                bluetoothSocket!!.outputStream.write(10)
+            }catch(e: IOException){
+                e.printStackTrace()
+            }
+        }
+    }
+
+    @ExperimentalCoroutinesApi
     fun sendCommandAlign(command: ByteArray){
         if(bluetoothSocket != null){
             try{
@@ -181,6 +156,7 @@ class BluetoothViewModel: ViewModel() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalPermissionsApi::class)
     @ExperimentalCoroutinesApi
     fun connectBluetooth(
@@ -278,76 +254,146 @@ class BluetoothViewModel: ViewModel() {
         }
     }
 //    @ExperimentalCoroutinesApi
-    fun writeNota(){
-//        viewModelScope.launch(Dispatchers.IO) {
-//
-//        }
+@RequiresApi(Build.VERSION_CODES.O)
+fun writeNota(){
+        var idTransaction = "${TRANSACATION_ID.substring(0,5)}${TRANSACATION_ID.substring(
+            TRANSACATION_ID.length-5, TRANSACATION_ID.length)}"
+
+        val formatter = DateTimeFormatter.ofPattern("HH:mm")
+        val timeNow = LocalDateTime.now().format(formatter)
+
         try {
-            sendCommandAlign(command = RESET_PRINTER)
-            sendCommandAlign(command = TEXT_ALIGN_CENTER)
-            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-            sendCommandAlign(command = TEXT_SIZE_BIG_2)
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_CHAR_B)
+            sendCommandAlign(command = CommandPrinter.TEXT_SIZE_DOUBLE_WIDTH)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_CENTER)
             sendCommand("$STORE_NAME")
+            sendCommandAlign(command = CommandPrinter.LF)
 
-            sendCommandAlign(command = RESET_PRINTER)
-            sendCommandAlign(command = TEXT_ALIGN_CENTER)
-            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-            sendCommand("$STORE_ADDRESS, $STORE_CITY")
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_CENTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommand("-- Nota Transakasi --")
+            sendCommandAlign(command = CommandPrinter.LF)
 
-            sendCommandAlign(command = LF)
-            sendCommandAlign(command = RESET_PRINTER)
-            sendCommandAlign(command = TEXT_ALIGN_LEFT)
-            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-            sendCommand("Customer: $TRANSACATION_CUSTOMER")
-            sendCommandAlign(command = RESET_PRINTER)
-            sendCommandAlign(command = TEXT_ALIGN_LEFT)
-            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-            sendCommand("Tanggal Masuk: $TRANSACATION_DATE")
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_CENTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommand("$STORE_ADDRESS")
+            sendCommandAlign(command = CommandPrinter.LF)
 
-            sendCommandAlign(command = LF)
-            sendCommandAlign(command = RESET_PRINTER)
-            sendCommandAlign(command = TEXT_ALIGN_LEFT)
-            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-            sendCommand("Jenis Layanan: ${if(TRANSACATION_CLASS) "Mesin Besar - " else "Mesin Kecil - "}")
-            sendCommand("$TRANSACATION_MENU")
-            sendCommandAlign(command = LF)
-            sendCommandAlign(command = RESET_PRINTER)
-            sendCommandAlign(command = TEXT_ALIGN_LEFT)
-            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-            sendCommand("Harga: Rp.$TRANSACATION_PRICE")
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_CENTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommand("$STORE_PHONE")
+            sendCommandAlign(command = CommandPrinter.LF)
 
-            sendCommandAlign(command = LF)
-            sendCommandAlign(command = RESET_PRINTER)
-            sendCommandAlign(command = TEXT_ALIGN_LEFT)
-            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-            sendCommand("Pembayaran: $TRANSACATION_PAYMENT")
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandAbsolutePosition("Pelanggan", "${TRANSACATION_CUSTOMER}")
 
-            sendCommandAlign(command = LF)
-            sendCommandAlign(command = RESET_PRINTER)
-            sendCommandAlign(command = TEXT_ALIGN_CENTER)
-            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-            sendCommand("-----Ketentuan-----")
-            sendCommandAlign(command = LF)
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandDivider("-")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandAbsolutePosition("Lunas", "No. ${idTransaction}")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandDivider("-")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandAbsolutePosition("${TRANSACATION_DATE} $timeNow", "${TRANSACATION_ADMIN}")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandDivider("-")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_BOLD)
+            sendCommand("${if(TRANSACATION_CLASS) "(Mesin Besar) " else "(Mesin Kecil)"} $TRANSACATION_MENU")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandDivider("-")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandAbsolutePosition("PEMBAYARAN", "${TRANSACATION_PAYMENT}")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandAbsolutePosition("TOTAL", "${TRANSACATION_PRICE}")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandAbsolutePosition("BAYAR", "${TRANSACTION_MONEY}")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandAbsolutePosition("KEMBALI", "${TRANSACTION_MONEY.toInt() - TRANSACATION_PRICE.toInt()}")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandDivider("-")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_CENTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommand("-- Estimasi Waktu --")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_CENTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommand("Estimasi +/- 2 Jam")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommandDivider("-")
+
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_CENTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_NORMAL)
+            sendCommand("-- Syarat Dan Ketentuan --")
+            sendCommandAlign(command = CommandPrinter.LF)
 
             LIST_RULE.forEachIndexed{ index, rule ->
-                sendCommandAlign(command = RESET_PRINTER)
-                sendCommandAlign(command = TEXT_ALIGN_LEFT)
-                sendCommandAlign(command = TEXT_WEIGHT_BOLD)
+                sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+                sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_LEFT)
+                sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_BOLD)
                 sendCommand("${index+1}. ${rule.rule}")
             }
 
-            sendCommandAlign(command = LF)
-            sendCommandAlign(command = RESET_PRINTER)
-            sendCommandAlign(command = TEXT_ALIGN_CENTER)
-            sendCommandAlign(command = TEXT_WEIGHT_BOLD)
-            sendCommandAlign(command = LF)
+            sendCommandAlign(command = CommandPrinter.LF)
+            sendCommandAlign(command = CommandPrinter.RESET_PRINTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_ALIGN_CENTER)
+            sendCommandAlign(command = CommandPrinter.TEXT_WEIGHT_BOLD)
+            sendCommandAlign(command = CommandPrinter.LF)
             sendCommand("Terimakasih")
 
-
             //End of Transaction
-            sendCommandAlign(command = LF)
-            sendCommandAlign(command = LF)
-            sendCommandAlign(command = LF)
+            sendCommandAlign(command = CommandPrinter.LF)
+            sendCommandAlign(command = CommandPrinter.LF)
+            sendCommandAlign(command = CommandPrinter.LF)
         }
         catch(e: IOException){
             e.printStackTrace()

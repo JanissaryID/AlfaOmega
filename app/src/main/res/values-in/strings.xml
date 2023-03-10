@@ -116,6 +116,7 @@
     <string name="Change">Kembalian</string>
     <string name="ExpensesEmpty">Pengeluaran Kosong</string>
     <string name="QrPayment">QR Code</string>
-    <string name="ListExpenses">List Expenses</string>
-    <string name="TransactionEmpty">Transaction Empty</string>
+    <string name="ListExpenses">Daftar Pengeluaran</string>
+    <string name="TransactionEmpty">Transaksi Kosong</string>
+    <string name="InsertData">Masukan Data</string>
 </resources>

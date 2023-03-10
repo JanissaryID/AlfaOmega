@@ -190,7 +190,7 @@ fun WallLogin(
         }
 
         Text(
-            text = "made by love ♥",
+            text = "made by aluma.id",
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = alphaFont),
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.typography.bodySmall.fontSize,

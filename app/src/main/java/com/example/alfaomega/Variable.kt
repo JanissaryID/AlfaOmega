@@ -10,6 +10,7 @@ import com.example.alfaomega.api.log.LogModel
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.menu.MenuModel
 import com.example.alfaomega.api.problem.ProblemModel
+import com.example.alfaomega.api.qr.QrModel
 import com.example.alfaomega.api.rules.RuleModel
 import com.example.alfaomega.api.store.StoreModel
 import com.example.alfaomega.api.transaction.TransactionModel
@@ -207,3 +208,8 @@ var LIST_EXPENSES_STORE: ArrayList<ExpensesModel> by mutableStateOf(arrayListOf(
 var EXPENSES_STATE_STORE: Int by mutableStateOf(0)
 var EXPENSES_ERROR_MESSAGE: String by mutableStateOf("")
 
+//Variable Qr
+var QR_DATA: QrModel by mutableStateOf(QrModel())
+var QR_STATE: Int by mutableStateOf(0)
+var QR_ERROR_MESSAGE: String by mutableStateOf("")
+//var QR_ID: String by mutableStateOf("")

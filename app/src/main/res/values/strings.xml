@@ -117,4 +117,5 @@
     <string name="QrPayment">QR Code</string>
     <string name="ListExpenses">List Expenses</string>
     <string name="TransactionEmpty">Transaction Empty</string>
+    <string name="InsertData">Insert Data</string>
 </resources>
