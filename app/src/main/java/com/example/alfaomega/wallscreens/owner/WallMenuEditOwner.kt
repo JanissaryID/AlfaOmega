@@ -294,16 +294,21 @@ fun WallMenuEditOwner(
                     )
                 }
                 else{
-                    menuViewModel.insertMenu(
-                        menuTitle = text_name_menu.text,
-                        menuPrice = text_price_menu.text,
-                        menuStore = STORE_ID,
-                        menuClass = if(class_value_index == 0) false else true,
-                        isWasher = checkedStateWasher.value,
-                        isDryer = checkedStateDryer.value,
-                        isService = checkedStateService.value,
-                        navController = navController
-                    )
+                    if(STORE_ID.isNullOrEmpty()){
+                        button_clicked = false
+                    }
+                    else{
+                        menuViewModel.insertMenu(
+                            menuTitle = text_name_menu.text,
+                            menuPrice = text_price_menu.text,
+                            menuStore = STORE_ID,
+                            menuClass = if(class_value_index == 0) false else true,
+                            isWasher = checkedStateWasher.value,
+                            isDryer = checkedStateDryer.value,
+                            isService = checkedStateService.value,
+                            navController = navController
+                        )
+                    }
                 }
             }
         }

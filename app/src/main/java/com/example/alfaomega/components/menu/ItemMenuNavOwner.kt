@@ -44,24 +44,26 @@ fun ItemMenuNavOwner(
                     modifier = Modifier
                         .size(42.dp)
                         .clickable {
-                            SCREEN_NOW = navMenu
-                            Log.d("log_screen", "Set = $SCREEN_NOW")
+                            if (!STORE_ID.isNullOrEmpty()){
+                                SCREEN_NOW = navMenu
+//                            Log.d("log_screen", "Set = $SCREEN_NOW")
 
-                            MENU_STATE = 0
-                            TRANSACTION_STATE = 0
-                            MACHINE_STATE = 0
+                                MENU_STATE = 0
+                                TRANSACTION_STATE = 0
+                                MACHINE_STATE = 0
 
-                            MENU_LIST_TITAN_RESPONSE.clear()
-                            MENU_LIST_GIANT_RESPONSE.clear()
-                            TRANSACTION_RESPONSE.clear()
-                            LIST_MACHINE_DRYER_GIANT.clear()
-                            LIST_MACHINE_DRYER_TITAN.clear()
-                            LIST_MACHINE_WASHER_GIANT.clear()
-                            LIST_MACHINE_WASHER_TITAN.clear()
+                                MENU_LIST_TITAN_RESPONSE.clear()
+                                MENU_LIST_GIANT_RESPONSE.clear()
+                                TRANSACTION_RESPONSE.clear()
+                                LIST_MACHINE_DRYER_GIANT.clear()
+                                LIST_MACHINE_DRYER_TITAN.clear()
+                                LIST_MACHINE_WASHER_GIANT.clear()
+                                LIST_MACHINE_WASHER_TITAN.clear()
 
-                            navController.navigate(route = navMenu){
-                                popUpTo(navMenu) {
-                                    inclusive = true
+                                navController.navigate(route = navMenu){
+                                    popUpTo(navMenu) {
+                                        inclusive = true
+                                    }
                                 }
                             }
                         }) {
