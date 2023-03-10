@@ -21,6 +21,10 @@ import java.time.format.DateTimeFormatter
 class MenuViewModel: ViewModel() {
 
     fun getMenu(){
+
+        MENU_LIST_GIANT_RESPONSE.clear()
+        MENU_LIST_TITAN_RESPONSE.clear()
+
         try {
             MenuApp.CreateInstance().fetchMenu(
                 BearerToken = "Bearer " + TOKEN_API,
@@ -30,8 +34,8 @@ class MenuViewModel: ViewModel() {
                 override fun onResponse(call: Call<ArrayList<MenuModel>>, response: Response<ArrayList<MenuModel>>) {
                     MENU_STATE = 0
 
-                    MENU_LIST_GIANT_RESPONSE.clear()
-                    MENU_LIST_TITAN_RESPONSE.clear()
+//                    MENU_LIST_GIANT_RESPONSE.clear()
+//                    MENU_LIST_TITAN_RESPONSE.clear()
 
                     if(response.code() == 200){
                         response.body()?.let {
