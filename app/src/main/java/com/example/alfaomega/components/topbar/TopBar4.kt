@@ -113,6 +113,7 @@ fun TopBar4(
                     contentDescription = description,
                     modifier = Modifier.clickable {
                         if(USER_TYPE == 1){
+                            Log.d("log_screen", "$SCREEN_NOW")
                             if(MENU_SCREEN_TYPE && EDIT_MODE){
                                 menuViewModel.deleteMenu(navController = navController, idMenu = ID_MENU_EDIT)
                                 navController.navigate(route = actionNav) {
@@ -127,7 +128,7 @@ fun TopBar4(
                             if(USER_SCREEN_TYPE && EDIT_MODE){
                                 userViewModel.deleteUser(navController = navController, iduser = ID_USER_EDIT)
                             }
-                            else{
+                            if(SCREEN_NOW == Screens.ExpensesOwner.route){
                                 mDatePickerDialog.show()
                             }
                         }

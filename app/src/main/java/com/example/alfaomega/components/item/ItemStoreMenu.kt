@@ -1,5 +1,6 @@
 package com.example.alfaomega.components
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,6 +41,7 @@ fun ItemStoreMenu(
     Surface(
         color = Color.Transparent,
         modifier = Modifier.clickable {
+
             if(USER_TYPE == 3){
                 if(typeMenu){
                     userViewModel.updateStatUser(USER_ID, false)

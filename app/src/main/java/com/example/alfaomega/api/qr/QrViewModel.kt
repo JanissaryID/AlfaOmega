@@ -27,7 +27,12 @@ class QrViewModel: ViewModel() {
                     QR_DATA = QrModel()
                     if(response.code() == 200){
                         response.body()?.let {
-                            QR_DATA = response.body()!![0]
+                            if(response.body()!!.isNullOrEmpty()){
+                                QR_DATA = QrModel()
+                            }
+                            else{
+                                QR_DATA = response.body()!![0]
+                            }
 
                             QR_STATE = 1
 //                            Log.d("get_log", "$LIST_PROBLEM_MACHINE")

@@ -1,5 +1,6 @@
 package com.example.alfaomega.components.menu
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -43,6 +44,9 @@ fun ItemMenuNavOwner(
                     modifier = Modifier
                         .size(42.dp)
                         .clickable {
+                            SCREEN_NOW = navMenu
+                            Log.d("log_screen", "Set = $SCREEN_NOW")
+
                             MENU_STATE = 0
                             TRANSACTION_STATE = 0
                             MACHINE_STATE = 0
