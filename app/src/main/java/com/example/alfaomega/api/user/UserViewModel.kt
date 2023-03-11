@@ -127,26 +127,30 @@ class UserViewModel : ViewModel() {
 
     fun fetchUser(){
         try {
+            USER_STATE = 0
+
+            LIST_USER.clear()
+
             UserApp.CreateInstance().fetchUser(
                 BearerToken = "Bearer " + TOKEN_API,
                 OwnerId = OWNER_ID
             ).enqueue(object :
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
-                    USER_STATE = 0
-
-                    LIST_USER.clear()
-
+//                    Log.i("info_response", "User : ${response}")
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_USER = response.body()!!.filter { user -> user.typeUser == 3} as ArrayList<UserModel>
-                            Log.i("info_response", "User : ${LIST_USER}")
+//                            Log.i("info_response", "User : ${LIST_USER}")
                             USER_STATE = 1
                         }
                         if (LIST_USER.isNullOrEmpty()){
                             USER_STATE = 3
                         }
                     }
+//                    else if(response.code() == 429){
+//                        fetchUser()
+//                    }
                 }
 
                 override fun onFailure(call: Call<ArrayList<UserModel>>, t: Throwable) {
@@ -261,6 +265,8 @@ class UserViewModel : ViewModel() {
                         val responseBodyData = response.body()
                         if (!responseBodyData!!.id.isNullOrEmpty()){
 
+                            fetchUser()
+
                             BUTTON_USER_EDIT = true
 
                             navController.navigate(route = ScreenDestination){
@@ -319,11 +325,22 @@ class UserViewModel : ViewModel() {
             override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
 //                Log.d("debug_user", response.toString())
                 if(response.code() == 201){
+                    fetchUser()
                     navController.navigate(route = ScreenDestination){
                         popUpTo(ScreenDestination) {
                             inclusive = true
                         }
                     }
+                }
+                else{
+                    insertUser(
+                        username = username,
+                        passwordUser = passwordUser,
+                        idOwner = idOwner,
+                        typeUser = typeUser,
+                        ScreenDestination = ScreenDestination,
+                        navController = navController
+                    )
                 }
             }
 
@@ -348,8 +365,9 @@ class UserViewModel : ViewModel() {
             ).enqueue(object :
                 Callback<UserModel> {
                 override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
-//                    Log.d("debug", "Code Delete Menu ${response.code()}")
+                    Log.d("log_user", "Code Delete Menu ${response}")
                     if(response.code() == 200){
+                        fetchUser()
                         if(USER_TYPE == 2){
                             navController.navigate(route = Screens.OwnerListDeveloper.route){
                                 popUpTo(Screens.OwnerListDeveloper.route) {

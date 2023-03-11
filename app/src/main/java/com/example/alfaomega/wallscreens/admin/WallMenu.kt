@@ -1,5 +1,6 @@
 package com.example.alfaomega.wallscreens
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -57,7 +58,7 @@ fun WallMenu(
             MenuLoadData(
                 navController = navController,
                 menu = if (selected_index_class == 0) MENU_LIST_GIANT_RESPONSE else MENU_LIST_TITAN_RESPONSE,
-                menuState = MENU_STATE,
+                menuState = if (selected_index_class == 0) MENU_STATE_GIANT else MENU_STATE_TITAN,
                 selectedIndex = selected_index_class
             )
         }

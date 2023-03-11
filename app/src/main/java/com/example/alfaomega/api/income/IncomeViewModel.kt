@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.log.LogApp
@@ -21,6 +22,7 @@ import com.example.alfaomega.navigations.Screens
 import com.madrapps.plot.line.DataPoint
 import com.madrapps.plot.line.LineGraph
 import com.madrapps.plot.line.LinePlot
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,7 +35,67 @@ import kotlin.collections.ArrayList
 class IncomeViewModel: ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    @ExperimentalCoroutinesApi
+    fun CoroutineFetchIncomeOwner(){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                INCOME_STATE = 0
+
+                LIST_INCOME.clear()
+                LIST_INCOME_FLOAT.clear()
+                LIST_EXPENSES_FLOAT.clear()
+                LIST_PROFIT_FLOAT.clear()
+
+                INCOME_SUM = 0
+                EXPENSES_SUM = 0
+                PROFIT_SUM = 0
+
+                fetchByOwner()
+                delay(1500L)
+//                Log.i("info_response", "Croutine End Income")
+                if(INCOME_STATE != 1){
+                    INCOME_STATE = 3
+                }
+            }
+            catch (e: Exception){
+//                INCOME_STATE = 3
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    @ExperimentalCoroutinesApi
+    fun CoroutineFetchIncomeStore(){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+//                Log.i("info_response", "Croutine")
+                INCOME_STATE_STORE = 0
+
+                LIST_INCOME_STORE.clear()
+                LIST_INCOME_FLOAT_STORE.clear()
+                LIST_EXPENSES_FLOAT_STORE.clear()
+                LIST_PROFIT_FLOAT_STORE.clear()
+
+                INCOME_SUM_STORE = 0
+                EXPENSES_SUM_STORE = 0
+                PROFIT_SUM_STORE = 0
+
+                fetchByStore()
+                delay(1500L)
+                if(INCOME_STATE_STORE != 1){
+                    INCOME_STATE_STORE = 3
+//                    Log.i("info_response", "Croutine End Income")
+                }
+            }
+            catch (e: Exception){
+//                INCOME_STATE = 3
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun fetchByOwner(){
+//        Log.i("info_response", "Croutine runing Income")
         try {
             val current = LocalDateTime.now()
 
@@ -53,16 +115,6 @@ class IncomeViewModel: ViewModel() {
             ).enqueue(object :
                 Callback<ArrayList<IncomeModel>> {
                 override fun onResponse(call: Call<ArrayList<IncomeModel>>, response: Response<ArrayList<IncomeModel>>) {
-                    INCOME_STATE = 0
-
-                    LIST_INCOME.clear()
-                    LIST_INCOME_FLOAT.clear()
-                    LIST_EXPENSES_FLOAT.clear()
-                    LIST_PROFIT_FLOAT.clear()
-
-                    INCOME_SUM = 0
-                    EXPENSES_SUM = 0
-                    PROFIT_SUM = 0
 
                     if(response.code() == 200){
                         response.body()?.let {
@@ -125,8 +177,8 @@ class IncomeViewModel: ViewModel() {
                                 INCOME_STATE = 1
                             }
                         }
-                        if (LIST_INCOME_FLOAT.isNullOrEmpty()){
-                            INCOME_STATE = 3
+                        if (LIST_INCOME_FLOAT.isNullOrEmpty() && INCOME_STATE == 0){
+                            fetchByOwner()
                         }
                     }
                 }
@@ -150,6 +202,7 @@ class IncomeViewModel: ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun fetchByStore(){
+//        Log.i("info_response", "Croutine Running Income")
         try {
             val current = LocalDateTime.now()
 
@@ -163,23 +216,13 @@ class IncomeViewModel: ViewModel() {
             ).enqueue(object :
                 Callback<ArrayList<IncomeModel>> {
                 override fun onResponse(call: Call<ArrayList<IncomeModel>>, response: Response<ArrayList<IncomeModel>>) {
-                    INCOME_STATE_STORE = 0
-
-                    LIST_INCOME_STORE.clear()
-                    LIST_INCOME_FLOAT_STORE.clear()
-                    LIST_EXPENSES_FLOAT_STORE.clear()
-                    LIST_PROFIT_FLOAT_STORE.clear()
-
-                    INCOME_SUM_STORE = 0
-                    EXPENSES_SUM_STORE = 0
-                    PROFIT_SUM_STORE = 0
 
                     if(response.code() == 200){
                         response.body()?.let {
 //                            Log.d("get_log", "data Int = ${response}")
                             LIST_INCOME_STORE = response.body()!!
 
-                            Log.d("get_log", "${response.body()!!}")
+//                            Log.d("get_log", "${response.body()!!}")
 
                             LIST_INCOME_STORE.forEachIndexed{ index, income ->
                                 var myDate = income.date!!.subSequence(0, 2).toString().toInt()
@@ -196,8 +239,8 @@ class IncomeViewModel: ViewModel() {
                                 INCOME_STATE_STORE = 1
                             }
                         }
-                        if (LIST_INCOME_FLOAT_STORE.isNullOrEmpty()){
-                            INCOME_STATE_STORE = 3
+                        if (LIST_INCOME_FLOAT_STORE.isNullOrEmpty() && INCOME_STATE_STORE == 0){
+                            fetchByStore()
                         }
                     }
                 }

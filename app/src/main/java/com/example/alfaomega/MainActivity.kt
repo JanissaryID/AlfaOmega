@@ -105,7 +105,7 @@ class MainActivity : ComponentActivity() {
                         qrViewModel = qrViewModel
                     )
 
-                    storeViewModel.FetchStore()
+//                    storeViewModel.FetchStore()
 
 //                    bluetoothViewModel.showPairedDevice(context = this, multiplePermissionState = multiplePermissionState)
                     MY_CONTEXT = this

@@ -1,8 +1,11 @@
 package com.example.alfaomega.view.admin.menu
 
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -20,13 +23,17 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.api.menu.MenuModel
+import com.example.alfaomega.api.menu.MenuViewModel
+import com.example.alfaomega.api.store.StoreViewModel
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun MenuLoadData(
     menuState: Int,
     selectedIndex: Int,
     menu: List<MenuModel>,
     navController: NavController,
+    menuViewModel: MenuViewModel = MenuViewModel(),
 //    onItemClick: (Int) -> Unit
 ) {
     val context = LocalContext.current
@@ -120,6 +127,55 @@ fun MenuLoadData(
             }
         }
         4 -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                ConstraintLayout(
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .fillMaxWidth()
+                ) {
+
+                    val (StoreImage, TextEmpty) = createRefs()
+
+                    Icon(painter = painterResource(
+                        id = R.drawable.ic_twotone_refresh_24),
+                        contentDescription = "Menu Empty",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .size(200.dp)
+                            .constrainAs(StoreImage)
+                            {
+                                top.linkTo(parent.top)
+                                start.linkTo(parent.start)
+                                bottom.linkTo(parent.bottom)
+                                end.linkTo(parent.end)
+                            }
+                            .clickable {
+                                menuViewModel.CoroutineMenu()
+                                Toast.makeText(context, "Please Wait", Toast.LENGTH_SHORT).show()
+                            }
+                    )
+
+                    Text(
+                        text = stringResource(R.string.Reload),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .constrainAs(TextEmpty)
+                            {
+                                top.linkTo(StoreImage.bottom, 8.dp)
+                                start.linkTo(parent.start)
+                                bottom.linkTo(parent.bottom)
+                                end.linkTo(parent.end)
+                            }
+                    )
+                }
+            }
             Toast.makeText(context, stringResource(R.string.TryAgainTitle), Toast.LENGTH_SHORT).show()
         }
     }

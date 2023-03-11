@@ -37,7 +37,7 @@ fun StoreLoadDataOwner(
     when (storeState) {
         0 -> {
             Box(
-                modifier = Modifier.wrapContentSize(),
+                modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()

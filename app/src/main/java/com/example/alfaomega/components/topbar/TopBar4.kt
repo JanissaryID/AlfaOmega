@@ -68,13 +68,10 @@ fun TopBar4(
 
     mCalendar.time = Date()
 
-//    val mDate = remember { mutableStateOf("") }
-
     val mDatePickerDialog = DatePickerDialog(
         activity,
         { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
             DATE_PICK = "${(mDayOfMonth).toString().padStart(2, '0')}-${(mMonth+1).toString().padStart(2, '0')}-${(mYear).toString().padStart(4, '0')}"
-//            Log.d("debug_transaction", "Date ${DATE_PICK}")
             transactionViewModel.getTransactionNowDate()
             expensesViewModel.fetchByStore()
         }, mYear, mMonth, mDay
@@ -96,7 +93,6 @@ fun TopBar4(
                     contentDescription = "Back",
                     modifier = Modifier.clickable {
                         navController.navigate(route = screenBack) {
-                            SCREEN_NOW = screenBack
                             popUpTo(screenBack) {
                                 inclusive = true
                             }
@@ -113,7 +109,6 @@ fun TopBar4(
                     contentDescription = description,
                     modifier = Modifier.clickable {
                         if(USER_TYPE == 1){
-                            Log.d("log_screen", "$SCREEN_NOW")
                             if(MENU_SCREEN_TYPE && EDIT_MODE){
                                 menuViewModel.deleteMenu(navController = navController, idMenu = ID_MENU_EDIT)
                                 navController.navigate(route = actionNav) {
@@ -122,13 +117,13 @@ fun TopBar4(
                                     }
                                 }
                             }
-                            if(RULES_SCREEN_TYPE && EDIT_MODE){
+                            else if(SCREEN_ACTIVE_NOW == Screens.RulesEditOwner.route && EDIT_MODE){
                                 ruleViewModel.deleteRule(navController = navController, idRule = ID_RULE_EDIT)
                             }
-                            if(USER_SCREEN_TYPE && EDIT_MODE){
+                            else if(SCREEN_ACTIVE_NOW == Screens.UserEditOwner.route && EDIT_MODE){
                                 userViewModel.deleteUser(navController = navController, iduser = ID_USER_EDIT)
                             }
-                            if(SCREEN_NOW == Screens.ExpensesOwner.route){
+                            else if(SCREEN_ACTIVE_NOW == Screens.ExpensesOwner.route){
                                 mDatePickerDialog.show()
                             }
                         }
@@ -137,13 +132,13 @@ fun TopBar4(
                                 userViewModel.deleteUser(navController = navController, iduser = ID_USER_EDIT)
                             }
                         }
-                        else if(USER_TYPE == 3 && SCREEN_NOW == Screens.StoreProfile.route){
-                            navController.navigate(route = actionNav) {
-                                popUpTo(actionNav) {
-                                    inclusive = true
-                                }
-                            }
-                        }
+//                        else if(USER_TYPE == 3 && SCREEN_NOW == Screens.StoreProfile.route){
+//                            navController.navigate(route = actionNav) {
+//                                popUpTo(actionNav) {
+//                                    inclusive = true
+//                                }
+//                            }
+//                        }
                         else{
 //                            Log.d("Check_Print", "Check_Print")
                             bluetoothViewModel.requestBluetoothPermission()

@@ -4,18 +4,41 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.user.UserApp
 import com.example.alfaomega.api.user.UserModel
 import com.example.alfaomega.navigations.Screens
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class StoreViewModel : ViewModel(){
+    @ExperimentalCoroutinesApi
+    fun CoroutineFetchStore(){
+//        Log.i("info_response", "Croutine Store")
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                STORE_STATE = 0
+                STORE_LIST_RESPONSE.clear()
+
+                FetchStore()
+                delay(3000L)
+                if(STORE_STATE != 1){
+                    STORE_STATE = 3
+                }
+//                Log.i("info_response", "Croutine End")
+            }
+            catch (e: Exception){
+
+            }
+        }
+    }
     fun FetchStore(){
         try {
+//            Log.i("info_response", "Croutine Runing")
             StoreApp.CreateInstance().fetchStore(
                 BearerToken = "Bearer " + TOKEN_API,
                 OwnerId = OWNER_ID
@@ -23,37 +46,28 @@ class StoreViewModel : ViewModel(){
                 Callback<ArrayList<StoreModel>> {
                 override fun onResponse(call: Call<ArrayList<StoreModel>>, response: Response<ArrayList<StoreModel>>) {
 
-                    STORE_STATE = 0
-
-                    STORE_LIST_RESPONSE.clear()
-
                     if(response.code() == 200){
                         response.body()?.let {
                             STORE_LIST_RESPONSE = response.body()!!
 
                             STORE_STATE = 1
-                            Log.i("info_response", "Store = $STORE_LIST_RESPONSE")
+//                            Log.i("info_response", "Store = $STORE_LIST_RESPONSE")
                         }
-                        if (STORE_LIST_RESPONSE.isNullOrEmpty()){
-                            STORE_STATE = 3
+                        if (STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE == 0){
+                            FetchStore()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<ArrayList<StoreModel>>, t: Throwable) {
-//                    Log.d("debug_store", "Fail get Data ${t.message.toString()}")
                     if (t.message == t.message){
-//                        Log.d("debug_store", "Failed")
                         STORE_STATE = 2
-//                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
                     }
                 }
             })
         }
         catch (e : Exception){
             STORE_ERROR_MESSAGE = e.message.toString()
-//            Log.d("debug_store", "ERROR $STORE_ERROR_MESSAGE")
-//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
 

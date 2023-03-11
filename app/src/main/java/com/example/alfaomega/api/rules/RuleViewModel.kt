@@ -70,6 +70,7 @@ class RuleViewModel : ViewModel() {
                     if(response.code() == 200){
                         val responseBodyData = response.body()
                         if (!responseBodyData!!.id.isNullOrEmpty()){
+                            getRules()
 
                             BUTTON_RULE_EDIT = true
 
@@ -121,11 +122,18 @@ class RuleViewModel : ViewModel() {
             Callback<RuleModel> {
             override fun onResponse(call: Call<RuleModel>, response: Response<RuleModel>) {
                 if(response.code() == 201){
+                    getRules()
                     navController.navigate(route = Screens.RulesOwner.route){
                         popUpTo(Screens.RulesOwner.route) {
                             inclusive = true
                         }
                     }
+                }
+                else{
+                    insertRule(
+                        ruleText = ruleText,
+                        navController = navController
+                    )
                 }
             }
 
@@ -152,6 +160,7 @@ class RuleViewModel : ViewModel() {
                 override fun onResponse(call: Call<RuleModel>, response: Response<RuleModel>) {
 //                    Log.d("debug", "Code Delete Menu ${response.code()}")
                     if(response.code() == 200){
+                        getRules()
                         navController.navigate(route = Screens.RulesOwner.route){
                             popUpTo(Screens.RulesOwner.route) {
                                 inclusive = true

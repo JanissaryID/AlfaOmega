@@ -13,18 +13,18 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class QrViewModel: ViewModel() {
-
     fun fetchQrOwner(){
         try {
+            QR_STATE = 0
+
+            QR_DATA = QrModel()
+
             QrApp.CreateInstance().fetchQr(
                 BearerToken = "Bearer " + TOKEN_API,
                 owner = OWNER_ID,
             ).enqueue(object :
                 Callback<ArrayList<QrModel>>{
                 override fun onResponse(call: Call<ArrayList<QrModel>>, response: Response<ArrayList<QrModel>>) {
-                    QR_STATE = 0
-
-                    QR_DATA = QrModel()
                     if(response.code() == 200){
                         response.body()?.let {
                             if(response.body()!!.isNullOrEmpty()){
@@ -80,12 +80,23 @@ class QrViewModel: ViewModel() {
             bodyUpdate).enqueue(object :
             Callback<QrModel> {
             override fun onResponse(call: Call<QrModel>, response: Response<QrModel>) {
+//                Log.d("log_qr", "$response")
                 if(response.code() == 201){
                     navController.navigate(route = Screens.Home.route){
                         popUpTo(Screens.Home.route) {
                             inclusive = true
                         }
                     }
+                    fetchQrOwner()
+                }
+                else{
+                    insertQR(
+                        merchantID = merchantID,
+                        clientID = clientID,
+                        KeyID = KeyID,
+                        ownerID = ownerID,
+                        navController = navController
+                    )
                 }
             }
 
@@ -128,6 +139,16 @@ class QrViewModel: ViewModel() {
                                 inclusive = true
                             }
                         }
+                        fetchQrOwner()
+                    }
+                    else{
+                        updateQr(
+                            idQr = idQr,
+                            merchantID = merchantID,
+                            clientID = clientID,
+                            KeyID = KeyID,
+                            navController = navController
+                        )
                     }
                 }
 

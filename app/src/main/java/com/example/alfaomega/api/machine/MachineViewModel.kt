@@ -23,7 +23,7 @@ class MachineViewModel: ViewModel() {
             ).enqueue(object :
                 Callback<ArrayList<MachineModel>> {
                 override fun onResponse(call: Call<ArrayList<MachineModel>>, response: Response<ArrayList<MachineModel>>) {
-                    MENU_STATE = 0
+//                    MENU_STATE = 0
 
                     LIST_MACHINE_WASHER_GIANT.clear()
                     LIST_MACHINE_DRYER_GIANT.clear()
@@ -70,7 +70,7 @@ class MachineViewModel: ViewModel() {
                 Callback<ArrayList<MachineModel>> {
                 override fun onResponse(call: Call<ArrayList<MachineModel>>, response: Response<ArrayList<MachineModel>>) {
                     Log.d("debug_machine", "Machine ${response}")
-                    MENU_STATE = 0
+//                    MENU_STATE = 0
 
                     LIST_MACHINE.clear()
                     if(response.code() == 200){

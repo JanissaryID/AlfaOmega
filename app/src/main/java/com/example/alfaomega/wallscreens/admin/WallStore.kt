@@ -75,7 +75,6 @@ fun WallStore(
                 Surface(
                     shape = RoundedCornerShape(100),
                     modifier = Modifier.clickable {
-                        STORE_STATE = 0
 
                         STORE_LIST_RESPONSE.clear()
 

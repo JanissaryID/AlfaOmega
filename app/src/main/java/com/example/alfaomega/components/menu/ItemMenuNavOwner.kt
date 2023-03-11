@@ -44,16 +44,20 @@ fun ItemMenuNavOwner(
                     modifier = Modifier
                         .size(42.dp)
                         .clickable {
-                            if (!STORE_ID.isNullOrEmpty()){
-                                SCREEN_NOW = navMenu
-//                            Log.d("log_screen", "Set = $SCREEN_NOW")
+                            if (SCREEN_ACTIVE_NOW == Screens.Home.route && !OWNER_ID.isNullOrEmpty()){
+                                navController.navigate(route = navMenu){
+                                    popUpTo(navMenu) {
+                                        inclusive = true
+                                    }
+                                }
+                            }
+                            else if(SCREEN_ACTIVE_NOW == Screens.OutletOwner.route && !STORE_ID.isNullOrEmpty()){
 
-                                MENU_STATE = 0
+                            }
+                            if (!STORE_ID.isNullOrEmpty()){
                                 TRANSACTION_STATE = 0
                                 MACHINE_STATE = 0
 
-                                MENU_LIST_TITAN_RESPONSE.clear()
-                                MENU_LIST_GIANT_RESPONSE.clear()
                                 TRANSACTION_RESPONSE.clear()
                                 LIST_MACHINE_DRYER_GIANT.clear()
                                 LIST_MACHINE_DRYER_TITAN.clear()

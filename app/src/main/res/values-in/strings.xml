@@ -119,4 +119,7 @@
     <string name="ListExpenses">Daftar Pengeluaran</string>
     <string name="TransactionEmpty">Transaksi Kosong</string>
     <string name="InsertData">Masukan Data</string>
+    <string name="GraphFinance">Graph Finance</string>
+    <string name="DataEmpty">Data Empty</string>
+    <string name="Reload">Reload</string>
 </resources>

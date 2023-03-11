@@ -206,7 +206,7 @@ fun WallHomeOwnerV2(
                 Column(modifier = Modifier
                     .fillMaxWidth()) {
                     Text(
-                        text = "Graph Finance",
+                        text = stringResource(R.string.GraphFinance),
                         fontWeight = FontWeight.Bold,
                         fontSize = MaterialTheme.typography.titleLarge.fontSize,
                         color = MaterialTheme.colorScheme.primary
@@ -216,8 +216,22 @@ fun WallHomeOwnerV2(
                         shape = RoundedCornerShape(ROUND_CORNER.dp),
                     ){
                         Column(modifier = Modifier.padding(vertical = 16.dp)) {
+//                            Log.d("debug_graph", "State = $INCOME_STATE")
                             if(INCOME_STATE == 1){
                                 SampleLineGraph(listOf(LIST_INCOME_FLOAT, LIST_EXPENSES_FLOAT, LIST_PROFIT_FLOAT), selectGraph = selectedItem)
+                            }
+                            else if(INCOME_STATE == 3){
+                                Box(
+                                    modifier = Modifier.fillMaxWidth().height(200.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.DataEmpty),
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                }
                             }
                             else{
                                 Box(
@@ -249,7 +263,8 @@ fun WallHomeOwnerV2(
                                                     selected = (selectedItem == index),
                                                     onClick = {
                                                         selectedItem = index
-                                                        Log.d("debug_graph", "index = $selectedItem")},
+//                                                        Log.d("debug_graph", "index = $selectedItem")
+                                                              },
                                                     role = Role.RadioButton
                                                 )
                                         ) {

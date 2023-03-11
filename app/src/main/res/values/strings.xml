@@ -118,4 +118,7 @@
     <string name="ListExpenses">List Expenses</string>
     <string name="TransactionEmpty">Transaction Empty</string>
     <string name="InsertData">Insert Data</string>
+    <string name="GraphFinance">Graph Finance</string>
+    <string name="DataEmpty">Data Empty</string>
+    <string name="Reload">Reload</string>
 </resources>

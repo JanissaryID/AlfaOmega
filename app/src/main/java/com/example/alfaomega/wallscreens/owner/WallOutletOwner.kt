@@ -198,6 +198,19 @@ fun WallOutletOwner(
                             if(INCOME_STATE_STORE == 1){
                                 SampleLineGraph(listOf(LIST_INCOME_FLOAT_STORE, LIST_EXPENSES_FLOAT_STORE, LIST_PROFIT_FLOAT_STORE), selectGraph = selectedItem)
                             }
+                            else if(INCOME_STATE_STORE == 3){
+                                Box(
+                                    modifier = Modifier.fillMaxWidth().height(200.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.DataEmpty),
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                }
+                            }
                             else{
                                 Box(
                                     modifier = Modifier

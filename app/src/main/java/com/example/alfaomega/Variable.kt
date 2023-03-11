@@ -35,15 +35,16 @@ var STORE_NAME: String by mutableStateOf("")
 var STORE_CITY: String by mutableStateOf("")
 var STORE_ADDRESS: String by mutableStateOf("")
 var STORE_PHONE: String by mutableStateOf("")
-//var STORE_ID: String by mutableStateOf("6385c1a3964c12ebc5e5fdb7")
 var STORE_ID: String by mutableStateOf("")
 var STORE_LIST_RESPONSE: ArrayList<StoreModel> by mutableStateOf(arrayListOf())
+//var OUTLET_LIST: ArrayList<StoreModel> by mutableStateOf(arrayListOf())
 var STORE_STATE: Int by mutableStateOf(0)
 var STORE_ERROR_MESSAGE: String by mutableStateOf("")
 var STORE_ADMIN: String by mutableStateOf("")
 
 //Variable Menu
-var MENU_STATE: Int by mutableStateOf(0)
+var MENU_STATE_GIANT: Int by mutableStateOf(0)
+var MENU_STATE_TITAN: Int by mutableStateOf(0)
 var MENU_LIST_TITAN_RESPONSE: ArrayList<MenuModel> by mutableStateOf(arrayListOf())
 var MENU_LIST_GIANT_RESPONSE: ArrayList<MenuModel> by mutableStateOf(arrayListOf())
 var MENU_ERROR_MESSAGE: String by mutableStateOf("")
@@ -75,7 +76,7 @@ var TRANSACTION_MONEY: String by mutableStateOf("")
 //Variable Screen
 var TRANSACTION_SCREEN: Boolean by mutableStateOf(false)
 var MACHINE_SCREEN: Boolean by mutableStateOf(false)
-var SCREEN_NOW: String by mutableStateOf("")
+var SCREEN_ACTIVE_NOW: String by mutableStateOf("")
 
 //Variable Machine
 var LIST_MACHINE_DRYER_GIANT: ArrayList<MachineModel> by mutableStateOf(arrayListOf())

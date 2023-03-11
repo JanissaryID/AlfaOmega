@@ -73,7 +73,9 @@ class ExpensesViewModel: ViewModel() {
             val dayNow = current.format(formatDay)
             val date = if(!DATE_PICK.isNullOrEmpty()) DATE_PICK.substring(startIndex = 3) else dayNow
 
-//            Log.d("get_log", "${date} -- ${dayNow}")
+            EXPENSES_STATE_STORE = 0
+
+            LIST_EXPENSES_STORE.clear()
 
             ExpensesApp.CreateInstance().fetchExpensesByStore(
                 BearerToken = "Bearer " + TOKEN_API,
@@ -82,9 +84,7 @@ class ExpensesViewModel: ViewModel() {
             ).enqueue(object :
                 Callback<ArrayList<ExpensesModel>> {
                 override fun onResponse(call: Call<ArrayList<ExpensesModel>>, response: Response<ArrayList<ExpensesModel>>) {
-                    EXPENSES_STATE_STORE = 0
 
-                    LIST_EXPENSES_STORE.clear()
 //                    Log.d("get_log", "${response}")
 
                     if(response.code() == 200){
