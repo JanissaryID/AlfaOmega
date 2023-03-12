@@ -55,6 +55,9 @@ fun ItemStoreSquare(
                     STORE_ID = storeId
                     STORE_PHONE = storePhone
                     STORE_ADMIN = storeAdmin
+
+                    protoViewModel.updateStoreID(STORE_ID)
+
                     if(!STORE_LIST_RESPONSE.isNullOrEmpty() && !STORE_ID.isNullOrEmpty()){
                         navController.navigate(route = Screens.OutletOwner.route){
                             popUpTo(Screens.OutletOwner.route) {

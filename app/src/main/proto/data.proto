@@ -11,4 +11,5 @@ message DataPreferences {
   string ADDRESS_DEVICE = 4;
   string OWNER_ID = 5;
   string UUID_STRING = 6;
+  bool EDIT_MODE = 7;
 }

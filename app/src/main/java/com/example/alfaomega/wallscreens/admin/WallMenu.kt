@@ -1,6 +1,8 @@
 package com.example.alfaomega.wallscreens
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -15,12 +17,15 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.components.ComponentMenuClass
+import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.view.admin.menu.MenuLoadData
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun WallMenu(
     paddingValues: PaddingValues,
     navController: NavController,
+    protoViewModel: ProtoViewModel
 ) {
 //    val onItemClick = { index: Int -> selectedIndex = index}
     val selectionMenuClass = listOf(stringResource(R.string.MenuGiant), stringResource(R.string.MenuTitan))
@@ -59,7 +64,8 @@ fun WallMenu(
                 navController = navController,
                 menu = if (selected_index_class == 0) MENU_LIST_GIANT_RESPONSE else MENU_LIST_TITAN_RESPONSE,
                 menuState = if (selected_index_class == 0) MENU_STATE_GIANT else MENU_STATE_TITAN,
-                selectedIndex = selected_index_class
+                selectedIndex = selected_index_class,
+                protoViewModel = protoViewModel
             )
         }
     }

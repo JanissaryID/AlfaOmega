@@ -36,4 +36,8 @@ class ProtoViewModel(application: Application): AndroidViewModel(application) {
     fun updateUUID(UUID_Device: String) = viewModelScope.launch(Dispatchers.IO){
         repository.updateUUID(UUID_Device = UUID_Device)
     }
+
+    fun updateEditMode(status: Boolean) = viewModelScope.launch(Dispatchers.IO){
+        repository.updateEditMode(status = status)
+    }
 }

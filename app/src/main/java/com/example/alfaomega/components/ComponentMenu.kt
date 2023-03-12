@@ -15,6 +15,7 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.navigations.Screens
+import com.example.alfaomega.proto.ProtoViewModel
 import java.text.NumberFormat
 import java.util.*
 
@@ -30,6 +31,7 @@ fun ComponentMenu(
     menuClass: Boolean,
     priceTitle: String,
     idmenu: String,
+    protoViewModel: ProtoViewModel,
     navController: NavController
 ) {
     val selectionMenuClass = listOf(stringResource(R.string.MenuGiant), stringResource(R.string.MenuTitan))
@@ -48,7 +50,7 @@ fun ComponentMenu(
             shape = RoundedCornerShape(ROUND_CORNER.dp),
             modifier = Modifier.clickable {
 
-                if(USER_TYPE == 1){
+                if(USER_TYPE == 1 && SCREEN_ACTIVE_NOW == Screens.MenuOwner.route){
                     EDIT_MODE = true
                     TITLE_MENU_EDIT = menuTitle
                     PRICE_MENU_EDIT = menuPrice
@@ -58,6 +60,7 @@ fun ComponentMenu(
                     CLASS_MENU_EDIT_STRING = if(menuClass) selectionMenuClass[1] else selectionMenuClass[0]
                     ID_MENU_EDIT = idmenu
                     MENU_SCREEN_TYPE = true
+                    protoViewModel.updateEditMode(status = EDIT_MODE)
                     navController.navigate(route = Screens.MenuEditOwner.route)
                 }
                 else{

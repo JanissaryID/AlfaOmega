@@ -17,12 +17,14 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.navigations.Screens
+import com.example.alfaomega.proto.ProtoViewModel
 
 @Composable
 fun ComponentUser(
     name: String,
     password: String,
     idUser: String,
+    protoViewModel: ProtoViewModel,
     navController: NavController
 ) {
     Card(
@@ -34,12 +36,13 @@ fun ComponentUser(
             color = Color.Transparent,
             shape = RoundedCornerShape(ROUND_CORNER.dp),
             modifier = Modifier.clickable {
-                if(USER_TYPE == 1) {
+                if(USER_TYPE == 1 && SCREEN_ACTIVE_NOW == Screens.UserOwner.route) {
                     EDIT_MODE = true
                     USER_NAME_EDIT = name
                     USER_PASSWORD_EDIT = password
                     USER_SCREEN_TYPE = true
                     ID_USER_EDIT = idUser
+                    protoViewModel.updateEditMode(status = EDIT_MODE)
                     navController.navigate(route = Screens.UserEditOwner.route)
                 }
                 else if(USER_TYPE == 2){
@@ -93,6 +96,7 @@ fun ComponentUser(
                             USER_PASSWORD_EDIT = password
                             USER_SCREEN_TYPE = true
                             ID_USER_EDIT = idUser
+                            protoViewModel.updateEditMode(status = EDIT_MODE)
                             navController.navigate(route = Screens.UserEditOwner.route){
                                 popUpTo(Screens.UserEditOwner.route) {
                                     inclusive = true

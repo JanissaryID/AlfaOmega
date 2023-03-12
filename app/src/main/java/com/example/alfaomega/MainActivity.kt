@@ -72,6 +72,7 @@ class MainActivity : ComponentActivity() {
             ADDRESS_DEVICE = it.addressdevice
             OWNER_ID = it.ownerid
             UUID_DEVICE = it.uuidstring
+            EDIT_MODE = it.editmode
         })
 
         setContent {
@@ -105,12 +106,11 @@ class MainActivity : ComponentActivity() {
                         qrViewModel = qrViewModel
                     )
 
-//                    storeViewModel.FetchStore()
-
-//                    bluetoothViewModel.showPairedDevice(context = this, multiplePermissionState = multiplePermissionState)
                     MY_CONTEXT = this
 
-                    Log.i("info_response", "Proto : ${STORE_ID}  ${USER_NAME}  ${USER_TYPE} ${UUID_DEVICE} ${ADDRESS_DEVICE}")
+                    Log.i("info_response", "Proto : ${STORE_ID} - ${USER_NAME} - ${USER_TYPE} - ${UUID_DEVICE} - ${ADDRESS_DEVICE}")
+
+                    Log.d("info_response", "Screen Now = ${SCREEN_ACTIVE_NOW} - ${EDIT_MODE}")
                 }
             }
         }

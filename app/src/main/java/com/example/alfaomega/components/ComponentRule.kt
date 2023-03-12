@@ -15,6 +15,7 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.navigations.Screens
+import com.example.alfaomega.proto.ProtoViewModel
 
 @Composable
 fun ComponentRule(
@@ -25,6 +26,7 @@ fun ComponentRule(
     machineNumber: String = "0",
     storeName: String = "Laundry",
     date: String = "",
+    protoViewModel: ProtoViewModel,
     navController: NavController
 ) {
     Card(
@@ -43,11 +45,12 @@ fun ComponentRule(
                 .clickable(
                     enabled = !solvedMachine
                 ) {
-                    if (USER_TYPE == 1) {
+                    if (USER_TYPE == 1 && SCREEN_ACTIVE_NOW == Screens.RulesOwner.route) {
                         EDIT_MODE = true
                         RULE_TEXT_EDIT = ruleText
                         RULES_SCREEN_TYPE = true
                         ID_RULE_EDIT = idRule
+                        protoViewModel.updateEditMode(status = EDIT_MODE)
                         navController.navigate(route = Screens.RulesEditOwner.route)
                     }
                 }) {

@@ -133,6 +133,7 @@ class MenuViewModel: ViewModel() {
             ).enqueue(object :
                 Callback<MenuModel> {
                 override fun onResponse(call: Call<MenuModel>, response: Response<MenuModel>) {
+                    Log.d("log_menu", "${response}")
                     if(response.code() == 200){
                         val responseBodyData = response.body()
                         if (!responseBodyData!!.id.isNullOrEmpty()){
@@ -205,6 +206,7 @@ class MenuViewModel: ViewModel() {
         ).enqueue(object :
             Callback<MenuModel> {
             override fun onResponse(call: Call<MenuModel>, response: Response<MenuModel>) {
+                Log.d("log_menu", "${response}")
                 if(response.code() == 201){
                     getMenu()
                     navController.navigate(route = Screens.MenuOwner.route){

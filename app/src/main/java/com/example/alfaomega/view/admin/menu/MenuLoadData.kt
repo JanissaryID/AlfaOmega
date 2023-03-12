@@ -25,6 +25,7 @@ import com.example.alfaomega.R
 import com.example.alfaomega.api.menu.MenuModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.store.StoreViewModel
+import com.example.alfaomega.proto.ProtoViewModel
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
@@ -34,6 +35,7 @@ fun MenuLoadData(
     menu: List<MenuModel>,
     navController: NavController,
     menuViewModel: MenuViewModel = MenuViewModel(),
+    protoViewModel: ProtoViewModel
 //    onItemClick: (Int) -> Unit
 ) {
     val context = LocalContext.current
@@ -59,7 +61,8 @@ fun MenuLoadData(
                     MenuLazyColumn(
                         navController = navController,
                         menuModel = menu,
-                        selectedIndex = selectedIndex
+                        selectedIndex = selectedIndex,
+                        protoViewModel = protoViewModel
                     )
                 }
 

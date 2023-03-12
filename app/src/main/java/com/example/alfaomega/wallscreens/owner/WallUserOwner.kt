@@ -12,10 +12,11 @@ import com.example.alfaomega.LIST_OWNER
 import com.example.alfaomega.LIST_USER
 import com.example.alfaomega.USER_STATE
 import com.example.alfaomega.USER_TYPE
+import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.view.owner.user.UserLoadData
 
 @Composable
-fun WallUserOwner(paddingValues: PaddingValues, navController: NavController) {
+fun WallUserOwner(paddingValues: PaddingValues, navController: NavController, protoViewModel: ProtoViewModel) {
     Surface(color = Color.Transparent, modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         Column(modifier = Modifier
             .fillMaxSize()
@@ -26,7 +27,9 @@ fun WallUserOwner(paddingValues: PaddingValues, navController: NavController) {
             UserLoadData(
                 userState = USER_STATE,
                 user = if(USER_TYPE == 2) LIST_OWNER else LIST_USER,
-                navController = navController)
+                navController = navController,
+                protoViewModel = protoViewModel
+            )
         }
     }
 }

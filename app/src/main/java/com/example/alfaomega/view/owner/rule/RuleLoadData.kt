@@ -19,12 +19,14 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.api.rules.RuleModel
+import com.example.alfaomega.proto.ProtoViewModel
 
 @Composable
 fun RuleLoadData(
     ruleState: Int,
     rule: List<RuleModel>,
     navController: NavController,
+    protoViewModel: ProtoViewModel
 //    onItemClick: (Int) -> Unit
 ) {
     val context = LocalContext.current
@@ -48,6 +50,7 @@ fun RuleLoadData(
                     RuleLazyColumn(
                         navController = navController,
                         ruleModel = rule,
+                        protoViewModel = protoViewModel
                     )
                 }
 

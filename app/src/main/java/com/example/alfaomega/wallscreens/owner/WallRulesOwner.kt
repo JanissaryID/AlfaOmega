@@ -17,7 +17,7 @@ import com.example.alfaomega.view.admin.store.StoreLoadData
 import com.example.alfaomega.view.owner.rule.RuleLoadData
 
 @Composable
-fun WallRulesOwner(paddingValues: PaddingValues, navController: NavController) {
+fun WallRulesOwner(paddingValues: PaddingValues, navController: NavController, protoViewModel: ProtoViewModel) {
     Surface(color = Color.Transparent, modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         Column(modifier = Modifier
             .fillMaxSize()
@@ -29,6 +29,7 @@ fun WallRulesOwner(paddingValues: PaddingValues, navController: NavController) {
                 ruleState = RULE_STATE,
                 rule = LIST_RULE,
                 navController = navController,
+                protoViewModel = protoViewModel
             )
         }
     }

@@ -13,11 +13,13 @@ import com.example.alfaomega.api.menu.MenuModel
 import com.example.alfaomega.api.rules.RuleModel
 import com.example.alfaomega.components.ComponentMenu
 import com.example.alfaomega.components.ComponentRule
+import com.example.alfaomega.proto.ProtoViewModel
 
 @Composable
 fun RuleLazyColumn(
     ruleModel: List<RuleModel>,
     navController: NavController,
+    protoViewModel: ProtoViewModel
 ) {
     LazyColumn(
         modifier = Modifier.padding(top = 8.dp).fillMaxSize(),
@@ -28,7 +30,8 @@ fun RuleLazyColumn(
                 indexNumber = index + 1,
                 ruleText = rule.rule!!,
                 idRule = rule.id!!,
-                navController = navController
+                navController = navController,
+                protoViewModel = protoViewModel
             )
         }
     }

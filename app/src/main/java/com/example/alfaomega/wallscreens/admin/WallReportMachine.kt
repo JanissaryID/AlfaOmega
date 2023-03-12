@@ -10,10 +10,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.LIST_PROBLEM_MACHINE
 import com.example.alfaomega.PROBLEM_MACHINE_STATE
+import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.view.admin.report.ReportLoadData
 
 @Composable
-fun WallReportMachine(paddingValues: PaddingValues, navController: NavController) {
+fun WallReportMachine(paddingValues: PaddingValues, navController: NavController, protoViewModel: ProtoViewModel) {
     Surface(color = Color.Transparent, modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         Column(modifier = Modifier
             .fillMaxSize()
@@ -25,6 +26,7 @@ fun WallReportMachine(paddingValues: PaddingValues, navController: NavController
                 reportState = PROBLEM_MACHINE_STATE,
                 report = LIST_PROBLEM_MACHINE,
                 navController = navController,
+                protoViewModel = protoViewModel
             )
         }
     }

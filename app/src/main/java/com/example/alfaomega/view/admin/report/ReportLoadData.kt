@@ -18,6 +18,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.api.problem.ProblemModel
+import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.view.owner.rule.RuleLazyColumn
 
 @Composable
@@ -25,6 +26,7 @@ fun ReportLoadData(
     reportState: Int,
     report: List<ProblemModel>,
     navController: NavController,
+    protoViewModel: ProtoViewModel
 //    onItemClick: (Int) -> Unit
 ) {
     val context = LocalContext.current
@@ -48,6 +50,7 @@ fun ReportLoadData(
                     ReportLazyColumn(
                         navController = navController,
                         reportModel = report,
+                        protoViewModel = protoViewModel
                     )
                 }
 

@@ -13,11 +13,13 @@ import androidx.navigation.NavController
 import com.example.alfaomega.api.problem.ProblemModel
 import com.example.alfaomega.api.rules.RuleModel
 import com.example.alfaomega.components.ComponentRule
+import com.example.alfaomega.proto.ProtoViewModel
 
 @Composable
 fun ReportLazyColumn(
     reportModel: List<ProblemModel>,
     navController: NavController,
+    protoViewModel: ProtoViewModel
 ) {
     LazyColumn(
         modifier = Modifier.padding(top = 0.dp).fillMaxSize(),
@@ -33,7 +35,8 @@ fun ReportLazyColumn(
                 machineNumber = problem.machineNumber.toString(),
                 storeName = problem.problemStore!!,
                 date = problem.date!!,
-                navController = navController
+                navController = navController,
+                protoViewModel = protoViewModel
             )
         }
     }

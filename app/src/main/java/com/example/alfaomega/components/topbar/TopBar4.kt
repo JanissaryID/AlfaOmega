@@ -132,25 +132,37 @@ fun TopBar4(
                                 userViewModel.deleteUser(navController = navController, iduser = ID_USER_EDIT)
                             }
                         }
-//                        else if(USER_TYPE == 3 && SCREEN_NOW == Screens.StoreProfile.route){
-//                            navController.navigate(route = actionNav) {
-//                                popUpTo(actionNav) {
-//                                    inclusive = true
-//                                }
-//                            }
-//                        }
-                        else{
-//                            Log.d("Check_Print", "Check_Print")
-                            bluetoothViewModel.requestBluetoothPermission()
-                            bluetoothViewModel.checkBluetoothCompatible()
-                            bluetoothViewModel.connectBluetooth(
-                                address = ADDRESS_DEVICE,
-                                context = MY_CONTEXT!!,
-                                multiplePermissionState = multiplePermissionState,
-                                uuidDevice = UUID_DEVICE
-                            )
-//                            Log.d("Check_Print", "Stat Connect = $STAT_BLUETOOTH_CONNECT")
+                        else if(USER_TYPE == 3){
+                            if(SCREEN_ACTIVE_NOW == Screens.StoreProfile.route){
+                                navController.navigate(route = actionNav) {
+                                    popUpTo(actionNav) {
+                                        inclusive = true
+                                    }
+                                }
+                            }
+                            else if(SCREEN_ACTIVE_NOW == Screens.DetailTransaction.route){
+                                bluetoothViewModel.requestBluetoothPermission()
+                                bluetoothViewModel.checkBluetoothCompatible()
+                                bluetoothViewModel.connectBluetooth(
+                                    address = ADDRESS_DEVICE,
+                                    context = MY_CONTEXT!!,
+                                    multiplePermissionState = multiplePermissionState,
+                                    uuidDevice = UUID_DEVICE
+                                )
+                            }
                         }
+//                        else{
+////                            Log.d("Check_Print", "Check_Print")
+//                            bluetoothViewModel.requestBluetoothPermission()
+//                            bluetoothViewModel.checkBluetoothCompatible()
+//                            bluetoothViewModel.connectBluetooth(
+//                                address = ADDRESS_DEVICE,
+//                                context = MY_CONTEXT!!,
+//                                multiplePermissionState = multiplePermissionState,
+//                                uuidDevice = UUID_DEVICE
+//                            )
+////                            Log.d("Check_Print", "Stat Connect = $STAT_BLUETOOTH_CONNECT")
+//                        }
                     },
                     tint = colorFont
                 )

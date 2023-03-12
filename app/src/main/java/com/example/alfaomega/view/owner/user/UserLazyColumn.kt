@@ -13,11 +13,13 @@ import com.example.alfaomega.api.rules.RuleModel
 import com.example.alfaomega.api.user.UserModel
 import com.example.alfaomega.components.ComponentRule
 import com.example.alfaomega.components.ComponentUser
+import com.example.alfaomega.proto.ProtoViewModel
 
 @Composable
 fun UserLazyColumn(
     userModel: List<UserModel>,
     navController: NavController,
+    protoViewModel: ProtoViewModel
 ) {
     LazyColumn(
         modifier = Modifier.padding(top = 8.dp).fillMaxSize(),
@@ -28,7 +30,8 @@ fun UserLazyColumn(
                 idUser = user.id!!,
                 name = user.username!!,
                 password = user.passwordUser!!,
-                navController = navController
+                navController = navController,
+                protoViewModel = protoViewModel
             )
         }
     }

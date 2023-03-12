@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.api.menu.MenuModel
+import com.example.alfaomega.proto.ProtoViewModel
 import java.text.NumberFormat
 import java.util.*
 import com.example.alfaomega.components.ComponentMenu as ComponentMenu
@@ -21,7 +22,8 @@ import com.example.alfaomega.components.ComponentMenu as ComponentMenu
 fun MenuLazyColumn(
     menuModel: List<MenuModel>,
     navController: NavController,
-    selectedIndex: Int
+    selectedIndex: Int,
+    protoViewModel: ProtoViewModel
 ) {
     val localeID = Locale("in", "ID")
     val numberFormat = NumberFormat.getCurrencyInstance(localeID)
@@ -45,7 +47,8 @@ fun MenuLazyColumn(
                 menuClass = menu.menuClass!!,
                 idmenu = menu.id!!,
                 priceTitle = numberFormat.format(menu.menuPrice!!.toInt()),
-                navController = navController
+                navController = navController,
+                protoViewModel = protoViewModel
             )
         }
     }

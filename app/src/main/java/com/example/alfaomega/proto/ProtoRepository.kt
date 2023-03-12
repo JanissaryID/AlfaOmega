@@ -62,4 +62,10 @@ class ProtoRepository(context: Context) {
             preference.toBuilder().setUUIDSTRING(UUID_Device).build()
         }
     }
+
+    suspend fun updateEditMode(status: Boolean){
+        datastore.updateData { preference ->
+            preference.toBuilder().setEDITMODE(status).build()
+        }
+    }
 }

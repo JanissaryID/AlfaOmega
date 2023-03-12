@@ -105,7 +105,7 @@ var FAILED_LOGIN_ALREADY: Boolean by mutableStateOf(false)
 var LIST_USER: ArrayList<UserModel> by mutableStateOf(arrayListOf())
 
 //Variable ownerMenu
-var EDIT_MODE: Boolean by mutableStateOf(true)
+var EDIT_MODE: Boolean by mutableStateOf(false)
 
 //Variable Edit menu
 var ID_MENU_EDIT: String by mutableStateOf("")

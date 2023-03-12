@@ -147,7 +147,7 @@ fun WallExpenses(
                             shape = RoundedCornerShape(12.dp),
                             modifier = Modifier.fillMaxWidth(),
                             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, keyboardType = KeyboardType.Number),
-                            readOnly = if(!TRANSACTION_SCREEN) true else false
+                            readOnly = if(USER_TYPE == 3 && SCREEN_ACTIVE_NOW == Screens.ExpensesStore.route) false else true
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(

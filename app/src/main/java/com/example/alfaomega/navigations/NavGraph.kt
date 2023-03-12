@@ -169,7 +169,11 @@ fun NavGraphSetup(
 
                 STAT_GET_DATA = false
                 TRANSACTION_SCREEN = true
-//                bluetoothViewModel.showPairedDevice(context = MY_CONTEXT!!, multiplePermissionState = multiplePermissionState)
+
+                if(STORE_NAME.isNullOrEmpty()){
+                    storeViewModel.GetStore()
+                }
+
             }
             ScreenStore(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
@@ -252,6 +256,10 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
 
                 SCREEN_ACTIVE_NOW = Screens.ExpensesStore.route
+
+                if(STORE_NAME.isNullOrEmpty()){
+                    storeViewModel.GetStore()
+                }
 
             }
             ScreenExpenses(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
