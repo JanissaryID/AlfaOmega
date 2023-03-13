@@ -373,10 +373,9 @@ fun NavGraphSetup(
                 STAT_GET_DATA = false
                 PROBLEM_MACHINE_STATE_SCREEN = false
 
-//                if(MENU_LIST_GIANT_RESPONSE.isNullOrEmpty() && MENU_LIST_TITAN_RESPONSE.isNullOrEmpty() && (MENU_STATE_GIANT <= 1 || MENU_STATE_TITAN <= 1) ){
-//                    menuViewModel.getMenu()
-////                    Log.d("log_menu", "Menu State = $MENU_LIST_GIANT_RESPONSE")
-//                }
+                if(STORE_NAME.isNullOrEmpty()){
+                    storeViewModel.GetStore()
+                }
 
                 if (LIST_EXPENSES_STORE.isNullOrEmpty() && EXPENSES_STATE_STORE <= 1){
                     expensesViewModel.fetchByStore()
