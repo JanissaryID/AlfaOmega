@@ -37,6 +37,9 @@ var STORE_ADDRESS: String by mutableStateOf("")
 var STORE_PHONE: String by mutableStateOf("")
 var STORE_ID: String by mutableStateOf("")
 var STORE_LIST_RESPONSE: ArrayList<StoreModel> by mutableStateOf(arrayListOf())
+var STORE_CODE_ERROR: Boolean by mutableStateOf(false)
+var STORE_CODE_ERROR_STR: String by mutableStateOf("")
+
 //var OUTLET_LIST: ArrayList<StoreModel> by mutableStateOf(arrayListOf())
 var STORE_STATE: Int by mutableStateOf(0)
 var STORE_ERROR_MESSAGE: String by mutableStateOf("")
@@ -102,6 +105,7 @@ var BUTTON_LOGIN_CLICKED: Boolean by mutableStateOf(false)
 var FAILED_LOGIN: Boolean by mutableStateOf(false)
 var FAILED_LOGIN_EMPTY: Boolean by mutableStateOf(false)
 var FAILED_LOGIN_ALREADY: Boolean by mutableStateOf(false)
+var STATUS_LOGIN_LOGOUT: Boolean by mutableStateOf(false)
 var LIST_USER: ArrayList<UserModel> by mutableStateOf(arrayListOf())
 
 //Variable ownerMenu

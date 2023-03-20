@@ -83,8 +83,7 @@ fun NavGraphSetup(
                     STAT_GET_DATA = true
                     transactionViewModel.getTransactionActive()
 
-
-                    TRANSACTION_SCREEN = true
+//                    STATUS_LOGIN_LOGOUT = false
 
                     TRANSACATION_IS_WASHER = false
                     TRANSACATION_IS_DRYER = false
@@ -98,6 +97,10 @@ fun NavGraphSetup(
             if(USER_TYPE == 3){
                 if(STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1){
                     storeViewModel.CoroutineFetchStore()
+                }
+
+                if(STORE_NAME.isNullOrEmpty() && !STORE_ID.isNullOrEmpty()){
+                    storeViewModel.GetStore()
                 }
 
                 ScreenHome(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
@@ -168,7 +171,7 @@ fun NavGraphSetup(
                 SCREEN_ACTIVE_NOW = Screens.StoreProfile.route
 
                 STAT_GET_DATA = false
-                TRANSACTION_SCREEN = true
+//                TRANSACTION_SCREEN = true
 
                 if(STORE_NAME.isNullOrEmpty()){
                     storeViewModel.GetStore()
@@ -192,7 +195,7 @@ fun NavGraphSetup(
                 else{
                     machineViewModel.getMachine()
                 }
-                TRANSACTION_SCREEN = true
+//                TRANSACTION_SCREEN = true
             }
             ScreenMachine(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
@@ -205,8 +208,10 @@ fun NavGraphSetup(
                 SCREEN_ACTIVE_NOW = Screens.Store.route
 
                 STAT_GET_DATA = false
-                storeViewModel.CoroutineFetchStore()
-                TRANSACTION_SCREEN = true
+
+                storeViewModel.FetchStore()
+//                storeViewModel.CoroutineFetchStore()
+//                TRANSACTION_SCREEN = true
             }
             ScreenStoreList(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
@@ -220,7 +225,7 @@ fun NavGraphSetup(
 
                 STAT_GET_DATA = false
                 transactionViewModel.getTransactionNow()
-                TRANSACTION_SCREEN = true
+//                TRANSACTION_SCREEN = true
             }
             ScreenTransactionList(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
@@ -231,6 +236,8 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
 
                 SCREEN_ACTIVE_NOW = Screens.Login.route
+
+                STORE_LIST_RESPONSE.clear()
 
                 STAT_GET_DATA = false
             }
@@ -274,7 +281,7 @@ fun NavGraphSetup(
 
                 STAT_GET_DATA = false
 
-                TRANSACTION_SCREEN = true
+//                TRANSACTION_SCREEN = true
                 CLASS_MENU_EDIT_STRING = ""
 
                 menuViewModel.getMenu()
@@ -292,7 +299,7 @@ fun NavGraphSetup(
                 STAT_GET_DATA = false
                 transactionViewModel.getTransactionNowDate()
                 logViewModel.fetchLog()
-                TRANSACTION_SCREEN = true
+//                TRANSACTION_SCREEN = true
             }
             ScreenTransactionOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }

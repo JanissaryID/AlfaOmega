@@ -57,21 +57,21 @@ fun TopBar3(
                     contentDescription = description,
                     modifier = Modifier.clickable {
                         if(USER_TYPE != 3 && SCREEN_ACTIVE_NOW == Screens.Home.route){
-                            userViewModel.updateStatUser(OWNER_ID, false)
+                            userViewModel.updateStatUser(OWNER_ID, false, navController = navController, routeScreen = route)
                             protoViewModel.updateNameUser(Nameuser = "")
                             protoViewModel.updateTypeUser(TypeUser = 0)
                             protoViewModel.updateStoreID(keyStore = "")
-                            multiplePermissionState.launchMultiplePermissionRequest()
-                            bluetoothViewModel.requestBluetoothPermission()
-
-                            if(BLUETOOTH_STATE_ON){
-                                navController.navigate(route = route)
-                                {
-                                    popUpTo(route) {
-                                        inclusive = true
-                                    }
-                                }
-                            }
+//                            multiplePermissionState.launchMultiplePermissionRequest()
+//                            bluetoothViewModel.requestBluetoothPermission()
+//
+//                            if(BLUETOOTH_STATE_ON){
+//                                navController.navigate(route = route)
+//                                {
+//                                    popUpTo(route) {
+//                                        inclusive = true
+//                                    }
+//                                }
+//                            }
                         }
                         else{
                             multiplePermissionState.launchMultiplePermissionRequest()

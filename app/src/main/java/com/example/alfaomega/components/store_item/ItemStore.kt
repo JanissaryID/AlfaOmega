@@ -49,7 +49,7 @@ fun ItemStore(
                         }
                     }
                     else{
-                        TRANSACTION_SCREEN = true
+//                        TRANSACTION_SCREEN = true
 
                         if(!STORE_ID.isNullOrEmpty()){
                             storeViewModel.updateStoreAdmin(

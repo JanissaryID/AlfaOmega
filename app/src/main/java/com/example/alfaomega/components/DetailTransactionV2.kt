@@ -76,15 +76,11 @@ fun DetailTransactionV2(
 
     val context = LocalContext.current
 
-
-//    val harga = "Rp.15.000".
-
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
 
         val (CardMenu, Button) = createRefs()
 
         Card(
-//            elevation = CardDefaults.cardElevation(6.dp),
             modifier = Modifier
                 .padding(0.dp)
                 .fillMaxWidth()
@@ -104,157 +100,148 @@ fun DetailTransactionV2(
                 .fillMaxWidth()) {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
                 ){
-                    Row(){
-                        Column()
-                        {
-                            Text(
-                                text = "${stringResource(R.string.OutletTitle)}",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = "${stringResource(R.string.SetviceTitle)}",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = "Type Machine",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = stringResource(R.string.PriceTitle),
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = stringResource(R.string.Nominal),
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = stringResource(R.string.Change),
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = stringResource(R.string.PaymentTitle),
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = stringResource(R.string.DateTitle),
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = stringResource(R.string.Admin),
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
+                    Text(
+                        text = "$STORE_NAME",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        color = MaterialTheme.colorScheme.surface
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "$TRANSACATION_DATE",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = MaterialTheme.typography.labelMedium.fontSize,
+                        color = MaterialTheme.colorScheme.surface
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Divider(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = stringResource(R.string.Customer),
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(0.dp))
-                        }
-                        Column(modifier = Modifier.padding(start = 16.dp))
-                        {
-                            Text(
-                                text = ": $STORE_NAME",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = ": ${TRANSACATION_MENU}",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = ": ${if(MACHINE_CLASS) "${stringResource(R.string.MenuTitan)}" else "${stringResource(R.string.MenuGiant)}"}",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = ": Rp. ${numberFormat.format(TRANSACATION_PRICE.toInt()).substring(2, numberFormat.format(TRANSACATION_PRICE.toInt()).length)}",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = ": Rp. ${numberFormat.format(TRANSACTION_MONEY.toInt()).substring(2, numberFormat.format(TRANSACTION_MONEY.toInt()).length)}",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = ": Rp. ${numberFormat.format((TRANSACTION_MONEY.toInt() - TRANSACATION_PRICE.toInt())).substring(2, numberFormat.format((TRANSACTION_MONEY.toInt() - TRANSACATION_PRICE.toInt())).length)}",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = ": $TRANSACATION_PAYMENT",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = ": $TRANSACATION_DATE",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = ": $TRANSACATION_ADMIN",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = ": $TRANSACATION_CUSTOMER",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                color = MaterialTheme.colorScheme.surface
-                            )
-                            Spacer(modifier = Modifier.height(0.dp))
-                        }
+                    Text(
+                        text = "$TRANSACATION_CUSTOMER",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        color = MaterialTheme.colorScheme.surface
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Divider(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = "( ${TRANSACATION_TYPE} ) ${TRANSACATION_MENU}",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        color = MaterialTheme.colorScheme.surface
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Divider(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(R.string.PaymentTitle),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
+                        )
+                        Text(
+                            text = "$TRANSACATION_PAYMENT",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
+                        )
                     }
-                    Spacer(modifier = Modifier.height(32.dp))
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(R.string.PriceTitle),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
+                        )
+                        Text(
+                            text = "Rp. ${numberFormat.format(TRANSACATION_PRICE.toInt()).substring(2, numberFormat.format(TRANSACATION_PRICE.toInt()).length)}",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(R.string.Nominal),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
+                        )
+                        Text(
+                            text = "Rp. ${numberFormat.format(TRANSACTION_MONEY.toInt()).substring(2, numberFormat.format(TRANSACTION_MONEY.toInt()).length)}",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(R.string.Change),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
+                        )
+                        Text(
+                            text = "Rp. ${numberFormat.format((TRANSACTION_MONEY.toInt() - TRANSACATION_PRICE.toInt())).substring(2, numberFormat.format((TRANSACTION_MONEY.toInt() - TRANSACATION_PRICE.toInt())).length)}",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Divider(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(R.string.Admin),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
+                        )
+                        Text(
+                            text = "$TRANSACATION_ADMIN",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            color = MaterialTheme.colorScheme.surface
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(48.dp))
+
                     Row(modifier = Modifier
                         .fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween

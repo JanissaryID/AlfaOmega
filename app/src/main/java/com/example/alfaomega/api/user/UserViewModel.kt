@@ -64,9 +64,11 @@ class UserViewModel : ViewModel() {
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
                                     protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
-                                    updateStatUser(OWNER_ID, true)
+                                    updateStatUser(OWNER_ID, true, navController = navController, routeScreen = screenBack)
                                 }
                                 else if(userListResponse[0].typeUser == 3 && !userListResponse[0].statususer!!){
+                                    STORE_LIST_RESPONSE.clear()
+
                                     USER_NAME = userListResponse[0].username!!
                                     USER_TYPE = userListResponse[0].typeUser!!
                                     OWNER_ID = userListResponse[0].idOwner!!
@@ -74,7 +76,7 @@ class UserViewModel : ViewModel() {
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
                                     protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
-                                    updateStatUser(USER_ID, true)
+                                    updateStatUser(USER_ID, true, navController = navController, routeScreen = screenBack)
                                 }
                                 else{
                                     USER_NAME = selectionUser[1]
@@ -84,16 +86,16 @@ class UserViewModel : ViewModel() {
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
                                     protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
-                                    updateStatUser(USER_ID, true)
+                                    updateStatUser(USER_ID, true, navController = navController, routeScreen = screenBack)
                                 }
                                 FAILED_LOGIN = false
                                 FAILED_LOGIN_EMPTY = false
                                 FAILED_LOGIN_ALREADY = false
-                                navController.navigate(route = screenBack) {
-                                    popUpTo(screenBack) {
-                                        inclusive = true
-                                    }
-                                }
+//                                navController.navigate(route = screenBack) {
+//                                    popUpTo(screenBack) {
+//                                        inclusive = true
+//                                    }
+//                                }
                             }
                             else{
                                 BUTTON_LOGIN_CLICKED = false
@@ -203,7 +205,9 @@ class UserViewModel : ViewModel() {
 
     fun updateStatUser(
         idUser: String,
-        statUser: Boolean
+        statUser: Boolean,
+        navController: NavController,
+        routeScreen: String
     ){
         val bodyDataUpdate = UserModel(
             statususer = statUser,
@@ -218,12 +222,32 @@ class UserViewModel : ViewModel() {
                 override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
                     if(response.code() == 200){
                         val responseBodyData = response.body()
-                        if (responseBodyData!!.id.isNullOrEmpty()){
+                        if (responseBodyData!!.id.isNullOrEmpty() && (responseBodyData!!.statususer != statUser)){
                             updateStatUser(
                                 idUser = idUser,
-                                statUser = statUser
+                                statUser = statUser,
+                                navController = navController,
+                                routeScreen = routeScreen
                             )
                         }
+                        else{
+//                            STATUS_LOGIN_LOGOUT = true
+                            navController.navigate(route = routeScreen){
+                                popUpTo(routeScreen) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+//                        else{
+
+//                        }
+//                        if(statUser != responseBodyData!!.statususer){
+//                            updateStatUser(
+//                                idUser = idUser,
+//                                statUser = statUser
+//                            )
+//                        }
+//                        Log.d("log_user", "Logout: ${responseBodyData}")
                     }
                 }
 

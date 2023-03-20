@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.user.UserApp
 import com.example.alfaomega.api.user.UserModel
+import com.example.alfaomega.api.user.UserViewModel
 import com.example.alfaomega.navigations.Screens
 import kotlinx.coroutines.*
 import retrofit2.Call
@@ -57,6 +58,10 @@ class StoreViewModel : ViewModel(){
                             FetchStore()
                         }
                     }
+                    else{
+                        STORE_CODE_ERROR = true
+                        STORE_CODE_ERROR_STR = "${response.code()}"
+                    }
                 }
 
                 override fun onFailure(call: Call<ArrayList<StoreModel>>, t: Throwable) {
@@ -95,6 +100,10 @@ class StoreViewModel : ViewModel(){
                         if (STORE_LIST_RESPONSE.isNullOrEmpty()){
                             STORE_STATE = 3
                         }
+                    }
+                    else{
+                        STORE_CODE_ERROR = true
+                        STORE_CODE_ERROR_STR = "${response.code()}"
                     }
                 }
 
@@ -224,7 +233,8 @@ class StoreViewModel : ViewModel(){
     fun updateStoreAdmin(
         admin: String,
         storeID: String,
-        navController: NavController
+        navController: NavController,
+        userViewModel: UserViewModel = UserViewModel()
     ){
         val bodyUpdate = StoreModel(
             admin = admin
@@ -243,10 +253,21 @@ class StoreViewModel : ViewModel(){
 
 //                        Log.d("debug_user", "get error 1 = $responseBodyData")
                         if (!responseBodyData!!.id.isNullOrEmpty()){
-                            navController.navigate(route = Screens.Home.route){
-                                popUpTo(Screens.Home.route) {
-                                    inclusive = true
-                                }
+                            if(responseBodyData!!.admin == admin){
+                                userViewModel.updateStatUser(USER_ID, false, navController = navController, routeScreen = Screens.Home.route)
+
+//                                navController.navigate(route = Screens.Home.route){
+//                                    popUpTo(Screens.Home.route) {
+//                                        inclusive = true
+//                                    }
+//                                }
+                            }
+                            else{
+                                updateStoreAdmin(
+                                    storeID = storeID,
+                                    admin = admin,
+                                    navController = navController
+                                )
                             }
                         }
                         else{

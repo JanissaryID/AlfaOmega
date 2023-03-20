@@ -119,7 +119,8 @@
     <string name="ListExpenses">Daftar Pengeluaran</string>
     <string name="TransactionEmpty">Transaksi Kosong</string>
     <string name="InsertData">Masukan Data</string>
-    <string name="GraphFinance">Graph Finance</string>
-    <string name="DataEmpty">Data Empty</string>
-    <string name="Reload">Reload</string>
+    <string name="GraphFinance">Grafik Keuangan</string>
+    <string name="DataEmpty">Data Kosong</string>
+    <string name="Reload">Muat Ulang</string>
+    <string name="Gratherthand">Uang Harus Lebih besar dari Harga</string>
 </resources>

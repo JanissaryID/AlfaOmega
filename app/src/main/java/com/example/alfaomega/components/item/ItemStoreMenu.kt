@@ -44,16 +44,17 @@ fun ItemStoreMenu(
 
             if(USER_TYPE == 3){
                 if(typeMenu){
-                    userViewModel.updateStatUser(USER_ID, false)
-                    protoViewModel.updateTypeUser(0)
-                    protoViewModel.updateNameUser("")
-                    protoViewModel.updateStoreID("")
-
                     storeViewModel.updateStoreAdmin(
                         admin = "",
                         storeID = STORE_ID,
                         navController = navController
                     )
+
+
+
+                    protoViewModel.updateTypeUser(0)
+                    protoViewModel.updateNameUser("")
+                    protoViewModel.updateStoreID("")
 
 //                    navController.navigate(route = Screens.Home.route){
 //                        popUpTo(Screens.Home.route) {

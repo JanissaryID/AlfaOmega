@@ -2,6 +2,7 @@ package com.example.alfaomega.components
 
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
@@ -54,6 +55,8 @@ fun DetailTransaction(
         mutableStateOf("")
     }
 
+    val messageToast = stringResource(R.string.Gratherthand)
+
     var StatMessage: Int = 0
 
     var button_clicked by remember { mutableStateOf(false) }
@@ -66,7 +69,7 @@ fun DetailTransaction(
         mutableStateOf(TextFieldValue(NEW_TRANSACATION_PHONE))
     }
     var payment_value_index by remember {
-        mutableStateOf(2)
+        mutableStateOf(0)
     }
     var text_money by remember {
         mutableStateOf(TextFieldValue(""))
@@ -122,6 +125,50 @@ fun DetailTransaction(
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                 ){
+
+                    Text(
+                        text = if(!TRANSACTION_SCREEN) "( $TRANSACATION_TYPE ) $TRANSACATION_MENU"
+                        else "( $NEW_TRANSACATION_TYPE ) $NEW_TRANSACATION_MENU",
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.PriceTitle),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        )
+                        Spacer(modifier = Modifier.width(16.dp))
+                        if(!TRANSACTION_SCREEN){
+                            Text(
+                                text = "${numberFormat.format(TRANSACATION_PRICE.toInt())}",
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            )
+                        }
+                        else{
+                            if(!NEW_TRANSACATION_PRICE.isNullOrEmpty()){
+                                Text(
+                                    text = "${numberFormat.format(NEW_TRANSACATION_PRICE.toInt())}",
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Divider(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
+                    Spacer(modifier = Modifier.height(16.dp))
+
                     Text(
                         text = stringResource(R.string.CustomerTitle),
                         fontWeight = FontWeight.Bold,
@@ -174,154 +221,6 @@ fun DetailTransaction(
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             readOnly = if(!TRANSACTION_SCREEN) true else false
                         )
-                    }
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = stringResource(id = R.string.Menu),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Surface(
-                        shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier.wrapContentSize(),
-                        color = Color.Transparent
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier
-                                .selectable(
-                                    selected = isSelectedItemMenu(
-                                        if (!TRANSACTION_SCREEN) TRANSACATION_MENU
-                                        else NEW_TRANSACATION_MENU
-                                    ),
-                                    onClick = {
-                                        onChangeStateMenu(
-                                            if (!TRANSACTION_SCREEN) TRANSACATION_MENU
-                                            else NEW_TRANSACATION_MENU
-                                        )
-                                    },
-                                    role = Role.RadioButton
-                                )
-                                .padding(8.dp)
-                        ) {
-                            RadioButton(
-                                selected = true,
-                                onClick = null,
-                                enabled = false
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Text(
-                                text = if(!TRANSACTION_SCREEN) TRANSACATION_MENU
-                                else NEW_TRANSACATION_MENU,
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = stringResource(id = R.string.TypeMenuTitle),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                    )
-                    Surface(
-                        shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier.wrapContentSize(),
-                        color = Color.Transparent
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier
-                                .selectable(
-                                    selected = isSelectedItemType(
-                                        if (!TRANSACTION_SCREEN) TRANSACATION_TYPE
-                                        else NEW_TRANSACATION_TYPE
-                                    ),
-                                    onClick = {
-                                        onChangeStateType(
-                                            if (!TRANSACTION_SCREEN) TRANSACATION_TYPE
-                                            else NEW_TRANSACATION_TYPE
-                                        )
-                                    },
-                                    role = Role.RadioButton
-                                )
-                                .padding(8.dp)
-                        ) {
-                            RadioButton(
-                                selected = true,
-                                onClick = null,
-                                enabled = false
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            if(!TRANSACTION_SCREEN){
-                                Text(
-                                    text = TRANSACATION_TYPE,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                )
-                            }
-                            else {
-                                Text(
-                                    text = NEW_TRANSACATION_TYPE,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                )
-                            }
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = stringResource(id = R.string.PriceTitle),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                    )
-                    Surface(
-                        shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier.wrapContentSize(),
-                        color = Color.Transparent
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier
-                                .selectable(
-                                    selected = isSelectedItemPrice(
-                                        if (!TRANSACTION_SCREEN) TRANSACATION_PRICE
-                                        else NEW_TRANSACATION_PRICE
-                                    ),
-                                    onClick = {
-                                        onChangeStatePrice(
-                                            if (!TRANSACTION_SCREEN) TRANSACATION_PRICE
-                                            else NEW_TRANSACATION_PRICE
-                                        )
-                                    },
-                                    role = Role.RadioButton
-                                )
-                                .padding(8.dp)
-                        ) {
-                            RadioButton(
-                                selected = true,
-                                onClick = null,
-                                enabled = false
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            if(!TRANSACTION_SCREEN){
-                                Text(
-                                    text = "${numberFormat.format(TRANSACATION_PRICE.toInt())}",
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                )
-                            }
-                            else{
-                                if(!NEW_TRANSACATION_PRICE.isNullOrEmpty()){
-                                    Text(
-                                        text = "${numberFormat.format(NEW_TRANSACATION_PRICE.toInt())}",
-                                        fontWeight = FontWeight.SemiBold,
-                                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                                    )
-                                }
-                            }
-                        }
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
@@ -388,7 +287,7 @@ fun DetailTransaction(
                             ),
                             shape = RoundedCornerShape(12.dp),
                             modifier = Modifier.fillMaxWidth(),
-                            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             readOnly = false
                         )
                     }
@@ -484,7 +383,10 @@ fun DetailTransaction(
             }
         }
         else{
-            if(!text_name.text.isNullOrEmpty() && if(selectedValuePayment.value == 0) !text_money.text.isNullOrEmpty() else true){
+            if(!text_name.text.isNullOrEmpty() &&
+                if(selectedValuePayment.value == 0) !text_money.text.isNullOrEmpty() else true
+//                        && (text_money.text.toInt() >= TRANSACATION_PRICE.toInt())
+            ){
                 NEW_TRANSACATION_BUTTON = true
             }
             else{
@@ -522,22 +424,28 @@ fun DetailTransaction(
                         }
                     }
                     else{
-                        transactionViewModel.insertTransaction(
-                            transactionCustomer = text_name.text,
-                            transactionMenu = NEW_TRANSACATION_MENU,
-                            transactionPrice = NEW_TRANSACATION_PRICE,
-                            transactionClass = NEW_TRANSACATION_CLASS,
-                            transactionPayment = if(payment_value_index == 0) false else true,
-                            transactionStateMachine = if(NEW_TRANSACATION_IS_WASHER) 0
-                            else if(NEW_TRANSACATION_IS_DRYER) 3
-                            else if (!NEW_TRANSACATION_IS_WASHER && !NEW_TRANSACATION_IS_DRYER) 7
-                            else 0,
-                            isWasher = NEW_TRANSACATION_IS_WASHER,
-                            isDryer = NEW_TRANSACATION_IS_DRYER,
-                            phoneCustomer = text_phone.text,
-                            userMoney = if(selectedValuePayment.value == 0) text_money.text else NEW_TRANSACATION_PRICE,
-                            navController = navController
-                        )
+                        if(text_money.text.toInt() >= NEW_TRANSACATION_PRICE.toInt()){
+                            transactionViewModel.insertTransaction(
+                                transactionCustomer = text_name.text,
+                                transactionMenu = NEW_TRANSACATION_MENU,
+                                transactionPrice = NEW_TRANSACATION_PRICE,
+                                transactionClass = NEW_TRANSACATION_CLASS,
+                                transactionPayment = if(payment_value_index == 0) false else true,
+                                transactionStateMachine = if(NEW_TRANSACATION_IS_WASHER) 0
+                                else if(NEW_TRANSACATION_IS_DRYER) 3
+                                else if (!NEW_TRANSACATION_IS_WASHER && !NEW_TRANSACATION_IS_DRYER) 7
+                                else 0,
+                                isWasher = NEW_TRANSACATION_IS_WASHER,
+                                isDryer = NEW_TRANSACATION_IS_DRYER,
+                                phoneCustomer = text_phone.text,
+                                userMoney = if(selectedValuePayment.value == 0) text_money.text else NEW_TRANSACATION_PRICE,
+                                navController = navController
+                            )
+                        }
+                        else{
+                            button_clicked = false
+                            Toast.makeText(context, "$messageToast" , Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
