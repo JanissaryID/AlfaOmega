@@ -424,7 +424,25 @@ fun DetailTransaction(
                         }
                     }
                     else{
-                        if(text_money.text.toInt() >= NEW_TRANSACATION_PRICE.toInt()){
+                        if(selectedValuePayment.value == 1){
+                            transactionViewModel.insertTransaction(
+                                transactionCustomer = text_name.text,
+                                transactionMenu = NEW_TRANSACATION_MENU,
+                                transactionPrice = NEW_TRANSACATION_PRICE,
+                                transactionClass = NEW_TRANSACATION_CLASS,
+                                transactionPayment = if(payment_value_index == 0) false else true,
+                                transactionStateMachine = if(NEW_TRANSACATION_IS_WASHER) 0
+                                else if(NEW_TRANSACATION_IS_DRYER) 3
+                                else if (!NEW_TRANSACATION_IS_WASHER && !NEW_TRANSACATION_IS_DRYER) 7
+                                else 0,
+                                isWasher = NEW_TRANSACATION_IS_WASHER,
+                                isDryer = NEW_TRANSACATION_IS_DRYER,
+                                phoneCustomer = text_phone.text,
+                                userMoney = if(selectedValuePayment.value == 0) text_money.text else NEW_TRANSACATION_PRICE,
+                                navController = navController
+                            )
+                        }
+                        else if(selectedValuePayment.value == 0 && text_money.text.toInt() >= NEW_TRANSACATION_PRICE.toInt()){
                             transactionViewModel.insertTransaction(
                                 transactionCustomer = text_name.text,
                                 transactionMenu = NEW_TRANSACATION_MENU,

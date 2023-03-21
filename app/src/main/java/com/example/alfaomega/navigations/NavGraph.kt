@@ -96,7 +96,7 @@ fun NavGraphSetup(
             }
             if(USER_TYPE == 3){
                 if(STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1){
-                    storeViewModel.CoroutineFetchStore()
+                    storeViewModel.FetchStore()
                 }
 
                 if(STORE_NAME.isNullOrEmpty() && !STORE_ID.isNullOrEmpty()){
@@ -120,7 +120,7 @@ fun NavGraphSetup(
                 }
 
                 if(STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1){
-                    storeViewModel.CoroutineFetchStore()
+                    storeViewModel.FetchStore()
                 }
 
                 if (QR_DATA.id.isNullOrEmpty() && QR_STATE <= 1){
