@@ -12,7 +12,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RuleViewModel : ViewModel() {
-
     fun getRules(){
         try {
             RuleApp.CreateInstance().fetchRule(
@@ -24,6 +23,8 @@ class RuleViewModel : ViewModel() {
                     RULE_STATE = 0
 
                     LIST_RULE.clear()
+
+                    Log.d("log_network", "Rules : ${response.code()} ${response.body()}")
 
                     if(response.code() == 200){
                         response.body()?.let {

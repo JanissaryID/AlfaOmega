@@ -49,9 +49,7 @@ fun ItemStore(
                         }
                     }
                     else{
-//                        TRANSACTION_SCREEN = true
-
-                        if(!STORE_ID.isNullOrEmpty()){
+                        if(!STORE_ID.isNullOrEmpty() && SCREEN_ACTIVE_NOW == Screens.Store.route){
                             storeViewModel.updateStoreAdmin(
                                 admin = "",
                                 storeID = STORE_ID,
@@ -59,20 +57,16 @@ fun ItemStore(
                             )
                         }
 
-                        STORE_NAME = storeName
-                        STORE_CITY = storeCity
-                        STORE_ADDRESS = storeAddress
-                        protoViewModel.updateStoreID(keyStore = storeId)
                         storeViewModel.updateStoreAdmin(
                             admin = USER_NAME,
                             storeID = storeId,
                             navController = navController
                         )
-//                    navController.navigate(route = Screens.Home.route){
-//                        popUpTo(Screens.Home.route) {
-//                            inclusive = true
-//                        }
-//                    }
+
+                        STORE_NAME = storeName
+                        STORE_CITY = storeCity
+                        STORE_ADDRESS = storeAddress
+                        protoViewModel.updateStoreID(keyStore = storeId)
                     }
                 }
             }) {

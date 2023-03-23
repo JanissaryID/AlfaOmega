@@ -80,10 +80,6 @@ fun NavGraphSetup(
                 SCREEN_ACTIVE_NOW = Screens.Home.route
 
                 if (!STORE_ID.isNullOrEmpty()){
-                    STAT_GET_DATA = true
-                    transactionViewModel.getTransactionActive()
-
-//                    STATUS_LOGIN_LOGOUT = false
 
                     TRANSACATION_IS_WASHER = false
                     TRANSACATION_IS_DRYER = false
@@ -95,7 +91,11 @@ fun NavGraphSetup(
                 BUTTON_LOGIN_CLICKED = false
             }
             if(USER_TYPE == 3){
-                if(STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1){
+                if(!STORE_ID.isNullOrEmpty()){
+                    transactionViewModel.getTransactionActive()
+                }
+
+                if(STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1 && SCREEN_ACTIVE_NOW == Screens.Home.route){
                     storeViewModel.FetchStore()
                 }
 
@@ -131,7 +131,7 @@ fun NavGraphSetup(
 
                 ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
-            else{
+            else if(USER_TYPE == 0) {
                 ScreenHome(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
         }
@@ -143,7 +143,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.Menu.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
                 menuViewModel.getMenu()
                 TRANSACTION_SCREEN = true
             }
@@ -157,7 +157,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.DetailTransaction.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
                 MACHINE_SCREEN = true
             }
             ScreenDetailTransaction(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
@@ -170,7 +170,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.StoreProfile.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
 //                TRANSACTION_SCREEN = true
 
                 if(STORE_NAME.isNullOrEmpty()){
@@ -188,7 +188,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.Machine.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
                 if(USER_TYPE == 2){
                     machineViewModel.getMachineList()
                 }
@@ -207,7 +207,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.Store.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
 
                 storeViewModel.FetchStore()
 //                storeViewModel.CoroutineFetchStore()
@@ -223,7 +223,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.TransactionList.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
                 transactionViewModel.getTransactionNow()
 //                TRANSACTION_SCREEN = true
             }
@@ -239,7 +239,7 @@ fun NavGraphSetup(
 
                 STORE_LIST_RESPONSE.clear()
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
             }
             ScreenLogin(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
@@ -251,7 +251,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.Bluetooth.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
                 bluetoothViewModel.showPairedDevice(context = MY_CONTEXT!!, multiplePermissionState = multiplePermissionState)
             }
             ScreenBluetooth(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
@@ -279,7 +279,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.MenuOwner.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
 
 //                TRANSACTION_SCREEN = true
                 CLASS_MENU_EDIT_STRING = ""
@@ -296,7 +296,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.TransactionOwner.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
                 transactionViewModel.getTransactionNowDate()
                 logViewModel.fetchLog()
 //                TRANSACTION_SCREEN = true
@@ -311,7 +311,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.MenuEditOwner.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
 
 
             }
@@ -325,7 +325,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.RulesOwner.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
 
 //                TRANSACTION_SCREEN = true
             }
@@ -339,7 +339,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.UserOwner.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
 
 //                TRANSACTION_SCREEN = true
             }
@@ -353,7 +353,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.RulesEditOwner.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
             }
             ScreenRulesEditOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
@@ -365,7 +365,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.UserEditOwner.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
             }
             ScreenUserEditOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
@@ -377,7 +377,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.OutletOwner.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
                 PROBLEM_MACHINE_STATE_SCREEN = false
 
                 if(STORE_NAME.isNullOrEmpty()){
@@ -400,7 +400,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.MachineOwner.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
                 machineViewModel.getMachineList()
             }
             ScreenMachineOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
@@ -413,7 +413,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.ExpensesOwner.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
 
             }
             ScreenExpensesOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
@@ -437,7 +437,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.ReportMachine.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
                 problemViewModel.fetchProblem()
                 PROBLEM_MACHINE_STATE_SCREEN = true
             }
@@ -451,7 +451,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.OwnerListDeveloper.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
                 userViewModel.fetchOwner()
 //                TRANSACTION_SCREEN = true
             }
@@ -465,7 +465,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.OwnerEditStoreDeveloper.route
 
-                STAT_GET_DATA = false
+//                STAT_GET_DATA = false
             }
             ScreenStoreEditDeveloper(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }

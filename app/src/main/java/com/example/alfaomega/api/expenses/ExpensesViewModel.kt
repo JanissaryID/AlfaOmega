@@ -85,7 +85,8 @@ class ExpensesViewModel: ViewModel() {
                 Callback<ArrayList<ExpensesModel>> {
                 override fun onResponse(call: Call<ArrayList<ExpensesModel>>, response: Response<ArrayList<ExpensesModel>>) {
 
-//                    Log.d("get_log", "${response}")
+//                    Log.d("log_network", "Expenses : ${response}")
+                    Log.d("log_network", "Expenses : ${response.code()} ${response.body()}")
 
                     if(response.code() == 200){
                         response.body()?.let {

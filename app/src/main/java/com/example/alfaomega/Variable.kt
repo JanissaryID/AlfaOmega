@@ -203,7 +203,7 @@ var PROFIT_SUM_STORE: Int by mutableStateOf(0)
 
 var INCOME_ERROR_MESSAGE: String by mutableStateOf("")
 
-var STAT_GET_DATA: Boolean by mutableStateOf(false)
+//var STAT_GET_DATA: Boolean by mutableStateOf(false)
 var ONE_RENDER_GRAPH: Boolean by mutableStateOf(false)
 
 //Variable Expenses

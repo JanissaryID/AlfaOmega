@@ -17,26 +17,26 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class StoreViewModel : ViewModel(){
-    @ExperimentalCoroutinesApi
-    fun CoroutineFetchStore(){
-//        Log.i("info_response", "Croutine Store")
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                STORE_STATE = 0
-                STORE_LIST_RESPONSE.clear()
-
-                FetchStore()
-                delay(3000L)
-                if(STORE_STATE != 1){
-                    STORE_STATE = 3
-                }
-//                Log.i("info_response", "Croutine End")
-            }
-            catch (e: Exception){
-
-            }
-        }
-    }
+//    @ExperimentalCoroutinesApi
+//    fun CoroutineFetchStore(){
+////        Log.i("info_response", "Croutine Store")
+//        viewModelScope.launch(Dispatchers.IO) {
+//            try {
+//                STORE_STATE = 0
+//                STORE_LIST_RESPONSE.clear()
+//
+////                FetchStore()
+//                delay(3000L)
+//                if(STORE_STATE != 1){
+//                    STORE_STATE = 3
+//                }
+////                Log.i("info_response", "Croutine End")
+//            }
+//            catch (e: Exception){
+//
+//            }
+//        }
+//    }
     fun FetchStore(){
         try {
 //            Log.i("info_response", "Croutine Runing")
@@ -47,6 +47,8 @@ class StoreViewModel : ViewModel(){
                 Callback<ArrayList<StoreModel>> {
                 override fun onResponse(call: Call<ArrayList<StoreModel>>, response: Response<ArrayList<StoreModel>>) {
 
+                    Log.d("log_network", "Store : ${TRANSACTION_ACTIVE_STATE} ${response.code()} ${response.body()}")
+
                     if(response.code() == 200){
                         response.body()?.let {
                             STORE_LIST_RESPONSE = response.body()!!
@@ -55,6 +57,7 @@ class StoreViewModel : ViewModel(){
 //                            Log.i("info_response", "Store = $STORE_LIST_RESPONSE")
                         }
                         if (STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE == 0){
+                            Log.d("log_network", "Store in null status : ${response.code()} ${response.body()}")
                             FetchStore()
                         }
                     }
@@ -75,7 +78,6 @@ class StoreViewModel : ViewModel(){
             STORE_ERROR_MESSAGE = e.message.toString()
         }
     }
-
     fun GetStore(){
         try {
             StoreApp.CreateInstance().getStore(
@@ -85,6 +87,8 @@ class StoreViewModel : ViewModel(){
                 override fun onResponse(call: Call<ArrayList<StoreModel>>, response: Response<ArrayList<StoreModel>>) {
 
                     STORE_STATE = 0
+
+                    Log.d("log_network", "Get Store : ${response.code()} ${response.body()}")
 
                     if(response.code() == 200){
                         response.body()?.let {
@@ -247,14 +251,13 @@ class StoreViewModel : ViewModel(){
                 bodyUpdate).enqueue(object :
                 Callback<StoreModel> {
                 override fun onResponse(call: Call<StoreModel>, response: Response<StoreModel>) {
-                    Log.d("debug_user", "get error = $response")
+//                    Log.d("debug_user", "get error = $response")
                     if(response.code() == 200){
                         val responseBodyData = response.body()
 
-//                        Log.d("debug_user", "get error 1 = $responseBodyData")
                         if (!responseBodyData!!.id.isNullOrEmpty()){
                             if(responseBodyData!!.admin == admin){
-                                userViewModel.updateStatUser(USER_ID, false, navController = navController, routeScreen = Screens.Home.route)
+                                userViewModel.updateStatUser(OWNER_ID, false, navController = navController, routeScreen = Screens.Home.route)
 
 //                                navController.navigate(route = Screens.Home.route){
 //                                    popUpTo(Screens.Home.route) {

@@ -13,7 +13,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class ProblemViewModel: ViewModel() {
-
     fun fetchProblem(){
         try {
             ProblemApp.CreateInstance().fetchProblemMachine(
@@ -26,6 +25,8 @@ class ProblemViewModel: ViewModel() {
                     PROBLEM_MACHINE_STATE = 0
 
                     LIST_PROBLEM_MACHINE.clear()
+
+                    Log.d("log_network", "Problem : ${response.code()} ${response.body()}")
 //                    Log.d("get_log", "$response")
                     if(response.code() == 200){
                         response.body()?.let {

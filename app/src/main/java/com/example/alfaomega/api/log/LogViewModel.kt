@@ -36,6 +36,8 @@ class LogViewModel: ViewModel() {
 
                     LIST_LOG.clear()
 
+                    Log.d("log_network", "Log : ${response.code()} ${response.body()}")
+
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_LOG = response.body()!!

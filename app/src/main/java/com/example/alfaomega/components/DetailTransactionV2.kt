@@ -254,35 +254,15 @@ fun DetailTransactionV2(
                             ) {
                                 button_clicked = true
 
-                                if(!TRANSACTION_SCREEN){
-                                    if(TRANSACATION_STATUS_MACHINE == 6 || TRANSACATION_STATUS_MACHINE == 7){
-                                        transactionViewModel.updateTransaction(
-                                            idTransaction = TRANSACATION_ID,
-                                            transactionStateMachine = 6,
-                                            navController = navController
-                                        )
-                                    }
-                                    else{
-                                        navController.navigate(route = Screens.Machine.route)
-                                    }
+                                if(TRANSACATION_STATUS_MACHINE == 6 || TRANSACATION_STATUS_MACHINE == 7){
+                                    transactionViewModel.updateTransaction(
+                                        idTransaction = TRANSACATION_ID,
+                                        transactionStateMachine = 6,
+                                        navController = navController
+                                    )
                                 }
                                 else{
-                                    transactionViewModel.insertTransaction(
-                                        transactionCustomer = text_name.text,
-                                        transactionMenu = NEW_TRANSACATION_MENU,
-                                        transactionPrice = NEW_TRANSACATION_PRICE,
-                                        transactionClass = NEW_TRANSACATION_CLASS,
-                                        transactionPayment = if(payment_value_index == 0) false else true,
-                                        transactionStateMachine = if(NEW_TRANSACATION_IS_WASHER) 0
-                                        else if(NEW_TRANSACATION_IS_DRYER) 3
-                                        else if (!NEW_TRANSACATION_IS_WASHER && !NEW_TRANSACATION_IS_DRYER) 7
-                                        else 0,
-                                        isWasher = NEW_TRANSACATION_IS_WASHER,
-                                        isDryer = NEW_TRANSACATION_IS_DRYER,
-                                        phoneCustomer = text_phone.text,
-                                        navController = navController,
-                                        userMoney = TRANSACTION_MONEY
-                                    )
+                                    navController.navigate(route = Screens.Machine.route)
                                 }
                             }
                         }

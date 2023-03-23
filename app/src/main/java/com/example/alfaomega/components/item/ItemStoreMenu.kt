@@ -49,19 +49,9 @@ fun ItemStoreMenu(
                         storeID = STORE_ID,
                         navController = navController
                     )
-
-
-
                     protoViewModel.updateTypeUser(0)
                     protoViewModel.updateNameUser("")
                     protoViewModel.updateStoreID("")
-
-//                    navController.navigate(route = Screens.Home.route){
-//                        popUpTo(Screens.Home.route) {
-//                            inclusive = true
-//                        }
-//                    }
-
                 }
                 if(screenMenuItem == Screens.MachineOwner.route){
                     PROBLEM_MACHINE_STATE_SCREEN = true

@@ -116,6 +116,8 @@ class IncomeViewModel: ViewModel() {
                 Callback<ArrayList<IncomeModel>> {
                 override fun onResponse(call: Call<ArrayList<IncomeModel>>, response: Response<ArrayList<IncomeModel>>) {
 
+                    Log.d("log_network", "Income Owner : ${response.code()} ${response.body()}")
+
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_INCOME = response.body()!!
@@ -216,6 +218,8 @@ class IncomeViewModel: ViewModel() {
             ).enqueue(object :
                 Callback<ArrayList<IncomeModel>> {
                 override fun onResponse(call: Call<ArrayList<IncomeModel>>, response: Response<ArrayList<IncomeModel>>) {
+
+                    Log.d("log_network", "Income Store : ${response.code()} ${response.body()}")
 
                     if(response.code() == 200){
                         response.body()?.let {

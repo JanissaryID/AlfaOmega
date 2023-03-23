@@ -86,7 +86,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ruleViewModel.getRules()
+//                    ruleViewModel.getRules()
 
                     navController = rememberNavController()
                     NavGraphSetup(

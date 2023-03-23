@@ -25,6 +25,9 @@ class QrViewModel: ViewModel() {
             ).enqueue(object :
                 Callback<ArrayList<QrModel>>{
                 override fun onResponse(call: Call<ArrayList<QrModel>>, response: Response<ArrayList<QrModel>>) {
+
+                    Log.d("log_network", "Qr : ${response.code()} ${response.body()}")
+
                     if(response.code() == 200){
                         response.body()?.let {
                             if(response.body()!!.isNullOrEmpty()){

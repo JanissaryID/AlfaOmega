@@ -63,8 +63,9 @@ class MenuViewModel: ViewModel() {
             ).enqueue(object :
                 Callback<ArrayList<MenuModel>> {
                 override fun onResponse(call: Call<ArrayList<MenuModel>>, response: Response<ArrayList<MenuModel>>) {
-                    Log.d("log_menu", "${response}")
-                    Log.d("log_menu", "${response.body()}")
+
+                    Log.d("log_network", "Menu : ${response.code()} ${response.body()}")
+
                     if(response.code() == 200){
                         response.body()?.let {
                             MENU_LIST_GIANT_RESPONSE = response.body()!!.filter { menu -> menu.menuClass == false } as ArrayList<MenuModel>

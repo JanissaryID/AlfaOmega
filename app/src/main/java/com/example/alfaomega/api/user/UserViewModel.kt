@@ -43,7 +43,9 @@ class UserViewModel : ViewModel() {
             ).enqueue(object :
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
-                    Log.d("debug_user", "get error = ${response.body()}")
+
+                    Log.d("log_network", "Get user : ${response.code()} ${response.body()}")
+
                     USER_STATE = 0
 
                     if(response.code() == 200){
@@ -76,7 +78,7 @@ class UserViewModel : ViewModel() {
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
                                     protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
-                                    updateStatUser(USER_ID, true, navController = navController, routeScreen = screenBack)
+                                    updateStatUser(OWNER_ID, true, navController = navController, routeScreen = screenBack)
                                 }
                                 else{
                                     USER_NAME = selectionUser[1]
@@ -139,7 +141,9 @@ class UserViewModel : ViewModel() {
             ).enqueue(object :
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
-//                    Log.i("info_response", "User : ${response}")
+
+                    Log.d("log_network", "Fetch User : ${response.code()} ${response.body()}")
+
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_USER = response.body()!!.filter { user -> user.typeUser == 3} as ArrayList<UserModel>
@@ -176,7 +180,11 @@ class UserViewModel : ViewModel() {
             ).enqueue(object :
                 Callback<ArrayList<UserModel>> {
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
+
+                    Log.d("log_network", "Fetch Ownner : ${response.code()} ${response.body()}")
+
                     USER_STATE = 0
+
                     if(response.code() == 200){
                         response.body()?.let {
                             LIST_OWNER = response.body()!!.filter { user -> user.typeUser == 1} as ArrayList<UserModel>
@@ -220,6 +228,9 @@ class UserViewModel : ViewModel() {
                 bodyDataUpdate).enqueue(object :
                 Callback<UserModel> {
                 override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+
+                    Log.d("log_network", "Update User Stat : $idUser ${response.code()} ${bodyDataUpdate} ${response}")
+
                     if(response.code() == 200){
                         val responseBodyData = response.body()
                         if (responseBodyData!!.id.isNullOrEmpty() && (responseBodyData!!.statususer != statUser)){
@@ -231,23 +242,12 @@ class UserViewModel : ViewModel() {
                             )
                         }
                         else{
-//                            STATUS_LOGIN_LOGOUT = true
                             navController.navigate(route = routeScreen){
                                 popUpTo(routeScreen) {
                                     inclusive = true
                                 }
                             }
                         }
-//                        else{
-
-//                        }
-//                        if(statUser != responseBodyData!!.statususer){
-//                            updateStatUser(
-//                                idUser = idUser,
-//                                statUser = statUser
-//                            )
-//                        }
-//                        Log.d("log_user", "Logout: ${responseBodyData}")
                     }
                 }
 

@@ -24,11 +24,13 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class TransactionViewModel: ViewModel() {
-
     @ExperimentalCoroutinesApi
     fun getTransactionActive() {
+        Log.d("log_network", "Delay 3 seconds ----")
         viewModelScope.launch(Dispatchers.IO) {
-            while (USER_TYPE == 3 && STAT_GET_DATA){
+            while (USER_TYPE == 3 && SCREEN_ACTIVE_NOW == Screens.Home.route){
+
+                Log.d("log_network", "Delay 3 seconds")
                 try {
                     TransactionApp.CreateInstance().fetchTransactionActive(
                         BearerToken = "Bearer " + TOKEN_API,
@@ -39,9 +41,8 @@ class TransactionViewModel: ViewModel() {
                             call: Call<ArrayList<TransactionModel>>,
                             response: Response<ArrayList<TransactionModel>>
                         ) {
-//                            TRANSACTION_ACTIVE_STATE = 0
-//
-//                            TRANSACTION_ACTIVE_RESPONSE.clear()
+
+                            Log.d("log_network", "Transaction Active : ${response.code()} ${response.body()}")
 
                             if (response.code() == 200) {
                                 response.body()?.let {
@@ -68,7 +69,8 @@ class TransactionViewModel: ViewModel() {
                     TRANSACTION_ERROR = e.message.toString()
 //                    Log.d("debug_transaction", "ERROR $TRANSACTION_ERROR")
                 }
-                delay(1000)
+                delay(5000L)
+//                Thread.sleep(5000L)
             }
         }
     }
@@ -87,6 +89,8 @@ class TransactionViewModel: ViewModel() {
                     TRANSACTION_ACTIVE_STATE = 0
 
                     TRANSACTION_ACTIVE_RESPONSE.clear()
+
+                    Log.d("log_network", "Transaction Active Once : ${response.code()} ${response.body()}")
 
                     if (response.code() == 200) {
                         response.body()?.let {
@@ -207,6 +211,8 @@ class TransactionViewModel: ViewModel() {
 
                             NEW_TRANSACATION_BUTTON = true
 
+                            getTransactionActiveOnce()
+
                             navController.navigate(route = Screens.Home.route){
                                 popUpTo(Screens.Home.route) {
                                     inclusive = true
@@ -259,6 +265,8 @@ class TransactionViewModel: ViewModel() {
 
                     TRANSACTION_RESPONSE.clear()
 
+                    Log.d("log_network", "Transactionn Now : ${response.code()} ${response.body()}")
+
                     if (response.code() == 200) {
                         response.body()?.let {
                             TRANSACTION_RESPONSE = response.body()!!
@@ -305,7 +313,9 @@ class TransactionViewModel: ViewModel() {
                     TRANSACTION_STATE = 0
 
                     TRANSACTION_RESPONSE.clear()
-//                    Log.d("debug_transaction", "Success get data transcaction 1 $response")
+
+                    Log.d("log_network", "Trannsaction now Date : ${response.code()} ${response.body()}")
+
                     if (response.code() == 200) {
                         response.body()?.let {
                             TRANSACTION_RESPONSE = response.body()!!

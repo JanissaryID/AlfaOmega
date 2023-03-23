@@ -25,6 +25,8 @@ class MachineViewModel: ViewModel() {
                 override fun onResponse(call: Call<ArrayList<MachineModel>>, response: Response<ArrayList<MachineModel>>) {
 //                    MENU_STATE = 0
 
+                    Log.d("log_network", "Machine : ${response.code()} ${response.body()}")
+
                     LIST_MACHINE_WASHER_GIANT.clear()
                     LIST_MACHINE_DRYER_GIANT.clear()
                     LIST_MACHINE_WASHER_TITAN.clear()
@@ -71,6 +73,8 @@ class MachineViewModel: ViewModel() {
                 override fun onResponse(call: Call<ArrayList<MachineModel>>, response: Response<ArrayList<MachineModel>>) {
                     Log.d("debug_machine", "Machine ${response}")
 //                    MENU_STATE = 0
+
+                    Log.d("log_network", "Machine list : ${response.code()} ${response.body()}")
 
                     LIST_MACHINE.clear()
                     if(response.code() == 200){
