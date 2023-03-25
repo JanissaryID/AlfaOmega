@@ -25,6 +25,73 @@ import java.time.format.DateTimeFormatter
 
 class MenuViewModel: ViewModel() {
 
+    @ExperimentalCoroutinesApi
+    fun getMenu3Times(){
+
+        var countGetData = 0
+
+        MENU_STATE_GIANT = 0
+        MENU_STATE_TITAN = 0
+
+        MENU_LIST_GIANT_RESPONSE.clear()
+        MENU_LIST_TITAN_RESPONSE.clear()
+
+        viewModelScope.launch(Dispatchers.IO) {
+            while (countGetData < 3 && (MENU_STATE_GIANT == 0 || MENU_STATE_TITAN == 0)) {
+                try {
+                    MenuApp.CreateInstance().fetchMenu(
+                        BearerToken = "Bearer " + TOKEN_API,
+                        store = STORE_ID
+                    ).enqueue(object :
+                        Callback<ArrayList<MenuModel>> {
+                        override fun onResponse(call: Call<ArrayList<MenuModel>>, response: Response<ArrayList<MenuModel>>) {
+
+                            Log.d("log_network", "Menu : ${response.code()} ${response.body()}")
+
+                            if(response.code() == 200){
+                                response.body()?.let {
+                                    MENU_LIST_GIANT_RESPONSE = response.body()!!.filter { menu -> menu.menuClass == false } as ArrayList<MenuModel>
+                                    MENU_LIST_TITAN_RESPONSE = response.body()!!.filter { menu -> menu.menuClass == true } as ArrayList<MenuModel>
+
+                                    MENU_STATE_GIANT = 1
+                                    MENU_STATE_TITAN = 1
+                                }
+                                if (MENU_LIST_GIANT_RESPONSE.isNullOrEmpty()){
+                                    MENU_STATE_GIANT = 3
+                                }
+                                if (MENU_LIST_TITAN_RESPONSE.isNullOrEmpty()){
+                                    MENU_STATE_TITAN = 3
+                                }
+                                if (response.body()!!.isNullOrEmpty()){
+                                    countGetData++
+                                }
+                            }
+                            else if(response.code() == 429){
+                                MENU_STATE_GIANT = 4
+                                MENU_STATE_TITAN = 4
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ArrayList<MenuModel>>, t: Throwable) {
+                            if (t.message == t.message){
+                                MENU_STATE_GIANT = 2
+                                MENU_STATE_TITAN = 2
+                            }
+                        }
+                    })
+                }
+                catch (e : Exception){
+                    MENU_ERROR_MESSAGE = e.message.toString()
+                }
+                if(countGetData >= 2){
+                    MENU_STATE_GIANT = 3
+                    MENU_STATE_TITAN = 3
+                }
+                delay(5000)
+            }
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @ExperimentalCoroutinesApi
     fun CoroutineMenu(){

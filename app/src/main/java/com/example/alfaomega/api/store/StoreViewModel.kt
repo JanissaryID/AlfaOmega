@@ -17,26 +17,60 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class StoreViewModel : ViewModel(){
-//    @ExperimentalCoroutinesApi
-//    fun CoroutineFetchStore(){
-////        Log.i("info_response", "Croutine Store")
-//        viewModelScope.launch(Dispatchers.IO) {
-//            try {
-//                STORE_STATE = 0
-//                STORE_LIST_RESPONSE.clear()
-//
-////                FetchStore()
-//                delay(3000L)
-//                if(STORE_STATE != 1){
-//                    STORE_STATE = 3
+
+    fun FetchStore3Times(){
+        var countGetData = 0
+
+        viewModelScope.launch(Dispatchers.IO) {
+            while (countGetData < 5 && STORE_STATE == 0) {
+//                if (countGetData > 0) {
+//                    delay(1000)
 //                }
-////                Log.i("info_response", "Croutine End")
-//            }
-//            catch (e: Exception){
-//
-//            }
-//        }
-//    }
+                try {
+                    StoreApp.CreateInstance().fetchStore(
+                        BearerToken = "Bearer " + TOKEN_API,
+                        OwnerId = OWNER_ID
+                    ).enqueue(object :
+                        Callback<ArrayList<StoreModel>> {
+                        override fun onResponse(call: Call<ArrayList<StoreModel>>, response: Response<ArrayList<StoreModel>>) {
+
+                            Log.d("log_network", "Store : ${countGetData} ${STORE_STATE} ${response.code()} ${response.body()}")
+
+                            if(response.code() == 200){
+                                response.body()?.let {
+                                    STORE_LIST_RESPONSE = response.body()!!
+
+                                    STORE_STATE = 1
+                                }
+                                if (STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE == 0){
+//                                    Log.d("log_network", "Store in null status : ${response.code()} ${response.body()}")
+                                    countGetData++
+                                }
+                            }
+                            else{
+                                countGetData++
+                                STORE_CODE_ERROR = true
+                                STORE_CODE_ERROR_STR = "${response.code()}"
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ArrayList<StoreModel>>, t: Throwable) {
+                            if (t.message == t.message){
+                                STORE_STATE = 2
+                            }
+                        }
+                    })
+                }
+                catch (e : Exception){
+                    STORE_ERROR_MESSAGE = e.message.toString()
+                }
+                if (countGetData >= 4) {
+                    STORE_STATE = 3
+                }
+                delay(5000L)
+            }
+        }
+    }
     fun FetchStore(){
         try {
 //            Log.i("info_response", "Croutine Runing")

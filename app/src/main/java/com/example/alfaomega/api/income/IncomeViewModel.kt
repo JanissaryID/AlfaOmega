@@ -35,60 +35,200 @@ import kotlin.collections.ArrayList
 class IncomeViewModel: ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    @ExperimentalCoroutinesApi
-    fun CoroutineFetchIncomeOwner(){
+    fun fetchByOwner3Times(){
+        var countGetData = 0
+
+        val current = LocalDateTime.now()
+
+        val formatDay = DateTimeFormatter.ofPattern("MM-yyyy")
+        val date = current.format(formatDay)
+
+        var tempDate = 0
+        var tempIncome = 0
+        var tempExpenses = 0
+        var tempNetProfit = 0
+        var tempIndex = 0
+
+        INCOME_STATE = 0
+
+        LIST_INCOME.clear()
+        LIST_INCOME_FLOAT.clear()
+        LIST_EXPENSES_FLOAT.clear()
+        LIST_PROFIT_FLOAT.clear()
+
+        INCOME_SUM = 0
+        EXPENSES_SUM = 0
+        PROFIT_SUM = 0
+
         viewModelScope.launch(Dispatchers.IO) {
-            try {
-                INCOME_STATE = 0
+            while (countGetData < 3 && INCOME_STATE == 0) {
+                try {
+                    IncomeApp.CreateInstance().fetchIncomeByOwner(
+                        BearerToken = "Bearer " + TOKEN_API,
+                        date = date,
+                        owner = OWNER_ID
+                    ).enqueue(object :
+                        Callback<ArrayList<IncomeModel>> {
+                        override fun onResponse(call: Call<ArrayList<IncomeModel>>, response: Response<ArrayList<IncomeModel>>) {
 
-                LIST_INCOME.clear()
-                LIST_INCOME_FLOAT.clear()
-                LIST_EXPENSES_FLOAT.clear()
-                LIST_PROFIT_FLOAT.clear()
+                            Log.d("log_network", "Income Owner : ${response.code()} ${response.body()}")
 
-                INCOME_SUM = 0
-                EXPENSES_SUM = 0
-                PROFIT_SUM = 0
+                            if(response.code() == 200){
+                                response.body()?.let {
+                                    LIST_INCOME = response.body()!!
 
-                fetchByOwner()
-                delay(1500L)
-//                Log.i("info_response", "Croutine End Income")
-                if(INCOME_STATE != 1){
+                                    LIST_INCOME.forEachIndexed(){ index, income ->
+                                        var myDate = income.date!!.subSequence(0, 2).toString().toInt()
+
+                                        if(myDate != tempDate){
+
+                                            tempDate = myDate
+                                            tempIncome = income.income!!.toInt()
+                                            tempExpenses = income.outcome!!.toInt()
+                                            tempNetProfit = income.income!!.toInt() - income.outcome!!.toInt()
+
+                                            LIST_INCOME_FLOAT.add(DataPoint(myDate.toFloat(),tempIncome.toFloat()))
+                                            LIST_EXPENSES_FLOAT.add(DataPoint(myDate.toFloat(), tempExpenses.toFloat()))
+                                            LIST_PROFIT_FLOAT.add(DataPoint(myDate.toFloat(), tempNetProfit.toFloat()))
+
+                                            tempIndex++
+
+                                        }
+                                        else{
+                                            tempDate = tempDate
+                                            tempIncome += income.income!!.toInt()
+                                            tempExpenses += income.outcome!!.toInt()
+                                            tempNetProfit += income.income!!.toInt() - income.outcome!!.toInt()
+
+                                            tempIndex--
+
+                                            if(LIST_INCOME_FLOAT[tempIndex].x == myDate.toFloat()){
+                                                LIST_INCOME_FLOAT.removeAt(tempIndex)
+                                                LIST_EXPENSES_FLOAT.removeAt(tempIndex)
+                                                LIST_PROFIT_FLOAT.removeAt(tempIndex)
+                                            }
+
+                                            LIST_INCOME_FLOAT.add(DataPoint(myDate.toFloat(),tempIncome.toFloat()))
+                                            LIST_EXPENSES_FLOAT.add(DataPoint(myDate.toFloat(), tempExpenses.toFloat()))
+                                            LIST_PROFIT_FLOAT.add(DataPoint(myDate.toFloat(), tempNetProfit.toFloat()))
+//
+                                            tempIndex++
+                                        }
+
+                                        INCOME_SUM += income.income!!.toInt()
+                                        EXPENSES_SUM += income.outcome!!.toInt()
+                                        PROFIT_SUM += income.income.toInt() - income.outcome.toInt()
+                                    }
+
+                                    if(!LIST_INCOME_FLOAT.isNullOrEmpty() &&
+                                        !LIST_PROFIT_FLOAT.isNullOrEmpty() &&
+                                        !LIST_EXPENSES_FLOAT.isNullOrEmpty() &&
+                                        !LIST_INCOME.isNullOrEmpty()
+                                    ){
+                                        INCOME_STATE = 1
+                                    }
+                                }
+                                if(LIST_INCOME_FLOAT.isNullOrEmpty() &&
+                                    LIST_PROFIT_FLOAT.isNullOrEmpty() &&
+                                    LIST_EXPENSES_FLOAT.isNullOrEmpty() &&
+                                    LIST_INCOME.isNullOrEmpty() &&
+                                    INCOME_STATE == 0
+                                ){
+                                    countGetData++
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ArrayList<IncomeModel>>, t: Throwable) {
+                            if (t.message == t.message){
+                                INCOME_STATE = 2
+                            }
+                        }
+                    })
+                }
+                catch (e : Exception){
+                    INCOME_ERROR_MESSAGE = e.message.toString()
+                }
+                if(countGetData >= 2){
                     INCOME_STATE = 3
                 }
-            }
-            catch (e: Exception){
-//                INCOME_STATE = 3
+                delay(5000)
             }
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    @ExperimentalCoroutinesApi
-    fun CoroutineFetchIncomeStore(){
+    fun fetchByStore3Times(){
+        var countGetData = 0
+
+        val current = LocalDateTime.now()
+
+        val formatDay = DateTimeFormatter.ofPattern("MM-yyyy")
+        val date = current.format(formatDay)
+
+        INCOME_STATE_STORE = 0
+
+        LIST_INCOME_STORE.clear()
+        LIST_INCOME_FLOAT_STORE.clear()
+        LIST_EXPENSES_FLOAT_STORE.clear()
+        LIST_PROFIT_FLOAT_STORE.clear()
+
+        INCOME_SUM_STORE = 0
+        EXPENSES_SUM_STORE = 0
+        PROFIT_SUM_STORE = 0
+
         viewModelScope.launch(Dispatchers.IO) {
-            try {
-//                Log.i("info_response", "Croutine")
-                INCOME_STATE_STORE = 0
+            while (countGetData < 3 && INCOME_STATE_STORE == 0) {
+                try {
+                    IncomeApp.CreateInstance().fetchIncomeByStore(
+                        BearerToken = "Bearer " + TOKEN_API,
+                        date = date,
+                        store = STORE_ID
+                    ).enqueue(object :
+                        Callback<ArrayList<IncomeModel>> {
+                        override fun onResponse(call: Call<ArrayList<IncomeModel>>, response: Response<ArrayList<IncomeModel>>) {
 
-                LIST_INCOME_STORE.clear()
-                LIST_INCOME_FLOAT_STORE.clear()
-                LIST_EXPENSES_FLOAT_STORE.clear()
-                LIST_PROFIT_FLOAT_STORE.clear()
+                            Log.d("log_network", "Income Store : $countGetData ${response.code()} ${response.body()}")
 
-                INCOME_SUM_STORE = 0
-                EXPENSES_SUM_STORE = 0
-                PROFIT_SUM_STORE = 0
+                            if(response.code() == 200){
+                                response.body()?.let {
+                                    LIST_INCOME_STORE = response.body()!!
 
-                fetchByStore()
-                delay(1500L)
-                if(INCOME_STATE_STORE != 1){
-                    INCOME_STATE_STORE = 3
-//                    Log.i("info_response", "Croutine End Income")
+                                    LIST_INCOME_STORE.forEachIndexed{ index, income ->
+                                        var myDate = income.date!!.subSequence(0, 2).toString().toInt()
+
+                                        LIST_INCOME_FLOAT_STORE.add(DataPoint(myDate.toFloat(),income.income!!.toFloat()))
+                                        LIST_EXPENSES_FLOAT_STORE.add(DataPoint(myDate.toFloat(), income.outcome!!.toFloat()))
+                                        LIST_PROFIT_FLOAT_STORE.add(DataPoint(myDate.toFloat(), (income.income!!.toFloat() - income.outcome!!.toFloat())))
+                                        INCOME_SUM_STORE += income.income.toInt()
+                                        EXPENSES_SUM_STORE += income.outcome.toInt()
+                                        PROFIT_SUM_STORE += income.income.toInt() - income.outcome.toInt()
+                                    }
+
+                                    if(!LIST_INCOME_FLOAT_STORE.isNullOrEmpty() && !LIST_PROFIT_FLOAT_STORE.isNullOrEmpty()){
+                                        INCOME_STATE_STORE = 1
+                                    }
+                                }
+                                if (LIST_INCOME_FLOAT_STORE.isNullOrEmpty() && LIST_PROFIT_FLOAT_STORE.isNullOrEmpty() && INCOME_STATE_STORE == 0){
+                                    countGetData++
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ArrayList<IncomeModel>>, t: Throwable) {
+                            if (t.message == t.message){
+                                INCOME_STATE_STORE = 2
+                            }
+                        }
+                    })
                 }
-            }
-            catch (e: Exception){
-//                INCOME_STATE = 3
+                catch (e : Exception){
+                    INCOME_ERROR_MESSAGE = e.message.toString()
+                }
+                if(countGetData >= 2){
+                    INCOME_STATE_STORE = 3
+                }
+                delay(5000)
             }
         }
     }

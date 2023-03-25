@@ -157,7 +157,7 @@ fun MenuLoadData(
                                 end.linkTo(parent.end)
                             }
                             .clickable {
-                                menuViewModel.CoroutineMenu()
+                                menuViewModel.getMenu3Times()
                                 Toast.makeText(context, "Please Wait", Toast.LENGTH_SHORT).show()
                             }
                     )
