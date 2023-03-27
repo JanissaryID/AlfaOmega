@@ -14,14 +14,20 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.navigations.Screens
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.MultiplePermissionsState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.time.LocalDateTime
@@ -36,11 +42,15 @@ class BluetoothViewModel: ViewModel() {
 
     lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
+    var statConnectedDevice by mutableStateOf(false)
+
     var ActivityApp : MainActivity? = null
 
     var context : Context? = null
 
     var devices: Set<BluetoothDevice>? = null
+
+    var countGetData by mutableStateOf(0)
     @ExperimentalCoroutinesApi
     fun createInstance(appCompatActivity: MainActivity){
         bluetoothManager = appCompatActivity.applicationContext.getSystemService(AppCompatActivity.BLUETOOTH_SERVICE) as BluetoothManager
@@ -156,6 +166,90 @@ class BluetoothViewModel: ViewModel() {
         }
     }
 
+    fun receiveMessages(navController: NavController) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                while (statConnectedDevice) {
+                    val buffer = ByteArray(1024)
+                    val bytesRead = bluetoothSocket!!.inputStream?.read(buffer)
+                    if (bytesRead != null && bytesRead > 0) {
+                        val message = String(buffer, 0, bytesRead)
+                        Log.i("Bluetooth_debug", "Message: ${message.toInt()} -- ${message.length}")
+                        if(message.toInt() == 1){
+                            disconnectBluetooth(navController = navController)
+                        }
+                    }
+                }
+            }
+            catch (e: Exception){
+
+            }
+        }
+    }
+
+    @OptIn(ExperimentalPermissionsApi::class)
+    fun onMachineBluetooth(
+        address: String,
+        uuidDevice: String,
+        context: Context,
+        multiplePermissionState: MultiplePermissionsState,
+        navController: NavController
+    ){
+        countGetData = 0
+//        C0:49:EF:E7:AB:BE
+        viewModelScope.launch(Dispatchers.IO) {
+            while (countGetData < 5) {
+                try {
+                    if (ActivityCompat.checkSelfPermission(
+                            context,
+                            Manifest.permission.BLUETOOTH_CONNECT
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        multiplePermissionState.launchMultiplePermissionRequest()
+                    }
+                    bluetoothSocket = bluetoothAdapter!!.getRemoteDevice(address)
+                        .createRfcommSocketToServiceRecord(UUID.fromString(uuidDevice))
+                    try {
+                        bluetoothAdapter.cancelDiscovery()
+                        bluetoothSocket!!.connect()
+                        Log.i("Bluetooth_debug", "Connecting")
+                        if (bluetoothSocket!!.isConnected){
+                            statConnectedDevice = true
+                            Log.i("Bluetooth_debug", "Connected")
+                            try{
+                                bluetoothSocket!!.outputStream.write("1".toByteArray())
+                                Log.i("Bluetooth_debug", "Success send")
+//                            MACHINE_BUTTON_UPDATE
+                            }catch(e: IOException){
+                                e.printStackTrace()
+                                MACHINE_BUTTON_UPDATE = true
+                                Log.i("Bluetooth_debug", "Error 1 = ${e.printStackTrace()}")
+                                countGetData++
+                            }
+                            receiveMessages(navController = navController)
+                        }
+                        else{
+                            statConnectedDevice = false
+                            MACHINE_BUTTON_UPDATE = true
+                            Log.i("Bluetooth_debug", "Disconnect")
+                        }
+                    }
+                    catch (e: Exception){
+                        statConnectedDevice = false
+                        Log.i("Bluetooth_debug", "Error 2 = ${e}")
+                        countGetData++
+                    }
+                }
+                catch (e: Exception){
+                    STAT_BLUETOOTH_CONNECT = false
+                    Log.i("Bluetooth_debug", "Error 3 = ${e}")
+                    countGetData++
+                }
+                delay(5000L)
+            }
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalPermissionsApi::class)
     @ExperimentalCoroutinesApi
@@ -203,13 +297,27 @@ class BluetoothViewModel: ViewModel() {
     }
 
     @ExperimentalCoroutinesApi
-    fun disconnectBluetooth(){
+    fun disconnectBluetooth(navController: NavController){
         if(bluetoothSocket != null){
             try {
                 bluetoothSocket!!.close()
                 bluetoothSocket = null
                 if (bluetoothSocket == null){
                     Log.i("Bluetooth_debug", "Disconnect")
+                    statConnectedDevice = false
+                    countGetData = 5
+                    viewModelScope.launch(Dispatchers.Main){
+
+                        MACHINE_BUTTON_UPDATE = true
+                        MACHINE_LOADING = false
+                        countGetData = 5
+
+                        navController.navigate(route = Screens.Home.route){
+                            popUpTo(Screens.Home.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
                 }
             }catch(e: IOException){
                 e.printStackTrace()
@@ -242,7 +350,7 @@ class BluetoothViewModel: ViewModel() {
                 if (devices!!.isNotEmpty()) {
                     // Show a list of paired devices here
                     for (device in devices!!) {
-                        Log.i("Bluetooth_debug", "${device.name} -- ${device.type} -- ${device.address}")
+                        Log.i("Bluetooth_debug", "${device.name} -- ${device.type} -- ${device.address} -- ${device.uuids[0].uuid}")
                     }
                     BLUETOOTH_STATE = 1
                 }

@@ -8,7 +8,10 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.navigations.Screens
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.MultiplePermissionsState
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -101,6 +104,93 @@ class MachineViewModel: ViewModel() {
         catch (e : Exception){
             MACHINE_ERROR_MESSAGE = e.message.toString()
 //            Log.d("debug menu", "ERROR $MACHINE_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    @OptIn(ExperimentalPermissionsApi::class)
+    fun updateMachineStat(
+        idMachine: String,
+        idTransaction: String,
+        navController: NavController,
+        logViewModel: LogViewModel = LogViewModel(),
+        transactionViewModel: TransactionViewModel = TransactionViewModel(),
+        bluetoothViewModel: BluetoothViewModel,
+        multiplePermissionState: MultiplePermissionsState,
+    ){
+        val bodyDataUpdate = MachineModel(
+            machineStatus = true,
+            transactionId = idTransaction,
+            machineTime = 0,
+        )
+
+        try {
+            MachineApp.CreateInstance().updateMachine(
+                BearerToken = "Bearer " + TOKEN_API,
+                id = idMachine,
+                bodyDataUpdate
+            ).enqueue(object :
+                Callback<MachineModel> {
+                @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+                override fun onResponse(call: Call<MachineModel>, response: Response<MachineModel>) {
+                    Log.d("log_network", "Machine : ${response.code()} ${response.body()}")
+                    if(response.code() == 200){
+                        val responseBodyData = response.body()
+                        if (responseBodyData!!.machineStatus!!){
+
+
+                            logViewModel.insertLog(
+                                log = response.toString(),
+                                machineNumber = MACHINE_NUMBER,
+                                machineStore = STORE_ID,
+                                codeResponse = response.code().toString(),
+                                machineStatus = true,
+                                machineClass = MACHINE_CLASS,
+                                machineType = MACHINE_TYPE
+                            )
+                            if(!MACHINE_TYPE){
+                                transactionViewModel.updateTransaction(
+                                    navController = navController,
+                                    transactionStateMachine = 1,
+                                    idTransaction = idTransaction,
+                                    bluetoothViewModel = bluetoothViewModel,
+                                    multiplePermissionState = multiplePermissionState
+                                )
+                            }
+                            else{
+                                transactionViewModel.updateTransaction(
+                                    navController = navController,
+                                    transactionStateMachine = 4,
+                                    idTransaction = idTransaction,
+                                    bluetoothViewModel = bluetoothViewModel,
+                                    multiplePermissionState = multiplePermissionState
+                                )
+                            }
+                        }
+                        else{
+                            updateMachineStat(
+                                idMachine = idMachine,
+                                idTransaction = idTransaction,
+//                                timeMachine = timeMachine,
+                                navController = navController,
+                                bluetoothViewModel = bluetoothViewModel,
+                                multiplePermissionState = multiplePermissionState
+                            )
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<MachineModel>, t: Throwable) {
+//                    Log.d("error", t.message.toString())
+                    if (t.message == t.message){
+//                        Toast.makeText(requireContext(), "Tidak ada koneksi Internet" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            MACHINE_ERROR_MESSAGE = e.message.toString()
+//            Log.d("debug", "ERROR $MACHINE_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }

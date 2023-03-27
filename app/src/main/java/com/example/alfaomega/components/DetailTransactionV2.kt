@@ -1,5 +1,6 @@
 package com.example.alfaomega.components
 
+import android.Manifest
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
@@ -25,13 +26,17 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.api.transaction.TransactionViewModel
+import com.example.alfaomega.bluetoothprinter.PermissionsRequiredState
 import com.example.alfaomega.components.button_view.ButtonViewV2
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.whatsapp.WhatsappViewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import java.text.NumberFormat
 import java.util.*
 import java.lang.StringBuilder
 
+@OptIn(ExperimentalPermissionsApi::class)
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun DetailTransactionV2(
@@ -39,6 +44,21 @@ fun DetailTransactionV2(
     navController: NavController,
     whatsappViewModel: WhatsappViewModel = WhatsappViewModel()
 ) {
+
+    val multiplePermissionState = rememberMultiplePermissionsState(
+        permissions = listOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.BLUETOOTH,
+            Manifest.permission.BLUETOOTH_ADMIN,
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_ADVERTISE,
+            Manifest.permission.BLUETOOTH_CONNECT
+        )
+    )
+
+    PermissionsRequiredState(multiplePermissionState = multiplePermissionState)
+
     val selectionProgressMachine = listOf(
         stringResource(R.string.PickWasher),
         stringResource(R.string.WasherProcess),
@@ -258,11 +278,16 @@ fun DetailTransactionV2(
                                     transactionViewModel.updateTransaction(
                                         idTransaction = TRANSACATION_ID,
                                         transactionStateMachine = 6,
-                                        navController = navController
+                                        navController = navController,
+                                        multiplePermissionState = multiplePermissionState
                                     )
                                 }
                                 else{
-                                    navController.navigate(route = Screens.Machine.route)
+                                    navController.navigate(route = Screens.Machine.route){
+                                        popUpTo(Screens.Machine.route) {
+                                            inclusive = true
+                                        }
+                                    }
                                 }
                             }
                         }

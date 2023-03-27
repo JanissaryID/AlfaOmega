@@ -1,5 +1,6 @@
 package com.example.alfaomega.components
 
+import android.Manifest
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
@@ -27,21 +28,39 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.api.transaction.TransactionViewModel
+import com.example.alfaomega.bluetoothprinter.PermissionsRequiredState
 import com.example.alfaomega.components.button_view.ButtonViewV2
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.whatsapp.WhatsappViewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import java.text.NumberFormat
 import java.util.*
 
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun DetailTransaction(
     transactionViewModel: TransactionViewModel,
     navController: NavController,
     whatsappViewModel: WhatsappViewModel = WhatsappViewModel()
 ) {
+
+    val multiplePermissionState = rememberMultiplePermissionsState(
+        permissions = listOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.BLUETOOTH,
+            Manifest.permission.BLUETOOTH_ADMIN,
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_ADVERTISE,
+            Manifest.permission.BLUETOOTH_CONNECT
+        )
+    )
+
+    PermissionsRequiredState(multiplePermissionState = multiplePermissionState)
+
     val selectionProgressMachine = listOf(
         stringResource(R.string.PickWasher),
         stringResource(R.string.WasherProcess),
@@ -416,7 +435,9 @@ fun DetailTransaction(
                             transactionViewModel.updateTransaction(
                                 idTransaction = TRANSACATION_ID,
                                 transactionStateMachine = 6,
-                                navController = navController
+                                navController = navController,
+                                multiplePermissionState = multiplePermissionState
+//                                bluetoothViewModel = blu
                             )
                         }
                         else{

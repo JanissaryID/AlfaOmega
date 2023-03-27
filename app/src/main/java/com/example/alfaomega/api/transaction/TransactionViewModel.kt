@@ -12,7 +12,10 @@ import com.example.alfaomega.*
 import com.example.alfaomega.api.income.IncomeViewModel
 import com.example.alfaomega.api.machine.MachineApp
 import com.example.alfaomega.api.machine.MachineModel
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.navigations.Screens
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.MultiplePermissionsState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
@@ -189,10 +192,13 @@ class TransactionViewModel: ViewModel() {
         })
     }
 
+    @OptIn(ExperimentalPermissionsApi::class)
     fun updateTransaction(
         idTransaction: String,
         transactionStateMachine: Int,
-        navController: NavController
+        navController: NavController,
+        bluetoothViewModel: BluetoothViewModel = BluetoothViewModel(),
+        multiplePermissionState: MultiplePermissionsState,
     ){
         val bodyUpdate = TransactionModel(
             transactionStateMachine = transactionStateMachine,
@@ -207,25 +213,36 @@ class TransactionViewModel: ViewModel() {
                 override fun onResponse(call: Call<TransactionModel>, response: Response<TransactionModel>) {
                     if(response.code() == 200){
                         val responseBodyData = response.body()
-                        if (responseBodyData!!.transactionStateMachine!! ==  6){
-
-                            NEW_TRANSACATION_BUTTON = true
-
+                        if (responseBodyData!!.transactionStateMachine!! < 6){
                             getTransactionActiveOnce()
 
+                            bluetoothViewModel.onMachineBluetooth(
+                                address = MACHINE_MAC,
+                                context = MY_CONTEXT!!,
+                                multiplePermissionState = multiplePermissionState,
+                                uuidDevice = "00001101-0000-1000-8000-00805f9b34fb",
+                                navController = navController
+                            )
+                        }
+                        else if(responseBodyData!!.transactionStateMachine!! > 5){
                             navController.navigate(route = Screens.Home.route){
                                 popUpTo(Screens.Home.route) {
                                     inclusive = true
                                 }
                             }
                         }
-                        else{
-                            updateTransaction(
-                                idTransaction = idTransaction,
-                                transactionStateMachine = 6,
-                                navController = navController
-                            )
-                        }
+//                        else if(responseBodyData!!.transactionStateMachine!! == 0 || responseBodyData!!.transactionStateMachine!! == 3){
+//
+//                        }
+//                        else{
+//                            updateTransaction(
+//                                idTransaction = idTransaction,
+//                                transactionStateMachine = 6,
+//                                navController = navController,
+//                                bluetoothViewModel = bluetoothViewModel,
+//                                multiplePermissionState = multiplePermissionState
+//                            )
+//                        }
                     }
                 }
 

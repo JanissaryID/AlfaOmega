@@ -28,6 +28,9 @@ data class MachineModel(
 	@field:SerializedName("tolerance_time")
 	val toleranceTime: Int? = null,
 
+	@field:SerializedName("macaddr")
+	val macaddr: String? = null,
+
 	@field:SerializedName("machine_debug")
 	val machineDebug: Int? = null,
 

@@ -35,7 +35,7 @@ fun ItemMachine(
 //        elevation = CardDefaults.cardElevation(6.dp),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
-        border = if (usedMachine) BorderStroke(6.dp, MaterialTheme.colorScheme.secondary) else BorderStroke(6.dp, MaterialTheme.colorScheme.primary)
+        border = if (usedMachine) BorderStroke(6.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)) else BorderStroke(6.dp, MaterialTheme.colorScheme.primary)
     ) {
         Surface(
             modifier = Modifier
@@ -46,6 +46,7 @@ fun ItemMachine(
                         MACHINE_CLASS = machineModel.machineClass!!
                         MACHINE_TYPE = machineModel.machineType!!
                         MACHINE_NUMBER = machineModel.machineNumber!!
+                        MACHINE_MAC = machineModel.macaddr!!
                         if(USER_TYPE == 1){
                             PROBLEM_MACHINE_STATE_SCREEN = true
                             PROBLEM_MACHINE_STATE = 0
@@ -85,7 +86,8 @@ fun ItemMachine(
                 modifier = Modifier
                     .padding(24.dp)
                     .fillMaxSize(),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = if (usedMachine) MaterialTheme.colorScheme.primary.copy(alpha = 0.6f) else if (selected) color  else MaterialTheme.colorScheme.primary
             )
         }
     }

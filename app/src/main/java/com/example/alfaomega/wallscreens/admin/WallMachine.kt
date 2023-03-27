@@ -1,10 +1,14 @@
 package com.example.alfaomega.wallscreens
 
+import android.Manifest
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -16,16 +20,38 @@ import com.example.alfaomega.R
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
+import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
+import com.example.alfaomega.bluetoothprinter.PermissionsRequiredState
 import com.example.alfaomega.components.ButtonView
 import com.example.alfaomega.components.button_view.ButtonViewV2
 import com.example.alfaomega.view.admin.machine.MachineLoadData
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.MultiplePermissionsState
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun WallMachine(
     paddingValues: PaddingValues,
     navController: NavController,
     machineViewModel: MachineViewModel = MachineViewModel(),
+    bluetoothViewModel: BluetoothViewModel,
 ) {
+
+    val multiplePermissionState = rememberMultiplePermissionsState(
+        permissions = listOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.BLUETOOTH,
+            Manifest.permission.BLUETOOTH_ADMIN,
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_ADVERTISE,
+            Manifest.permission.BLUETOOTH_CONNECT
+        )
+    )
+
+    PermissionsRequiredState(multiplePermissionState = multiplePermissionState)
+
     var selectedIndex by remember { mutableStateOf(-1) }
     val onItemClick = { index: Int -> selectedIndex = index}
 
@@ -58,12 +84,14 @@ fun WallMachine(
         }
     }
 
-    ConstraintLayout(modifier = Modifier.padding(
-        start = 16.dp,
-        end = 16.dp,
-        top = paddingValues.calculateTopPadding(),
-        bottom = paddingValues.calculateBottomPadding()
-    ).fillMaxSize()
+    ConstraintLayout(modifier = Modifier
+        .padding(
+            start = 16.dp,
+            end = 16.dp,
+            top = paddingValues.calculateTopPadding(),
+            bottom = paddingValues.calculateBottomPadding()
+        )
+        .fillMaxSize()
     ) {
         val (Content, ButtonActive) = createRefs()
 
@@ -96,13 +124,29 @@ fun WallMachine(
                 }
             ) {
                 MACHINE_BUTTON_UPDATE = false
+                MACHINE_LOADING = true
 
-                machineViewModel.updateMachine(
+                bluetoothViewModel.requestBluetoothPermission()
+                bluetoothViewModel.checkBluetoothCompatible()
+
+                machineViewModel.updateMachineStat(
                     idMachine = MACHINE_ID,
                     idTransaction = TRANSACATION_ID,
-                    timeMachine = 0,
-                    navController = navController
+                    navController = navController,
+                    bluetoothViewModel = bluetoothViewModel,
+                    multiplePermissionState = multiplePermissionState
                 )
+            }
+        }
+    }
+
+    if(MACHINE_LOADING){
+        Surface(modifier = Modifier.fillMaxSize(), color = Color.DarkGray.copy(alpha = 0.5f)) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
             }
         }
     }
