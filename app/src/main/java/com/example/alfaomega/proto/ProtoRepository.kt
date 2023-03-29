@@ -68,4 +68,10 @@ class ProtoRepository(context: Context) {
             preference.toBuilder().setEDITMODE(status).build()
         }
     }
+
+    suspend fun updateUserId(UserID: String){
+        datastore.updateData { preference ->
+            preference.toBuilder().setUSERID(UserID).build()
+        }
+    }
 }

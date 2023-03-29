@@ -209,9 +209,11 @@ class BluetoothViewModel: ViewModel() {
                     }
                     bluetoothSocket = bluetoothAdapter!!.getRemoteDevice(address)
                         .createRfcommSocketToServiceRecord(UUID.fromString(uuidDevice))
+                    Log.i("Bluetooth_debug", "Connect to $address with UUID $uuidDevice")
                     try {
                         bluetoothAdapter.cancelDiscovery()
                         bluetoothSocket!!.connect()
+//                        Log.i("Bluetooth_debug", "Connect to $address with UUID $uuidDevice")
                         Log.i("Bluetooth_debug", "Connecting")
                         if (bluetoothSocket!!.isConnected){
                             statConnectedDevice = true
@@ -350,7 +352,9 @@ class BluetoothViewModel: ViewModel() {
                 if (devices!!.isNotEmpty()) {
                     // Show a list of paired devices here
                     for (device in devices!!) {
-                        Log.i("Bluetooth_debug", "${device.name} -- ${device.type} -- ${device.address} -- ${device.uuids[0].uuid}")
+                        if(!device.uuids[0].uuid.toString().isNullOrEmpty()){
+                            Log.i("Bluetooth_debug", "${device.name} -- ${device.type} -- ${device.address} -- ${device.uuids[0].uuid}")
+                        }
                     }
                     BLUETOOTH_STATE = 1
                 }

@@ -129,6 +129,14 @@ fun WallMachine(
                 bluetoothViewModel.requestBluetoothPermission()
                 bluetoothViewModel.checkBluetoothCompatible()
 
+//                bluetoothViewModel.onMachineBluetooth(
+//                    address = MACHINE_MAC,
+//                    context = MY_CONTEXT!!,
+//                    multiplePermissionState = multiplePermissionState,
+//                    uuidDevice = "00001101-0000-1000-8000-00805f9b34fb",
+//                    navController = navController
+//                )
+
                 machineViewModel.updateMachineStat(
                     idMachine = MACHINE_ID,
                     idTransaction = TRANSACATION_ID,

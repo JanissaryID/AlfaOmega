@@ -291,13 +291,7 @@ class StoreViewModel : ViewModel(){
 
                         if (!responseBodyData!!.id.isNullOrEmpty()){
                             if(responseBodyData!!.admin == admin){
-                                userViewModel.updateStatUser(OWNER_ID, false, navController = navController, routeScreen = Screens.Home.route)
-
-//                                navController.navigate(route = Screens.Home.route){
-//                                    popUpTo(Screens.Home.route) {
-//                                        inclusive = true
-//                                    }
-//                                }
+                                userViewModel.updateStatUser(USER_ID, false, navController = navController, routeScreen = Screens.Home.route)
                             }
                             else{
                                 updateStoreAdmin(

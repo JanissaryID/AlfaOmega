@@ -40,4 +40,8 @@ class ProtoViewModel(application: Application): AndroidViewModel(application) {
     fun updateEditMode(status: Boolean) = viewModelScope.launch(Dispatchers.IO){
         repository.updateEditMode(status = status)
     }
+
+    fun updateUserId(UserId: String) = viewModelScope.launch(Dispatchers.IO){
+        repository.updateUserId(UserID = UserId)
+    }
 }

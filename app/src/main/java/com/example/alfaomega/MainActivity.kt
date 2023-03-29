@@ -73,6 +73,7 @@ class MainActivity : ComponentActivity() {
             OWNER_ID = it.ownerid
             UUID_DEVICE = it.uuidstring
             EDIT_MODE = it.editmode
+            USER_ID = it.userid
         })
 
         setContent {
@@ -108,7 +109,7 @@ class MainActivity : ComponentActivity() {
 
                     MY_CONTEXT = this
 
-                    Log.i("info_response", "Proto : ${STORE_ID} - ${USER_NAME} - ${USER_TYPE} - ${UUID_DEVICE} - ${ADDRESS_DEVICE}")
+                    Log.i("info_response", "Proto : ${USER_ID} - ${OWNER_ID} - ${STORE_ID} - ${USER_NAME} - ${USER_TYPE} - ${UUID_DEVICE} - ${ADDRESS_DEVICE}")
 
                     Log.d("info_response", "Screen Now = ${SCREEN_ACTIVE_NOW} - ${EDIT_MODE}")
                 }

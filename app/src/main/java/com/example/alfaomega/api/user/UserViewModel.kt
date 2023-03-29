@@ -77,8 +77,8 @@ class UserViewModel : ViewModel() {
                                     USER_ID = userListResponse[0].id!!
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
-                                    protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
-                                    updateStatUser(OWNER_ID, true, navController = navController, routeScreen = screenBack)
+                                    protoViewModel.updateUserId(UserId = USER_ID)
+                                    updateStatUser(USER_ID, true, navController = navController, routeScreen = screenBack)
                                 }
                                 else{
                                     USER_NAME = selectionUser[1]
@@ -87,7 +87,7 @@ class UserViewModel : ViewModel() {
                                     USER_ID = userListResponse[0].id!!
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
-                                    protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
+                                    protoViewModel.updateUserId(UserId = USER_ID)
                                     updateStatUser(USER_ID, true, navController = navController, routeScreen = screenBack)
                                 }
                                 FAILED_LOGIN = false
