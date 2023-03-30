@@ -99,7 +99,8 @@ fun NavGraphSetup(
 
                 if(STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1 && SCREEN_ACTIVE_NOW == Screens.Home.route){
                     LaunchedEffect(key1 = STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1 && SCREEN_ACTIVE_NOW == Screens.Home.route){
-                        storeViewModel.FetchStore()
+                        if(!OWNER_ID.isNullOrEmpty()) storeViewModel.FetchStore3Times()
+                        else storeViewModel.FetchStore3Times()
                     }
                 }
 
@@ -198,7 +199,7 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.Store.route
 
-                storeViewModel.FetchStore()
+                storeViewModel.FetchStore3Times()
             }
             ScreenStoreList(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }

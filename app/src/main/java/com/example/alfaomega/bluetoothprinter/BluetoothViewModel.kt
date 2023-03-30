@@ -352,7 +352,7 @@ class BluetoothViewModel: ViewModel() {
                 if (devices!!.isNotEmpty()) {
                     // Show a list of paired devices here
                     for (device in devices!!) {
-                        if(!device.uuids[0].uuid.toString().isNullOrEmpty()){
+                        if(!device.uuids.isNullOrEmpty()){
                             Log.i("Bluetooth_debug", "${device.name} -- ${device.type} -- ${device.address} -- ${device.uuids[0].uuid}")
                         }
                     }

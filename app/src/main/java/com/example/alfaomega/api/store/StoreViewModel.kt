@@ -81,7 +81,7 @@ class StoreViewModel : ViewModel(){
                 Callback<ArrayList<StoreModel>> {
                 override fun onResponse(call: Call<ArrayList<StoreModel>>, response: Response<ArrayList<StoreModel>>) {
 
-                    Log.d("log_network", "Store : ${TRANSACTION_ACTIVE_STATE} ${response.code()} ${response.body()}")
+                    Log.d("log_network", "Store : ${TRANSACTION_ACTIVE_STATE} ${response.code()} ${response.body()} $response")
 
                     if(response.code() == 200){
                         response.body()?.let {

@@ -75,9 +75,12 @@ class UserViewModel : ViewModel() {
                                     USER_TYPE = userListResponse[0].typeUser!!
                                     OWNER_ID = userListResponse[0].idOwner!!
                                     USER_ID = userListResponse[0].id!!
+
+                                    Log.d("log_network", "$USER_NAME $OWNER_ID $USER_ID")
                                     protoViewModel.updateNameUser(Nameuser = USER_NAME)
                                     protoViewModel.updateTypeUser(TypeUser = USER_TYPE)
                                     protoViewModel.updateUserId(UserId = USER_ID)
+                                    protoViewModel.updateOwnerId(OwnerId = OWNER_ID)
                                     updateStatUser(USER_ID, true, navController = navController, routeScreen = screenBack)
                                 }
                                 else{
