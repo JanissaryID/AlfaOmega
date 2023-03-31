@@ -35,18 +35,21 @@ fun ItemMachine(
 //        elevation = CardDefaults.cardElevation(6.dp),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
-        border = if (usedMachine) BorderStroke(6.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)) else BorderStroke(6.dp, MaterialTheme.colorScheme.primary)
+        border = if(PROBLEM_MACHINE_STATE_SCREEN) BorderStroke(6.dp, MaterialTheme.colorScheme.primary)
+        else if (usedMachine) BorderStroke(6.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.6f))
+        else BorderStroke(6.dp, MaterialTheme.colorScheme.primary)
     ) {
         Surface(
             modifier = Modifier
                 .padding(7.dp)
                 .clickable {
-                    if (!usedMachine) {
-                        MACHINE_ID = machineModel.id!!
-                        MACHINE_CLASS = machineModel.machineClass!!
-                        MACHINE_TYPE = machineModel.machineType!!
-                        MACHINE_NUMBER = machineModel.machineNumber!!
-                        MACHINE_MAC = machineModel.macaddr!!
+                    MACHINE_ID = machineModel.id!!
+                    MACHINE_CLASS = machineModel.machineClass!!
+                    MACHINE_TYPE = machineModel.machineType!!
+                    MACHINE_NUMBER = machineModel.machineNumber!!
+                    MACHINE_MAC = machineModel.macaddr!!
+
+                    if(PROBLEM_MACHINE_STATE_SCREEN){
                         if(USER_TYPE == 1){
                             PROBLEM_MACHINE_STATE_SCREEN = true
                             PROBLEM_MACHINE_STATE = 0
@@ -57,7 +60,7 @@ fun ItemMachine(
                                 }
                             }
                         }
-                        else if(PROBLEM_MACHINE_STATE_SCREEN){
+                        else if(USER_TYPE == 3){
                             PROBLEM_MACHINE_STATE_SCREEN = true
                             PROBLEM_MACHINE_STATE = 0
                             LIST_PROBLEM_MACHINE.clear()
@@ -67,17 +70,21 @@ fun ItemMachine(
                                 }
                             }
                         }
-                        else{
+                    }
+                    else{
+                        if (!usedMachine) {
                             MACHINE_BUTTON_UPDATE = selected
 
                             onClick.invoke(index)
                         }
                     }
                 },
-            color = if (usedMachine){ MaterialTheme.colorScheme.secondary }
+            color = if(PROBLEM_MACHINE_STATE_SCREEN) MaterialTheme.colorScheme.primary else if (usedMachine){ MaterialTheme.colorScheme.secondary }
             else{ if (selected) MaterialTheme.colorScheme.primary else color },
             shape = RoundedCornerShape(5.dp),
-            contentColor = if (selected) color else MaterialTheme.colorScheme.primary,
+            contentColor = if(PROBLEM_MACHINE_STATE_SCREEN) color
+            else if (selected) color
+            else MaterialTheme.colorScheme.primary,
         ){
             Text(
                 text = machineModel.machineNumber.toString(),
@@ -87,7 +94,7 @@ fun ItemMachine(
                     .padding(24.dp)
                     .fillMaxSize(),
                 textAlign = TextAlign.Center,
-                color = if (usedMachine) MaterialTheme.colorScheme.primary.copy(alpha = 0.6f) else if (selected) color  else MaterialTheme.colorScheme.primary
+                color = if(PROBLEM_MACHINE_STATE_SCREEN) color else if (usedMachine) MaterialTheme.colorScheme.primary.copy(alpha = 0.6f) else if (selected) color  else MaterialTheme.colorScheme.primary
             )
         }
     }

@@ -21,11 +21,10 @@ class StoreViewModel : ViewModel(){
     fun FetchStore3Times(){
         var countGetData = 0
 
+        STORE_STATE = 0
+
         viewModelScope.launch(Dispatchers.IO) {
             while (countGetData < 5 && STORE_STATE == 0) {
-//                if (countGetData > 0) {
-//                    delay(1000)
-//                }
                 try {
                     StoreApp.CreateInstance().fetchStore(
                         BearerToken = "Bearer " + TOKEN_API,

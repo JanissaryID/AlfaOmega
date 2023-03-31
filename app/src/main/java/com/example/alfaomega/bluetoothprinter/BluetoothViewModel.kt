@@ -167,9 +167,9 @@ class BluetoothViewModel: ViewModel() {
     }
 
     fun receiveMessages(navController: NavController) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Default) {
             try {
-                while (statConnectedDevice) {
+                while (true) {
                     val buffer = ByteArray(1024)
                     val bytesRead = bluetoothSocket!!.inputStream?.read(buffer)
                     if (bytesRead != null && bytesRead > 0) {
@@ -182,7 +182,7 @@ class BluetoothViewModel: ViewModel() {
                 }
             }
             catch (e: Exception){
-
+                Log.i("Bluetooth_debug", "Catch read $e")
             }
         }
     }
@@ -196,8 +196,7 @@ class BluetoothViewModel: ViewModel() {
         navController: NavController
     ){
         countGetData = 0
-//        C0:49:EF:E7:AB:BE
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Default) {
             while (countGetData < 5) {
                 try {
                     if (ActivityCompat.checkSelfPermission(
@@ -207,28 +206,27 @@ class BluetoothViewModel: ViewModel() {
                     ) {
                         multiplePermissionState.launchMultiplePermissionRequest()
                     }
-                    bluetoothSocket = bluetoothAdapter!!.getRemoteDevice(address)
-                        .createRfcommSocketToServiceRecord(UUID.fromString(uuidDevice))
+                    bluetoothSocket = bluetoothAdapter!!.getRemoteDevice(address).createRfcommSocketToServiceRecord(UUID.fromString(uuidDevice))
                     Log.i("Bluetooth_debug", "Connect to $address with UUID $uuidDevice")
-                    try {
+                    try {receiveMessages(navController = navController)
                         bluetoothAdapter.cancelDiscovery()
                         bluetoothSocket!!.connect()
 //                        Log.i("Bluetooth_debug", "Connect to $address with UUID $uuidDevice")
                         Log.i("Bluetooth_debug", "Connecting")
                         if (bluetoothSocket!!.isConnected){
                             statConnectedDevice = true
+                            receiveMessages(navController = navController)
+                            delay(1000L)
                             Log.i("Bluetooth_debug", "Connected")
                             try{
                                 bluetoothSocket!!.outputStream.write("1".toByteArray())
                                 Log.i("Bluetooth_debug", "Success send")
-//                            MACHINE_BUTTON_UPDATE
                             }catch(e: IOException){
                                 e.printStackTrace()
                                 MACHINE_BUTTON_UPDATE = true
                                 Log.i("Bluetooth_debug", "Error 1 = ${e.printStackTrace()}")
                                 countGetData++
                             }
-                            receiveMessages(navController = navController)
                         }
                         else{
                             statConnectedDevice = false
@@ -248,6 +246,9 @@ class BluetoothViewModel: ViewModel() {
                     countGetData++
                 }
                 delay(5000L)
+            }
+            if(countGetData >= 4){
+                MACHINE_LOADING = false
             }
         }
     }
@@ -319,6 +320,29 @@ class BluetoothViewModel: ViewModel() {
                                 inclusive = true
                             }
                         }
+                    }
+                }
+            }catch(e: IOException){
+                e.printStackTrace()
+            }
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    fun disconnectBluetooth2(){
+        if(bluetoothSocket != null){
+            try {
+                bluetoothSocket!!.close()
+                bluetoothSocket = null
+                if (bluetoothSocket == null){
+                    Log.i("Bluetooth_debug", "Disconnect")
+                    statConnectedDevice = false
+                    countGetData = 5
+                    viewModelScope.launch(Dispatchers.Main){
+
+                        MACHINE_BUTTON_UPDATE = true
+                        MACHINE_LOADING = false
+                        countGetData = 5
                     }
                 }
             }catch(e: IOException){

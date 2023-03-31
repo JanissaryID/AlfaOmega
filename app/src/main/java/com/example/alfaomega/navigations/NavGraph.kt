@@ -156,6 +156,8 @@ fun NavGraphSetup(
                 SCREEN_ACTIVE_NOW = Screens.DetailTransaction.route
 
                 MACHINE_SCREEN = true
+
+                PROBLEM_MACHINE_STATE_SCREEN = false
             }
             ScreenDetailTransaction(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }

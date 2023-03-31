@@ -85,26 +85,14 @@ fun DetailTransaction(
             NEW_TRANSACATION_CUSTOMER))
     }
     var text_phone by remember {
-        mutableStateOf(TextFieldValue(NEW_TRANSACATION_PHONE))
+        mutableStateOf(NEW_TRANSACATION_PHONE)
     }
     var payment_value_index by remember {
         mutableStateOf(0)
     }
     var text_money by remember {
-        mutableStateOf(TextFieldValue(""))
+        mutableStateOf("")
     }
-
-    val selectedValueMenu = remember { mutableStateOf("") }
-    val isSelectedItemMenu: (String) -> Boolean = { selectedValueMenu.value == it }
-    val onChangeStateMenu: (String) -> Unit = { selectedValueMenu.value = it }
-
-    val selectedValueType = remember { mutableStateOf("") }
-    val isSelectedItemType: (String) -> Boolean = { selectedValueType.value == it }
-    val onChangeStateType: (String) -> Unit = { selectedValueType.value = it }
-
-    val selectedValuePrice = remember { mutableStateOf("") }
-    val isSelectedItemPrice: (String) -> Boolean = { selectedValuePrice.value == it }
-    val onChangeStatePrice: (String) -> Unit = { selectedValuePrice.value = it }
 
     val selectedValuePayment = remember { mutableStateOf(0) }
     val isSelectedItemPayment: (Int) -> Boolean = { selectedValuePayment.value == it }
@@ -224,7 +212,7 @@ fun DetailTransaction(
                         TextField(
                             value = text_phone,
                             onValueChange ={
-                                text_phone = it
+                                text_phone = it.filter { it.isDigit() }
                             },
                             singleLine = true,
                             colors = TextFieldDefaults.textFieldColors(
@@ -293,7 +281,7 @@ fun DetailTransaction(
                         TextField(
                             value = text_money,
                             onValueChange ={
-                                text_money = it
+                                text_money = it.filter { it.isDigit() }
                             },
                             singleLine = true,
                             colors = TextFieldDefaults.textFieldColors(
@@ -403,7 +391,7 @@ fun DetailTransaction(
         }
         else{
             if(!text_name.text.isNullOrEmpty() &&
-                if(selectedValuePayment.value == 0) !text_money.text.isNullOrEmpty() else true
+                if(selectedValuePayment.value == 0) !text_money.isNullOrEmpty() else true
 //                        && (text_money.text.toInt() >= TRANSACATION_PRICE.toInt())
             ){
                 NEW_TRANSACATION_BUTTON = true
@@ -458,12 +446,12 @@ fun DetailTransaction(
                                 else 0,
                                 isWasher = NEW_TRANSACATION_IS_WASHER,
                                 isDryer = NEW_TRANSACATION_IS_DRYER,
-                                phoneCustomer = text_phone.text,
-                                userMoney = if(selectedValuePayment.value == 0) text_money.text else NEW_TRANSACATION_PRICE,
+                                phoneCustomer = text_phone,
+                                userMoney = if(selectedValuePayment.value == 0) text_money else NEW_TRANSACATION_PRICE,
                                 navController = navController
                             )
                         }
-                        else if(selectedValuePayment.value == 0 && text_money.text.toInt() >= NEW_TRANSACATION_PRICE.toInt()){
+                        else if(selectedValuePayment.value == 0 && text_money.toInt() >= NEW_TRANSACATION_PRICE.toInt()){
                             transactionViewModel.insertTransaction(
                                 transactionCustomer = text_name.text,
                                 transactionMenu = NEW_TRANSACATION_MENU,
@@ -476,8 +464,8 @@ fun DetailTransaction(
                                 else 0,
                                 isWasher = NEW_TRANSACATION_IS_WASHER,
                                 isDryer = NEW_TRANSACATION_IS_DRYER,
-                                phoneCustomer = text_phone.text,
-                                userMoney = if(selectedValuePayment.value == 0) text_money.text else NEW_TRANSACATION_PRICE,
+                                phoneCustomer = text_phone,
+                                userMoney = if(selectedValuePayment.value == 0) text_money else NEW_TRANSACATION_PRICE,
                                 navController = navController
                             )
                         }
