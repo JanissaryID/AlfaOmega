@@ -1,5 +1,6 @@
 package com.example.alfaomega.components
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -48,6 +49,8 @@ fun ItemMachine(
                     MACHINE_TYPE = machineModel.machineType!!
                     MACHINE_NUMBER = machineModel.machineNumber!!
                     MACHINE_MAC = machineModel.macaddr!!
+
+                    Log.d("log_machine", "State = $PROBLEM_MACHINE_STATE_SCREEN")
 
                     if(PROBLEM_MACHINE_STATE_SCREEN){
                         if(USER_TYPE == 1){

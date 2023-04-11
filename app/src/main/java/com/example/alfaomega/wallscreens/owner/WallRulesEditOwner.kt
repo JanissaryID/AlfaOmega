@@ -160,7 +160,8 @@ fun WallRulesEditOwner(
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         TextField(
-                            enabled = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) false else true,
+//                            enabled = true,
+                            enabled = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN && !EDIT_MODE) true else if(EDIT_MODE) false else true,
                             value = text_rule,
                             onValueChange ={
                                 text_rule = it
@@ -192,7 +193,9 @@ fun WallRulesEditOwner(
             }
 
             ButtonViewV2(
-                title = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.problemClearTitle)
+                title =
+                if(!EDIT_MODE && PROBLEM_MACHINE_STATE_SCREEN && USER_TYPE == 1) stringResource(R.string.CreateProblem)
+                else if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.problemClearTitle)
                 else if(USER_TYPE == 3 && PROBLEM_MACHINE_STATE_SCREEN) stringResource(R.string.CreateProblem)
                 else if(EDIT_MODE) stringResource(com.example.alfaomega.R.string.SaveChanges)
                 else stringResource(com.example.alfaomega.R.string.CreateRuleTitle),
@@ -205,10 +208,29 @@ fun WallRulesEditOwner(
             ) {
                 button_clicked = true
 
-                if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN){
+                if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN && EDIT_MODE){
                     problemViewModel.updateProblem(idProblem = ID_RULE_EDIT) // im lazy to create a new component
                     // so i reused component rule for problem machinne. id and text same name,
                     // but have different value in passing data lazycolumn
+                    problemViewModel.fetchProblem()
+
+                    navController.navigate(route = Screens.ReportMachine.route){
+                        popUpTo(Screens.ReportMachine.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+                else if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN && !EDIT_MODE){
+                    problemViewModel.insertProblem(
+                        idMachine = MACHINE_ID,
+                        storeName = STORE_NAME,
+                        date = date,
+                        admin = USER_NAME,
+                        store = STORE_ID,
+                        numberMachine = MACHINE_NUMBER,
+                        problem = text_rule.text,
+                        navController = navController
+                    )
                     problemViewModel.fetchProblem()
 
                     navController.navigate(route = Screens.ReportMachine.route){

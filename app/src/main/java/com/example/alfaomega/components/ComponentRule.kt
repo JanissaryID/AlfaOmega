@@ -1,5 +1,6 @@
 package com.example.alfaomega.components
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -45,12 +46,19 @@ fun ComponentRule(
                 .clickable(
                     enabled = !solvedMachine
                 ) {
+                    Log.d("log_machine", "Problem $USER_TYPE -- $SCREEN_ACTIVE_NOW")
                     if (USER_TYPE == 1 && SCREEN_ACTIVE_NOW == Screens.RulesOwner.route) {
                         EDIT_MODE = true
                         RULE_TEXT_EDIT = ruleText
                         RULES_SCREEN_TYPE = true
                         ID_RULE_EDIT = idRule
                         protoViewModel.updateEditMode(status = EDIT_MODE)
+                        navController.navigate(route = Screens.RulesEditOwner.route)
+                    }
+                    if (USER_TYPE == 1 && SCREEN_ACTIVE_NOW == Screens.ReportMachine.route) {
+                        EDIT_MODE = true
+                        RULE_TEXT_EDIT = ruleText
+                        ID_RULE_EDIT = idRule
                         navController.navigate(route = Screens.RulesEditOwner.route)
                     }
                 }) {

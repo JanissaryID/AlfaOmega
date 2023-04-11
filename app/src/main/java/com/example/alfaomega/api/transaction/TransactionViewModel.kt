@@ -99,6 +99,7 @@ class TransactionViewModel: ViewModel() {
                         response.body()?.let {
                             TRANSACTION_ACTIVE_RESPONSE = response.body()!!.filter { data -> data.transactionStateMachine != 6 } as ArrayList<TransactionModel>
                             TRANSACTION_ACTIVE_STATE = 1
+
 //                            Log.d("debug_transaction", "Success get data transcaction")
                         }
                         if (TRANSACTION_ACTIVE_RESPONSE.isNullOrEmpty()) {
@@ -179,6 +180,7 @@ class TransactionViewModel: ViewModel() {
                     NEW_TRANSACATION_BUTTON = true
                     NEW_TRANSACATION_IS_DRYER = false
                     NEW_TRANSACATION_IS_WASHER = false
+                    TRANSACTION_LOADING = false
                 }
             }
 

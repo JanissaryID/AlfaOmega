@@ -5,6 +5,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -44,7 +45,7 @@ import java.util.*
 fun DetailTransaction(
     transactionViewModel: TransactionViewModel,
     navController: NavController,
-    whatsappViewModel: WhatsappViewModel = WhatsappViewModel()
+    whatsappViewModel: WhatsappViewModel = WhatsappViewModel(),
 ) {
 
     val multiplePermissionState = rememberMultiplePermissionsState(
@@ -105,13 +106,21 @@ fun DetailTransaction(
     numberFormat.setMaximumFractionDigits(0)
 
     val context = LocalContext.current
+
+    if(TRANSACTION_LOADING){
+        Box(
+            modifier = Modifier.fillMaxSize().background(Color.Transparent),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
+        }
+    }
     
-    ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+    ConstraintLayout(modifier = Modifier.fillMaxSize().padding(start = 16.dp, end = 16.dp, top = 16.dp)) {
 
         val (CardMenu, Button) = createRefs()
 
         Card(
-//            elevation = CardDefaults.cardElevation(6.dp),
             modifier = Modifier
                 .padding(0.dp)
                 .fillMaxWidth()
@@ -417,6 +426,9 @@ fun DetailTransaction(
                     enable = NEW_TRANSACATION_BUTTON,
                 ) {
                     button_clicked = true
+                    TRANSACTION_LOADING = true
+
+                    Log.d("get_log", "Loading : $TRANSACTION_LOADING")
 
                     if(!TRANSACTION_SCREEN){
                         if(TRANSACATION_STATUS_MACHINE == 6 || TRANSACATION_STATUS_MACHINE == 7){
@@ -425,7 +437,6 @@ fun DetailTransaction(
                                 transactionStateMachine = 6,
                                 navController = navController,
                                 multiplePermissionState = multiplePermissionState
-//                                bluetoothViewModel = blu
                             )
                         }
                         else{

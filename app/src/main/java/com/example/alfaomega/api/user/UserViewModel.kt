@@ -342,7 +342,8 @@ class UserViewModel : ViewModel() {
             username = username,
             passwordUser = passwordUser,
             typeUser = typeUser,
-            idOwner = idOwner
+            idOwner = idOwner,
+            statususer = false
         )
 
         UserApp.CreateInstance().insertUser(

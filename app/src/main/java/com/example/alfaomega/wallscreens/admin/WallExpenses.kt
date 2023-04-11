@@ -42,7 +42,7 @@ fun WallExpenses(
     }
 
     var text_nominal by remember {
-        mutableStateOf(TextFieldValue(""))
+        mutableStateOf("")
     }
 
     val current = LocalDateTime.now()
@@ -133,7 +133,7 @@ fun WallExpenses(
                         TextField(
                             value = text_nominal,
                             onValueChange ={
-                                text_nominal = it
+                                text_nominal = it.filter { it.isDigit() }
                             },
                             singleLine = true,
                             colors = TextFieldDefaults.textFieldColors(
@@ -147,7 +147,8 @@ fun WallExpenses(
                             shape = RoundedCornerShape(12.dp),
                             modifier = Modifier.fillMaxWidth(),
                             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, keyboardType = KeyboardType.Number),
-                            readOnly = if(USER_TYPE == 3 && SCREEN_ACTIVE_NOW == Screens.ExpensesStore.route) false else true
+                            readOnly = false
+//                            readOnly = if(USER_TYPE == 3 && SCREEN_ACTIVE_NOW == Screens.ExpensesStore.route) false else true
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
@@ -182,7 +183,7 @@ fun WallExpenses(
                 }
             }
 
-            if(!text_rule.text.isNullOrEmpty() && !text_nominal.text.isNullOrEmpty() && !button_clicked) {
+            if(!text_rule.text.isNullOrEmpty() && !text_nominal.isNullOrEmpty() && !button_clicked) {
                 BUTTON_MENU_EDIT = true
             }
             else{
@@ -200,12 +201,21 @@ fun WallExpenses(
             ) {
                 button_clicked = true
 
-                incomeViewModel.fetchByStoreGetNull(incomeStat = false, expenses = text_nominal.text)
-                expensesViewModel.insertExpenses(expenses = text_nominal.text, note = text_rule.text)
+                incomeViewModel.fetchByStoreGetNull(incomeStat = false, expenses = text_nominal)
+                expensesViewModel.insertExpenses(expenses = text_nominal, note = text_rule.text)
 
-                navController.navigate(route = Screens.StoreProfile.route){
-                    popUpTo(Screens.StoreProfile.route) {
-                        inclusive = true
+                if(USER_TYPE == 3){
+                    navController.navigate(route = Screens.StoreProfile.route){
+                        popUpTo(Screens.StoreProfile.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+                else{
+                    navController.navigate(route = Screens.ExpensesOwner.route){
+                        popUpTo(Screens.ExpensesOwner.route) {
+                            inclusive = true
+                        }
                     }
                 }
             }

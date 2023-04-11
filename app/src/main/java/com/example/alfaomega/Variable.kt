@@ -80,6 +80,7 @@ var TRANSACTION_MONEY: String by mutableStateOf("")
 var TRANSACTION_SCREEN: Boolean by mutableStateOf(false)
 var MACHINE_SCREEN: Boolean by mutableStateOf(false)
 var SCREEN_ACTIVE_NOW: String by mutableStateOf("")
+var TRANSACTION_LOADING: Boolean by mutableStateOf(false)
 
 //Variable Machine
 var LIST_MACHINE_DRYER_GIANT: ArrayList<MachineModel> by mutableStateOf(arrayListOf())

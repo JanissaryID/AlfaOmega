@@ -21,7 +21,7 @@ import com.example.alfaomega.ui.theme.AlfaOmegaTheme
 fun ScreenExpenses(navController: NavController, protoViewModel: ProtoViewModel, bluetoothViewModel: BluetoothViewModel) {
 
     val tittleScreen = stringResource(R.string.ExpensesTitle)
-    val screenBack = Screens.StoreProfile.route
+    val screenBack = if(USER_TYPE == 3) Screens.StoreProfile.route else Screens.ExpensesOwner.route
     val floatingRoute = Screens.Menu.route
     val icon = R.drawable.ic_twotone_storefront_24
     val TopBar = 2

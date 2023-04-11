@@ -29,38 +29,53 @@ fun ScreenReportMachine(navController: NavController, protoViewModel: ProtoViewM
     val topBarColor = MaterialTheme.colorScheme.primary
     val fontTopBar = MaterialTheme.colorScheme.surface
 
-    if(USER_TYPE == 1){
-        Scaffold1(
-            tittleScreen = tittleScreen,
-            wallScreen = wallScrreen,
-            navController = navController,
-            screenBack = screenBack,
-            protoViewModel = protoViewModel,
-            floatingRoute = floatingRoute,
-            TopBar = TopBar,
-            icon = icon,
-            description = desctiptionTopBar,
-            route =routeAction,
-            bluetoothViewModel = bluetoothViewModel,
-            topBarColor = topBarColor,
-            fontTopBar = fontTopBar
-        )
-    }
-    else{
-        Scaffold2(
-            tittleScreen = tittleScreen,
-            wallScreen = wallScrreen,
-            navController = navController,
-            screenBack = screenBack,
-            protoViewModel = protoViewModel,
-            floatingRoute = floatingRoute,
-            TopBar = TopBar,
-            icon = icon,
-            description = desctiptionTopBar,
-            route =routeAction,
-            bluetoothViewModel = bluetoothViewModel,
-            topBarColor = topBarColor,
-            fontTopBar = fontTopBar
-        )
-    }
+//    if(USER_TYPE == 1){
+//        Scaffold1(
+//            tittleScreen = tittleScreen,
+//            wallScreen = wallScrreen,
+//            navController = navController,
+//            screenBack = screenBack,
+//            protoViewModel = protoViewModel,
+//            floatingRoute = floatingRoute,
+//            TopBar = TopBar,
+//            icon = icon,
+//            description = desctiptionTopBar,
+//            route =routeAction,
+//            bluetoothViewModel = bluetoothViewModel,
+//            topBarColor = topBarColor,
+//            fontTopBar = fontTopBar
+//        )
+//    }
+//    else{
+//        Scaffold2(
+//            tittleScreen = tittleScreen,
+//            wallScreen = wallScrreen,
+//            navController = navController,
+//            screenBack = screenBack,
+//            protoViewModel = protoViewModel,
+//            floatingRoute = floatingRoute,
+//            TopBar = TopBar,
+//            icon = icon,
+//            description = desctiptionTopBar,
+//            route =routeAction,
+//            bluetoothViewModel = bluetoothViewModel,
+//            topBarColor = topBarColor,
+//            fontTopBar = fontTopBar
+//        )
+//    }
+    Scaffold2(
+        tittleScreen = tittleScreen,
+        wallScreen = wallScrreen,
+        navController = navController,
+        screenBack = screenBack,
+        protoViewModel = protoViewModel,
+        floatingRoute = floatingRoute,
+        TopBar = TopBar,
+        icon = icon,
+        description = desctiptionTopBar,
+        route =routeAction,
+        bluetoothViewModel = bluetoothViewModel,
+        topBarColor = topBarColor,
+        fontTopBar = fontTopBar
+    )
 }

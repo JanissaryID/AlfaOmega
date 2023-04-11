@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import com.example.alfaomega.R
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.components.scaffold.Scaffold1
+import com.example.alfaomega.components.scaffold.Scaffold2
 import com.example.alfaomega.navigations.Screens
 import com.example.alfaomega.proto.ProtoViewModel
 
@@ -18,7 +19,7 @@ fun ScreenExpensesOwner(navController: NavController, bluetoothViewModel: Blueto
 
     val tittleScreen = stringResource(R.string.ListExpenses)
     val screenBack = Screens.OutletOwner.route
-    val floatingRoute = Screens.Menu.route
+    val floatingRoute = Screens.ExpensesStore.route
     val icon = R.drawable.ic_twotone_today_24
     val TopBar = 4
     val wallScrreen = 27
@@ -27,7 +28,7 @@ fun ScreenExpensesOwner(navController: NavController, bluetoothViewModel: Blueto
     val topBarColor = MaterialTheme.colorScheme.primary
     val fontTopBar = MaterialTheme.colorScheme.surface
 
-    Scaffold1(
+    Scaffold2(
         tittleScreen = tittleScreen,
         wallScreen = wallScrreen,
         navController = navController,

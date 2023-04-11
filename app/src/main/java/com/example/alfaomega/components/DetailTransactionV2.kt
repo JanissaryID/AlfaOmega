@@ -42,7 +42,7 @@ import java.lang.StringBuilder
 fun DetailTransactionV2(
     transactionViewModel: TransactionViewModel,
     navController: NavController,
-    whatsappViewModel: WhatsappViewModel = WhatsappViewModel()
+    whatsappViewModel: WhatsappViewModel = WhatsappViewModel(),
 ) {
 
     val multiplePermissionState = rememberMultiplePermissionsState(
@@ -96,9 +96,11 @@ fun DetailTransactionV2(
 
     val context = LocalContext.current
 
-    ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+    ConstraintLayout(modifier = Modifier.fillMaxSize().padding(start = 16.dp, end = 16.dp, top = 16.dp)) {
 
         val (CardMenu, Button) = createRefs()
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         Card(
             modifier = Modifier

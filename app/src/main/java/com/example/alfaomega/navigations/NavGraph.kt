@@ -91,6 +91,11 @@ fun NavGraphSetup(
                 BUTTON_LOGIN_CLICKED = false
             }
             if(USER_TYPE == 3){
+
+                TRANSACTION_LOADING = false
+
+                Log.d("get_log", "Loading : $TRANSACTION_LOADING")
+
                 if(!STORE_ID.isNullOrEmpty()){
                     LaunchedEffect(key1 = !STORE_ID.isNullOrEmpty()){
                         transactionViewModel.getTransactionActive()
@@ -116,7 +121,8 @@ fun NavGraphSetup(
                 ScreenHomeDeveloper(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
             else if(USER_TYPE == 1){
-                PROBLEM_MACHINE_STATE_SCREEN = false
+//                PROBLEM_MACHINE_STATE_SCREEN = false
+                PROBLEM_MACHINE_STATE_SCREEN = true
 
                 if(STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1){
                     LaunchedEffect(key1 = STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1){
@@ -157,7 +163,11 @@ fun NavGraphSetup(
 
                 MACHINE_SCREEN = true
 
-                PROBLEM_MACHINE_STATE_SCREEN = false
+//                PROBLEM_MACHINE_STATE_SCREEN = false
+
+                if(USER_TYPE == 3){
+                    ruleViewModel.getRules()
+                }
             }
             ScreenDetailTransaction(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }
@@ -354,7 +364,9 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.OutletOwner.route
 
-                PROBLEM_MACHINE_STATE_SCREEN = false
+                PROBLEM_MACHINE_STATE_SCREEN = true
+                LIST_EXPENSES_STORE.clear()
+                EXPENSES_STATE_STORE = 0
 
                 if(STORE_NAME.isNullOrEmpty()){
                     storeViewModel.GetStore()
@@ -389,6 +401,10 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
 
                 SCREEN_ACTIVE_NOW = Screens.ExpensesOwner.route
+
+                if (LIST_EXPENSES_STORE.isNullOrEmpty() && EXPENSES_STATE_STORE <= 1){
+                    expensesViewModel.fetchByStore()
+                }
 
             }
             ScreenExpensesOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
