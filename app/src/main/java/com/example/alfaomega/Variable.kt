@@ -108,7 +108,7 @@ var BUTTON_LOGIN_CLICKED: Boolean by mutableStateOf(false)
 var FAILED_LOGIN: Boolean by mutableStateOf(false)
 var FAILED_LOGIN_EMPTY: Boolean by mutableStateOf(false)
 var FAILED_LOGIN_ALREADY: Boolean by mutableStateOf(false)
-var STATUS_LOGIN_LOGOUT: Boolean by mutableStateOf(false)
+var STATUS_USER_EXIST: Boolean by mutableStateOf(false)
 var LIST_USER: ArrayList<UserModel> by mutableStateOf(arrayListOf())
 
 //Variable ownerMenu

@@ -129,16 +129,19 @@ class UserViewModel : ViewModel() {
 
     fun GetSimiliarUser(
         username: String,
-    ): Boolean {
-
-        var statData = false
-
+        passwordUser: String,
+        idOwner: String,
+        typeUser: Int,
+        ScreenDestination: String,
+        navController: NavController
+    ) {
         try {
             UserApp.CreateInstance().getSimiliarUser(
                 BearerToken = "Bearer " + TOKEN_API,
                 username = username,
             ).enqueue(object :
                 Callback<ArrayList<UserModel>> {
+                @RequiresApi(Build.VERSION_CODES.TIRAMISU)
                 override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
 
                     Log.d("log_network", "Get user : ${response.code()} ${response.body()}")
@@ -150,10 +153,17 @@ class UserViewModel : ViewModel() {
 
                             USER_STATE = 1
                             if(response.body().isNullOrEmpty()){
-                                statData = true
+                                insertUser(
+                                    username = username,
+                                    passwordUser = passwordUser,
+                                    idOwner = idOwner,
+                                    typeUser = typeUser,
+                                    ScreenDestination = ScreenDestination,
+                                    navController = navController
+                                )
                             }
                             else{
-                                statData = false
+                                STATUS_USER_EXIST = true
                             }
                         }
                     }
@@ -179,8 +189,6 @@ class UserViewModel : ViewModel() {
             Log.d("debug_user", "ERROR $USER_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
-
-        return statData
     }
 
     fun fetchUser(){

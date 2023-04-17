@@ -160,6 +160,7 @@ fun WallUserEditOwner(
                 }
             ) {
                 button_clicked = true
+                STATUS_USER_EXIST = false
                 if(USER_TYPE == 2){
                     if(EDIT_MODE){
                         userViewModel.updateUser(
@@ -171,20 +172,14 @@ fun WallUserEditOwner(
                         )
                     }
                     else{
-                        if(userViewModel.GetSimiliarUser(username = text_name.text)){
-                            userViewModel.insertUser(
-                                username = text_name.text,
-                                passwordUser = text_password.text,
-                                idOwner = "#",
-                                typeUser = 1,
-                                ScreenDestination = Screens.OwnerListDeveloper.route,
-                                navController = navController
-                            )
-                        }
-                        else{
-                            button_clicked = false
-                            Toast.makeText(context, "Username Already exist" , Toast.LENGTH_SHORT).show()
-                        }
+                        userViewModel.GetSimiliarUser(
+                            username = text_name.text,
+                            passwordUser = text_password.text,
+                            idOwner = "#",
+                            typeUser = 1,
+                            ScreenDestination = Screens.OwnerListDeveloper.route,
+                            navController = navController
+                        )
                     }
                 }
                 else{
@@ -198,22 +193,25 @@ fun WallUserEditOwner(
                         )
                     }
                     else{
-                        if(userViewModel.GetSimiliarUser(username = text_name.text)){
-                            userViewModel.insertUser(
-                                username = text_name.text,
-                                passwordUser = text_password.text,
-                                idOwner = OWNER_ID,
-                                typeUser = 3,
-                                ScreenDestination = Screens.UserOwner.route,
-                                navController = navController
-                            )
-                        }
-                        else{
-                            button_clicked = false
-                            Toast.makeText(context, "Username Already exist" , Toast.LENGTH_SHORT).show()
-                        }
+                        userViewModel.GetSimiliarUser(
+                            username = text_name.text,
+                            passwordUser = text_password.text,
+                            idOwner = OWNER_ID,
+                            typeUser = 3,
+                            ScreenDestination = Screens.UserOwner.route,
+                            navController = navController
+                        )
                     }
                 }
+            }
+
+//            LaunchedEffect(true){
+//
+//            }
+            if(STATUS_USER_EXIST){
+                button_clicked = false
+                Toast.makeText(context, "Username Already exist" , Toast.LENGTH_SHORT).show()
+                STATUS_USER_EXIST = false
             }
         }
     }
