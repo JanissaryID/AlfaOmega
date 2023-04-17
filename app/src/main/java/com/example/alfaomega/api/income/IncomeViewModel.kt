@@ -73,8 +73,11 @@ class IncomeViewModel: ViewModel() {
 
                             Log.d("log_network", "Income Owner : ${response.code()} ${response.body()}")
 
+//                            Log.d("log_network", "Count Get Data = $countGetData")
+
                             if(response.code() == 200){
                                 response.body()?.let {
+
                                     LIST_INCOME = response.body()!!
 
                                     LIST_INCOME.forEachIndexed(){ index, income ->
@@ -117,7 +120,7 @@ class IncomeViewModel: ViewModel() {
 
                                         INCOME_SUM += income.income!!.toInt()
                                         EXPENSES_SUM += income.outcome!!.toInt()
-                                        PROFIT_SUM += income.income.toInt() - income.outcome.toInt()
+                                        PROFIT_SUM += (income.income.toInt() - income.outcome.toInt())
                                     }
 
                                     if(!LIST_INCOME_FLOAT.isNullOrEmpty() &&
@@ -230,179 +233,6 @@ class IncomeViewModel: ViewModel() {
                 }
                 delay(5000)
             }
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    fun fetchByOwner(){
-//        Log.i("info_response", "Croutine runing Income")
-        try {
-            val current = LocalDateTime.now()
-
-            val formatDay = DateTimeFormatter.ofPattern("MM-yyyy")
-            val date = current.format(formatDay)
-
-            var tempDate = 0
-            var tempIncome = 0
-            var tempExpenses = 0
-            var tempNetProfit = 0
-            var tempIndex = 0
-
-            IncomeApp.CreateInstance().fetchIncomeByOwner(
-                BearerToken = "Bearer " + TOKEN_API,
-                date = date,
-                owner = OWNER_ID
-            ).enqueue(object :
-                Callback<ArrayList<IncomeModel>> {
-                override fun onResponse(call: Call<ArrayList<IncomeModel>>, response: Response<ArrayList<IncomeModel>>) {
-
-                    Log.d("log_network", "Income Owner : ${response.code()} ${response.body()}")
-
-                    if(response.code() == 200){
-                        response.body()?.let {
-                            LIST_INCOME = response.body()!!
-
-                            LIST_INCOME.forEachIndexed(){ index, income ->
-                                var myDate = income.date!!.subSequence(0, 2).toString().toInt()
-
-                                if(myDate != tempDate){
-
-                                    tempDate = myDate
-                                    tempIncome = income.income!!.toInt()
-                                    tempExpenses = income.outcome!!.toInt()
-                                    tempNetProfit = income.income!!.toInt() - income.outcome!!.toInt()
-
-                                    LIST_INCOME_FLOAT.add(DataPoint(myDate.toFloat(),tempIncome.toFloat()))
-                                    LIST_EXPENSES_FLOAT.add(DataPoint(myDate.toFloat(), tempExpenses.toFloat()))
-                                    LIST_PROFIT_FLOAT.add(DataPoint(myDate.toFloat(), tempNetProfit.toFloat()))
-
-//                                    Log.d("get_log", "first = $tempIndex $tempIncome - $tempExpenses - $tempNetProfit")
-
-                                    tempIndex++
-
-                                }
-                                else{
-                                    tempDate = tempDate
-                                    tempIncome += income.income!!.toInt()
-                                    tempExpenses += income.outcome!!.toInt()
-                                    tempNetProfit += income.income!!.toInt() - income.outcome!!.toInt()
-
-                                    tempIndex--
-
-                                    if(LIST_INCOME_FLOAT[tempIndex].x == myDate.toFloat()){
-                                        LIST_INCOME_FLOAT.removeAt(tempIndex)
-                                        LIST_EXPENSES_FLOAT.removeAt(tempIndex)
-                                        LIST_PROFIT_FLOAT.removeAt(tempIndex)
-                                    }
-
-                                    LIST_INCOME_FLOAT.add(DataPoint(myDate.toFloat(),tempIncome.toFloat()))
-                                    LIST_EXPENSES_FLOAT.add(DataPoint(myDate.toFloat(), tempExpenses.toFloat()))
-                                    LIST_PROFIT_FLOAT.add(DataPoint(myDate.toFloat(), tempNetProfit.toFloat()))
-//
-//                                    Log.d("get_log", "two = $tempIndex  $tempIncome - $tempExpenses - $tempNetProfit")
-
-                                    tempIndex++
-                                }
-
-                                INCOME_SUM += income.income!!.toInt()
-                                EXPENSES_SUM += income.outcome!!.toInt()
-                                PROFIT_SUM += income.income.toInt() - income.outcome.toInt()
-                            }
-
-//                            Log.d("get_log", "$LIST_INCOME_FLOAT")
-
-                            if(!LIST_INCOME_FLOAT.isNullOrEmpty() &&
-                                !LIST_PROFIT_FLOAT.isNullOrEmpty() &&
-                                !LIST_EXPENSES_FLOAT.isNullOrEmpty() &&
-                                !LIST_INCOME.isNullOrEmpty()
-                            ){
-                                INCOME_STATE = 1
-                            }
-                        }
-                        if (LIST_INCOME_FLOAT.isNullOrEmpty() && INCOME_STATE == 0){
-                            fetchByOwner()
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<ArrayList<IncomeModel>>, t: Throwable) {
-//                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
-                    if (t.message == t.message){
-//                        Log.d("debug menu", "Failed")
-                        INCOME_STATE = 2
-//                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
-                    }
-                }
-            })
-        }
-        catch (e : Exception){
-            INCOME_ERROR_MESSAGE = e.message.toString()
-//            Log.d("debug menu", "ERROR $LOG_ERROR_MESSAGE")
-//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    fun fetchByStore(){
-//        Log.i("info_response", "Croutine Running Income")
-        try {
-            val current = LocalDateTime.now()
-
-            val formatDay = DateTimeFormatter.ofPattern("MM-yyyy")
-            val date = current.format(formatDay)
-
-            IncomeApp.CreateInstance().fetchIncomeByStore(
-                BearerToken = "Bearer " + TOKEN_API,
-                date = date,
-                store = STORE_ID
-            ).enqueue(object :
-                Callback<ArrayList<IncomeModel>> {
-                override fun onResponse(call: Call<ArrayList<IncomeModel>>, response: Response<ArrayList<IncomeModel>>) {
-
-                    Log.d("log_network", "Income Store : ${response.code()} ${response.body()}")
-
-                    if(response.code() == 200){
-                        response.body()?.let {
-//                            Log.d("get_log", "data Int = ${response}")
-                            LIST_INCOME_STORE = response.body()!!
-
-//                            Log.d("get_log", "${response.body()!!}")
-
-                            LIST_INCOME_STORE.forEachIndexed{ index, income ->
-                                var myDate = income.date!!.subSequence(0, 2).toString().toInt()
-
-                                LIST_INCOME_FLOAT_STORE.add(DataPoint(myDate.toFloat(),income.income!!.toFloat()))
-                                LIST_EXPENSES_FLOAT_STORE.add(DataPoint(myDate.toFloat(), income.outcome!!.toFloat()))
-                                LIST_PROFIT_FLOAT_STORE.add(DataPoint(myDate.toFloat(), (income.income!!.toFloat() - income.outcome!!.toFloat())))
-                                INCOME_SUM_STORE += income.income.toInt()
-                                EXPENSES_SUM_STORE += income.outcome.toInt()
-                                PROFIT_SUM_STORE += income.income.toInt() - income.outcome.toInt()
-                            }
-
-                            if(!LIST_INCOME_FLOAT_STORE.isNullOrEmpty() && !LIST_PROFIT_FLOAT_STORE.isNullOrEmpty()){
-                                INCOME_STATE_STORE = 1
-                            }
-                        }
-                        if (LIST_INCOME_FLOAT_STORE.isNullOrEmpty() && INCOME_STATE_STORE == 0){
-                            fetchByStore()
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<ArrayList<IncomeModel>>, t: Throwable) {
-//                    Log.d("debug menu", "Fail get Data ${t.message.toString()}")
-                    if (t.message == t.message){
-//                        Log.d("debug menu", "Failed")
-                        INCOME_STATE_STORE = 2
-//                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
-                    }
-                }
-            })
-        }
-        catch (e : Exception){
-            INCOME_ERROR_MESSAGE = e.message.toString()
-//            Log.d("debug menu", "ERROR $LOG_ERROR_MESSAGE")
-//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
     }
 

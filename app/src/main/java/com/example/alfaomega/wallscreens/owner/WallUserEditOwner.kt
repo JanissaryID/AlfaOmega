@@ -1,6 +1,7 @@
 package com.example.alfaomega.wallscreens.owner
 
 import android.os.Build
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,6 +34,7 @@ fun WallUserEditOwner(
     userViewModel: UserViewModel,
     navController: NavController
 ) {
+    val context = LocalContext.current
 
     var button_clicked by remember { mutableStateOf(false) }
     var text_name by remember {
@@ -168,14 +171,20 @@ fun WallUserEditOwner(
                         )
                     }
                     else{
-                        userViewModel.insertUser(
-                            username = text_name.text,
-                            passwordUser = text_password.text,
-                            idOwner = "#",
-                            typeUser = 1,
-                            ScreenDestination = Screens.OwnerListDeveloper.route,
-                            navController = navController
-                        )
+                        if(userViewModel.GetSimiliarUser(username = text_name.text)){
+                            userViewModel.insertUser(
+                                username = text_name.text,
+                                passwordUser = text_password.text,
+                                idOwner = "#",
+                                typeUser = 1,
+                                ScreenDestination = Screens.OwnerListDeveloper.route,
+                                navController = navController
+                            )
+                        }
+                        else{
+                            button_clicked = false
+                            Toast.makeText(context, "Username Already exist" , Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
                 else{
@@ -189,14 +198,20 @@ fun WallUserEditOwner(
                         )
                     }
                     else{
-                        userViewModel.insertUser(
-                            username = text_name.text,
-                            passwordUser = text_password.text,
-                            idOwner = OWNER_ID,
-                            typeUser = 3,
-                            ScreenDestination = Screens.UserOwner.route,
-                            navController = navController
-                        )
+                        if(userViewModel.GetSimiliarUser(username = text_name.text)){
+                            userViewModel.insertUser(
+                                username = text_name.text,
+                                passwordUser = text_password.text,
+                                idOwner = OWNER_ID,
+                                typeUser = 3,
+                                ScreenDestination = Screens.UserOwner.route,
+                                navController = navController
+                            )
+                        }
+                        else{
+                            button_clicked = false
+                            Toast.makeText(context, "Username Already exist" , Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }

@@ -134,6 +134,7 @@ fun TopBar4(
                         }
                         else if(USER_TYPE == 3){
                             if(SCREEN_ACTIVE_NOW == Screens.StoreProfile.route){
+                                RULE_TEXT_EDIT = ""
                                 navController.navigate(route = actionNav) {
                                     popUpTo(actionNav) {
                                         inclusive = true

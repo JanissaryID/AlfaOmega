@@ -16,6 +16,12 @@ interface UserService {
     ): Call<ArrayList<UserModel>>
 
     @GET("NewUser")
+    fun getSimiliarUser(
+        @Header("Authorization") BearerToken: String,
+        @Query(value="username", encoded=true) username: String?,
+    ): Call<ArrayList<UserModel>>
+
+    @GET("NewUser")
     fun fetchUser(
         @Header("Authorization") BearerToken: String,
         @Query(value="id_owner", encoded=true) OwnerId: String?

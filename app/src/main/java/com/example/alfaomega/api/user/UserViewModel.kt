@@ -96,11 +96,6 @@ class UserViewModel : ViewModel() {
                                 FAILED_LOGIN = false
                                 FAILED_LOGIN_EMPTY = false
                                 FAILED_LOGIN_ALREADY = false
-//                                navController.navigate(route = screenBack) {
-//                                    popUpTo(screenBack) {
-//                                        inclusive = true
-//                                    }
-//                                }
                             }
                             else{
                                 BUTTON_LOGIN_CLICKED = false
@@ -130,6 +125,62 @@ class UserViewModel : ViewModel() {
             Log.d("debug_user", "ERROR $USER_ERROR_MESSAGE")
 //            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun GetSimiliarUser(
+        username: String,
+    ): Boolean {
+
+        var statData = false
+
+        try {
+            UserApp.CreateInstance().getSimiliarUser(
+                BearerToken = "Bearer " + TOKEN_API,
+                username = username,
+            ).enqueue(object :
+                Callback<ArrayList<UserModel>> {
+                override fun onResponse(call: Call<ArrayList<UserModel>>, response: Response<ArrayList<UserModel>>) {
+
+                    Log.d("log_network", "Get user : ${response.code()} ${response.body()}")
+
+                    USER_STATE = 0
+
+                    if(response.code() == 200){
+                        response.body()?.let {
+
+                            USER_STATE = 1
+                            if(response.body().isNullOrEmpty()){
+                                statData = true
+                            }
+                            else{
+                                statData = false
+                            }
+                        }
+                    }
+                    else{
+                        BUTTON_LOGIN_CLICKED = false
+                        FAILED_LOGIN_ALREADY = true
+                    }
+                }
+                override fun onFailure(call: Call<ArrayList<UserModel>>, t: Throwable) {
+                    Log.d("debug_user", "Fail get Data ${t.message.toString()}")
+                    if (t.message == t.message){
+                        Log.d("debug_user", "Failed")
+                        USER_STATE = 2
+                        BUTTON_LOGIN_CLICKED = false
+                        FAILED_LOGIN = true
+//                        Toast.makeText(requireContext(), "Failed connect to server" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+        }
+        catch (e : Exception){
+            USER_ERROR_MESSAGE = e.message.toString()
+            Log.d("debug_user", "ERROR $USER_ERROR_MESSAGE")
+//            Toast.makeText(requireContext(), "Error $e" , Toast.LENGTH_SHORT).show()
+        }
+
+        return statData
     }
 
     fun fetchUser(){
@@ -237,6 +288,7 @@ class UserViewModel : ViewModel() {
                     if(response.code() == 200){
                         val responseBodyData = response.body()
                         if (responseBodyData!!.id.isNullOrEmpty() && (responseBodyData!!.statususer != statUser)){
+//                            Log.d("log_network", "If User")
                             updateStatUser(
                                 idUser = idUser,
                                 statUser = statUser,
@@ -244,7 +296,8 @@ class UserViewModel : ViewModel() {
                                 routeScreen = routeScreen
                             )
                         }
-                        else{
+                        else if(!responseBodyData!!.id.isNullOrEmpty() && (responseBodyData!!.statususer == statUser)){
+//                            Log.d("log_network", "Else if User")
                             navController.navigate(route = routeScreen){
                                 popUpTo(routeScreen) {
                                     inclusive = true

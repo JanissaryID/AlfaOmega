@@ -161,7 +161,7 @@ fun WallRulesEditOwner(
                         Spacer(modifier = Modifier.height(4.dp))
                         TextField(
 //                            enabled = true,
-                            enabled = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN && !EDIT_MODE) true else if(EDIT_MODE) false else true,
+                            enabled = if(USER_TYPE == 1 && PROBLEM_MACHINE_STATE_SCREEN && !EDIT_MODE) true else if(USER_TYPE == 1 && !PROBLEM_MACHINE_STATE_SCREEN && EDIT_MODE) true else if(EDIT_MODE) false else true,
                             value = text_rule,
                             onValueChange ={
                                 text_rule = it

@@ -118,8 +118,16 @@ fun WallHomeOwnerV2(
                                     EXPENSES_SUM).substring(2, numberFormat.format(EXPENSES_SUM).length)}", colorFont = MaterialTheme.colorScheme.error)
                             }
                             else{
-                                ItemFinance(title = item, price = "Rp. ${numberFormat.format(
-                                    PROFIT_SUM).substring(2, numberFormat.format(PROFIT_SUM).length)}", colorFont = MaterialTheme.colorScheme.onPrimary)
+                                ItemFinance(title = item, price =
+                                    if(PROFIT_SUM < 0){
+                                        "-Rp. ${numberFormat.format(
+                                            (PROFIT_SUM * -1)).substring(2, numberFormat.format((PROFIT_SUM * -1)).length)}"
+                                    }
+                                    else{
+                                        "Rp. ${numberFormat.format(
+                                            PROFIT_SUM).substring(2, numberFormat.format(PROFIT_SUM).length)}"
+                                    }
+                                    , colorFont = MaterialTheme.colorScheme.onPrimary)
                             }
                             if (index < selectionFinanceTitle.lastIndex){
                                 Spacer(modifier = Modifier.width(16.dp))

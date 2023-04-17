@@ -89,52 +89,45 @@ fun NavGraphSetup(
                     MENU_MACHINE_CLASS = 0
                 }
                 BUTTON_LOGIN_CLICKED = false
-            }
-            if(USER_TYPE == 3){
 
-                TRANSACTION_LOADING = false
+                if(USER_TYPE == 1){
+                    PROBLEM_MACHINE_STATE_SCREEN = false
 
-                Log.d("get_log", "Loading : $TRANSACTION_LOADING")
+                    if(STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1){
+                        storeViewModel.FetchStore3Times()
+                    }
 
-                if(!STORE_ID.isNullOrEmpty()){
-                    LaunchedEffect(key1 = !STORE_ID.isNullOrEmpty()){
+                    incomeViewModel.fetchByOwner3Times()
+                }
+                if(USER_TYPE == 3){
+
+                    TRANSACTION_LOADING = false
+
+                    Log.d("get_log", "Loading : $TRANSACTION_LOADING")
+
+                    if(!STORE_ID.isNullOrEmpty()){
                         transactionViewModel.getTransactionActive()
                     }
-                }
 
-                if(STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1 && SCREEN_ACTIVE_NOW == Screens.Home.route){
-                    LaunchedEffect(key1 = STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1 && SCREEN_ACTIVE_NOW == Screens.Home.route){
+                    if(STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1 && SCREEN_ACTIVE_NOW == Screens.Home.route){
                         if(!OWNER_ID.isNullOrEmpty()) storeViewModel.FetchStore3Times()
                         else storeViewModel.FetchStore3Times()
                     }
-                }
 
-                if(STORE_NAME.isNullOrEmpty() && !STORE_ID.isNullOrEmpty()){
-                    LaunchedEffect(key1 = STORE_NAME.isNullOrEmpty() && !STORE_ID.isNullOrEmpty()){
+                    if(STORE_NAME.isNullOrEmpty() && !STORE_ID.isNullOrEmpty()){
                         storeViewModel.GetStore()
                     }
                 }
+            }
 
-                ScreenHome(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+            if(USER_TYPE == 1){
+                ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
             else if(USER_TYPE == 2){
                 ScreenHomeDeveloper(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
-            else if(USER_TYPE == 1){
-//                PROBLEM_MACHINE_STATE_SCREEN = false
-                PROBLEM_MACHINE_STATE_SCREEN = true
-
-                if(STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1){
-                    LaunchedEffect(key1 = STORE_LIST_RESPONSE.isNullOrEmpty() && STORE_STATE <= 1){
-                        storeViewModel.FetchStore3Times()
-                    }
-                }
-
-                LaunchedEffect(key1 = !OWNER_ID.isNullOrEmpty()){
-                    incomeViewModel.fetchByOwner3Times()
-                }
-
-                ScreenHomeOwner(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
+            if(USER_TYPE == 3){
+                ScreenHome(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
             }
             else if(USER_TYPE == 0) {
                 ScreenHome(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
@@ -389,6 +382,8 @@ fun NavGraphSetup(
             LaunchedEffect(key1 = STORE_ID){
 
                 SCREEN_ACTIVE_NOW = Screens.MachineOwner.route
+
+                PROBLEM_MACHINE_STATE_SCREEN = true
 
                 machineViewModel.getMachineList()
             }

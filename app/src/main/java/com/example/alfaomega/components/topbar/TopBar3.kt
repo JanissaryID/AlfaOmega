@@ -61,17 +61,6 @@ fun TopBar3(
                             protoViewModel.updateNameUser(Nameuser = "")
                             protoViewModel.updateTypeUser(TypeUser = 0)
                             protoViewModel.updateStoreID(keyStore = "")
-//                            multiplePermissionState.launchMultiplePermissionRequest()
-//                            bluetoothViewModel.requestBluetoothPermission()
-//
-//                            if(BLUETOOTH_STATE_ON){
-//                                navController.navigate(route = route)
-//                                {
-//                                    popUpTo(route) {
-//                                        inclusive = true
-//                                    }
-//                                }
-//                            }
                         }
                         else{
                             multiplePermissionState.launchMultiplePermissionRequest()
