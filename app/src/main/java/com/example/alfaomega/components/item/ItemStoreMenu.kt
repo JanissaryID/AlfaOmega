@@ -49,6 +49,7 @@ fun ItemStoreMenu(
                         storeID = STORE_ID,
                         navController = navController
                     )
+                    userViewModel.updateStatUser(USER_ID, false, navController = navController, routeScreen = "")
                     protoViewModel.updateTypeUser(0)
                     protoViewModel.updateNameUser("")
                     protoViewModel.updateStoreID("")

@@ -306,9 +306,11 @@ class UserViewModel : ViewModel() {
                         }
                         else if(!responseBodyData!!.id.isNullOrEmpty() && (responseBodyData!!.statususer == statUser)){
 //                            Log.d("log_network", "Else if User")
-                            navController.navigate(route = routeScreen){
-                                popUpTo(routeScreen) {
-                                    inclusive = true
+                            if(routeScreen != ""){
+                                navController.navigate(route = routeScreen){
+                                    popUpTo(routeScreen) {
+                                        inclusive = true
+                                    }
                                 }
                             }
                         }

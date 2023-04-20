@@ -230,6 +230,10 @@ fun NavGraphSetup(
 
                 STORE_LIST_RESPONSE.clear()
 
+                INCOME_SUM = 0
+                EXPENSES_SUM = 0
+                PROFIT_SUM = 0
+
             }
             ScreenLogin(navController = navController, protoViewModel = protoViewModel, bluetoothViewModel = bluetoothViewModel)
         }

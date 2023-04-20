@@ -56,13 +56,7 @@ fun TopBar3(
                     tint = colorFont,
                     contentDescription = description,
                     modifier = Modifier.clickable {
-                        if(USER_TYPE != 3 && SCREEN_ACTIVE_NOW == Screens.Home.route){
-                            userViewModel.updateStatUser(OWNER_ID, false, navController = navController, routeScreen = route)
-                            protoViewModel.updateNameUser(Nameuser = "")
-                            protoViewModel.updateTypeUser(TypeUser = 0)
-                            protoViewModel.updateStoreID(keyStore = "")
-                        }
-                        else{
+                        if(USER_TYPE == 3 && SCREEN_ACTIVE_NOW == Screens.Home.route){
                             multiplePermissionState.launchMultiplePermissionRequest()
                             bluetoothViewModel.requestBluetoothPermission()
                             if(BLUETOOTH_STATE_ON){
@@ -73,6 +67,12 @@ fun TopBar3(
                                     }
                                 }
                             }
+                        }
+                        else if(USER_TYPE != 3 && SCREEN_ACTIVE_NOW == Screens.Home.route){
+                            userViewModel.updateStatUser(OWNER_ID, false, navController = navController, routeScreen = route)
+                            protoViewModel.updateNameUser(Nameuser = "")
+                            protoViewModel.updateTypeUser(TypeUser = 0)
+                            protoViewModel.updateStoreID(keyStore = "")
                         }
                     }
                 )

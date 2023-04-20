@@ -284,13 +284,18 @@ class StoreViewModel : ViewModel(){
                 bodyUpdate).enqueue(object :
                 Callback<StoreModel> {
                 override fun onResponse(call: Call<StoreModel>, response: Response<StoreModel>) {
-//                    Log.d("debug_user", "get error = $response")
+
                     if(response.code() == 200){
                         val responseBodyData = response.body()
 
                         if (!responseBodyData!!.id.isNullOrEmpty()){
                             if(responseBodyData!!.admin == admin){
-                                userViewModel.updateStatUser(USER_ID, false, navController = navController, routeScreen = Screens.Home.route)
+                                Log.d("debug_user", "screen $SCREEN_ACTIVE_NOW")
+                                navController.navigate(route = Screens.Home.route){
+                                    popUpTo(Screens.Home.route) {
+                                        inclusive = true
+                                    }
+                                }
                             }
                             else{
                                 updateStoreAdmin(

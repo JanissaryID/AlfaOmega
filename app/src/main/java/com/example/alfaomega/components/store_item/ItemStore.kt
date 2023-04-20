@@ -49,6 +49,9 @@ fun ItemStore(
                         }
                     }
                     else{
+                        TRANSACTION_ACTIVE_RESPONSE.clear()
+                        TRANSACTION_ACTIVE_STATE = 0
+
                         if(!STORE_ID.isNullOrEmpty() && SCREEN_ACTIVE_NOW == Screens.Store.route){
                             storeViewModel.updateStoreAdmin(
                                 admin = "",
