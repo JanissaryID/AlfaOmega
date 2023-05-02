@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
+import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.excel.ExcelViewModel
 import java.util.*
@@ -39,7 +40,8 @@ fun TopBar5(
     transactionViewModel: TransactionViewModel = TransactionViewModel(),
     containerColor: Color = Color.Transparent,
     colorFont: Color = MaterialTheme.colorScheme.onSurfaceVariant,
-    excelViewModel: ExcelViewModel = ExcelViewModel()
+    excelViewModel: ExcelViewModel = ExcelViewModel(),
+    logViewModel: LogViewModel = LogViewModel()
 ) {
 
     val activity = LocalContext.current
@@ -64,6 +66,7 @@ fun TopBar5(
             DATE_PICK = "${(mDayOfMonth).toString().padStart(2, '0')}-${(mMonth+1).toString().padStart(2, '0')}-${(mYear).toString().padStart(4, '0')}"
 //            Log.d("debug_transaction", "Date ${DATE_PICK}")
             transactionViewModel.getTransactionNowDate()
+            logViewModel.fetchLog()
         }, mYear, mMonth, mDay
     )
 

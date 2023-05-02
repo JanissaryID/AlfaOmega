@@ -286,6 +286,9 @@ fun NavGraphSetup(
 
                 SCREEN_ACTIVE_NOW = Screens.TransactionOwner.route
 
+//                TRANSACTION_RESPONSE.clear()
+//                LIST_LOG.clear()
+
                 transactionViewModel.getTransactionNowDate()
                 logViewModel.fetchLog()
             }

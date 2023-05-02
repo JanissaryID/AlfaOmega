@@ -167,7 +167,7 @@ var PROBLEM_MACHINE_STATE_SCREEN: Boolean by mutableStateOf(false)
 //Variable API
 var KEY_API: String by mutableStateOf("")
 var TOKEN_API: String by mutableStateOf("")
-var URL_SERVER: String by mutableStateOf("https://api.v2.kontenbase.com/query/api/v1/")
+var URL_SERVER: String by mutableStateOf("https://api.kontenbase.com/query/api/v1/")
 
 //Variable Developer Mode
 var LIST_OWNER: ArrayList<UserModel> by mutableStateOf(arrayListOf())

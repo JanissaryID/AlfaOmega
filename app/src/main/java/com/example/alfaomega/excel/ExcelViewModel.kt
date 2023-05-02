@@ -196,7 +196,7 @@ class ExcelViewModel: ViewModel() {
     fun MachineReport(date: String, SheetTitle: String) {
         val sheet = workbook!!.createSheet(SheetTitle, 1)
         var rowExcel = 0
-        var totalPrice = 0
+//        var totalPrice = 0
 
         var totalWahser = 0
         var totalDryer = 0

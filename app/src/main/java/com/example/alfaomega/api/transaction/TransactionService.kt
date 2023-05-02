@@ -10,6 +10,7 @@ interface TransactionService {
     fun fetchTransactionActive(
         @Header("Authorization") BearerToken: String,
         @Query(value="transaction_store", encoded=true) store: String?,
+        @Query(value="transaction_state_machine[\$ne]", encoded=true) state_machine: Int?,
     ): Call<ArrayList<TransactionModel>>
 
     @POST("NewTransaction")

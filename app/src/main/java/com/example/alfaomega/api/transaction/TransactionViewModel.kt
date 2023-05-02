@@ -37,7 +37,8 @@ class TransactionViewModel: ViewModel() {
                 try {
                     TransactionApp.CreateInstance().fetchTransactionActive(
                         BearerToken = "Bearer " + TOKEN_API,
-                        store = STORE_ID
+                        store = STORE_ID,
+                        state_machine = 6
                     ).enqueue(object :
                         Callback<ArrayList<TransactionModel>> {
                         override fun onResponse(
@@ -82,7 +83,8 @@ class TransactionViewModel: ViewModel() {
         try {
             TransactionApp.CreateInstance().fetchTransactionActive(
                 BearerToken = "Bearer " + TOKEN_API,
-                store = STORE_ID
+                store = STORE_ID,
+                state_machine = 6
             ).enqueue(object :
                 Callback<ArrayList<TransactionModel>> {
                 override fun onResponse(

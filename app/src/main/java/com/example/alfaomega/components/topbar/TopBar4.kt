@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.api.expenses.ExpensesViewModel
+import com.example.alfaomega.api.log.LogViewModel
 import com.example.alfaomega.api.menu.MenuViewModel
 import com.example.alfaomega.api.rules.RuleViewModel
 import com.example.alfaomega.api.transaction.TransactionViewModel
@@ -51,7 +52,8 @@ fun TopBar4(
     containerColor: Color = Color.Transparent,
     colorFont: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     multiplePermissionState: MultiplePermissionsState,
-    expensesViewModel: ExpensesViewModel = ExpensesViewModel()
+    expensesViewModel: ExpensesViewModel = ExpensesViewModel(),
+    logViewModel: LogViewModel = LogViewModel()
 ) {
 
     val activity = LocalContext.current
@@ -73,6 +75,7 @@ fun TopBar4(
         { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
             DATE_PICK = "${(mDayOfMonth).toString().padStart(2, '0')}-${(mMonth+1).toString().padStart(2, '0')}-${(mYear).toString().padStart(4, '0')}"
             transactionViewModel.getTransactionNowDate()
+            logViewModel.fetchLog()
             expensesViewModel.fetchByStore()
         }, mYear, mMonth, mDay
     )
