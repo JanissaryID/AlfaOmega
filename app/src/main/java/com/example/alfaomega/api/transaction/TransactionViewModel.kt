@@ -2,20 +2,13 @@ package com.example.alfaomega.api.transaction
 
 import android.os.Build
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.alfaomega.*
 import com.example.alfaomega.api.income.IncomeViewModel
-import com.example.alfaomega.api.machine.MachineApp
-import com.example.alfaomega.api.machine.MachineModel
-import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.navigations.Screens
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.MultiplePermissionsState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
@@ -196,13 +189,13 @@ class TransactionViewModel: ViewModel() {
         })
     }
 
-    @OptIn(ExperimentalPermissionsApi::class)
+//    @OptIn(ExperimentalPermissionsApi::class)
     fun updateTransaction(
         idTransaction: String,
         transactionStateMachine: Int,
         navController: NavController,
-        bluetoothViewModel: BluetoothViewModel = BluetoothViewModel(),
-        multiplePermissionState: MultiplePermissionsState,
+//        bluetoothViewModel: BluetoothViewModel = BluetoothViewModel(),
+//        multiplePermissionState: MultiplePermissionsState,
     ){
         val bodyUpdate = TransactionModel(
             transactionStateMachine = transactionStateMachine,
@@ -220,13 +213,13 @@ class TransactionViewModel: ViewModel() {
                         if (responseBodyData!!.transactionStateMachine!! < 6){
                             getTransactionActiveOnce()
 
-                            bluetoothViewModel.onMachineBluetooth(
-                                address = MACHINE_MAC,
-                                context = MY_CONTEXT!!,
-                                multiplePermissionState = multiplePermissionState,
-                                uuidDevice = "00001101-0000-1000-8000-00805f9b34fb",
-                                navController = navController
-                            )
+//                            bluetoothViewModel.onMachineBluetooth(
+//                                address = MACHINE_MAC,
+//                                context = MY_CONTEXT!!,
+//                                multiplePermissionState = multiplePermissionState,
+//                                uuidDevice = "00001101-0000-1000-8000-00805f9b34fb",
+//                                navController = navController
+//                            )
                         }
                         else if(responseBodyData!!.transactionStateMachine!! > 5){
                             navController.navigate(route = Screens.Home.route){

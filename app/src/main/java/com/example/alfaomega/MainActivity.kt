@@ -1,6 +1,5 @@
 package com.example.alfaomega
 
-import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -33,8 +32,7 @@ import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.navigations.NavGraphSetup
 import com.example.alfaomega.proto.ProtoViewModel
 import com.example.alfaomega.ui.theme.AlfaOmegaTheme
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberMultiplePermissionsState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class MainActivity : ComponentActivity() {
 
@@ -55,6 +53,7 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var protoViewModel: ProtoViewModel
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

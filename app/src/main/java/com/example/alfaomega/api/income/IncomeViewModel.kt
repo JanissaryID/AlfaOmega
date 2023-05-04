@@ -3,34 +3,17 @@ package com.example.alfaomega.api.income
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import com.example.alfaomega.*
-import com.example.alfaomega.api.log.LogApp
-import com.example.alfaomega.api.log.LogModel
-import com.example.alfaomega.api.transaction.TransactionApp
-import com.example.alfaomega.api.transaction.TransactionModel
-import com.example.alfaomega.datapoint.DataPoints
-import com.example.alfaomega.navigations.Screens
 import com.madrapps.plot.line.DataPoint
-import com.madrapps.plot.line.LineGraph
-import com.madrapps.plot.line.LinePlot
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.collections.ArrayList
 
 class IncomeViewModel: ViewModel() {
 
@@ -80,7 +63,7 @@ class IncomeViewModel: ViewModel() {
 
                                     LIST_INCOME = response.body()!!
 
-                                    LIST_INCOME.forEachIndexed(){ index, income ->
+                                    LIST_INCOME.forEachIndexed(){ _, income ->
                                         var myDate = income.date!!.subSequence(0, 2).toString().toInt()
 
                                         if(myDate != tempDate){
@@ -88,7 +71,7 @@ class IncomeViewModel: ViewModel() {
                                             tempDate = myDate
                                             tempIncome = income.income!!.toInt()
                                             tempExpenses = income.outcome!!.toInt()
-                                            tempNetProfit = income.income!!.toInt() - income.outcome!!.toInt()
+                                            tempNetProfit = income.income.toInt() - income.outcome.toInt()
 
                                             LIST_INCOME_FLOAT.add(DataPoint(myDate.toFloat(),tempIncome.toFloat()))
                                             LIST_EXPENSES_FLOAT.add(DataPoint(myDate.toFloat(), tempExpenses.toFloat()))
@@ -101,7 +84,7 @@ class IncomeViewModel: ViewModel() {
                                             tempDate = tempDate
                                             tempIncome += income.income!!.toInt()
                                             tempExpenses += income.outcome!!.toInt()
-                                            tempNetProfit += income.income!!.toInt() - income.outcome!!.toInt()
+                                            tempNetProfit += income.income.toInt() - income.outcome.toInt()
 
                                             tempIndex--
 
@@ -118,8 +101,8 @@ class IncomeViewModel: ViewModel() {
                                             tempIndex++
                                         }
 
-                                        INCOME_SUM += income.income!!.toInt()
-                                        EXPENSES_SUM += income.outcome!!.toInt()
+                                        INCOME_SUM += income.income.toInt()
+                                        EXPENSES_SUM += income.outcome.toInt()
                                         PROFIT_SUM += (income.income.toInt() - income.outcome.toInt())
                                     }
 
@@ -197,12 +180,12 @@ class IncomeViewModel: ViewModel() {
                                 response.body()?.let {
                                     LIST_INCOME_STORE = response.body()!!
 
-                                    LIST_INCOME_STORE.forEachIndexed{ index, income ->
+                                    LIST_INCOME_STORE.forEachIndexed{ _, income ->
                                         var myDate = income.date!!.subSequence(0, 2).toString().toInt()
 
                                         LIST_INCOME_FLOAT_STORE.add(DataPoint(myDate.toFloat(),income.income!!.toFloat()))
                                         LIST_EXPENSES_FLOAT_STORE.add(DataPoint(myDate.toFloat(), income.outcome!!.toFloat()))
-                                        LIST_PROFIT_FLOAT_STORE.add(DataPoint(myDate.toFloat(), (income.income!!.toFloat() - income.outcome!!.toFloat())))
+                                        LIST_PROFIT_FLOAT_STORE.add(DataPoint(myDate.toFloat(), (income.income.toFloat() - income.outcome.toFloat())))
                                         INCOME_SUM_STORE += income.income.toInt()
                                         EXPENSES_SUM_STORE += income.outcome.toInt()
                                         PROFIT_SUM_STORE += income.income.toInt() - income.outcome.toInt()
@@ -395,12 +378,6 @@ class IncomeViewModel: ViewModel() {
         expenses: String,
         idIncome: String
     ){
-        val current = LocalDateTime.now()
-
-        val formatDay = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val date = current.format(formatDay)
-
-
         val bodyUpdate = IncomeModel(
             outcome = expenses
         )
@@ -431,12 +408,6 @@ class IncomeViewModel: ViewModel() {
         idIncome: String,
         income: String
     ){
-        val current = LocalDateTime.now()
-
-        val formatDay = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val date = current.format(formatDay)
-
-
         val bodyUpdate = IncomeModel(
             income = income
         )

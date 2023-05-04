@@ -42,7 +42,6 @@
     <string name="BluetoothEmpty">Bluetooth Kosong</string>
     <string name="Whatsapp">Whatsapp</string>
     <string name="TextLoginFirst">Tolong untuk masuk dahulu untuk memulai operasi</string>
-    <string name="TextPickStoreFirst">Tolong pilih toko dahulu untuk memulai operasi</string>
     <string name="WaitingWash">Menunggu Mencuci</string>
     <string name="Washing">Mencuci</string>
     <string name="FinishWash">Selesai Mencuci</string>
@@ -85,9 +84,7 @@
     <string name="MenuTitan">Besar</string>
     <string name="MachineTitle">Mesin</string>
     <string name="OwnerTitleDev">Pemilik Toko</string>
-    <string name="TextMachineDev">Tambah, Ubah dan Hapus Mesin</string>
     <string name="TextOwnerDev">Tambah, Ubah dan Hapus Owner</string>
-    <string name="TextStoreDev">Tambah, Ubah dan Hapus Toko</string>
     <string name="alumaDevMode">aluma</string>
     <string name="DevModeTitle">Developer Mode</string>
     <string name="MadeByLove">Made by Love ♥</string>
@@ -107,8 +104,6 @@
     <string name="CreateProblem">Tambah Kerusakan</string>
     <string name="OutletTitle">Toko</string>
     <string name="DateTitle">Tanggal</string>
-    <string name="SetviceTitle">Layanan</string>
-    <string name="Customer">Pelanggan</string>
     <string name="ClosedTitle">Tutup</string>
     <string name="ExpensesTitle">Pengeluaran</string>
     <string name="Money">Uang</string>

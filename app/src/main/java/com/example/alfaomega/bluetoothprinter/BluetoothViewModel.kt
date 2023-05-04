@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.alfaomega.*
+import com.example.alfaomega.api.machine.MachineViewModel
 import com.example.alfaomega.navigations.Screens
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.MultiplePermissionsState
@@ -299,8 +300,12 @@ class BluetoothViewModel: ViewModel() {
         }
     }
 
+    @OptIn(ExperimentalPermissionsApi::class)
     @ExperimentalCoroutinesApi
-    fun disconnectBluetooth(navController: NavController){
+    fun disconnectBluetooth(
+        navController: NavController,
+        machineViewModel: MachineViewModel = MachineViewModel()
+    ){
         if(bluetoothSocket != null){
             try {
                 bluetoothSocket!!.close()
@@ -314,6 +319,14 @@ class BluetoothViewModel: ViewModel() {
                         MACHINE_BUTTON_UPDATE = true
                         MACHINE_LOADING = false
                         countGetData = 5
+
+                        machineViewModel.updateMachineStatV2(
+                            idMachine = MACHINE_ID,
+                            idTransaction = TRANSACATION_ID,
+                            navController = navController,
+//                            bluetoothViewModel = bluetoothViewModel,
+//                            multiplePermissionState = multiplePermissionState
+                        )
 
                         navController.navigate(route = Screens.Home.route){
                             popUpTo(Screens.Home.route) {

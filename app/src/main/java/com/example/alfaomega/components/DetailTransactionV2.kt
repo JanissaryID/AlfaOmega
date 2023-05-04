@@ -4,9 +4,7 @@ import android.Manifest
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -14,10 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -34,7 +29,6 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import java.text.NumberFormat
 import java.util.*
-import java.lang.StringBuilder
 
 @OptIn(ExperimentalPermissionsApi::class)
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -281,7 +275,7 @@ fun DetailTransactionV2(
                                         idTransaction = TRANSACATION_ID,
                                         transactionStateMachine = 6,
                                         navController = navController,
-                                        multiplePermissionState = multiplePermissionState
+//                                        multiplePermissionState = multiplePermissionState
                                     )
                                 }
                                 else{

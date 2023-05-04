@@ -7,12 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.alfaomega.*
-import com.example.alfaomega.api.machine.MachineApp
-import com.example.alfaomega.api.machine.MachineModel
-import com.example.alfaomega.api.transaction.TransactionApp
-import com.example.alfaomega.api.transaction.TransactionModel
 import com.example.alfaomega.navigations.Screens
-import com.example.alfaomega.proto.ProtoViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
@@ -20,9 +15,8 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class MenuViewModel: ViewModel() {
 
     @ExperimentalCoroutinesApi
@@ -173,6 +167,7 @@ class MenuViewModel: ViewModel() {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun updateMenu(
         idMenu: String,
         isWasher: Boolean,
@@ -246,6 +241,7 @@ class MenuViewModel: ViewModel() {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun insertMenu(
         isWasher: Boolean,

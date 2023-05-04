@@ -41,7 +41,6 @@
     <string name="BluetoothEmpty">Bluetooth Empty</string>
     <string name="Whatsapp">Whatsapp</string>
     <string name="TextLoginFirst">Please Login to start operate</string>
-    <string name="TextPickStoreFirst">Please Pick Store First to start operation</string>
     <string name="WaitingWash">Waiting Wash</string>
     <string name="Washing">Washing</string>
     <string name="FinishWash">Finish Wash</string>
@@ -84,9 +83,7 @@
     <string name="MenuTitan">Large</string>
     <string name="MachineTitle">Machine</string>
     <string name="OwnerTitleDev">Owner</string>
-    <string name="TextMachineDev">Add, Edit and Delete Machine</string>
     <string name="TextOwnerDev">Add, Edit and Delete Owner</string>
-    <string name="TextStoreDev">Add, Edit and Delete Store</string>
     <string name="alumaDevMode">aluma</string>
     <string name="DevModeTitle">Developer Mode</string>
     <string name="MadeByLove">Made by Love ♥</string>
@@ -106,8 +103,6 @@
     <string name="CreateProblem">Create Problem</string>
     <string name="OutletTitle">Outlet</string>
     <string name="DateTitle">Date</string>
-    <string name="SetviceTitle">Service</string>
-    <string name="Customer">Customer</string>
     <string name="ClosedTitle">Closed</string>
     <string name="ExpensesTitle">Expenses</string>
     <string name="Money">Money</string>

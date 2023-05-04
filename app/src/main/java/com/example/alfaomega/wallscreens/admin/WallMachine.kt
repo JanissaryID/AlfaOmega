@@ -19,14 +19,11 @@ import com.example.alfaomega.*
 import com.example.alfaomega.R
 import com.example.alfaomega.api.machine.MachineModel
 import com.example.alfaomega.api.machine.MachineViewModel
-import com.example.alfaomega.api.transaction.TransactionViewModel
 import com.example.alfaomega.bluetoothprinter.BluetoothViewModel
 import com.example.alfaomega.bluetoothprinter.PermissionsRequiredState
-import com.example.alfaomega.components.ButtonView
 import com.example.alfaomega.components.button_view.ButtonViewV2
 import com.example.alfaomega.view.admin.machine.MachineLoadData
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.MultiplePermissionsState
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -128,6 +125,15 @@ fun WallMachine(
 
                 bluetoothViewModel.requestBluetoothPermission()
                 bluetoothViewModel.checkBluetoothCompatible()
+                if(bluetoothViewModel.bluetoothAdapter != null){
+                    bluetoothViewModel.onMachineBluetooth(
+                        address = MACHINE_MAC,
+                        context = MY_CONTEXT!!,
+                        multiplePermissionState = multiplePermissionState,
+                        uuidDevice = "00001101-0000-1000-8000-00805f9b34fb",
+                        navController = navController
+                    )
+                }
 
 //                bluetoothViewModel.onMachineBluetooth(
 //                    address = MACHINE_MAC,

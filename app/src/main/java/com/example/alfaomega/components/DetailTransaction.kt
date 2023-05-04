@@ -436,7 +436,7 @@ fun DetailTransaction(
                                 idTransaction = TRANSACATION_ID,
                                 transactionStateMachine = 6,
                                 navController = navController,
-                                multiplePermissionState = multiplePermissionState
+//                                multiplePermissionState = multiplePermissionState
                             )
                         }
                         else{
