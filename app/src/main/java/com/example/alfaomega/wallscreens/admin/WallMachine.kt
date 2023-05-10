@@ -143,13 +143,13 @@ fun WallMachine(
 //                    navController = navController
 //                )
 
-                machineViewModel.updateMachineStat(
-                    idMachine = MACHINE_ID,
-                    idTransaction = TRANSACATION_ID,
-                    navController = navController,
-                    bluetoothViewModel = bluetoothViewModel,
-                    multiplePermissionState = multiplePermissionState
-                )
+//                machineViewModel.updateMachineStat(
+//                    idMachine = MACHINE_ID,
+//                    idTransaction = TRANSACATION_ID,
+//                    navController = navController,
+//                    bluetoothViewModel = bluetoothViewModel,
+//                    multiplePermissionState = multiplePermissionState
+//                )
             }
         }
     }

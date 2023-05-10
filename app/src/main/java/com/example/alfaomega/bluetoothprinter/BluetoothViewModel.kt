@@ -246,7 +246,7 @@ class BluetoothViewModel: ViewModel() {
                     Log.i("Bluetooth_debug", "Error 3 = ${e}")
                     countGetData++
                 }
-                delay(5000L)
+                delay(2000L)
             }
             if(countGetData >= 4){
                 MACHINE_LOADING = false
@@ -300,7 +300,6 @@ class BluetoothViewModel: ViewModel() {
         }
     }
 
-    @OptIn(ExperimentalPermissionsApi::class)
     @ExperimentalCoroutinesApi
     fun disconnectBluetooth(
         navController: NavController,
@@ -333,29 +332,6 @@ class BluetoothViewModel: ViewModel() {
                                 inclusive = true
                             }
                         }
-                    }
-                }
-            }catch(e: IOException){
-                e.printStackTrace()
-            }
-        }
-    }
-
-    @ExperimentalCoroutinesApi
-    fun disconnectBluetooth2(){
-        if(bluetoothSocket != null){
-            try {
-                bluetoothSocket!!.close()
-                bluetoothSocket = null
-                if (bluetoothSocket == null){
-                    Log.i("Bluetooth_debug", "Disconnect")
-                    statConnectedDevice = false
-                    countGetData = 5
-                    viewModelScope.launch(Dispatchers.Main){
-
-                        MACHINE_BUTTON_UPDATE = true
-                        MACHINE_LOADING = false
-                        countGetData = 5
                     }
                 }
             }catch(e: IOException){
