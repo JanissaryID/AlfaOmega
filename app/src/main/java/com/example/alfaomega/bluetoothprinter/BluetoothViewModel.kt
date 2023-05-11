@@ -378,7 +378,6 @@ class BluetoothViewModel: ViewModel() {
             }
         }
     }
-//    @ExperimentalCoroutinesApi
 @RequiresApi(Build.VERSION_CODES.O)
 fun writeNota(){
         var idTransaction = "${TRANSACATION_ID.substring(0,5)}${TRANSACATION_ID.substring(
